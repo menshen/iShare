@@ -3,19 +3,32 @@
 #import "IS_SenceTempateItemCell.h"
 
 @implementation IS_SenceTempateItemCell
--(void)setSenceTemplateModel:(IS_SenceTemplateModel *)senceTemplateModel{
+-(void)setSenceTemplatePanModel:(IS_SenceTemplatePanModel *)senceTemplatePanModel{
     
-    _senceTemplateModel = senceTemplateModel;
+    _senceTemplatePanModel = senceTemplatePanModel;
     
     //1.
-    self.sence_image_view.image = [UIImage imageNamed:senceTemplateModel.s_img_name];
+    self.sence_image_view.image = [UIImage imageNamed:senceTemplatePanModel.s_img_name];
     
     //2.
-    if (senceTemplateModel.s_name&&senceTemplateModel.s_name.length!=0) {
-        self.sence_title_lab.text = senceTemplateModel.s_name;
+    if (senceTemplatePanModel.s_name&&senceTemplatePanModel.s_name.length!=0) {
+        self.sence_title_lab.text = senceTemplatePanModel.s_name;
         self.sence_title_lab.hidden=NO;
     }else{
         self.sence_title_lab.hidden=YES;
+    }
+    
+    //3.
+//    self.selected = senceTemplateModel.is_selected;
+    if (senceTemplatePanModel.is_selected) {
+        
+        self.sence_image_view.layer.borderWidth = 5;
+        self.sence_image_view.layer.borderColor = [[UIColor redColor]CGColor];
+        
+        
+    }else{
+        self.sence_image_view.layer.borderWidth = 0;
+        self.sence_image_view.layer.borderColor = [[UIColor clearColor]CGColor];
     }
 
 }
@@ -37,12 +50,13 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     
-    // Configure the view for the selected state
+ 
+    
 }
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    [self setBackgroundView:@"" selectBackgroundView:@"sence_template_select"];
+    //[self setBackgroundView:@"" selectBackgroundView:@"sence_template_select"];
 }
 -(void)setBackgroundView:(NSString *)imgName
     selectBackgroundView:(NSString*)select_imgName{

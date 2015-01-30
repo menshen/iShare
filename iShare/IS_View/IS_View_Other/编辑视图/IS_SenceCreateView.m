@@ -1,16 +1,13 @@
 #import "IS_SenceCreateView.h"
 #import "IS_SenceEditCell.h"
 
+#import "AAPullToRefresh.h"
+#define WEAKSELF __weak typeof(self) weakSelf = self
 
 
-
-#import "UIScrollView+Extension.h"
-#import "Masonry.h"
-#import "POP.h"
-
-
-#define IS_SENCE_EDIT_CELL_ID @"IS_SenceEditCell_ID"
 @interface IS_SenceCreateView()<UICollectionViewDataSource,UICollectionViewDelegate>
+@property (nonatomic,strong)AAPullToRefresh * right_refresh;
+
 @end
 @implementation IS_SenceCreateView
 #pragma mark -初始化
@@ -20,14 +17,19 @@
     if (self = [super initWithFrame:frame]) {
        
         
-        //0.数据
-        [self addDefaultData];
+       
         
         //1.添加子视图
         [self addSubViews];
         
+        
+        //0.数据
+        [self addDefaultData];
+        
         //2.
         [self addNotification];
+        
+        
     }
     return self;
 }
@@ -41,72 +43,108 @@
     return _senceTemplateArray;
 
 }
-#pragma mark -增加手势
+
+
+
+#pragma mark -通知方法
 
 -(void)addNotification{
     
-    //1.手势响应
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleGestureChange:) name:IS_SenceCreateImageViewGestureNotification object:nil];
-
-    //2.模板改变
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleTemplateChange:) name:IS_SenceCreateViewDidChangeTemplate object:nil];
-    //3.图片改变
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleImageChange:) name:IS_SenceCreateViewDidChangeImage object:nil];
+    //1.响应手势响应
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(bigImageGestureToCollectionView:) name:BIG_IMAGE_GESTURE_COLLECTION_VIEW object:nil];
+    //2.响应模板点击改变
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(templateToCollectionView:) name:TEMPLATE_TO_COLLECTION_VIEW_BY_TAP object:nil];
+    //3.响应图片改变
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(bigImageToCollectionView:) name:BIG_IMAGE_TO_COLLECTION_VIEW object:nil];
+    //4.响应点击缩略图
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(thumbnailImageToCollectionView:) name:THUMBNAIL_IMAGE_TO_COLLECTION_VIEW object:nil];
 }
--(void)deleteNotification{
- 
-    [[NSNotificationCenter defaultCenter]removeObserver:self name:IS_SenceCreateImageViewGestureNotification object:nil];
-     [[NSNotificationCenter defaultCenter]removeObserver:self name:IS_SenceCreateViewDidChangeTemplate object:nil];
-    [[NSNotificationCenter defaultCenter]removeObserver:self name:IS_SenceCreateViewDidChangeImage object:nil];
+-(void)deleteNotification{[[NSNotificationCenter defaultCenter]removeObserver:self];}
+#pragma mark -响应手势通知方法
 
-}
-#pragma mark -响应通知方法
-
--(void)handleGestureChange:(NSNotification*)notification{
+-(void)bigImageGestureToCollectionView:(NSNotification*)notification{
     
     BOOL isGesture = [notification.object boolValue];
-    
     self.senceCollectioneEditView.scrollEnabled =!isGesture;
 
 }
-
-- (void)handleTemplateChange:(NSNotification*)notification{
+#pragma mark - 响应模板点击->保存图片->换模板
+- (void)templateToCollectionView:(NSNotification*)notification{
     
-    IS_SenceTemplateModel * senceTemplateModel =(IS_SenceTemplateModel *)notification.object;
-    //2.定型
-    [self.senceTemplateArray replaceObjectAtIndex:self.currentIndexPath.row withObject:senceTemplateModel];
-    [self.senceCollectioneEditView reloadItemsAtIndexPaths:@[self.currentIndexPath]];
+    if ([notification.userInfo[IS_NOTIFICATION_OPTION] isEqualToString:TEMPLATE_TO_COLLECTION_VIEW_BY_TAP]) {
+        
+        IS_SenceTemplateModel * from_sence = (IS_SenceTemplateModel *)notification.object;
+        
+        
+        IS_SenceTemplateModel * be_change_sence=[[IS_SenceTemplateModel alloc]init];//self.senceTemplateArray[self.currentIndexPath.row];
+        be_change_sence.s_template_style=from_sence.s_template_style;
+        be_change_sence.s_sub_template_style=from_sence.s_sub_template_style;
+        //2.定型
+        [self.senceTemplateArray replaceObjectAtIndex:self.currentIndexPath.row withObject:be_change_sence];
+        [self.senceCollectioneEditView reloadItemsAtIndexPaths:@[self.currentIndexPath]];
+    }
+   
 
     
 }
--(void)handleImageChange:(NSNotification*)notification{
+#pragma mark - 响应大图点击->改变模型选择项>>>刷新以把当前大图选中
+-(void)bigImageToCollectionView:(NSNotification*)notification{
     
-    NSDictionary * user_info = notification.userInfo;
-    UIButton * button =notification.object;
-    UIImage * image=nil;
-    if ([user_info[@"type"] isEqualToValue:@(0)]) {
-        //0.点击大图
-        image= button.currentImage;
-    }else{
-        //1.点击图片选择器
-        image=  button.currentBackgroundImage;
-        IS_SenceTemplateModel * senceTemplateModel = self.senceTemplateArray[self.currentIndexPath.row];
-        [senceTemplateModel.s_img_array addObject:image];
-        //2.定型
+   
+    
+    if ([notification.object isKindOfClass:[IS_SenceSubTemplateModel class]]) {
+        
+        IS_SenceSubTemplateModel * cur_templateSubModel=notification.object;
+        IS_SenceTemplateModel * cur_templateModel = self.senceTemplateArray[self.currentIndexPath.row];
+        [cur_templateModel.s_sub_view_array replaceObjectAtIndex:cur_templateSubModel.sub_tag withObject:cur_templateSubModel];
+        [self.senceTemplateArray replaceObjectAtIndex:self.currentIndexPath.row withObject:cur_templateModel];
+        [self.senceCollectioneEditView reloadItemsAtIndexPaths:@[self.currentIndexPath]];
+        
+        
+    }
+    
+   
+
+}
+#pragma mark - 响应缩略图通知
+
+-(void)thumbnailImageToCollectionView:(NSNotification*)notification{
+    
+    IS_SenceTemplateModel * senceTemplateModel = self.senceTemplateArray[self.currentIndexPath.row];
+
+    if (!notification.object) {
+        return;
+    }else if ([notification.object isKindOfClass:[UIImage class]]){
+    
+        UIImage * selectImage=notification.object;
+        [senceTemplateModel.s_sub_view_array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            
+            IS_SenceSubTemplateModel * sub_model = obj;
+            if (sub_model.sub_type==IS_SenceSubTemplateTypeImage&&!sub_model.image_data) {
+                sub_model.image_data=selectImage;
+                [senceTemplateModel.s_sub_view_array replaceObjectAtIndex:idx withObject:sub_model];
+                *stop=YES;
+                
+            }
+        }];
+        [self.senceTemplateArray replaceObjectAtIndex:self.currentIndexPath.row withObject:senceTemplateModel];
+        [self.senceCollectioneEditView reloadItemsAtIndexPaths:@[self.currentIndexPath]];
+    }else if ([notification.object isKindOfClass:[IS_SenceSubTemplateModel class]]){
+    
+        IS_SenceSubTemplateModel * sub_model = notification.object;
+        NSInteger  cur_big_btn_tag =sub_model.sub_tag;
+        [senceTemplateModel.s_sub_view_array replaceObjectAtIndex:cur_big_btn_tag withObject:sub_model];
         [self.senceTemplateArray replaceObjectAtIndex:self.currentIndexPath.row withObject:senceTemplateModel];
         [self.senceCollectioneEditView reloadItemsAtIndexPaths:@[self.currentIndexPath]];
 
-        
-      }
-    
-    
-    
-   
-//    IS_SenceEditCell * editCell = ( IS_SenceEditCell * )[self collectionView:self.senceCollectioneEditView cellForItemAtIndexPath:self.currentIndexPath];
-//    IS_SenceCreateEditView * editView =editCell.senceCreateEditView;
-//    editView.senceTemplateModel=senceTemplateModel;
-//    [editView resetImageViews];
 
+    
+    }
+    
+    
+    
+
+    
     
     
 }
@@ -115,25 +153,9 @@
 -(void)addDefaultData{
 
     
-    for (int i = 0; i<7; i++) {
-        IS_SenceTemplateModel  * senceModel = [[IS_SenceTemplateModel alloc]init];
-        if (i<4) {
-            
-            senceModel.s_isCurrent = (i==0)?YES:NO;
-            senceModel.s_template_stype=1;
-            senceModel.s_sub_template_stype=i+3;
-            
-        }else{
-            senceModel.s_template_stype=0;
-            senceModel.s_sub_template_stype=0;
-        }
-        [self.senceTemplateArray addObject:senceModel];
-    
-        
-    }
-    
+    self.senceTemplateArray = [IS_SenceEditTool appendSenceDefaultData];
     self.currentIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    
+    [self.senceCollectioneEditView reloadData];
     
 }
 
@@ -154,9 +176,7 @@
 
     
     
-    if (self.senceTemplateArray) {
-        self.currentSenceTemplateModel = self.senceTemplateArray.firstObject;
-    }
+
 
 }
 
@@ -183,8 +203,19 @@
         _senceCollectioneEditView.backgroundColor = kColor(240, 240, 240);
         _senceCollectioneEditView.showsHorizontalScrollIndicator=NO;
         _senceCollectioneEditView.showsVerticalScrollIndicator=NO;
+        _senceCollectioneEditView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);//contentInset
         UIOffset anOffset = UIOffsetMake(40, 10);
         [(EBCardCollectionViewLayout *)_senceCollectioneEditView.collectionViewLayout setOffset:anOffset];
+        // right
+        WEAKSELF;
+        _right_refresh =  [_senceCollectioneEditView addPullToRefreshPosition:AAPullToRefreshPositionRight actionHandler:^(AAPullToRefresh *v){
+            NSLog(@"fire from right");
+            [weakSelf performSelector:@selector(doneSomeThing) withObject:nil afterDelay:0.2];
+            
+            
+        }];
+        _right_refresh.imageIcon = [UIImage imageNamed:@"launchpad"];
+        _right_refresh.borderColor = [UIColor whiteColor];
         
 
         
@@ -192,6 +223,23 @@
     
     
     return _senceCollectioneEditView;
+}
+-(void)doneSomeThing{
+    
+//    [self addLastButtonPressed:nil];
+    IS_SenceTemplateModel  * new_senceModel = [[IS_SenceTemplateModel alloc]init];
+    new_senceModel.s_template_style=1;
+    new_senceModel.s_sub_template_style=3;
+    [self.senceTemplateArray addObject:new_senceModel];
+    NSIndexPath* newIndexPath = [NSIndexPath indexPathForItem:[self.senceTemplateArray count]-1 inSection:0];
+    self.currentIndexPath = newIndexPath;
+    [_senceCollectioneEditView insertItemsAtIndexPaths:@[newIndexPath]];
+    [_senceCollectioneEditView scrollToItemAtIndexPath:newIndexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+    
+      [[NSNotificationCenter defaultCenter]postNotificationName:COLLECTION_VIEW_SCROLL_CHANGE_TEMPLATE_PAN object:new_senceModel userInfo:@{IS_NOTIFICATION_OPTION:COLLECTION_VIEW_SCROLL_CHANGE_TEMPLATE_PAN}];
+    [_right_refresh performSelector:@selector(stopIndicatorAnimation) withObject:nil afterDelay:.2];
+    //
+    
 }
 //
 #pragma mark - UICollectionView-Delegate
@@ -203,22 +251,10 @@
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     IS_SenceEditCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:IS_SENCE_EDIT_CELL_ID forIndexPath:indexPath];
-    
-//    NSLog(@"senceTemplate:%@",cell);
-    
-
     cell.senceTemplateModel = self.senceTemplateArray[indexPath.row];
-//    [UIView animateWithDuration:0.1 animations:^{
-//        cell.senceCreateEditView.alpha=[self.currentIndexPath isEqual:indexPath]?1:0.7;
-//
-//    }];
-
     
-
     return cell;
 }
-
-
 
 
 #pragma mark - 每次滑动后得到当前编辑视图
@@ -227,11 +263,44 @@
     CGPoint visiblePoint = CGPointMake(CGRectGetMidX(visibleRect), CGRectGetMidY(visibleRect));
     NSIndexPath *visibleIndexPath = [_senceCollectioneEditView indexPathForItemAtPoint:visiblePoint];
     
-   NSLog(@"%d",(int)visibleIndexPath.row);
     
-    //1
+   
+    
+    //0.上一个senceTemplateModel
+    IS_SenceTemplateModel * last_senceTemplateModel=nil;
+    if (visibleIndexPath.row>0) {
+        NSIndexPath * last_indexPath =[NSIndexPath indexPathForRow:visibleIndexPath.row-1 inSection:0];
+        last_senceTemplateModel=self.senceTemplateArray[last_indexPath.row];
+        last_senceTemplateModel.s_selected_tag=-1;
+        last_senceTemplateModel.templateState=IS_SenceTemplateStateInsert; //都是重新开始插入
+        [self.senceTemplateArray replaceObjectAtIndex:last_indexPath.row withObject:last_senceTemplateModel];
+
+        
+        //3.
+    }
+    //1.得到当前senceTemplateModel
+    
     self.currentIndexPath =visibleIndexPath;
-    self.currentSenceTemplateModel = self.senceTemplateArray [visibleIndexPath.row];
+    IS_SenceTemplateModel * senceTemplateModel = self.senceTemplateArray[self.currentIndexPath.row];
+    senceTemplateModel.s_selected_tag=-1;
+    senceTemplateModel.templateState=IS_SenceTemplateStateInsert; //都是重新开始插入
+    if (senceTemplateModel.s_sub_view_array.count==0) {
+        senceTemplateModel.s_template_style=last_senceTemplateModel.s_template_style;
+        senceTemplateModel.s_sub_template_style =last_senceTemplateModel.s_sub_template_style+1;
+    }
+    if (last_senceTemplateModel.s_sub_template_style>6) {
+        senceTemplateModel.s_template_style=1;
+        senceTemplateModel.s_sub_template_style =6;
+    }
+    
+    
+    [self.senceTemplateArray replaceObjectAtIndex:self.currentIndexPath.row withObject:senceTemplateModel];
+    [self.senceCollectioneEditView reloadData];
+    
+    
+    [[NSNotificationCenter defaultCenter]postNotificationName:COLLECTION_VIEW_SCROLL_CHANGE_TEMPLATE_PAN object:senceTemplateModel userInfo:@{IS_NOTIFICATION_OPTION:COLLECTION_VIEW_SCROLL_CHANGE_TEMPLATE_PAN}];
+    
+
     
     
     
@@ -239,32 +308,4 @@
     
 }
 
-
-///currentSenceEditView
-//- (id)initWithFrame:(CGRect)frame{
-//    self = [super initWithFrame:frame];
-//    if (self) {
-//        
-//        
-//        //  [self addSubview:self.senceEditView];
-//        
-//        //1.布局
-//        
-//        [self addSubViews];
-//        
-//    }
-//    return self;
-//}
-
-//6.单击后
-//[self.senceCreateView.senceEditView AddSingleTapAction:^(id result) {
-//    IS_SenceCreateImageView * imageView =result;
-//    if (imageView.createImageViewType==IS_SenceCreateImageViewTypeImage) {
-//        [self showImagePan];
-//        
-//    }else{
-//        NSLog(@"编辑文字");
-//    }
-//    
-//}];
 @end

@@ -21,7 +21,7 @@
 @property (nonatomic,strong)IS_SenceTemplateModel * senceTemplateModel;
 
 
-
+//-(void)resetSenceCreateImageView:(NSArray*)arrayM;
 
 
 @end

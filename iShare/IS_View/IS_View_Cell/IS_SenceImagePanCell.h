@@ -1,11 +1,11 @@
 
 
 #import <UIKit/UIKit.h>
-#import "IS_SenceImageModel.h"
+#import "IS_SenceSubTemplateModel.h"
 
 @interface IS_SenceImagePanCell : UITableViewCell
 
-@property (nonatomic,strong)IS_SenceImageModel * senceImageModel;
+@property (nonatomic,strong)IS_SenceSubTemplateModel * senceImageModel;
 
 
 /**

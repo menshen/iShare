@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "UIView+Badge.h"
 @interface UIButton (JJ)
--(void)setTitle:(NSString*)title;
 
+- (void)setBtnSelecteAction;
 @end

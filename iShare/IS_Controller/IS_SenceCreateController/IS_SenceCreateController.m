@@ -50,24 +50,55 @@
     
     //2.初始化展示数据
     [self showTemplatePan];
-    self.senceTemplatePanView.dataSource = [NSMutableArray arrayWithArray:List_Array_1];
     [self.senceTemplatePanView.tableView reloadData];
     [self.senceImagePanView.tableView reloadData];
+    
+    //3.增加通知
+    [self addNotification];
     
   
 
 }
+#pragma mark -销毁通知
+-(void)dealloc{[[NSNotificationCenter defaultCenter]removeObserver:self];}
 #pragma mark -通知
+- (void)addNotification{
 
-//-(void)viewDidLayoutSubviews{
-//
-//        [super viewDidLayoutSubviews];
-//    
-//
-//    //1.模板 pan
-//  
-//    
-//}
+    //0.模板改变
+     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(templateDidChange:) name:COLLECTION_VIEW_SCROLL_CHANGE_TEMPLATE_PAN object:nil];
+  
+    
+    //1.点击缩略图
+      [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(thumbnailImageDidChange:) name:THUMBNAIL_IMAGE_TO_CONTROLLER object:nil];
+    
+    //2.点击大图
+      [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(bigImageDidAction:) name:BIG_IMAGE_TO_CONTROLLER object:nil];
+}
+
+#pragma mark - 模板改变
+-(void)templateDidChange:(NSNotification*)notification{
+    NSDictionary * user_info = notification.userInfo;
+    if ([user_info[IS_NOTIFICATION_OPTION] isEqualToString:COLLECTION_VIEW_SCROLL_CHANGE_TEMPLATE_PAN]) {
+        [self showTemplatePan];
+    }
+    
+    
+
+    
+}
+-(void)thumbnailImageDidChange:(NSNotification*)notification{
+    
+    if (!notification.object&&!notification.userInfo) {
+        [self pickImageAndVideo];
+    }
+    
+}
+///统一处理 1.选择图片 2.图片插入
+-(void)bigImageDidAction:(NSNotification*)notification{
+    
+    [self showImagePan];
+
+}
 #pragma mark -加载视图
 -(void)loadSenceSubView{
     
@@ -144,10 +175,13 @@
     }
    
 }
+
+
 #pragma mark -展示模板
 -(void)showTemplatePan{
 
-    
+    [self.sence_segmented_control setSelectedSegmentIndex:0];
+
 
     [UIView animateWithDuration:.2 delay:0 options:UIViewAnimationOptionTransitionFlipFromBottom animations:^{
         
@@ -163,6 +197,7 @@
 -(void)showImagePan{
     
     
+    [self.sence_segmented_control setSelectedSegmentIndex:1];
 
     [UIView animateWithDuration:.2 delay:0 options:UIViewAnimationOptionTransitionFlipFromBottom animations:^{
         
@@ -170,7 +205,11 @@
         self.senceTemplatePanView.hidden=YES;
       
     } completion:^(BOOL finished) {
-        //
+        if (self.senceImagePanView.dataSource.count<2) {
+            [self pickImageAndVideo];
+        }else{
+        
+        }
     }];
     
 }

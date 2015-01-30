@@ -4,17 +4,17 @@
 @implementation IS_SenceImagePanCell
 
 
--(void)setSenceImageModel:(IS_SenceImageModel *)senceImageModel{
+-(void)setSenceImageModel:(IS_SenceSubTemplateModel *)senceImageModel{
 
     
     _senceImageModel = senceImageModel;
     
     //1.
-    if (senceImageModel.imageData) {
-        [self.sencn_image_btn_view setBackgroundImage:senceImageModel.imageData forState:UIControlStateNormal];
-//        [self.sencn_image_btn_view setImage:senceImageModel.imageData forState:UIControlStateNormal];
+    if (senceImageModel.image_data) {
+        [self.sencn_image_btn_view setBackgroundImage:senceImageModel.image_data forState:UIControlStateNormal];
+//        [self.sencn_image_btn_view setImage:senceImageModel.image_data forState:UIControlStateNormal];
     }else{
-         [self.sencn_image_btn_view setImage:[UIImage imageNamed:senceImageModel.image_path] forState:UIControlStateNormal];
+         [self.sencn_image_btn_view setImage:[UIImage imageNamed:senceImageModel.image_url] forState:UIControlStateNormal];
      
 
     }
@@ -23,6 +23,17 @@
         self.sence_image_selected_num_lab.hidden=!senceImageModel.image_selected_num;
         self.sence_image_selected_num_lab.text=[NSString stringWithFormat:@"%@",@(senceImageModel.image_selected_num)];
     
+    
+    if (senceImageModel.image_selected) {
+        
+        self.sencn_image_btn_view.layer.borderWidth = 5;
+        self.sencn_image_btn_view.layer.borderColor = [[UIColor redColor]CGColor];
+        
+        
+    }else{
+        self.sencn_image_btn_view.layer.borderWidth = 0;
+        self.sencn_image_btn_view.layer.borderColor = [[UIColor clearColor]CGColor];
+    }
 }
 
 - (void)awakeFromNib {

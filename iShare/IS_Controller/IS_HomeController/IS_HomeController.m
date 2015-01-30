@@ -40,20 +40,20 @@
 
     
     //1.
-//    WEAKSELF;
-//    [self.tableView addFooterWithCallback:^{
-//      
-//        [weakSelf loadMoreData];
-//    }];
+    WEAKSELF;
+    [self.tableView addHeaderWithCallback:^{
+      
+        [weakSelf loadMoreData];
+    }];
     [self loadLocalData];
     
 }
 -(void)loadMoreData{
     
     NSMutableArray * a1=[self.sectionDictionary objectForKey:@"C 优秀案例"];
-    IS_SenceModel * senceModel = [[IS_SenceModel alloc]initWithDictionary:@{@"i_image":@"app_007",
+    IS_SenceModel * senceModel = [[IS_SenceModel alloc]initWithDictionary:@{@"i_image":@"IS_icon-1",
                                                                             @"i_name":@"插入",
-                                                                            @"i_title":@"xx"}];
+                                                                            @"i_title":@"车市"}];
     [a1 addObject:senceModel];
     [self.sectionDictionary setObject:a1 forKey:@"C 优秀案例"];
 
@@ -61,7 +61,7 @@
     NSIndexPath  * indexPath  = [NSIndexPath indexPathForRow:a1.count-1 inSection:2];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
     
-    [self.tableView footerEndRefreshing];
+    [self.tableView headerEndRefreshing];
 
 }
 

@@ -74,7 +74,7 @@
         _tableView.backgroundColor = [UIColor clearColor];
 //        ScreenHeight
 //        _tableView.pagingEnabled=YES;
-        _tableView.contentInset =UIEdgeInsetsMake(0, 0, 0, 0);
+        //
     }
     return _tableView;
 }

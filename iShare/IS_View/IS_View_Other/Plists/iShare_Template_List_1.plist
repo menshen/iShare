@@ -9,80 +9,80 @@
 			<string></string>
 			<key>s_img_name</key>
 			<string>Sence_Template_1_1</string>
-			<key>s_template_stype</key>
+			<key>s_template_style</key>
 			<string>1</string>
-			<key>s_sub_template_stype</key>
-			<string>1</string>
+			<key>s_sub_template_style</key>
+			<string>0</string>
 		</dict>
 		<dict>
 			<key>s_name</key>
 			<string></string>
 			<key>s_img_name</key>
 			<string>Sence_Template_1_2</string>
-            <key>s_template_stype</key>
-            <string>1</string>
-            <key>s_sub_template_stype</key>
-            <string>2</string>
+			<key>s_template_style</key>
+			<string>1</string>
+			<key>s_sub_template_style</key>
+			<string>1</string>
 		</dict>
 		<dict>
 			<key>s_name</key>
 			<string></string>
 			<key>s_img_name</key>
 			<string>Sence_Template_1_3</string>
-            <key>s_template_stype</key>
-            <string>1</string>
-            <key>s_sub_template_stype</key>
-            <string>3</string>
+			<key>s_template_style</key>
+			<string>1</string>
+			<key>s_sub_template_style</key>
+			<string>2</string>
 		</dict>
 		<dict>
 			<key>s_name</key>
 			<string></string>
 			<key>s_img_name</key>
 			<string>Sence_Template_1_4</string>
-            <key>s_template_stype</key>
-            <string>1</string>
-            <key>s_sub_template_stype</key>
-            <string>4</string>
+			<key>s_template_style</key>
+			<string>1</string>
+			<key>s_sub_template_style</key>
+			<string>3</string>
 		</dict>
 		<dict>
 			<key>s_name</key>
 			<string></string>
 			<key>s_img_name</key>
 			<string>Sence_Template_1_5</string>
-            <key>s_template_stype</key>
-            <string>1</string>
-            <key>s_sub_template_stype</key>
-            <string>5</string>
+			<key>s_template_style</key>
+			<string>1</string>
+			<key>s_sub_template_style</key>
+			<string>4</string>
 		</dict>
 		<dict>
 			<key>s_name</key>
 			<string></string>
 			<key>s_img_name</key>
 			<string>Sence_Template_1_6</string>
-            <key>s_template_stype</key>
-            <string>1</string>
-            <key>s_sub_template_stype</key>
-            <string>6</string>
+			<key>s_template_style</key>
+			<string>1</string>
+			<key>s_sub_template_style</key>
+			<string>5</string>
 		</dict>
 		<dict>
 			<key>s_name</key>
 			<string></string>
 			<key>s_img_name</key>
 			<string>Sence_Template_1_7</string>
-            <key>s_template_stype</key>
-            <string>1</string>
-            <key>s_sub_template_stype</key>
-            <string>7</string>
+			<key>s_template_style</key>
+			<string>1</string>
+			<key>s_sub_template_style</key>
+			<string>6</string>
 		</dict>
 		<dict>
 			<key>s_name</key>
 			<string></string>
 			<key>s_img_name</key>
 			<string>Sence_Template_1_8</string>
-            <key>s_template_stype</key>
-            <string>1</string>
-            <key>s_sub_template_stype</key>
-            <string>8</string>
+			<key>s_template_style</key>
+			<string>1</string>
+			<key>s_sub_template_style</key>
+			<string>7</string>
 		</dict>
 	</array>
 </dict>

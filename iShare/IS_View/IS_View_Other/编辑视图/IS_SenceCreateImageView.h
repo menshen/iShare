@@ -1,4 +1,5 @@
 #import <UIKit/UIKit.h>
+#import "IS_SenceSubTemplateModel.h"
 
 typedef NS_ENUM(NSInteger, IS_SenceCreateImageViewType) {
 
@@ -10,6 +11,10 @@ typedef NS_ENUM(NSInteger, IS_SenceCreateImageViewType) {
 @protocol IS_SenceCreateImageViewDelegate;
 
 @interface IS_SenceCreateImageView : UIView//<UIScrollViewDelegate>
+/**
+ *  数据
+ */
+@property (nonatomic, strong) IS_SenceSubTemplateModel  * senceSubTemplateModel;
 /**
  *  内容视图
  */
@@ -27,8 +32,10 @@ typedef NS_ENUM(NSInteger, IS_SenceCreateImageViewType) {
  *  协议
  */
 @property (nonatomic, assign) id<IS_SenceCreateImageViewDelegate> editViewDelegate;
-
-
+/**
+ *   是否被选择中
+ */
+@property (nonatomic, assign)BOOL isSelected;
 
 @end
 

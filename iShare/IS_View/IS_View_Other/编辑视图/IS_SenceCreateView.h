@@ -1,7 +1,8 @@
 #import <UIKit/UIKit.h>
 #import "IS_SenceTemplateModel.h"
+#import "IS_SenceTemplatePanModel.h"
 #import "EBCardCollectionViewLayout.h"
-
+#import "IS_SenceEditTool.h"
 
 
 

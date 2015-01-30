@@ -1,10 +1,9 @@
-//
-//  IS_SenceModel.h
-//  iShare
-//
-//  Created by 伍松和 on 15/1/13.
-//  Copyright (c) 2015年 iShare. All rights reserved.
-//
+
+/**
+ *  把握整个场景
+    1.保存整个场景数据: A.A1=B1+B2+B3+C1
+    2.保存用过的图片
+ */
 
 #import "IS_BaseModel.h"
 

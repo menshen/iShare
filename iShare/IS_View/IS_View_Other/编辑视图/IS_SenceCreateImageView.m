@@ -14,34 +14,71 @@
 
 @implementation IS_SenceCreateImageView
 
-
-
--(instancetype)initWithFrame:(CGRect)frame{
-    if (self = [super initWithFrame:frame]) {
-        //1
-        [self initContentViewWithImageView];
-        
-        //2.
-        [self addGestureRecognizers];
-        
-        //3.
-        self.isSelect = NO;
-    }
-    return self;
-}
--(void)setIsSelect:(BOOL)isSelect{
+-(void)setSenceSubTemplateModel:(IS_SenceSubTemplateModel *)senceSubTemplateModel{
     
-    _isSelect = isSelect;
-    //1.
-//    self.contentView.scrollEnabled = !isSelect;
+    _senceSubTemplateModel = senceSubTemplateModel;
+    
+    //1.根据类型判断,初始化图片
+    if (senceSubTemplateModel.sub_type==IS_SenceSubTemplateTypeImage) {
+        UIImage * image =senceSubTemplateModel.image_data;
+        if (image) {
+            [self.imageBtnView setImage:image forState:UIControlStateNormal];
+        }else{
+            UIImage * place_image = [UIImage imageNamed:UPLOAD_IMAGE];
+            [self.imageBtnView setImage:place_image forState:UIControlStateNormal];
+            self.imageBtnView.imageView.contentMode=UIViewContentModeCenter;
+
+        }
+        //2.文字
+        [self addGestureRecognizers];
+    }else{
+        [self.imageBtnView setImage:[UIImage imageNamed:senceSubTemplateModel.image_place_name]forState:UIControlStateNormal];
+
+    }
+    //
+    self.tag = senceSubTemplateModel.sub_tag;
+    self.imageBtnView.tag=senceSubTemplateModel.sub_tag;
+    
+    //3
+    
+    //1
+    [self initContentViewWithImageView];
+    
+  
+    
+    //3.
+    self.isSelect = NO;
+    self.isSelected =senceSubTemplateModel.image_selected;
+    
+    //4.
+    
+    [self setClipsToBounds:YES];
+    [self setBackgroundColor:kColor(221, 221, 221)];
 
 }
+-(void)setIsSelected:(BOOL)isSelected{
+
+    _isSelected = isSelected;
+    if (isSelected) {
+        self.layer.borderWidth = 5;
+        self.layer.borderColor = [[UIColor redColor]CGColor];
+        
+        
+    }else{
+        self.layer.borderWidth = 0;
+        self.layer.borderColor = [[UIColor clearColor]CGColor];
+    }
+}
+
+
+
+
 
 #pragma mark -增加手势通知
 -(void)addGestureNotification:(BOOL)isGesture{
     
     //
-    [[NSNotificationCenter defaultCenter]postNotificationName:IS_SenceCreateImageViewGestureNotification object:@(isGesture) userInfo:nil];
+    [[NSNotificationCenter defaultCenter]postNotificationName:BIG_IMAGE_GESTURE_COLLECTION_VIEW object:@(isGesture) userInfo:nil];
 
 }
 
@@ -202,7 +239,7 @@
  */
 - (void)initContentViewWithImageView
 {
-    self.backgroundColor = [UIColor grayColor];
+    self.backgroundColor = [UIColor lightGrayColor];
     [self addSubview:self.contentView];
     [self.contentView addSubview:self.imageBtnView];
 }

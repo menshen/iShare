@@ -14,7 +14,7 @@
 
     _senceTemplateModel = senceTemplateModel;
     
-    if (senceTemplateModel.s_template_stype!=0) {
+    if (senceTemplateModel.s_template_style!=0) {
         self.senceCreateEditView.backgroundColor = [UIColor whiteColor];
         self.senceCreateEditView.senceTemplateModel=senceTemplateModel;
     }else{

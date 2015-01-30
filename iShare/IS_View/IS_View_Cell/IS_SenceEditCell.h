@@ -10,6 +10,7 @@
 #import "IS_SenceCreateEditView.h"
 #import "IS_SenceTemplateModel.h"
 #import "UITableViewCell+JJ.h"
+#define IS_SENCE_EDIT_CELL_ID @"IS_SenceEditCell_ID"
 
 @interface IS_SenceEditCell : UICollectionViewCell
 
