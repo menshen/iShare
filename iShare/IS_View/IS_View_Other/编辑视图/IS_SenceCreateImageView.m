@@ -1,39 +1,193 @@
 
 #import "IS_SenceCreateImageView.h"
+#import <AssetsLibrary/AssetsLibrary.h>
+#import <AVFoundation/AVFoundation.h>
+#import "IS_SenceEditTool.h"
+#import "MutilThreadTool.h"
 
+@interface IS_SenceCreateImageView()<UIGestureRecognizerDelegate,UIScrollViewDelegate>
+@property (nonatomic, strong) UILongPressGestureRecognizer  *longPressGestureRecognizer;
+@property (nonatomic, strong) UIPanGestureRecognizer        *panPressGestureRecognizer;
+@property (nonatomic, strong) UITapGestureRecognizer        *tapPressGestureRecognizer;
 
-@interface IS_SenceCreateImageView()<UIGestureRecognizerDelegate>
-@property (nonatomic, strong) UILongPressGestureRecognizer *longPressGestureRecognizer;
-@property (nonatomic, strong) UIPanGestureRecognizer *panPressGestureRecognizer;
-@property (nonatomic, strong) UITapGestureRecognizer *tapPressGestureRecognizer;
+@property (nonatomic, strong) UIPanGestureRecognizer        *inner_panPressGestureRecognizer;
+@property (nonatomic, strong) UIPinchGestureRecognizer      *inner_pinchPressGestureRecognizer;
+@property (nonatomic, strong) UIRotationGestureRecognizer   *inner_rotationPressGestureRecognizer;
+
 
 
 @property (nonatomic,assign)BOOL isSelect;//是否被选中
+@property (nonatomic,assign)BOOL isInner;//是否被选中
+
+//@property (nonatomic,assign)
 
 @end
 
 @implementation IS_SenceCreateImageView
+#define MRScreenWidth      CGRectGetWidth([UIScreen mainScreen].applicationFrame)
+#define MRScreenHeight     CGRectGetHeight([UIScreen mainScreen].applicationFrame)
+#pragma mark - 内容视图-可以滚动
+-(instancetype)initWithFrame:(CGRect)frame{
+
+    if (self = [super initWithFrame:frame]) {
+        
+       
+        [self addSubview:self.imageBtnView];
+        self.delegate=self;
+        
+    }
+    return self;
+    
+}
+#pragma mark - 图片数据
+- (void)setImageViewData:(UIImage *)imageData
+{
+    
+    
+    if (imageData) {
+        [self.imageBtnView setImage:imageData forState:UIControlStateNormal];
+    }else{
+        UIImage * place_image = [UIImage imageNamed:UPLOAD_IMAGE];
+        imageData=place_image;
+        [self.imageBtnView setImage:place_image forState:UIControlStateNormal];
+        
+    }
+    CGRect rect  = CGRectZero;
+    rect  = CGRectZero;
+
+    CGFloat scale = 1.0f;
+    CGFloat w = 0.0f;
+    CGFloat h = 0.0f;
+    
+    if(self.frame.size.width > self.frame.size.height)
+    {
+        
+        w = self.frame.size.width;
+        h = w*imageData.size.height/imageData.size.width;
+        if(h < self.frame.size.height){
+            h = self.frame.size.height;
+            w = h*imageData.size.width/imageData.size.height;
+        }
+        
+    }else{
+        
+        h = self.frame.size.height;
+        w = h*imageData.size.width/imageData.size.height;
+        if(w < self.frame.size.width){
+            w = self.frame.size.width;
+            h = w*imageData.size.height/imageData.size.width;
+        }
+    }
+    rect.size  = CGSizeMake(w, h);
+//        rect.size = CGSizeMake(w, h);
+    
+    CGFloat scale_w = w / imageData.size.width;
+    CGFloat scale_h = h / imageData.size.height;
+    if (w > self.frame.size.width || h > self.frame.size.height) {
+        scale_w = w / self.frame.size.width;
+        scale_h = h / self.frame.size.height;
+        if (scale_w > scale_h) {
+            scale = 1/scale_w;
+        }else{
+            scale = 1/scale_h;
+        }
+    }
+    
+    if (w <= self.frame.size.width || h <= self.frame.size.height) {
+        scale_w = w / self.frame.size.width;
+        scale_h = h / self.frame.size.height;
+        if (scale_w > scale_h) {
+            scale = scale_h;
+        }else{
+            scale = scale_w;
+        }
+    }
+
+
+    self.imageBtnView.frame = rect;
+    if (self.senceSubTemplateModel.sub_image_frame) {
+        self.imageBtnView.frame = CGRectFromString(self.senceSubTemplateModel.sub_image_frame);
+    }
+    if (self.senceSubTemplateModel.sub_image_offset) {
+        
+        [self setContentOffset:CGPointFromString(self.senceSubTemplateModel.sub_image_offset)];
+        
+    }else{
+        
+        self.imageBtnView.center = CGPointMake(self.width/2, self.height/2);
+        
+        
+    }
+    [self setZoomScale:0.2 animated:YES];
+   
+    
+    
+//    @synchronized(self){
+//       
+//       
+//        
+////        [self setNeedsLayout];
+//        
+//    }
+    
+}
+#pragma mark -图片视图
+
+-(UIButton *)imageBtnView{
+    
+    if (!_imageBtnView) {
+        _imageBtnView = [[UIButton alloc] initWithFrame:self.bounds];
+//        _imageBtnView.frame = CGRectMake(0, 0, MRScreenWidth * 2.5, MRScreenWidth * 2.5);
+        float minimumScale = self.frame.size.width / _imageBtnView.frame.size.width;
+        [self setMinimumZoomScale:minimumScale];
+        [self setZoomScale:minimumScale];
+        _imageBtnView.imageView.contentMode = UIViewContentModeScaleToFill;
+    }
+    return _imageBtnView;
+}
 
 -(void)setSenceSubTemplateModel:(IS_SenceSubTemplateModel *)senceSubTemplateModel{
     
     _senceSubTemplateModel = senceSubTemplateModel;
     
+   
+   
+   
+    
     //1.根据类型判断,初始化图片
     if (senceSubTemplateModel.sub_type==IS_SenceSubTemplateTypeImage) {
-        UIImage * image =senceSubTemplateModel.image_data;
-        if (image) {
-            [self.imageBtnView setImage:image forState:UIControlStateNormal];
+        self.createImageViewType=IS_SenceSubTemplateTypeImage;
+//        if (!senceSubTemplateModel.image_data) {
+//            senceSubTemplateModel.image_data = [IS_SenceEditTool getImagesDataFromAssetURLString:senceSubTemplateModel.image_url];//[UIImage imageNamed:UPLOAD_IMAGE];//
+//        }else{
+//            [self setImageViewData:senceSubTemplateModel.image_data];
+//
+//        }
+        
+        
+        
+        if (senceSubTemplateModel.image_data) {
+            [self setImageViewData:senceSubTemplateModel.image_data];
         }else{
-            UIImage * place_image = [UIImage imageNamed:UPLOAD_IMAGE];
-            [self.imageBtnView setImage:place_image forState:UIControlStateNormal];
-            self.imageBtnView.imageView.contentMode=UIViewContentModeCenter;
-
+            [MutilThreadTool ES_AsyncConcurrentOperationQueueBlock:^{
+                if (!senceSubTemplateModel.image_data) {
+                    senceSubTemplateModel.image_data = [IS_SenceEditTool getImagesDataFromAssetURLString:senceSubTemplateModel.image_url];//[UIImage imageNamed:UPLOAD_IMAGE];//
+                }
+            } MainThreadBlock:^{
+                
+                [self setImageViewData:senceSubTemplateModel.image_data];
+                
+            }];
         }
+        
+        
+        
         //2.文字
         [self addGestureRecognizers];
     }else{
+        self.createImageViewType=IS_SenceSubTemplateTypeText;
         [self.imageBtnView setImage:[UIImage imageNamed:senceSubTemplateModel.image_place_name]forState:UIControlStateNormal];
-
+        
     }
     //
     self.tag = senceSubTemplateModel.sub_tag;
@@ -41,10 +195,9 @@
     
     //3
     
-    //1
-    [self initContentViewWithImageView];
+    //
     
-  
+    
     
     //3.
     self.isSelect = NO;
@@ -54,14 +207,16 @@
     
     [self setClipsToBounds:YES];
     [self setBackgroundColor:kColor(221, 221, 221)];
+    
+   
 
 }
 -(void)setIsSelected:(BOOL)isSelected{
 
     _isSelected = isSelected;
     if (isSelected) {
-        self.layer.borderWidth = 5;
-        self.layer.borderColor = [[UIColor redColor]CGColor];
+        self.layer.borderWidth = 2;
+        self.layer.borderColor = [IS_SYSTEM_COLOR CGColor];
         
         
     }else{
@@ -94,9 +249,6 @@
         _longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleLongPressGesture:)];
         _longPressGestureRecognizer.minimumPressDuration=0.2;
         _longPressGestureRecognizer.delegate=self;
-        
-        
-        
         for (UIGestureRecognizer *gestureRecognizer in self.gestureRecognizers) {
             if ([gestureRecognizer isKindOfClass:[UILongPressGestureRecognizer class]]) {
                 [gestureRecognizer requireGestureRecognizerToFail:_longPressGestureRecognizer];
@@ -105,11 +257,30 @@
         [self addGestureRecognizer:_longPressGestureRecognizer];
         
         
-        //2.拖动手势
+      //  2.拖动手势
         
         _panPressGestureRecognizer = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(handlePanGesture:)];
         _panPressGestureRecognizer.delegate=self;
         [self addGestureRecognizer:_panPressGestureRecognizer];
+//
+//        
+//        
+//        //3.内部 Pan
+//        _inner_panPressGestureRecognizer=[[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(handleInnerPanGesture:)];
+//        _inner_panPressGestureRecognizer.delegate=self;
+//        [_imageBtnView addGestureRecognizer:_inner_panPressGestureRecognizer];
+        
+        //4.内部 Pinch
+        _inner_pinchPressGestureRecognizer = [[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(handleInnerPinchGesture:)];
+        _inner_pinchPressGestureRecognizer.delegate=self;
+        [_imageBtnView addGestureRecognizer:_inner_pinchPressGestureRecognizer];
+        
+       // 5.内部 rotation
+        
+        _inner_rotationPressGestureRecognizer=[[UIRotationGestureRecognizer alloc]initWithTarget:self action:@selector(handleInnerRotationGesture:)];
+        _inner_rotationPressGestureRecognizer.delegate=self;
+        [_imageBtnView addGestureRecognizer:_inner_rotationPressGestureRecognizer];
+    
     }
   
     
@@ -180,100 +351,76 @@
     //NSLog(@"drag");
     //获取手势在该视图上得偏移量
     
-    
+
     
     CGPoint translation = [pan translationInView:self];
-    
-    
-    //一下分别为拖动时的三种状态：开始，变化，结束
-    if (pan.state == UIGestureRecognizerStateBegan)
-    {
-//        NSLog(@"drag begin");
-        //开始时拖动的view更改透明度
-        self.alpha = 0.5;
-        
-        
-    }
-    else if(pan.state == UIGestureRecognizerStateChanged)
-    {
-//        NSLog(@"grag change");
-        
-        
-        
-        //使拖动的view跟随手势移动
-        self.center = CGPointMake(self.center.x + translation.x,
-                                                             self.center.y + translation.y);
-        [pan setTranslation:CGPointZero inView:self];
-        
-        /**
-         *  把pan 动作 post 出去
-         */
-        
-        if ([self.editViewDelegate respondsToSelector:@selector(panSenceCreateSubView:state:)]) {
-            [self.editViewDelegate panSenceCreateSubView:self state:UIGestureRecognizerStateChanged];
+
+        if (pan.state == UIGestureRecognizerStateBegan)
+        {
+            //        NSLog(@"drag begin");
+            //开始时拖动的view更改透明度
+            self.alpha = 0.5;
+            
+            
         }
-        
-        
-    }
-    else if (pan.state == UIGestureRecognizerStateEnded)
-    {
-//        NSLog(@"drag end");
-        
-        [self addGestureNotification:NO];
-
-        
-        self.alpha = 1;
-        if ([self.editViewDelegate respondsToSelector:@selector(panSenceCreateSubView:state:)]) {
-            [self.editViewDelegate panSenceCreateSubView:self state:UIGestureRecognizerStateEnded];
+        else if(pan.state == UIGestureRecognizerStateChanged)
+        {
+            //        NSLog(@"grag change");
+            
+            
+            
+            //使拖动的view跟随手势移动
+            self.center = CGPointMake(self.center.x + translation.x,
+                                      self.center.y + translation.y);
+            [pan setTranslation:CGPointZero inView:self];
+            
+            /**
+             *  把pan 动作 post 出去
+             */
+            
+            if ([self.editViewDelegate respondsToSelector:@selector(panSenceCreateSubView:state:)]) {
+                [self.editViewDelegate panSenceCreateSubView:self state:UIGestureRecognizerStateChanged];
+            }
+            
+            
         }
-        
-        
-    }
+        else if (pan.state == UIGestureRecognizerStateEnded)
+        {
+            //        NSLog(@"drag end");
+            
+            [self addGestureNotification:NO];
+            
+            
+            self.alpha = 1;
+            if ([self.editViewDelegate respondsToSelector:@selector(panSenceCreateSubView:state:)]) {
+                [self.editViewDelegate panSenceCreateSubView:self state:UIGestureRecognizerStateEnded];
+            }
+            
+            
+        }
+//    }
+    
+   
     
     
     
     
 }
-/**
- *  初始化
- */
-- (void)initContentViewWithImageView
-{
-    self.backgroundColor = [UIColor lightGrayColor];
-    [self addSubview:self.contentView];
-    [self.contentView addSubview:self.imageBtnView];
-}
-#pragma mark - 内容视图-可以滚动
--(UIView *)contentView{
 
-    if (!_contentView) {
-        _contentView = [[UIView alloc] initWithFrame:CGRectInset(self.bounds, 0, 0)];
-//        _contentView.delegate = self;
-//        _contentView.showsHorizontalScrollIndicator = NO;
-//        _contentView.showsVerticalScrollIndicator = NO;
-//        float minimumScale = self.frame.size.width / self.imageview.frame.size.width;
-//        [_contentView setMinimumZoomScale:minimumScale];
-//        [_contentView setZoomScale:minimumScale];
-    }
-    return _contentView;
 
-}
-#pragma mark -图片视图
--(UIButton *)imageBtnView{
-    
-    if (!_imageBtnView) {
-        _imageBtnView = [[UIButton alloc] initWithFrame:self.contentView.bounds];
-        _imageBtnView.imageView.contentMode = UIViewContentModeScaleAspectFill;
-    }
-    return _imageBtnView;
-}
 
 #pragma mark  - UIGestureRecognizer-Delegate
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
-    if([gestureRecognizer isEqual:_panPressGestureRecognizer]) {
-        return self.isSelect;
+    
+    if([gestureRecognizer isEqual:self.panGestureRecognizer]) {
+        
+        return YES;
+    }else  if([gestureRecognizer isEqual:_panPressGestureRecognizer]) {
+        
+       return self.isSelect;
     }
-    return YES;
+    
+    return  YES;
 }
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
@@ -288,48 +435,114 @@
     return NO;
 }
 
-#pragma mark - UIScrollViewDelegate
 
-//- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
-//{
-//    return _imageview;
-//}
-//
-//- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale
-//{
-//    
-//    [scrollView setZoomScale:scale animated:NO];
-//}
-//
-//- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
-//{
-////    self.gestureRecognizers = nil;
-//    return;
-//}
-//- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
-//{
-//    return;
-//}
-//
-//
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-//{
-//    
-//    
-//}
-//
-//
-//- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-//{
-//    
-//    
-//}
-//
-//- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
-//{
-//    CGPoint touch = [[touches anyObject] locationInView:self.superview];
-//    self.imageview.center = touch;
-//    
-//}
 
+
+#pragma mark - 内部手势处理
+-(void)handleInnerPinchGesture:(UIPinchGestureRecognizer*)pinchGestureRecognizer{
+    
+    CGRect oldRect =CGRectZero;
+    CGRect newRect =CGRectZero;
+
+    
+    
+    //1.取得视图
+    UIButton *view = (UIButton*)pinchGestureRecognizer.view;
+    BOOL isGestureRecognizerStateBegan =(pinchGestureRecognizer.state == UIGestureRecognizerStateBegan || pinchGestureRecognizer.state == UIGestureRecognizerStateChanged);
+    [self addGestureNotification:isGestureRecognizerStateBegan];
+    
+    if (pinchGestureRecognizer.state == UIGestureRecognizerStateBegan) {
+        oldRect = view.frame;
+        NSLog(@"oldSize-size:%@",NSStringFromCGRect(oldRect));
+    }else if (pinchGestureRecognizer.state==UIGestureRecognizerStateChanged){
+        view.transform = CGAffineTransformScale(view.transform, pinchGestureRecognizer.scale, pinchGestureRecognizer.scale);
+        
+        pinchGestureRecognizer.scale = 1;
+    }else{
+        newRect=view.frame;
+        NSString * newSizeString =NSStringFromCGRect(newRect);
+        NSLog(@"view-size:%@",newSizeString);
+        
+//        CGFloat dx =newSize.width-oldSize.width;
+//        CGFloat dy =newSize.height-oldSize.height;
+//        CGPoint point = CGPointMake(dx, dy);
+        self.senceSubTemplateModel.sub_image_frame = newSizeString;
+        if ([self.editViewDelegate respondsToSelector:@selector(IS_SenceCreateImageViewDidDealImage:)]) {
+            [self.editViewDelegate IS_SenceCreateImageViewDidDealImage:self.senceSubTemplateModel];
+        }
+        
+    }
+    
+
+    
+  // UIImage * cur_image= view.currentImage;
+    //2.手势在开始/进行中
+   
+    
+   
+
+}
+- (void)handleInnerPanGesture:(UIPanGestureRecognizer *)panGestureRecognizer {
+   
+    
+    //1.取得视图
+    UIView *view = panGestureRecognizer.view;
+    //2.手势在开始/进行中
+    BOOL isGestureRecognizerStateBegan =(panGestureRecognizer.state == UIGestureRecognizerStateBegan || panGestureRecognizer.state == UIGestureRecognizerStateChanged);
+    [self addGestureNotification:isGestureRecognizerStateBegan];
+    
+    if (isGestureRecognizerStateBegan) {
+        CGPoint translation = [panGestureRecognizer translationInView:view.superview];
+        [view setCenter:(CGPoint){view.center.x + translation.x, view.center.y + translation.y}];
+        [panGestureRecognizer setTranslation:CGPointZero inView:view.superview];
+    }
+}
+// 处理旋转手势
+- (void) handleInnerRotationGesture:(UIRotationGestureRecognizer *)rotationGestureRecognizer
+{ //1.取得视图
+    UIView *view = rotationGestureRecognizer.view;
+    
+    //2.手势在开始/进行中
+    BOOL isGestureRecognizerStateBegan =(rotationGestureRecognizer.state == UIGestureRecognizerStateBegan || rotationGestureRecognizer.state == UIGestureRecognizerStateChanged);
+    [self addGestureNotification:isGestureRecognizerStateBegan];
+    
+    if (isGestureRecognizerStateBegan) {
+        view.transform = CGAffineTransformRotate(view.transform, rotationGestureRecognizer.rotation);
+        [rotationGestureRecognizer setRotation:0];
+    }
+}
+
+#pragma mark - ScrollView-Delegate
+-(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    
+//    NSLog(@"image_center:%@",NSStringFromCGPoint(scrollView.contentOffset));
+    [self addGestureNotification:YES];
+}
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    [self addGestureNotification:NO];
+    
+    self.senceSubTemplateModel.sub_image_offset = NSStringFromCGPoint(scrollView.contentOffset);
+    if ([self.editViewDelegate respondsToSelector:@selector(IS_SenceCreateImageViewDidDealImage:)]) {
+        [self.editViewDelegate IS_SenceCreateImageViewDidDealImage:self.senceSubTemplateModel];
+    }
+//    NSLog(@"2-image_center:%@",NSStringFromCGPoint(scrollView.contentOffset));
+
+
+}
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
+{
+    return self.imageBtnView;
+}
+- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale
+{
+    [scrollView setZoomScale:scale animated:NO];
+  
+
+}
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    CGPoint touch = [[touches anyObject] locationInView:self.superview];
+    self.imageBtnView.center = touch;
+    
+}
 @end

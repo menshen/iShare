@@ -1,7 +1,9 @@
 
 
 #import "IS_SenceSubTemplateModel.h"
-
+#import <AssetsLibrary/AssetsLibrary.h>
+#import <AVFoundation/AVFoundation.h>
+#import "IS_SenceEditTool.h"
 @implementation IS_SenceSubTemplateModel
 
 #pragma mark
@@ -12,15 +14,16 @@
 //    }
 //    return self;
 //}
-+ (NSMutableArray *)configureSubTemplateModelIndex:(NSInteger)index
-                            sub_index:(NSInteger)sub_index {
++ (NSMutableArray *)configureSubTemplateModelWithStandardSize:(CGSize)size
+                                                        Index:(NSInteger)index
+                                                    sub_index:(NSInteger)sub_index {
    
     if (index==0) {
         return nil;
     }
     
     //1.模板对应配置文件
-    NSString *styleName = [NSString stringWithFormat:@"t_%d_%d",(int)index,(int)sub_index];
+    NSString *styleName = [NSString stringWithFormat:@"p%d_%d",(int)sub_index,(int)index];
     
     //2.
     NSDictionary *styleDict = [NSString objectFromJsonFilePath:styleName];
@@ -32,6 +35,7 @@
     
     //4.遍历 每一个子视图信息
     
+    //默认的
     CGFloat WIDTH =ScreenWidth-80;
     CGFloat HEIGHT =ScreenHeight-60-120-20;
     
@@ -56,9 +60,13 @@
         NSString * place_image_name = sub_view_info_dic[PLACE_IMAGE_NAME];
         senceSubTemplateModel.image_place_name = place_image_name?place_image_name:UPLOAD_IMAGE;
         
-        //8
-        senceSubTemplateModel.sub_tag =idx;
+        //8.占位文字
+        NSString * place_text =  sub_view_info_dic[PLACE_TEXT];
+        senceSubTemplateModel.text_string =place_text;
         
+        
+        //9.tag
+        senceSubTemplateModel.sub_tag =idx;
         [arrayM addObject:senceSubTemplateModel];
         
         
@@ -68,10 +76,32 @@
     return arrayM;
     
 }
+/*
+if (!_image_url) {
+    
+    
+    
+    NSData * d =[self loadDataForDefaultRepresentation:[NSURL URLWithString:_image_url]];
+    
+    //         ALAssetsLibrary *assetLibrary=[[ALAssetsLibrary alloc] init];
+    //         [assetLibrary assetForURL:[NSURL URLWithString:_image_url] resultBlock:^(ALAsset *asset) {
+    //             _image_data = copyOfOriginalImage;
+    //         } failureBlock:nil];
+    
+}else{
+    
+}
+
+*/
 -(UIImage *)image_data{
     
     if (!_image_data) {
-         [_image_data setAccessibilityIdentifier:UPLOAD_IMAGE];
+
+        [_image_data setAccessibilityIdentifier:UPLOAD_IMAGE];
+
+       
+
+
     }else{
         [_image_data setAccessibilityIdentifier:[_image_data description]];
     }
@@ -79,6 +109,18 @@
  
 
 }
+#pragma mark -
+
+// --------------- .h file
+
+// class members in the header file (can't be local as then the blocks wouldn't be able to use them
+
+
+
+// --------------- .m file
+
+// NSConditionLock values
+
 
 
 @end

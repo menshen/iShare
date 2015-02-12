@@ -10,6 +10,10 @@
 
 #import <Foundation/Foundation.h>
 #import "IS_SenceTemplateModel.h"
+#import "IS_SenceModel.h"
+
+typedef void(^SenceModelCompleteBlock)(id results);
+
 @interface IS_SenceEditTool : NSObject
 
 /**
@@ -18,8 +22,17 @@
 + (NSMutableArray*)appendSenceDefaultData;
 
 
+#pragma mark - 把场景出去来
++ (IS_SenceModel *)getSenceModelWithID:(NSString*)sence_id;
+
+#pragma mark - 保存
++ (void)saveSenceModelWithSenceID:(NSString*)senceID
+                    TemplateArray:(NSMutableArray*)templateArray
+             SubTemplateDataArray:(NSMutableArray*)subTemplateDataArray
+                    CompleteBlock:(SenceModelCompleteBlock)CompleteBlock;
 
 
++ (UIImage*)getImagesDataFromAssetURLString:(NSString*)urlString;
 
 ///**
 // *  当前的模板

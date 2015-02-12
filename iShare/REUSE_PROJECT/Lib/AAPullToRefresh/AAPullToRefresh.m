@@ -1,5 +1,5 @@
 #import "AAPullToRefresh.h"
-
+#import "PlaySoundClass.h"
 #define DEGREES_TO_RADIANS(x) (x)/180.0*M_PI
 #define RADIANS_TO_DEGREES(x) (x)/M_PI*180.0
 
@@ -30,6 +30,7 @@
     view.originalInsetBottom = self.contentInset.bottom;
     view.originalInsetLeft=self.contentInset.left;
     view.originalInsetRight=self.contentInset.right;
+    view.backgroundColor = [UIColor clearColor];
     
     view.showPullToRefresh = YES;
     view.alpha = 0.0;
@@ -188,7 +189,7 @@
 - (void)setupScrollViewContentInsetForLoadingIndicator:(actionHandler)handler
 {
     UIEdgeInsets currentInsets = self.scrollView.contentInset;
-    currentInsets.right   = MIN(self.threshold, self.originalInsetRight + self.bounds.size.height + 40.0f);
+    currentInsets.right   = 0;// MIN(self.threshold, self.originalInsetRight + self.bounds.size.height + 40.0f);
     [self setScrollViewContentInset:currentInsets handler:handler];
 }
 
@@ -201,7 +202,7 @@
 
 - (void)setScrollViewContentInset:(UIEdgeInsets)contentInset handler:(actionHandler)handler
 {
-    [UIView animateWithDuration:0.3f
+    [UIView animateWithDuration:0.01f
                           delay:0
                         options:UIViewAnimationOptionAllowUserInteraction |
      UIViewAnimationOptionCurveEaseOut |
@@ -295,6 +296,12 @@
     self.imageLayer.opacity = opacity;
     self.backgroundLayer.opacity = opacity;
     self.shapeLayer.opacity = opacity;
+    if (opacity==0) {
+        self.backgroundColor = [UIColor clearColor];
+    }else{
+        self.backgroundColor = [UIColor lightGrayColor];
+
+    }
 }
 
 - (void)setLayerHidden:(BOOL)hidden
@@ -321,11 +328,13 @@
 - (void)scrollViewDidScroll:(CGPoint)contentOffset
 {
     CGFloat yOffset = contentOffset.y;
-    CGFloat xOffset = contentOffset.x;
+    CGFloat xOffset = contentOffset.x+0;
 //    CGFloat overBottomOffsetY = yOffset - self.scrollView.contentSize.height + self.scrollView.frame.size.height;
     CGFloat centerX;
     CGFloat centerY;
     switch (self.position) {
+            
+            
         case AAPullToRefreshPositionRight: {
             CGFloat rightEdgeOffset = self.scrollView.contentSize.width - self.scrollView.bounds.size.width;
             centerX = self.scrollView.contentSize.width + MAX((xOffset - rightEdgeOffset) / 2.0f, 0);
@@ -340,13 +349,27 @@
     self.center = CGPointMake(centerX, centerY);
     switch (self.state) {
         case AAPullToRefreshStateNormal: //detect action
+            
+            if ( self.prevProgress>0.1&&self.prevProgress<0.2) {
+                PlaySoundClass * p =[[PlaySoundClass alloc]initForPlayingSoundEffectWith:@"swipe.caf"];//With:@"swipe" ofType:@"caf"];
+                [p play];
+
+            }
+            
             if (self.isUserAction && !self.scrollView.dragging && !self.scrollView.isZooming && self.prevProgress > 0.99f) {
                 [self actionTriggeredState];
+               
             }
             break;
-        case AAPullToRefreshStateStopped: // finish
-        case AAPullToRefreshStateLoading: // wait until stopIndicatorAnimation
-            break;
+        case AAPullToRefreshStateStopped: {
+            
+        } break;
+        case AAPullToRefreshStateLoading:{ // wait until stopIndicatorAnimation{
+//            PlaySoundClass * p =[[PlaySoundClass alloc]initForPlayingSoundEffectWith:@"screenselected.caf"];
+//            [p play];
+               break;
+    }
+         
         default:
             break;
     }
@@ -367,9 +390,14 @@
                      }];
     
 //    [self.activityIndicatorView startAnimating];
+    
     [self setupScrollViewContentInsetForLoadingIndicator:nil];
+
     if (self.pullToRefreshHandler)
         self.pullToRefreshHandler(self);
+    
+    
+
 }
 
 - (void)actionStopState
@@ -378,6 +406,7 @@
                           delay:0.0f
                         options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionAllowUserInteraction
                      animations:^{
+//                         self.hidden=YES;
                          self.activityIndicatorView.transform = CGAffineTransformMakeScale(0.1f, 0.1f);
                      } completion:^(BOOL finished) {
                          [self.activityIndicatorView stopAnimating];
@@ -386,6 +415,8 @@
                              [self setLayerHidden:NO];
                              [self setLayerOpacity:1.0f];
                              self.state = AAPullToRefreshStateNormal;
+                             PlaySoundClass * p =[[PlaySoundClass alloc]initForPlayingSoundEffectWith:@"screenselected.caf"];
+                             [p play];
                          }];
                      }];
 }
@@ -415,6 +446,10 @@
                              -size.height, size.width, size.height);
     
     self.frame = rect;
+    
+  //  NSLog(@"bounds:%@",NSStringFromCGRect(self.frame));
+
+    
     self.shapeLayer.frame = self.bounds;
     self.activityIndicatorView.frame = self.bounds;
     self.imageLayer.frame = CGRectInset(self.bounds, self.borderWidth, self.borderWidth);
@@ -429,6 +464,8 @@
     _imageLayer.contents = (id)_imageIcon.CGImage;
     _imageLayer.frame = CGRectInset(self.bounds, self.borderWidth, self.borderWidth);
     
+//    CGSize size = CGSizeMake(100, 400);
+//    [self setSize:size];
     [self setSize:_imageIcon.size];
 }
 

@@ -7,6 +7,7 @@
 
 @property (nonatomic,strong)IS_SenceSubTemplateModel * senceImageModel;
 
+@property (weak, nonatomic) IBOutlet UIButton *sence_close_btn;
 
 /**
  *  图片视图

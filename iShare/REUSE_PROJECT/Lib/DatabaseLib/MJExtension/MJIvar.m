@@ -54,6 +54,9 @@
 - (id)value
 {
     if (_type.KVCDisabled) return [NSNull null];
+    if ([_srcObject isKindOfClass:[UIImage class]]) {
+        return [NSNull null];
+    }
     return [_srcObject valueForKey:_propertyName];
 }
 

@@ -21,5 +21,8 @@
 
 @property (strong, nonatomic) IBOutlet IS_SenceCreateEditView * senceCreateEditView;
 
+@property (strong, nonatomic)UIButton * close_btn;
 
+- (void)startShake;
+- (void)stopShake;
 @end

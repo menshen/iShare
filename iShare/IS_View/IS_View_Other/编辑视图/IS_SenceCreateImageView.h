@@ -10,7 +10,7 @@ typedef NS_ENUM(NSInteger, IS_SenceCreateImageViewType) {
 
 @protocol IS_SenceCreateImageViewDelegate;
 
-@interface IS_SenceCreateImageView : UIView//<UIScrollViewDelegate>
+@interface IS_SenceCreateImageView : UIScrollView//<UIScrollViewDelegate>
 /**
  *  数据
  */
@@ -18,11 +18,11 @@ typedef NS_ENUM(NSInteger, IS_SenceCreateImageViewType) {
 /**
  *  内容视图
  */
-@property (nonatomic, strong) UIView  *contentView;
-/**
- *  可以点击
+@property (nonatomic, strong) UIButton  *imageBtnView;
+/*
+ 图片数据
  */
-@property (nonatomic, strong) UIButton *imageBtnView;
+- (void)setImageViewData:(UIImage *)imageData;
 
 /**
  *  编辑子视图的类型 1、图片 2、文字 3、视频
@@ -47,6 +47,11 @@ typedef NS_ENUM(NSInteger, IS_SenceCreateImageViewType) {
 - (void)panSenceCreateSubView:(IS_SenceCreateImageView *)sender
                         state:(UIGestureRecognizerState)pan_state;
 
+
+/**
+ *  处理图片完毕
+ */
+-(void)IS_SenceCreateImageViewDidDealImage:(id)sender;
 
 
 

@@ -26,35 +26,13 @@
 
 ///1.系统颜色
 
-#define IS_SYSTEM_COLOR kColor(0, 157, 255)
+#define IS_SYSTEM_COLOR kColor(4, 163, 255)
 
 
 
 //2.系统通知
 
 #define IS_NOTIFICATION_OPTION @"IS_NOTIFICATION_OPTION"
-
-//A.当点击大图时候
-
-//#define IS_SenceCreateViewDidChangeImage @"IS_SenceCreateViewDidChangeImage"
-
-#define BIG_IMAGE_TO_IMAGE_PAN  @"BIG_IMAGE_TO_IMAGE_PAN" //跳转到图片选择器,告诉它是否选择,选择的图片是什么,tag 是多少
-#define BIG_IMAGE_TO_COLLECTION_VIEW @"BIG_IMAGE_TO_COLLECTION_VIEW" //告诉滑动视图,现在选择的数据改变了
-#define BIG_IMAGE_TO_CONTROLLER @"BIG_IMAGE_TO_CONTROLLER" //告诉控制器，是否选择图片
-//B.点击缩略图
-//#define IS_SenceCreateViewDidChangeThumbnailImage @"IS_SenceCreateViewDidChangeThumbnailImage"
-#define THUMBNAIL_IMAGE_TO_COLLECTION_VIEW @"THUMBNAIL_IMAGE_TO_COLLECTION_VIEW" //告诉滑动视图当前视图,插入或者替换
-#define THUMBNAIL_IMAGE_TO_CONTROLLER @"THUMBNAIL_IMAGE_TO_CONTROLLER" //告诉控制器，是否选择图片
-
-
-//C.当模板改变时候->选择模板,滑动改变模板时候
-//#define IS_SenceCreateViewDidChangeTemplate @"IS_SenceCreateViewDidChangeTemplate"
-#define TEMPLATE_TO_COLLECTION_VIEW_BY_TAP  @"TEMPLATE_TO_COLLECTION_VIEW_BY_TAP" //通过点击，通知滑动视图当前项改变
-#define COLLECTION_VIEW_SCROLL_CHANGE_TEMPLATE_PAN  @"COLLECTION_VIEW_SCROLL_CHANGE_TEMPLATE_PAN" //滑动新视图/滚,令模板选择器适当高亮
-#define TEMPLATE_TO_CONTROLLER_BY_SCROLL  @"TEMPLATE_TO_CONTROLLER_BY_SCROLL"
-
-
-
 
 
 //D.手势在变化

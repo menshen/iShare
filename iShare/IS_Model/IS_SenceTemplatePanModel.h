@@ -33,4 +33,6 @@
  *  缩略图是否被选中
  */
 @property (nonatomic,assign)BOOL is_selected;
+
+@property (nonatomic ,assign)NSInteger img_count;
 @end

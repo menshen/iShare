@@ -14,6 +14,7 @@
 
 #import "IS_SenceModel.h"
 #import "IS_BaseCell.h"
+#import "IS_SenceEditTool.h"
 
 @interface IS_HomeController ()
 @end
@@ -43,10 +44,15 @@
     WEAKSELF;
     [self.tableView addHeaderWithCallback:^{
       
-        [weakSelf loadMoreData];
+        [weakSelf loadLocalData];
     }];
-    [self loadLocalData];
+//    [self loadLocalData];
     
+}
+-(void)viewWillAppear:(BOOL)animated{
+
+    [super viewWillAppear:animated];
+    [self loadLocalData];
 }
 -(void)loadMoreData{
     
@@ -72,10 +78,16 @@
     //1.
     NSArray * sence_array_1 =temp_array_1;
     NSMutableArray * arrayM1= [NSMutableArray array];
-    for (NSDictionary * dic in sence_array_1) {
-        IS_SenceModel * senceModel = [[IS_SenceModel alloc]initWithDictionary:dic];
-        [arrayM1 addObject:senceModel];
-    }
+//    for (NSDictionary * dic in sence_array_1) {
+//        IS_SenceModel * senceModel = [[IS_SenceModel alloc]initWithDictionary:dic];
+//      //  [arrayM1 addObject:senceModel];
+//      
+//        
+//        
+//    }
+    //b.还有数据库的
+    NSMutableArray * array_sence= [IS_SenceModel queryFormDB:nil orderBy:nil count:10 success:nil];
+    [arrayM1 addObjectsFromArray:array_sence];
     [self.sectionDictionary setObject:arrayM1 forKey:@"A 编辑中"];
     
     //2.
@@ -139,7 +151,7 @@
 -(NSArray *) createRightButtons
 {
     NSMutableArray * result = [NSMutableArray array];
-    NSArray * titleArray =@[@"  操作A  ",@"  操作B  "];
+    NSArray * titleArray =@[@"      删除      ",@"    编辑      "];
     NSArray *colorArray=@[[UIColor redColor],[UIColor lightGrayColor]];;
     for (int i = 0; i < titleArray.count; ++i)
     {
@@ -148,11 +160,19 @@
         button.tag=i;
         if (i==0) {
             button = [MGSwipeButton buttonWithTitle:titleArray[i] backgroundColor:colorArray[i] callback:^BOOL(MGSwipeTableCell *sender) {
+      
                 return YES;
             }];
         }else if (i==1){
             button = [MGSwipeButton buttonWithTitle:titleArray[i] backgroundColor:colorArray[i] callback:^BOOL(MGSwipeTableCell *sender) {
                 //[self jumpToPerson:indexPath];
+                NSArray * a1 = [self.sectionDictionary objectForKey:@"A 编辑中"];
+                IS_SenceModel * s =  a1[sender.tag];
+                if (s) {
+                    IS_SenceCreateController * senceCreateController = [[IS_SenceCreateController alloc]init];
+                    senceCreateController.senceModel = s;
+                    [self.navigationController pushViewController:senceCreateController animated:YES];
+                }
                 return YES;
             }];
         }

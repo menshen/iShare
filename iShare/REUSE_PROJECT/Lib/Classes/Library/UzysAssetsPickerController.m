@@ -17,6 +17,8 @@
 #import "UzysGroupPickerViewController.h"
 
 
+#import "UIWindow+JJ.h"
+
 @interface UzysAssetsPickerController ()<UICollectionViewDataSource,UICollectionViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 //View
 @property (weak, nonatomic) IBOutlet UIButton *btnTitle;
@@ -556,6 +558,9 @@
 
 - (void)finishPickingAssets
 {
+    
+    [UIWindow showWithHUDStatus:@"正在加载..." dismissAfter:10];
+
     NSMutableArray *assets = [[NSMutableArray alloc] init];
     
     for (NSIndexPath *indexPath in self.collectionView.indexPathsForSelectedItems)
@@ -571,7 +576,8 @@
             [picker.delegate UzysAssetsPickerController:picker didFinishPickingAssets:assets];
         
         [self dismissViewControllerAnimated:YES completion:^{
-            
+            [UIWindow dismissWithHUD];
+
         }];
     }
 }
@@ -684,7 +690,6 @@
 - (IBAction)btnAction:(id)sender {
 
     UIButton *btn = (UIButton *)sender;
-    
     switch (btn.tag) {
         case kTagButtonCamera:
         {
@@ -730,11 +735,14 @@
         }
             break;
         case kTagButtonDone:
+//            [UIWindow showWithBarStatus:@"正在加载" dismissAfter:0];
             [self finishPickingAssets];
+
             break;
         default:
             break;
     }
+
 }
 
 - (IBAction)indexDidChangeForSegmentedControl:(id)sender {

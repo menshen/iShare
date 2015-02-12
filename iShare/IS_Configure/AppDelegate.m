@@ -19,10 +19,17 @@
 
 @implementation AppDelegate
 
-
+//void myExceptionHandler(NSException *exception)
+//{
+//    NSArray *stack = [exception callStackReturnAddresses];
+//    NSLog(@"Stack trace: %@", stack);
+//}
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     //iShare_List
     
+    
+//        NSSetUncaughtExceptionHandler(&myExceptionHandler);
+   
     // [self setNaviAppearance];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] ;

@@ -4,13 +4,13 @@
 @interface IS_SenceCreateEditView()<IS_SenceCreateImageViewDelegate>
 
 //拖动时用到的属性，记录最后的选中button的tag
-@property (nonatomic,assign)int tmptag;
+@property (nonatomic,assign)int be_change_tag;
 
 @property (nonatomic,strong)UIButton * last_button;
 @end
 
 @implementation IS_SenceCreateEditView
-@synthesize tmptag;
+@synthesize be_change_tag;
 #pragma mark - 根据模板数据来构建
 -(void)setSenceTemplateModel:(IS_SenceTemplateModel *)senceTemplateModel{
 
@@ -30,26 +30,39 @@
 -(void)createSenceSubTemplateViewsBySubViewModelArray:(NSMutableArray*)arrayM{
 
     [self removeSubViewsFromSuperview];
-    self.senceCreateImgViewArray=nil;
     self.senceCreateImgViewFramesArray=nil;
-    self.senceCreateImgViewImageArray=nil;
+    self.senceSubModelArray=nil;
+    self.senceSubViewArray=nil;
 
     [arrayM enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         IS_SenceSubTemplateModel * senceSubTemplateModel = obj;
         //9.建设每个视图
+        CGRect frame = CGRectFromString(senceSubTemplateModel.sub_frame);
         
-        IS_SenceCreateImageView * senceCreateImageView = [[IS_SenceCreateImageView alloc]initWithFrame:CGRectFromString(senceSubTemplateModel.sub_frame)];
+        CGFloat xx= 3;
+        if (self.senceTemplateModel.senceTemplateShape==IS_SenceTemplateShapeGird) {
+            CGFloat X = frame.origin.x/xx+0.5;
+            CGFloat Y = frame.origin.y/xx;
+            CGFloat WIDTH =frame.size.width/xx;
+            CGFloat HEIGHT =frame.size.height/xx;
+            frame  = CGRectMake(X, Y, WIDTH, HEIGHT);
+        }else{
+        }
+        
+        IS_SenceCreateImageView * senceCreateImageView = [[IS_SenceCreateImageView alloc]initWithFrame:frame];
+        [self addSubview:senceCreateImageView];
+
         senceCreateImageView.senceSubTemplateModel =senceSubTemplateModel;
         senceCreateImageView.editViewDelegate = self;
         [senceCreateImageView.imageBtnView addTarget:self action:@selector(imageBtnViewAction:) forControlEvents:UIControlEventTouchUpInside];
-        [self.senceCreateImgViewImageArray addObject:senceCreateImageView.imageBtnView.currentImage];
         //3.
-        [self.senceCreateImgViewArray addObject:senceCreateImageView];
+        [self.senceSubViewArray addObject:senceCreateImageView];
+        [self.senceSubModelArray addObject:senceSubTemplateModel];
         [self.senceCreateImgViewFramesArray addObject:senceSubTemplateModel.sub_frame];
 
         
         
-        [self addSubview:senceCreateImageView];
+        
         
     }];
     
@@ -64,23 +77,23 @@
 #pragma mark -数据,记录每个子视图,子视图的Frame,图片信息
 
 #pragma mark -存储当前模板子视图数组
--(NSMutableArray *)senceCreateImgViewArray{
+-(NSMutableArray *)senceSubViewArray{
 
-    if (!_senceCreateImgViewArray) {
-        _senceCreateImgViewArray = [NSMutableArray array];
+    if (!_senceSubViewArray) {
+        _senceSubViewArray = [NSMutableArray array];
         
     }
-    return _senceCreateImgViewArray;
+    return _senceSubViewArray;
 }
-#pragma mark - 存储当前模板图片数据的
--(NSMutableArray *)senceCreateImgViewImageArray{
-    
-    if (!_senceCreateImgViewImageArray) {
-        _senceCreateImgViewImageArray = [NSMutableArray array];
-        
-    }
-    return _senceCreateImgViewImageArray;
-}
+//#pragma mark - 存储当前模板图片数据的
+//-(NSMutableArray *)senceCreateImgViewImageArray{
+//    
+//    if (!_senceCreateImgViewImageArray) {
+//        _senceCreateImgViewImageArray = [NSMutableArray array];
+//        
+//    }
+//    return _senceCreateImgViewImageArray;
+//}
 #pragma mark -存储模板子视图的frame数组
 -(NSMutableArray *)senceCreateImgViewFramesArray{
     
@@ -91,6 +104,14 @@
     return _senceCreateImgViewFramesArray;
 
 }
+-(NSMutableArray *)senceSubModelArray{
+
+    if (!_senceSubModelArray) {
+        _senceSubModelArray = [NSMutableArray array];
+        
+    }
+    return _senceSubModelArray;
+}
 
 #pragma mark -清除所以子视图
 -(void)removeSubViewsFromSuperview{
@@ -100,7 +121,15 @@
     }
 }
 
-
+/*
+ 
+ IS_SenceSubTemplateModel * cur_templateSubModel=itemData;
+ if (cur_templateSubModel.sub_type==IS_SenceSubTemplateTypeText) {
+ 
+ }else if (cur_templateSubModel.sub_type==IS_SenceCreateImageViewTypeImage){
+ 
+ }
+ */
 
 #pragma mark -点击图片
 -(void)imageBtnViewAction:(UIButton*)btn{
@@ -114,28 +143,25 @@
         self.senceTemplateModel.s_selected_tag=btn.tag;
     }
    
-    
-
-    
-    [[NSNotificationCenter defaultCenter]postNotificationName:BIG_IMAGE_TO_IMAGE_PAN
-                                                       object:subTemplateModel
-                                                     userInfo:nil];
-    [[NSNotificationCenter defaultCenter]postNotificationName:BIG_IMAGE_TO_COLLECTION_VIEW
-                                                       object:subTemplateModel
-                                                     userInfo:nil];
-    
-    [[NSNotificationCenter defaultCenter]postNotificationName:BIG_IMAGE_TO_CONTROLLER
-                                                       object:nil
-                                                     userInfo:nil];
-    
-    
-    
-
+    //1.代理
+    if ([self.delegate respondsToSelector:@selector(IS_SenceCreateEditViewDidSelectItem:userinfo:)]) {
+        [self.delegate IS_SenceCreateEditViewDidSelectItem:subTemplateModel userinfo:nil];
+    }
+   
 
    
 }
 
-#pragma mark - 
+#pragma mark - 输入框
+-(UITextView *)senceTextView{
+
+    if (!_senceTextView) {
+        _senceTextView = [[UITextView alloc]initWithFrame:CGRectMake(0, self.height, self.width, 40)];
+    }
+    return _senceTextView;
+
+}
+
 
 
 
@@ -148,13 +174,16 @@
                         state:(UIGestureRecognizerState)pan_state{
     
 
+    
+    NSInteger pan_tag = panView.tag;
+//    NSInteger change_tag =0;
     if(pan_state == UIGestureRecognizerStateChanged)
     {
 //        NSLog(@"grag change");
        //遍历9个view看移动到了哪个view区域，使其为选中状态.并更新选中view的tag值，使其永远为最新的
-        for (int i = 0; i< self.senceCreateImgViewArray.count; i++)
+        for (int i = 0; i< self.senceSubViewArray.count; i++)
         {
-            IS_SenceCreateImageView * sence_image_view = self.senceCreateImgViewArray[i];
+            IS_SenceCreateImageView * sence_image_view = self.senceSubViewArray[i];
             NSString* tmprect = self.senceCreateImgViewFramesArray[i];
             if (CGRectContainsPoint(CGRectFromString(tmprect), panView.center))
             {
@@ -163,9 +192,9 @@
                     return;
                 }
                 
-                tmptag = (int)sence_image_view.tag;
-                sence_image_view.layer.borderWidth = 5;
-                sence_image_view.layer.borderColor = [[UIColor redColor]CGColor];
+                be_change_tag = (int)sence_image_view.tag;
+                sence_image_view.layer.borderWidth = 2;
+                sence_image_view.layer.borderColor = [IS_SYSTEM_COLOR CGColor];
                 return;
             }
             else
@@ -183,41 +212,51 @@
         [UIView animateWithDuration:.2  animations:^
          {
              //结束时将选中view的边框还原
-             IS_SenceCreateImageView *  beChangeView = self.senceCreateImgViewArray[tmptag];
+             IS_SenceCreateImageView *  beChangeView = self.senceSubViewArray[be_change_tag];
              beChangeView.layer.borderWidth = 0;
              beChangeView.layer.borderColor = [[UIColor clearColor]CGColor];
              
              //把移动的 view 也还原
              NSString * panViewRectString = self.senceCreateImgViewFramesArray[panView.tag];
              panView.frame = CGRectFromString(panViewRectString);
+//             NSString * changeViewRectString= self.senceCreateImgViewFramesArray[panView.tag];
 
              
+             //数据
+             
+             NSLog(@"panView_t=%d",(int)pan_tag);
+             IS_SenceSubTemplateModel * beChangeModel = self.senceSubModelArray[be_change_tag];
+             beChangeModel.sub_tag=pan_tag;
+             beChangeModel.sub_frame=panViewRectString;
+
+             IS_SenceSubTemplateModel * panModel = self.senceSubModelArray[pan_tag];
+             panModel.sub_tag=be_change_tag;
+             panModel.sub_frame=self.senceCreateImgViewFramesArray[be_change_tag];
+             
+             [self.senceTemplateModel.s_sub_view_array replaceObjectAtIndex:pan_tag withObject:beChangeModel];
+             [self.senceTemplateModel.s_sub_view_array replaceObjectAtIndex:be_change_tag withObject:panModel];
+             
+//             [self.senceSubModelArray exchangeObjectAtIndex:be_change_tag withObjectAtIndex:pan_tag];
+//             self.senceTemplateModel.s_sub_view_array=self.senceSubModelArray;
+             
+             if ([self.delegate respondsToSelector:@selector(IS_SenceCreateEditViewDidEndPanItem:userinfo:)]) {
+                 [self.delegate IS_SenceCreateEditViewDidEndPanItem:self.senceTemplateModel userinfo:nil];
+             }
+             
+             
+
 #pragma mark - ImageView
              
-             
-//
-             [panView.imageBtnView setImage:self.senceCreateImgViewImageArray[tmptag] forState:UIControlStateNormal];
-             [beChangeView.imageBtnView setImage:self.senceCreateImgViewImageArray[panView.tag] forState:UIControlStateNormal];
-             [self.senceCreateImgViewImageArray exchangeObjectAtIndex:panView.tag withObjectAtIndex:beChangeView.tag];
+
+
              
 #pragma mark - 交换数据-刷新
-        
-             [self.senceTemplateModel.s_sub_view_array exchangeObjectAtIndex:panView.tag  withObjectAtIndex:beChangeView.tag];
-             [[NSNotificationCenter defaultCenter]postNotificationName:BIG_IMAGE_TO_COLLECTION_VIEW object:self.senceTemplateModel];
              
              
              
          } completion:^(BOOL finished)
          {
-             NSLog(@"已交换");
-             //完成动画后还原btn的状态
-             for (int i = 0; i< self.senceCreateImgViewArray.count; i++)
-             {
-                 
-                 IS_SenceCreateImageView * sence_image_view =  self.senceCreateImgViewArray[i];
-                 sence_image_view.layer.borderColor = [[UIColor clearColor]CGColor];
-                 sence_image_view.layer.borderWidth = 0;
-             }
+          
              
          }];
         
@@ -227,6 +266,17 @@
 
     
 }
-
+#pragma mark - 处理完
+-(void)IS_SenceCreateImageViewDidDealImage:(id)sender{
+    
+    if (sender) {
+        IS_SenceSubTemplateModel * subTemplateModel = sender;
+        [self.senceTemplateModel.s_sub_view_array replaceObjectAtIndex:subTemplateModel.sub_tag withObject:subTemplateModel];
+        if ([self.delegate respondsToSelector:@selector(IS_SenceCreateEditViewDidEndPanItem:userinfo:)]) {
+            [self.delegate IS_SenceCreateEditViewDidEndPanItem:self.senceTemplateModel userinfo:nil];
+        }
+    }
+    
+}
 
 @end

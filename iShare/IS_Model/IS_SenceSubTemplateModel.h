@@ -9,7 +9,7 @@
 
 #define TYPE_KEY @"type"
 #define PLACE_IMAGE_NAME @"place_image"
-
+#define PLACE_TEXT      @"place_text"
 typedef NS_ENUM(NSInteger, IS_SenceSubTemplateType) {
     
     IS_SenceSubTemplateTypeImage,
@@ -34,6 +34,14 @@ typedef NS_ENUM(NSInteger, IS_SenceSubTemplateType) {
  *   对应视图的tag
  */
 @property (nonatomic,assign)NSInteger  sub_tag;
+/**
+ *   对应视图的tag
+ */
+@property (nonatomic,copy)NSString * sub_image_frame;
+/**
+ *   对应视图的偏移
+ */
+@property (nonatomic,copy)NSString * sub_image_offset;
 
 #pragma mark -图片数据
 /**
@@ -86,6 +94,7 @@ typedef NS_ENUM(NSInteger, IS_SenceSubTemplateType) {
 /**
  *  通过模板风格来构建N个子视图图
  */
-+ (NSMutableArray *)configureSubTemplateModelIndex:(NSInteger)index
-                                    sub_index:(NSInteger)sub_index;
++ (NSMutableArray *)configureSubTemplateModelWithStandardSize:(CGSize)size
+                                                        Index:(NSInteger)index
+                                                        sub_index:(NSInteger)sub_index;
 @end

@@ -4,16 +4,35 @@
 #import "IS_SenceCreateImageView.h"
 #import "IS_SenceTemplateModel.h"
 
+@protocol IS_SenceCreateEditViewDelegate <NSObject>
+
+/**
+ *  当点击事件后
+ */
+- (void)IS_SenceCreateEditViewDidSelectItem:(id)itemData
+                                 userinfo:(NSDictionary*)userinfo;
+
+/**
+ *  当点击事件后
+ */
+- (void)IS_SenceCreateEditViewDidEndPanItem:(id)itemData
+                                   userinfo:(NSDictionary*)userinfo;
+
+@end
+
+
+
 @interface IS_SenceCreateEditView : UIView
 
+@property (nonatomic,weak)id<IS_SenceCreateEditViewDelegate>delegate;
 ///存放View数组
-@property (nonatomic,strong)NSMutableArray *  senceCreateImgViewArray;
+@property (nonatomic,strong)NSMutableArray *  senceSubModelArray;
 //存放view-Frame的标准位置
 @property (nonatomic,strong)NSMutableArray *  senceCreateImgViewFramesArray;
-//存放Image的标准位置
-@property (nonatomic,strong)NSMutableArray *  senceCreateImgViewImageArray;
+////存放Image的标准位置
+@property (nonatomic,strong)NSMutableArray *  senceSubViewArray;
 
-
+@property (nonatomic,strong)UITextView * senceTextView;
 
 /**
  *  模板编辑视图的模板模型

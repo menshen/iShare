@@ -21,11 +21,14 @@
     _s_sub_template_style = s_sub_template_style;
     
     //初始化时候构建占位的
-    NSMutableArray * arrayM = [IS_SenceSubTemplateModel configureSubTemplateModelIndex:_s_template_style sub_index:_s_sub_template_style];
+    NSMutableArray * arrayM = [IS_SenceSubTemplateModel configureSubTemplateModelWithStandardSize:CGSizeZero
+                                                                                            Index:_s_template_style
+                                                                                        sub_index:_s_sub_template_style];
     self.s_sub_view_array = arrayM;
     
   
 }
+
 -(void)setS_selected_tag:(NSInteger)s_selected_tag{
     if (s_selected_tag==-1) {
         [self.s_sub_view_array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -54,20 +57,10 @@
     }
     return _s_sub_view_array;
 }
--(NSMutableArray *)s_img_array{
-    
-    if (!_s_img_array) {
-        _s_img_array = [NSMutableArray array];
-    }
-    return _s_img_array;
-}
--(NSMutableArray *)s_text_array{
-    
-    if (!_s_text_array) {
-        _s_text_array = [NSMutableArray array];
-    }
-    return _s_text_array;
 
+-(NSInteger)img_count{
+    
+    return _s_sub_template_style;
 }
 
 @end

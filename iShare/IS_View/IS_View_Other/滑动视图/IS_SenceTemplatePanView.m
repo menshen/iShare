@@ -21,13 +21,13 @@
     
     if (self = [super initWithFrame:frame]) {
         
-        self.tableView.contentInset =UIEdgeInsetsMake(-40, 0, 0, 0);
+        self.tableView.contentInset =UIEdgeInsetsMake(0, 0, 0, 0);
         
         //1.默认
        [self addDefault];
         
-        //2.模板改变
-        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(templateToPanView:) name:COLLECTION_VIEW_SCROLL_CHANGE_TEMPLATE_PAN object:nil];
+     
+        
         
       
     }
@@ -66,19 +66,19 @@
     
 }
 #pragma mark -当下一页->模板改变
--(void)templateToPanView:(NSNotification*)notification{
-  
+-(void)templateScrollDidChange:(id)itemData{
     
-    if ([notification.userInfo[IS_NOTIFICATION_OPTION] isEqualToString:COLLECTION_VIEW_SCROLL_CHANGE_TEMPLATE_PAN]) {
-        if ([notification.object isKindOfClass:[IS_SenceTemplateModel class]]) {
-            IS_SenceTemplateModel * last_Template = notification.object;
-            NSIndexPath * indexPath = [NSIndexPath indexPathForRow:last_Template.s_sub_template_style inSection:0];
-            [self clearByIndexPath:indexPath];
-//
-        }
+    if ([itemData isKindOfClass:[IS_SenceTemplateModel class]]) {
+//        IS_SenceTemplateModel * last_Template = itemData;
+//        NSInteger row = last_Template.s_sub_template_style+last_Template.s_template_style
+//        NSIndexPath * indexPath = [NSIndexPath indexPathForRow: inSection:0];
+//        [self clearByIndexPath:indexPath];
+        //
     }
-
+    
+    
 }
+
 
 #pragma mark -点击
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -88,8 +88,9 @@
     if (self.dataSource[indexPath.row]) {
         [self clearByIndexPath:indexPath];
         IS_SenceTemplatePanModel * senceTemplatePanModel =self.dataSource[indexPath.row];
-        NSDictionary * user_info = @{IS_NOTIFICATION_OPTION:TEMPLATE_TO_COLLECTION_VIEW_BY_TAP};
-        [[NSNotificationCenter defaultCenter]postNotificationName:TEMPLATE_TO_COLLECTION_VIEW_BY_TAP object:senceTemplatePanModel userInfo:user_info];
+        if ([self.delegate respondsToSelector:@selector(IS_SenceTemplatePanViewDidSelectItem:userinfo:)]) {
+            [self.delegate IS_SenceTemplatePanViewDidSelectItem:senceTemplatePanModel userinfo:nil];
+        }
         
     }
 

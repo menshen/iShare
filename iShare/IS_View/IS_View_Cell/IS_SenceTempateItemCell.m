@@ -22,13 +22,13 @@
 //    self.selected = senceTemplateModel.is_selected;
     if (senceTemplatePanModel.is_selected) {
         
-        self.sence_image_view.layer.borderWidth = 5;
-        self.sence_image_view.layer.borderColor = [[UIColor redColor]CGColor];
+        self.contentView.layer.borderWidth = 1;
+        self.contentView.layer.borderColor = [IS_SYSTEM_COLOR CGColor];
         
         
     }else{
-        self.sence_image_view.layer.borderWidth = 0;
-        self.sence_image_view.layer.borderColor = [[UIColor clearColor]CGColor];
+        self.contentView.layer.borderWidth = 0;
+        self.contentView.layer.borderColor = [[UIColor clearColor]CGColor];
     }
 
 }
