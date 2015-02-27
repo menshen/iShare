@@ -1,12 +1,6 @@
 #import <UIKit/UIKit.h>
 #import "IS_SenceSubTemplateModel.h"
 
-typedef NS_ENUM(NSInteger, IS_SenceCreateImageViewType) {
-
-    IS_SenceCreateImageViewTypeImage,
-    IS_SenceCreateImageViewTypeText,
-    
-};
 
 @protocol IS_SenceCreateImageViewDelegate;
 
@@ -24,10 +18,6 @@ typedef NS_ENUM(NSInteger, IS_SenceCreateImageViewType) {
  */
 - (void)setImageViewData:(UIImage *)imageData;
 
-/**
- *  编辑子视图的类型 1、图片 2、文字 3、视频
- */
-@property (nonatomic, assign)IS_SenceCreateImageViewType createImageViewType;
 /**
  *  协议
  */

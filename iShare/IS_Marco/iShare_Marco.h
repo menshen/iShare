@@ -18,8 +18,11 @@
 
 #define List_URL_1      [[NSBundle mainBundle]URLForResource:@"iShare_Template_List_1" withExtension:@"plist"]
 #define List_DIC_1      [NSDictionary dictionaryWithContentsOfURL:List_URL_1]
-#define List_Array_1    List_DIC_1[@"First_Template"]
+#define List_Sence_Array_1     List_DIC_1[@"First_Sence"]
 
+#define TEMPLATE_THEME_1            List_DIC_1[@"TEMPLATE_THEME_1"]
+#define TEMPLATE_THEME_2            List_DIC_1[@"TEMPLATE_THEME_2"]
+#define TEMPLATE_THEME_3            List_DIC_1[@"TEMPLATE_THEME_3"]
 
 #import "CategoryMarco.h"
 

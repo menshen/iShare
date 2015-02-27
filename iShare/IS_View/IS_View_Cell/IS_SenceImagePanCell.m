@@ -2,6 +2,7 @@
 
 #import "IS_SenceImagePanCell.h"
 #import "IS_SenceEditTool.h"
+#import "MutilThreadTool.h"
 @implementation IS_SenceImagePanCell
 
 
@@ -19,14 +20,26 @@
 //
 //    }
     
+    
+    
+    
+  
+    
     if (senceImageModel.image_data) {
         [self.sencn_image_btn_view setImage:senceImageModel.image_data forState:UIControlStateNormal];
 //        [self.sencn_image_btn_view setImage:senceImageModel.image_data forState:UIControlStateNormal];
     }else{
         
-        senceImageModel.image_data=[IS_SenceEditTool getImagesDataFromAssetURLString:senceImageModel.image_url];
-        [self.sencn_image_btn_view setImage:senceImageModel.image_data forState:UIControlStateNormal];
-
+        
+        [MutilThreadTool ES_AsyncConcurrentOperationQueueBlock:^{
+            if (!senceImageModel.image_data) {
+                senceImageModel.image_data = [IS_SenceEditTool getImagesDataFromAssetURLString:senceImageModel.image_url];//[UIImage imageNamed:UPLOAD_IMAGE];//
+            }
+        } MainThreadBlock:^{
+            
+            [self.sencn_image_btn_view setImage:senceImageModel.image_data forState:UIControlStateNormal];
+            
+        }];
         
     }
 //    else{

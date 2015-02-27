@@ -76,8 +76,8 @@
             [self clearByIndexPath:nil];
         }else{
             self.cur_subTemplateModel=subTemplateModel;
-            self.cur_image=subTemplateModel.image_data;
-            [self clearByCurImage:_cur_image];
+//            self.cur_image=subTemplateModel.image_data;
+            [self clearByCurImage:subTemplateModel.image_data image_asset:subTemplateModel.image_url];
             self.isReplace=subTemplateModel.image_selected;
         }
        
@@ -88,11 +88,12 @@
     }
 
 }
--(void)clearByCurImage:(UIImage*)image{
+-(void)clearByCurImage:(UIImage*)image
+           image_asset:(NSString*)image_asset{
     
     [self.dataSource enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         IS_SenceSubTemplateModel * senceImageModel = obj;
-        if ([senceImageModel.image_data isEqual:image]) {
+        if ([senceImageModel.image_data isEqual:image] || [senceImageModel.image_url isEqualToString:image_asset]) {
             [self clearByIndexPath:[NSIndexPath indexPathForRow:idx inSection:0]];
               *stop=YES;
         }

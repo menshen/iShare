@@ -1,0 +1,54 @@
+{
+    "view_info": [
+        {
+            "frame": {
+                "x": 27.7,
+                "y": 4.5,
+                "w": 44,
+                "h": 13.3
+            },
+             "type": 2,
+             "place_text": "  PERFECT\rROMANCE"
+        },
+        {
+            "frame": {
+                "x": 5.3,
+                "y": 22.5,
+                "w": 44,
+                "h": 35
+            },
+            "type": 0,
+            "place_image": "p4_b_1"
+        },
+        {
+            "frame": {
+                "x": 51,
+                "y": 22.5,
+                "w": 44,
+                "h": 35
+            },
+            "type": 0,
+            "place_image": "p4_b_2"
+        },
+        {
+            "frame": {
+                "x": 5.3,
+                "y": 58.3,
+                "w": 44,
+                "h": 35
+            },
+            "type": 0,
+            "place_image": "p4_b_3"
+        },
+        {
+            "frame": {
+                "x": 51,
+                "y": 58.3,
+                "w": 44,
+                "h": 35
+            },
+            "type": 0,
+            "place_image": "p4_b_4"
+        }
+    ]
+}

@@ -36,7 +36,13 @@
 }
 -(void)addDefault{
 
-    self.dataSource = [NSMutableArray arrayWithArray:List_Array_1];
+    NSMutableArray * arrayM = [NSMutableArray array];
+    [arrayM addObjectsFromArray:TEMPLATE_THEME_1];
+    [arrayM addObjectsFromArray:TEMPLATE_THEME_2];
+    [arrayM addObjectsFromArray:TEMPLATE_THEME_3];
+    
+    self.dataSource = arrayM;
+
     IS_SenceTemplatePanModel * s =[self.dataSource firstObject];
     s.is_selected=YES;
 
@@ -69,20 +75,35 @@
 -(void)templateScrollDidChange:(id)itemData{
     
     if ([itemData isKindOfClass:[IS_SenceTemplateModel class]]) {
-//        IS_SenceTemplateModel * last_Template = itemData;
-//        NSInteger row = last_Template.s_sub_template_style+last_Template.s_template_style
-//        NSIndexPath * indexPath = [NSIndexPath indexPathForRow: inSection:0];
-//        [self clearByIndexPath:indexPath];
+        IS_SenceTemplateModel * last_Template = itemData;
+       [self clearByIndexPath:last_Template];
         //
     }
     
     
 }
 
-
+/*
+ 
+ if (indexPath.row==0) {
+ self.dataSource = [NSMutableArray arrayWithArray:List_Sence_Array_1];
+ [tableView reloadData];
+ 
+ return;
+ 
+ }else if (indexPath.row==1){
+ 
+ self.dataSource = [NSMutableArray arrayWithArray:List_Array_1];
+ [tableView reloadData];
+ 
+ return;
+ }
+ */
 #pragma mark -点击
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    
+  
     
 //    
     if (self.dataSource[indexPath.row]) {
@@ -98,24 +119,56 @@
 }
 
 #pragma mark - 清除并添加
--(void)clearByIndexPath:(NSIndexPath*)indexPath{
+-(void)clearByIndexPath:(id)itemData{
 
     
-    [self.dataSource enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        IS_SenceTemplatePanModel * last_Template =obj;
-        if (idx==indexPath.row) {
-            last_Template.is_selected=YES;
-            IS_SenceTemplatePanModel * litter_template_model = self.dataSource[indexPath.row];
-            litter_template_model.is_selected=YES;
-            [self.dataSource replaceObjectAtIndex:indexPath.row withObject:litter_template_model];
-            
-        }else{
-            last_Template.is_selected=NO;
-        }
-    }];
+    if ([itemData isKindOfClass:[NSIndexPath class]]) {
+        
+        NSIndexPath * indexPath = itemData;
+        
+        [self.dataSource enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            IS_SenceTemplatePanModel * last_Template =obj;
+            if (idx==indexPath.row) {
+                last_Template.is_selected=YES;
+                IS_SenceTemplatePanModel * litter_template_model = self.dataSource[indexPath.row];
+                litter_template_model.is_selected=YES;
+                [self.dataSource replaceObjectAtIndex:indexPath.row withObject:litter_template_model];
+                
+            }else{
+                last_Template.is_selected=NO;
+            }
+        }];
+        
+        [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+        [self.tableView reloadData];
+    }else if ([itemData isKindOfClass:[IS_SenceTemplateModel class]]){
     
-    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
-    [self.tableView reloadData];
+        IS_SenceTemplateModel * targetTemplateModel = itemData;
+       __block NSInteger cur_row=0;
+        [self.dataSource enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            IS_SenceTemplatePanModel * last_Template =obj;
+            if (last_Template.s_template_style==targetTemplateModel.s_template_style&&last_Template.s_sub_template_style==targetTemplateModel.s_sub_template_style) {
+                
+                last_Template.is_selected=YES;
+                IS_SenceTemplatePanModel * litter_template_model = self.dataSource[idx];
+                litter_template_model.is_selected=YES;
+                cur_row=idx;
+                [self.dataSource replaceObjectAtIndex:idx withObject:litter_template_model];
+                
+            }else{
+                last_Template.is_selected=NO;
+            }
+        }];
+        
+        NSIndexPath * curIndexPath = [NSIndexPath indexPathForRow:cur_row inSection:0];
+        [self.tableView scrollToRowAtIndexPath:curIndexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+        [self.tableView reloadData];
+        
+        
+    }
+    
+    
+   
 }
 
 @end

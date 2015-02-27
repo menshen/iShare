@@ -12,6 +12,7 @@
     return self;
 }
 
+
 #pragma mark - 根据主风格+子风格 ->构建子视图的参数
 -(void)setS_template_style:(NSInteger)s_template_style{
     

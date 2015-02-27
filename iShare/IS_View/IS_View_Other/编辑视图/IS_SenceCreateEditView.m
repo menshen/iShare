@@ -85,15 +85,7 @@
     }
     return _senceSubViewArray;
 }
-//#pragma mark - 存储当前模板图片数据的
-//-(NSMutableArray *)senceCreateImgViewImageArray{
-//    
-//    if (!_senceCreateImgViewImageArray) {
-//        _senceCreateImgViewImageArray = [NSMutableArray array];
-//        
-//    }
-//    return _senceCreateImgViewImageArray;
-//}
+
 #pragma mark -存储模板子视图的frame数组
 -(NSMutableArray *)senceCreateImgViewFramesArray{
     
@@ -161,11 +153,6 @@
     return _senceTextView;
 
 }
-
-
-
-
-
 #pragma mark -拖动图片
 /**
  *  拖动状态
@@ -179,8 +166,7 @@
 //    NSInteger change_tag =0;
     if(pan_state == UIGestureRecognizerStateChanged)
     {
-//        NSLog(@"grag change");
-       //遍历9个view看移动到了哪个view区域，使其为选中状态.并更新选中view的tag值，使其永远为最新的
+
         for (int i = 0; i< self.senceSubViewArray.count; i++)
         {
             IS_SenceCreateImageView * sence_image_view = self.senceSubViewArray[i];
@@ -188,7 +174,7 @@
             if (CGRectContainsPoint(CGRectFromString(tmprect), panView.center))
             {
                 
-                if (sence_image_view.createImageViewType !=IS_SenceCreateImageViewTypeImage) {
+                if (sence_image_view.senceSubTemplateModel.sub_type !=IS_SenceSubTemplateTypeImage) {
                     return;
                 }
                 
@@ -211,20 +197,26 @@
 
         [UIView animateWithDuration:.2  animations:^
          {
+             
+            
+             
              //结束时将选中view的边框还原
              IS_SenceCreateImageView *  beChangeView = self.senceSubViewArray[be_change_tag];
              beChangeView.layer.borderWidth = 0;
              beChangeView.layer.borderColor = [[UIColor clearColor]CGColor];
+             NSString * panViewRectString = self.senceCreateImgViewFramesArray[pan_tag];
+             beChangeView.frame =CGRectFromString(panViewRectString);
+             beChangeView.tag = panView.tag;
              
              //把移动的 view 也还原
-             NSString * panViewRectString = self.senceCreateImgViewFramesArray[panView.tag];
-             panView.frame = CGRectFromString(panViewRectString);
-//             NSString * changeViewRectString= self.senceCreateImgViewFramesArray[panView.tag];
+             NSString * beChangeFrame = self.senceCreateImgViewFramesArray[be_change_tag];
+             panView.frame = CGRectFromString(beChangeFrame);
+             beChangeView.tag = be_change_tag;
 
+          
              
-             //数据
+#pragma mark - 交换数据-刷新
              
-             NSLog(@"panView_t=%d",(int)pan_tag);
              IS_SenceSubTemplateModel * beChangeModel = self.senceSubModelArray[be_change_tag];
              beChangeModel.sub_tag=pan_tag;
              beChangeModel.sub_frame=panViewRectString;
@@ -235,28 +227,15 @@
              
              [self.senceTemplateModel.s_sub_view_array replaceObjectAtIndex:pan_tag withObject:beChangeModel];
              [self.senceTemplateModel.s_sub_view_array replaceObjectAtIndex:be_change_tag withObject:panModel];
-             
-//             [self.senceSubModelArray exchangeObjectAtIndex:be_change_tag withObjectAtIndex:pan_tag];
-//             self.senceTemplateModel.s_sub_view_array=self.senceSubModelArray;
+
              
              if ([self.delegate respondsToSelector:@selector(IS_SenceCreateEditViewDidEndPanItem:userinfo:)]) {
                  [self.delegate IS_SenceCreateEditViewDidEndPanItem:self.senceTemplateModel userinfo:nil];
              }
-             
-             
-
-#pragma mark - ImageView
-             
-
-
-             
-#pragma mark - 交换数据-刷新
-             
-             
-             
          } completion:^(BOOL finished)
          {
-          
+             //1.frame数组
+             [self.senceCreateImgViewFramesArray exchangeObjectAtIndex:pan_tag withObjectAtIndex:be_change_tag];
              
          }];
         

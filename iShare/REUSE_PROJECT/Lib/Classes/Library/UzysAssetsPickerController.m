@@ -559,8 +559,11 @@
 - (void)finishPickingAssets
 {
     
-    [UIWindow showWithHUDStatus:@"正在加载..." dismissAfter:10];
-
+    NSInteger sum = self.collectionView.indexPathsForSelectedItems.count;
+    NSString * detail = [NSString stringWithFormat:@"%d张图片",(int)sum];
+    [UIWindow showWithHUDStatus:@"正在处理" detailStatus:detail dismissAfter:10];
+    //[UIWindow showWithBarHUDStatus:nil detailStatus:@"正在加载图片" dismissAfter:3 view:nil];
+    
     NSMutableArray *assets = [[NSMutableArray alloc] init];
     
     for (NSIndexPath *indexPath in self.collectionView.indexPathsForSelectedItems)

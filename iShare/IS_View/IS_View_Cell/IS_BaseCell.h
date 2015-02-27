@@ -10,6 +10,11 @@
 //MGSwipeTableCell
 #import "MGSwipeTableCell.h"
 #import "MGSwipeButton.h"
+
+/**
+    block
+ */
+
 @class IS_SenceModel;
 @interface IS_BaseCell : MGSwipeTableCell
 #pragma mark -模板
@@ -20,6 +25,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *detailLab;
 @property (weak, nonatomic) IBOutlet UILabel *timeLab;
 @property (strong,nonatomic)NSIndexPath * indexPath;
+
+
 
 
 #pragma mark -构建Cell（根据数据）

@@ -26,6 +26,9 @@
 @implementation IS_SenceCreateImageView
 #define MRScreenWidth      CGRectGetWidth([UIScreen mainScreen].applicationFrame)
 #define MRScreenHeight     CGRectGetHeight([UIScreen mainScreen].applicationFrame)
+
+#define FONT_NAME @""
+
 #pragma mark - 内容视图-可以滚动
 -(instancetype)initWithFrame:(CGRect)frame{
 
@@ -50,6 +53,7 @@
         UIImage * place_image = [UIImage imageNamed:UPLOAD_IMAGE];
         imageData=place_image;
         [self.imageBtnView setImage:place_image forState:UIControlStateNormal];
+
         
     }
     CGRect rect  = CGRectZero;
@@ -118,6 +122,7 @@
         
         
     }
+    [self setBackgroundColor:kColor(221, 221, 221)];
     [self setZoomScale:0.2 animated:YES];
    
     
@@ -142,6 +147,7 @@
         [self setMinimumZoomScale:minimumScale];
         [self setZoomScale:minimumScale];
         _imageBtnView.imageView.contentMode = UIViewContentModeScaleToFill;
+        _imageBtnView.backgroundColor = [UIColor clearColor];
     }
     return _imageBtnView;
 }
@@ -151,45 +157,63 @@
     _senceSubTemplateModel = senceSubTemplateModel;
     
    
-   
-   
-    
-    //1.根据类型判断,初始化图片
-    if (senceSubTemplateModel.sub_type==IS_SenceSubTemplateTypeImage) {
-        self.createImageViewType=IS_SenceSubTemplateTypeImage;
-//        if (!senceSubTemplateModel.image_data) {
-//            senceSubTemplateModel.image_data = [IS_SenceEditTool getImagesDataFromAssetURLString:senceSubTemplateModel.image_url];//[UIImage imageNamed:UPLOAD_IMAGE];//
-//        }else{
-//            [self setImageViewData:senceSubTemplateModel.image_data];
-//
-//        }
-        
-        
-        
-        if (senceSubTemplateModel.image_data) {
-            [self setImageViewData:senceSubTemplateModel.image_data];
-        }else{
-            [MutilThreadTool ES_AsyncConcurrentOperationQueueBlock:^{
-                if (!senceSubTemplateModel.image_data) {
-                    senceSubTemplateModel.image_data = [IS_SenceEditTool getImagesDataFromAssetURLString:senceSubTemplateModel.image_url];//[UIImage imageNamed:UPLOAD_IMAGE];//
-                }
-            } MainThreadBlock:^{
-                
+
+    switch (senceSubTemplateModel.sub_type) {
+        case IS_SenceSubTemplateTypeImage:
+        {
+            if (senceSubTemplateModel.image_data) {
+                //1.有数据的
                 [self setImageViewData:senceSubTemplateModel.image_data];
                 
-            }];
+            }else if(senceSubTemplateModel.image_url){
+                //2,指向图片库
+                [MutilThreadTool ES_AsyncConcurrentOperationQueueBlock:^{
+                    if (!senceSubTemplateModel.image_data) {
+                        senceSubTemplateModel.image_data = [IS_SenceEditTool getImagesDataFromAssetURLString:senceSubTemplateModel.image_url];//[UIImage imageNamed:UPLOAD_IMAGE];//
+                    }
+                } MainThreadBlock:^{
+                    
+                    [self setImageViewData:senceSubTemplateModel.image_data];
+                    
+                }];
+            }else if (senceSubTemplateModel.image_place_name){
+                //3.有占位图片
+                 [self.imageBtnView setImage:[UIImage imageNamed:senceSubTemplateModel.image_place_name]forState:UIControlStateNormal];
+                _imageBtnView.imageView.contentMode = UIViewContentModeScaleAspectFill;
+
+            }
+            //2.增加手势
+            [self addGestureRecognizers];
         }
+            break;
+        case IS_SenceSubTemplateTypeDecorate:{
         
-        
-        
-        //2.文字
-        [self addGestureRecognizers];
-    }else{
-        self.createImageViewType=IS_SenceSubTemplateTypeText;
-        [self.imageBtnView setImage:[UIImage imageNamed:senceSubTemplateModel.image_place_name]forState:UIControlStateNormal];
-        
+            [self.imageBtnView setImage:[UIImage imageNamed:senceSubTemplateModel.image_place_name]forState:UIControlStateNormal];
+            self.imageBtnView.imageView.backgroundColor = [UIColor clearColor];
+            self.imageBtnView.userInteractionEnabled=NO;
+        }
+            break;
+        case IS_SenceSubTemplateTypeText:{
+        //Raleway Thin
+            UIFont * raleway_font = [UIFont fontWithName:@"Raleway-Thin" size:20]; //[UIFont systemFontOfSize:25];
+            
+            [self.imageBtnView.titleLabel setFont:raleway_font];
+            self.imageBtnView.titleLabel.numberOfLines=0;
+            [self.imageBtnView setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+//            self.imageBtnView.titleLabel.textAlignment = NSTextAlignmentLeft;
+            [self.imageBtnView setTitle:senceSubTemplateModel.text_string forState:UIControlStateNormal];
+            self.imageBtnView.imageView.backgroundColor = [UIColor clearColor];
+//            self.imageBtnView.height=60;
+            
+
+        }
+            break;
+            
+        default:
+            break;
     }
-    //
+    
+ 
     self.tag = senceSubTemplateModel.sub_tag;
     self.imageBtnView.tag=senceSubTemplateModel.sub_tag;
     
@@ -206,11 +230,12 @@
     //4.
     
     [self setClipsToBounds:YES];
-    [self setBackgroundColor:kColor(221, 221, 221)];
+   //
     
    
 
 }
+#pragma mark - 被选中
 -(void)setIsSelected:(BOOL)isSelected{
 
     _isSelected = isSelected;
@@ -243,7 +268,7 @@
    
     
 
-    if (self.createImageViewType==IS_SenceCreateImageViewTypeImage) {
+    if (self.senceSubTemplateModel.sub_type==IS_SenceSubTemplateTypeImage&&self.senceSubTemplateModel.image_data) {
         //1.长按手势
         
         _longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleLongPressGesture:)];

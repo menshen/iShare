@@ -7,13 +7,13 @@
 @implementation IS_SenceSubTemplateModel
 
 #pragma mark
-//-(instancetype)init{
-//    
-//    if (self = [super init]) {
-//        self.image_selected=-1;
-//    }
-//    return self;
-//}
+-(instancetype)init{
+    
+    if (self = [super init]) {
+        self.image_edited=NO;
+    }
+    return self;
+}
 + (NSMutableArray *)configureSubTemplateModelWithStandardSize:(CGSize)size
                                                         Index:(NSInteger)index
                                                     sub_index:(NSInteger)sub_index {
@@ -76,23 +76,7 @@
     return arrayM;
     
 }
-/*
-if (!_image_url) {
-    
-    
-    
-    NSData * d =[self loadDataForDefaultRepresentation:[NSURL URLWithString:_image_url]];
-    
-    //         ALAssetsLibrary *assetLibrary=[[ALAssetsLibrary alloc] init];
-    //         [assetLibrary assetForURL:[NSURL URLWithString:_image_url] resultBlock:^(ALAsset *asset) {
-    //             _image_data = copyOfOriginalImage;
-    //         } failureBlock:nil];
-    
-}else{
-    
-}
 
-*/
 -(UIImage *)image_data{
     
     if (!_image_data) {
@@ -109,17 +93,7 @@ if (!_image_url) {
  
 
 }
-#pragma mark -
 
-// --------------- .h file
-
-// class members in the header file (can't be local as then the blocks wouldn't be able to use them
-
-
-
-// --------------- .m file
-
-// NSConditionLock values
 
 
 

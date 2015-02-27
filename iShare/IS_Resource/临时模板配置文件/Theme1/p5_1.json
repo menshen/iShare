@@ -1,0 +1,69 @@
+{
+  "view_info": [
+        {
+            "frame": {
+                "x": 0,
+                "y": 6.5,
+                "w": 67,
+                "h": 28
+            },
+            "type": 0,
+            "place_image": "p5_a_1"
+           
+        },
+        {
+            "frame": {
+                "x": 0,
+                "y": 35,
+                "w": 57,
+                "h": 28
+            },
+              "type": 0,
+                "place_image": "p5_a_2"
+        },
+        {
+            "frame": {
+                "x": 0,
+                "y": 65,
+                "w": 46,
+                "h": 28
+            },
+              "type": 0,
+            "place_image": "p5_a_3"
+                
+        },
+        {
+            "frame": {
+                "x": 60,
+                "y": 6.5,
+                "w": 40,
+                "h": 28
+            },
+              "type": 0,
+            "place_image": "p5_a_4"
+        },
+        {
+            "frame": {
+                "x": 60,
+                "y": 35,
+                "w": 40,
+                "h": 28
+            },
+              "type": 1,
+              "place_image": "Full_Of_Love",
+              
+        },
+        {
+            "frame": {
+                "x": 38,
+                "y": 65,
+                "w": 63,
+                "h": 28
+            },
+            "type": 0,
+            "place_image": "p5_a_5"
+            
+
+        }
+    ]
+}

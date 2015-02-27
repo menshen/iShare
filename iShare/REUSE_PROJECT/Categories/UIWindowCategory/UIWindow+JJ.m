@@ -173,4 +173,32 @@ static MBProgressHUD *_progressHUD;
 
     [_progressHUD hide:YES];
 }
+
+#pragma mark - 显示进度条
++(void)showWithBarHUDStatus:(NSString*)Status
+            detailStatus:(NSString*)detailStatus
+            dismissAfter:(NSTimeInterval)timeInterval
+                       view:(UIView*)view{
+
+    // Set determinate mode
+    _progressHUD.mode = MBProgressHUDModeAnnularDeterminate;
+    _progressHUD.removeFromSuperViewOnHide = YES;
+    _progressHUD.detailsLabelText=detailStatus;
+    _progressHUD.labelText = Status;
+    
+    // myProgressTask uses the HUD instance to update progress
+    [_progressHUD showWhileExecuting:@selector(myProgressTask) onTarget:self withObject:nil animated:YES];
+
+}
++(void)myProgressTask{
+    
+    float progress = 0.0f;
+    while (progress < 1.0f) {
+        progress += 0.01f;
+        _progressHUD.progress = progress;
+        usleep(50000); //1/40秒
+    }
+
+}
+
 @end

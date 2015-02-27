@@ -12,8 +12,9 @@
 #define PLACE_TEXT      @"place_text"
 typedef NS_ENUM(NSInteger, IS_SenceSubTemplateType) {
     
-    IS_SenceSubTemplateTypeImage,
-    IS_SenceSubTemplateTypeText,
+    IS_SenceSubTemplateTypeImage, //图片
+    IS_SenceSubTemplateTypeDecorate, //装饰
+    IS_SenceSubTemplateTypeText, //文字
     
 };
 /**
@@ -60,6 +61,10 @@ typedef NS_ENUM(NSInteger, IS_SenceSubTemplateType) {
  *  占位符图片
  */
 @property (nonatomic,copy)NSString * image_place_name;
+/**
+ *  是否被编辑过
+ */
+@property (nonatomic,assign)BOOL image_edited;
 /**
  *  是否正在被选中
  */

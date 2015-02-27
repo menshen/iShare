@@ -71,15 +71,23 @@
 //    [UIWindow showWithBarStatus:@"正在保存.." dismissAfter:3];
 //    [UIWindow showWithHUDStatus:@"正在保存.." detailStatus:@"...." dismissAfter:3];
 
+//   __block UIImage * image = [UIImage imageNamed:@"bg_001"];
+    
     [MutilThreadTool ES_AsyncConcurrentOperationQueueBlock:^{
         [templateArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             IS_SenceTemplateModel * tm = obj;
             //                NSDictionary * dic = [tm keyValues];
             //                NSArray * arrayM =dic[@"s_sub_view_array"];
             [tm.s_sub_view_array enumerateObjectsUsingBlock:^(id s_obj, NSUInteger s_idx, BOOL *stop) {
+                
                 IS_SenceSubTemplateModel * s =s_obj;
+//                if (s.sub_type == IS_SenceSubTemplateTypeImage&&idx==0) {
+//                    image = s.image_data;
+//                }
+                
                 s.image_data=nil;
                 [tm.s_sub_view_array replaceObjectAtIndex:s_idx withObject:s];
+                
             }];
             
             [templateArray replaceObjectAtIndex:idx withObject:tm];
@@ -121,7 +129,10 @@
             
             senceModel.sence_id = [self msg_custom_id];
             
-            senceModel.i_title = [NSString stringWithFormat:@"场景-%@",senceModel.sence_id] ;
+            senceModel.i_title = [NSString stringWithFormat:@"%@",[NSDate date]] ;
+            
+            
+            
             
             senceModel.i_image = @"icon_5";
             

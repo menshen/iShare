@@ -91,5 +91,8 @@
 +(void)dismissWithHUD;
 
 
-
++(void)showWithBarHUDStatus:(NSString*)Status
+               detailStatus:(NSString*)detailStatus
+               dismissAfter:(NSTimeInterval)timeInterval
+                       view:(UIView*)view;
 @end

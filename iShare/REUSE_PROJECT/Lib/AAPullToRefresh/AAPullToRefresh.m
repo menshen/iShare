@@ -432,9 +432,9 @@
     [self setLayerOpacity:0.0f];
     
     UIEdgeInsets currentInsets = self.scrollView.contentInset;
-    currentInsets.top = self.originalInsetTop + self.bounds.size.height + 20.0f;
+    currentInsets.right = self.originalInsetTop + self.bounds.size.height + 0;
     [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.scrollView.contentOffset = CGPointMake(self.scrollView.contentOffset.x, -currentInsets.top);
+        self.scrollView.contentOffset = CGPointMake(self.scrollView.contentOffset.x, -currentInsets.right);
     } completion:^(BOOL finished) {
         [self actionTriggeredState];
     }];

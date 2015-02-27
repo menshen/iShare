@@ -216,7 +216,7 @@
                 
             }
             
-            [arrayM1 enumerateObjectsUsingBlock:^(id image, NSUInteger image_idx, BOOL *stop) {
+            [arrayM1 enumerateObjectsUsingBlock:^(id image_asset, NSUInteger image_idx, BOOL *stop) {
                 //1.填满了当前视图
                 [newModel.s_sub_view_array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *sub_stop) {
                     
@@ -224,7 +224,8 @@
                     
                     if (sub_model.sub_type==IS_SenceSubTemplateTypeImage&&!sub_model.image_url) {
 //                        sub_model.image_data=image;
-                        sub_model.image_url=image;//assetUrlArray[image_idx];
+                        sub_model.image_url=image_asset;//assetUrlArray[image_idx];
+                        sub_model.image_data = [IS_SenceEditTool getImagesDataFromAssetURLString:image_asset];
                         [newModel.s_sub_view_array replaceObjectAtIndex:idx withObject:sub_model];
                         *sub_stop=YES;
                     }
@@ -416,14 +417,18 @@
             [self.collection_delegate IS_CardCollectionViewDidEndDecelerating:senceTemplateModel userinfo:nil];
         }
 
-        [self reloadItemsAtIndexPaths:@[visibleIndexPath]];
+        if (visibleIndexPath) {
+            [self reloadItemsAtIndexPaths:@[visibleIndexPath]];
+            if (visibleIndexPath.row==0||visibleIndexPath.row==self.senceDataSource.count-1) {
+                [self scrollToItemAtIndexPath:visibleIndexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+            }
+
+
+        }
 
     
     
     //2.
-//    if (self.currentIndexPath.row==0) {
-//        [self scrollToItemAtIndexPath:self.currentIndexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
-//    }
     
     
  

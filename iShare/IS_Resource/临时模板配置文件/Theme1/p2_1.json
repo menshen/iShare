@@ -1,0 +1,45 @@
+{
+    "view_info": [
+        {
+            "frame": {
+                "x": 0,
+                "y": 0,
+                "w": 50,
+                "h": 50
+            },
+            "type": 0,
+            "place_image": "p2_a_1"
+        },
+        {
+            "frame": {
+                "x": 55,
+                "y": 0,
+                "w": 40,
+                "h": 40
+            },
+            "type": 1,
+             "place_image": "Me_We"
+
+        },
+        {
+            "frame": {
+                "x": 0,
+                "y": 55,
+                "w": 40,
+                "h": 40
+            },
+            "type": 1,
+             "place_image": "Big_Blank"
+        },
+        {
+            "frame": {
+                "x": 50,
+                "y": 50,
+                "w": 50,
+                "h": 50
+            },
+            "type": 0,
+            "place_image": "p2_a_2"
+        }
+    ]
+}

@@ -1,0 +1,66 @@
+{
+    "view_info": [
+        {
+            "frame": {
+                "x": 3,
+                "y": 2,
+                "w": 93,
+                "h": 38
+            },
+             "type": 0,
+             "place_image": "p4_a_1"
+        },
+        {
+            "frame": {
+                "x": 0,
+                "y": 42,
+                "w": 100,
+                "h": 13
+            },
+            "type": 1,
+            "place_image": "Home_Love"
+        },
+        {
+            "frame": {
+                "x": 3,
+                "y": 56,
+                "w": 28,
+                "h": 34
+            },
+            "type": 0,
+            "place_image": "p4_a_2"
+        },
+        {
+            "frame": {
+                "x": 32,
+                "y": 56,
+                "w": 35,
+                "h": 34
+            },
+            "type": 0,
+            "place_image": "p4_a_3"
+             
+        },
+        {
+            "frame": {
+                "x": 69,
+                "y": 56,
+                "w": 28,
+                "h": 34
+            },
+            "type": 0,
+            "place_image": "p4_a_4"
+  
+        },
+        {
+            "frame": {
+                "x": 25,
+                "y": 90,
+                "w": 49,
+                "h": 6.5
+            },
+            "type": 1,
+            "place_image": "Love_Me_Litter"
+        }
+    ]
+}
