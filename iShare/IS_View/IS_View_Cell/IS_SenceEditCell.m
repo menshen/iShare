@@ -23,18 +23,13 @@
     CGRect frame = CGRectZero;
     if (self.senceTemplateModel.senceTemplateShape==IS_SenceTemplateShapeCard) {
         //a.尺寸
-        CGFloat WIDTH =ScreenWidth-80;
-        CGFloat HEIGHT =ScreenHeight-60-120-20;
-        frame  = CGRectMake(0, 0, WIDTH, HEIGHT);
+
+        frame  = CGRectMake(0, 0, IS_CARD_ITEM_WIDTH, IS_CARD_ITEM_HEIGHT);
         //b,
         self.close_btn.hidden=YES;
     }else{
-        CGFloat XX=3;
-        CGFloat X =0;//self.frame.origin.x/XX;
-        CGFloat Y =0;//self.frame.origin.y/XX;
-        CGFloat WIDTH =self.frame.size.width/XX;
-        CGFloat HEIGHT =self.frame.size.height/XX;
-        frame = CGRectMake(X, Y, WIDTH, HEIGHT);
+//
+        frame = CGRectMake(0, 0, IS_CARD_LITTER_ITEM_WIDTH, IS_CARD_LITTER_ITEM_HEIGHT);
         
         //b
         self.close_btn.hidden=NO;
@@ -47,13 +42,10 @@
         self.senceCreateEditView.senceTemplateModel=senceTemplateModel;
     }else{
         self.senceCreateEditView.backgroundColor = [UIColor whiteColor];
-//        self.contentView.backgroundColor= [UIColor lightGrayColor];
         self.senceCreateEditView.senceTemplateModel=nil;
 
     }    
-    //1.
-//
-//    senceSubViewSize = CGSizeMake(WIDTH, HEIGHT);
+    
     
 
 }

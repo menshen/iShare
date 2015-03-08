@@ -8,13 +8,15 @@
 
 #import "IS_HomeController.h"
 #import "IS_SenceCreateController.h"
-#import "IS_SenceController.h"
+#import "IS_WebContentController.h"
 #import "IS_LoginController.h"
 
 
 #import "IS_SenceModel.h"
 #import "IS_BaseCell.h"
 #import "IS_SenceEditTool.h"
+#import "IS_SencePageController.h"
+#import "IS_SenceCollectionController.h"
 
 @interface IS_HomeController ()
 @end
@@ -115,8 +117,10 @@
 #pragma mark -跳转到模板选择器
 -(void)jumpToSenceChooseController:(UIBarButtonItem*)item{
     
-    IS_SenceCreateController * sence_choose_ctrl = [[IS_SenceCreateController alloc]initWithCreateType:IS_SenceCreateTypeFristSence];//
-        [self.navigationController pushViewController:sence_choose_ctrl animated:YES];
+    IS_SenceCollectionController * SencePageController = [[IS_SenceCollectionController alloc]init];
+//    IS_SencePageController * SencePageController = [[IS_SencePageController alloc]init];
+//    IS_SenceCreateController * sence_choose_ctrl = [[IS_SenceCreateController alloc]init];//
+        [self.navigationController pushViewController:SencePageController animated:YES];
 
 }
 #pragma mark -选择菜单
@@ -151,7 +155,7 @@
 -(NSArray *) createRightButtons
 {
     NSMutableArray * result = [NSMutableArray array];
-    NSArray * titleArray =@[@"      删除      ",@"    编辑      "];
+    NSArray * titleArray =@[@"     删除     ",@"   编辑     "];
     NSArray *colorArray=@[[UIColor redColor],[UIColor lightGrayColor]];;
     for (int i = 0; i < titleArray.count; ++i)
     {
@@ -190,13 +194,16 @@
     IS_SenceModel * senceModel = arrayM[indexPath.section][indexPath.row];
     
     //1
-    IS_SenceController * senceController = [[IS_SenceController alloc]initWithURLString:senceModel.i_url];
+//    IS_SenceController * senceController = [[IS_SenceController alloc]initWithURLString:senceModel.i_url];
+//    
+//    //2.
+//    senceController.title=senceModel.i_title;
     
-    //2.
-    senceController.title=senceModel.i_title;
+    
+    IS_SencePageController * sv = [[IS_SencePageController alloc]init];
     
     //3.
-    [self.navigationController pushViewController:senceController animated:YES];
+    [self.navigationController pushViewController:sv animated:YES];
 
     
 

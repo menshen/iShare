@@ -350,11 +350,11 @@
     switch (self.state) {
         case AAPullToRefreshStateNormal: //detect action
             
-            if ( self.prevProgress>0.1&&self.prevProgress<0.2) {
-                PlaySoundClass * p =[[PlaySoundClass alloc]initForPlayingSoundEffectWith:@"swipe.caf"];//With:@"swipe" ofType:@"caf"];
-                [p play];
-
-            }
+//            if ( self.prevProgress>0.1&&self.prevProgress<0.2) {
+//                PlaySoundClass * p =[[PlaySoundClass alloc]initForPlayingSoundEffectWith:@"swipe.caf"];//With:@"swipe" ofType:@"caf"];
+//                [p play];
+//
+//            }
             
             if (self.isUserAction && !self.scrollView.dragging && !self.scrollView.isZooming && self.prevProgress > 0.99f) {
                 [self actionTriggeredState];

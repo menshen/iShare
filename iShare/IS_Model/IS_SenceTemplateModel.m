@@ -29,27 +29,31 @@
     
   
 }
-
--(void)setS_selected_tag:(NSInteger)s_selected_tag{
-    if (s_selected_tag==-1) {
-        [self.s_sub_view_array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            IS_SenceSubTemplateModel * sub =obj;
-            sub.image_selected=NO;
-            [self.s_sub_view_array replaceObjectAtIndex:idx withObject:sub];
-        }];
-        //[self.s_sub_view_array makeObjectsPerformSelector:@selector(setImage_selected:) withObject:@(YES)];
-    }else{
-        [self.s_sub_view_array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            
-            IS_SenceSubTemplateModel * sub =obj;
-            sub.image_selected=(idx==s_selected_tag);
-            [self.s_sub_view_array replaceObjectAtIndex:idx withObject:sub];
-        }];
-       
-    }
-   
-    
-}
+/**
+ *  当前被选中的 tag
+ *
+ *  @param s_selected_tag 
+ */
+//-(void)setS_selected_tag:(NSInteger)s_selected_tag{
+//    if (s_selected_tag==-1) {
+//        [self.s_sub_view_array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+//            IS_SenceSubTemplateModel * sub =obj;
+//            sub.image_selected=NO;
+//            [self.s_sub_view_array replaceObjectAtIndex:idx withObject:sub];
+//        }];
+//        //[self.s_sub_view_array makeObjectsPerformSelector:@selector(setImage_selected:) withObject:@(YES)];
+//    }else{
+//        [self.s_sub_view_array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+//            
+//            IS_SenceSubTemplateModel * sub =obj;
+//            sub.image_selected=(idx==s_selected_tag);
+//            [self.s_sub_view_array replaceObjectAtIndex:idx withObject:sub];
+//        }];
+//       
+//    }
+//   
+//    
+//}
 
 -(NSMutableArray *)s_sub_view_array{
     

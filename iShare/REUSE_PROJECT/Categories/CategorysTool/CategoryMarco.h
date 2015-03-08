@@ -17,5 +17,5 @@
 #import "UIButton+JJ.h"
 #import "UIScrollView+EmptyDataSet.h"
 #import "UIViewController+JJ.h"
-
+#import "UIColor+JJ.h"
 #endif

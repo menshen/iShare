@@ -8,7 +8,7 @@
 @optional
 
 /**
- *  当点击事件后
+ *  当点击图像事件后
  */
 - (void)IS_CardCollectionViewDidSelectImageViewItem:(id)itemData
                                         userinfo:(NSDictionary*)userinfo;

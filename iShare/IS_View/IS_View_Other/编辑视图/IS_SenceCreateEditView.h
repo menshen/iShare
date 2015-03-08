@@ -29,8 +29,12 @@
 @property (nonatomic,strong)NSMutableArray *  senceSubModelArray;
 //存放view-Frame的标准位置
 @property (nonatomic,strong)NSMutableArray *  senceCreateImgViewFramesArray;
-////存放Image的标准位置
+////存放ImageView的标准位置
 @property (nonatomic,strong)NSMutableArray *  senceSubViewArray;
+////存放Image的标准位置
+@property (nonatomic,strong)NSMutableArray *  imageArray;
+////存放imageAssetURLArray的标准位置
+@property (nonatomic,strong)NSMutableArray *  imageAssetURLArray;
 
 @property (nonatomic,strong)UITextView * senceTextView;
 

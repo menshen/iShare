@@ -17,12 +17,20 @@ typedef NS_ENUM(NSInteger, IS_SenceSubTemplateType) {
     IS_SenceSubTemplateTypeText, //文字
     
 };
+typedef NS_ENUM(NSInteger, IS_SubTemplateShapeType) {
+    
+    IS_SubTemplateShapeTypeLarge, // 大
+    IS_SubTemplateShapeTypeMiddle, //中
+    IS_SubTemplateShapeTypeSmall, //小
+    
+};
 /**
  *  这是子模板中的数据:
     1.包括图片
     2.文字
  */
 @interface IS_SenceSubTemplateModel : IS_BaseModel
+@property (nonatomic,assign)IS_SubTemplateShapeType shapeType;
 /**
  *  类型
  */
@@ -46,10 +54,6 @@ typedef NS_ENUM(NSInteger, IS_SenceSubTemplateType) {
 
 #pragma mark -图片数据
 /**
- *  图片被选次数
- */
-@property (nonatomic,assign)NSInteger image_selected_num;
-/**
  *  图片数据
  */
 @property (nonatomic,strong)UIImage * image_data;
@@ -70,27 +74,16 @@ typedef NS_ENUM(NSInteger, IS_SenceSubTemplateType) {
  */
 @property (nonatomic,assign)BOOL image_selected;
 
-/**
- *  图片使用情况:
-        1. 例如 {
-     A5:2
-     B2:3
-     B4:2
-     }
-     就是代表A5模板用了2次，B2用了3次
-        2.一开始的时候,如果已经有数据编辑状态,就导入
-        3.如果完全是新的就是空
- */
-@property (nonatomic,strong)NSDictionary  * image_use_info;
-
 
 #pragma mark -文字数据
-
+/**
+ *  占位文字
+ */
+@property (nonatomic,copy)NSString * text_place_string;
 /**
  *  文字数据
  */
 @property (nonatomic,copy)NSString * text_string;
-
 /**
  *  文字信息： 1.字体等等
  */

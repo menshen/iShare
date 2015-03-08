@@ -438,7 +438,7 @@
             self.topBar.alpha = 0.0;
         }
     }
-    return _topBar;
+        return _topBar;
 }
 
 - (UIView *)progressView;

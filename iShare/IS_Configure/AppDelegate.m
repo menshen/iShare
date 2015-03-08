@@ -10,7 +10,7 @@
 #import "IS_NavigationController.h"
 #import "IS_HomeController.h"
 #import "RootControllerTool.h"
-
+#import "FLEXManager.h"
 
 
 @interface AppDelegate ()
@@ -49,9 +49,41 @@
      NSDictionary * font_dic =@{NSForegroundColorAttributeName:kColor(107, 107, 107),
                                NSFontAttributeName:[UIFont boldSystemFontOfSize:20]};
     [[UINavigationBar appearance] setTitleTextAttributes:font_dic];
+    
+    
+    //3.    //short version
+    [self setupFLEXManager];
 
     return YES;
 
+}
+
+
+#pragma mark - 开启FLEX调试
+
+- (void)setupFLEXManager{
+    
+    UITapGestureRecognizer * two_tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleSixFingerQuadrupleTap:)];
+    two_tap.numberOfTapsRequired=2;
+    two_tap.numberOfTouchesRequired=2;
+    
+    [[UIApplication sharedApplication].keyWindow addGestureRecognizer:two_tap];
+    
+    
+
+}
+#if DEBUG
+#import "FLEXManager.h"
+#endif
+
+- (void)handleSixFingerQuadrupleTap:(UITapGestureRecognizer *)tapRecognizer
+{
+#if DEBUG
+    if (tapRecognizer.state == UIGestureRecognizerStateRecognized) {
+        // This could also live in a handler for a keyboard shortcut, debug menu item, etc.
+        [[FLEXManager sharedManager] showExplorer];
+    }
+#endif
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

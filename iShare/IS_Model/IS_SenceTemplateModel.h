@@ -20,10 +20,6 @@ typedef NS_ENUM(NSInteger, IS_SenceTemplateShape) {
 @property (nonatomic,assign)IS_SenceTemplateShape senceTemplateShape;
 
 /**
- *  对应的略缩图
- */
-@property (nonatomic,strong)NSString * s_img_name;
-/**
     ID
  */
 @property (nonatomic,assign)NSInteger s_Id;
@@ -52,12 +48,6 @@ typedef NS_ENUM(NSInteger, IS_SenceTemplateShape) {
  */
 @property (nonatomic,assign)NSInteger s_selected_tag;
 
-
-
-/**
- *  编辑状态 0.开始(直接插模板) 1.编辑中 2.编辑结束
- */
-//@property (nonatomic,assign)IS_SenceTemplateEditState templateEditState;
 
 
 

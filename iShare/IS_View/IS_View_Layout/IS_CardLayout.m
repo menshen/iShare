@@ -26,7 +26,7 @@ static NSString * const CellKind = @"CardCell";
 
     [self addObserver:self forKeyPath:@"collectionView.contentOffset" options:NSKeyValueObservingOptionNew context:nil];
     
-    UIOffset anOffset = UIOffsetMake(40, 10);
+    UIOffset anOffset = UIOffsetMake(IS_CARD_LAYOUT_WIDTH, IS_CARD_LAYOUT_HEIGHT);
     [self setOffset:anOffset];
 }
 #pragma mark -计算尺寸问题

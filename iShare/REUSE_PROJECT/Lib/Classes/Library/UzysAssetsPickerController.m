@@ -710,7 +710,6 @@
 //                [self initImagePicker];
                 __weak typeof(self) weakSelf = self;
                 [self presentViewController:self.picker animated:YES completion:^{
-                    //카메라 화면으로 가면 강제로 가메라 롤로 변경.
                     if(![weakSelf.assetsGroup isEqual:weakSelf.groups[0]] )
                     {
                         weakSelf.assetsGroup = weakSelf.groups[0];

@@ -48,8 +48,9 @@
 -(void)setupCollectionView{
 
     //0.构建视图
+
     self.decelerationRate=UIScrollViewDecelerationRateFast;
-    self.backgroundColor =kColor(240, 240, 240);//[UIColor redColor];// kColor(240, 240, 240);
+    self.backgroundColor =kColor(244, 244, 244);//[UIColor redColor];// kColor(240, 240, 240);
     self.showsHorizontalScrollIndicator=NO;
     self.showsVerticalScrollIndicator=NO;
     
@@ -87,7 +88,7 @@
     //4.内部 Pinch
     _inner_pinchPressGestureRecognizer = [[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(handleInnerPinchGesture:)];
 //    _inner_pinchPressGestureRecognizer.delegate=self;
-    [self addGestureRecognizer:_inner_pinchPressGestureRecognizer];
+//    [self addGestureRecognizer:_inner_pinchPressGestureRecognizer];
 }
 -(void)handleInnerPinchGesture:(UIPinchGestureRecognizer*)pinchGestureRecognizer{
 
@@ -152,10 +153,133 @@
 
 
 
+
+//   assets-library://asset/asset.JPG?id=7A494467-58CB-450E-9652-55B46FA456FA&ext=JPG
+- (void)insertAssetIntoEditView:(NSMutableArray*)image_array
+              WithAssetURLArray:(NSMutableArray*)assetUrlArray{
+    
+//    IS_SenceTemplateModel * senceTemplateModel = self.senceDataSource[self.currentIndexPath.row];
+       //1.
+    __block NSInteger last_idx = 0;
+    __block NSInteger left_num = 0;
+//    __block NSInteger cur_location =self.currentIndexPath.row;
+//    __block  NSInteger cur_length = self.senceDataSource.count -cur_location-1;
+//    NSArray * cur_arraym = [self.senceDataSource subarrayWithRange:NSMakeRange(cur_location, cur_length)];
+    //1.把空缺的补上
+    for (UIImage * i in image_array) {
+        [self.senceDataSource enumerateObjectsUsingBlock:^(id t, NSUInteger t_idx, BOOL *t_stop) {
+            IS_SenceTemplateModel * templateModel = t;
+            
+            [templateModel.s_sub_view_array enumerateObjectsUsingBlock:^(id sub_obj, NSUInteger s_idx, BOOL *s_stop) {
+                
+                IS_SenceSubTemplateModel * sub_templateModel =sub_obj;
+                if (sub_templateModel.sub_type== IS_SenceSubTemplateTypeImage&&!sub_templateModel.image_data) {
+                    sub_templateModel.image_data = i;
+                    left_num++;
+                   
+                    [templateModel.s_sub_view_array replaceObjectAtIndex:s_idx withObject:sub_templateModel];
+                    [self.senceDataSource replaceObjectAtIndex:t_idx withObject:templateModel];
+                    last_idx = t_idx;
+                  
+                    
+                    *s_stop =YES;
+                    *t_stop=YES;
+                }
+                
+            }];
+        }];
+    }
+    [self reloadData];
+
+   // NSLog(@"用了几张:%d",left_num);
+    
+    //2.把剩下的新增
+    NSInteger location = (left_num==0)?0:(left_num);
+    NSInteger length = image_array.count - left_num;
+    NSArray * left_array = [image_array subarrayWithRange:NSMakeRange(location, length)];
+    
+    int sub =(arc4random() % 1) + 6;
+    NSMutableArray * arrayM = [self makeIndex:1 SubIndex:sub totalArray:left_array];
+    
+    [self dealLetf:arrayM lastSenceTemplateModel:[self.senceDataSource lastObject]];
+    self.currentIndexPath = [NSIndexPath indexPathForRow:self.senceDataSource.count-1 inSection:0];
+    [self scrollToItemAtIndexPath:self.currentIndexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+   
+    [self reloadData];
+
+    
+  
+
+   
+    
+    
+//    NSIndexPath * indexPath = [NSIndexPath indexPathForRow:last_idx inSection:0];
+//    [self scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+   
+
+
+   
+}
+
+-(void)dealLetf:(NSMutableArray *)deal_image_array
+            lastSenceTemplateModel:(IS_SenceTemplateModel*)senceTemplateModel{
+    
+    [deal_image_array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        
+//        if (idx==0) {
+//            return;
+//        }
+        
+        NSArray * arrayM1 = obj;
+        IS_SenceTemplateModel * newModel = [[IS_SenceTemplateModel alloc]init];
+        if (arrayM1.count>=6) {
+            newModel.s_template_style=1;
+        }else if (arrayM1.count>=5){
+            newModel.s_template_style = (arc4random() % 1) + 2;
+        }else{
+            newModel.s_template_style = (arc4random() % 1) + 3;
+
+        }
+        newModel.s_sub_template_style =arrayM1.count;
+        
+
+        [arrayM1 enumerateObjectsUsingBlock:^(id image_asset, NSUInteger image_idx, BOOL *stop) {
+            //1.填满了当前视图
+            [newModel.s_sub_view_array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *sub_stop) {
+                
+                IS_SenceSubTemplateModel * sub_model = obj;
+                
+                if (sub_model.sub_type==IS_SenceSubTemplateTypeImage&&!sub_model.image_data) {
+                    //                        sub_model.image_data=image;
+                    //                    sub_model.image_url=image_asset;//assetUrlArray[image_idx];
+                    sub_model.image_data = image_asset;//[IS_SenceEditTool getImagesDataFromAssetURLString:image_asset];
+                    [newModel.s_sub_view_array replaceObjectAtIndex:idx withObject:sub_model];
+                    *sub_stop=YES;
+                }
+            }];
+            
+            
+            
+        }];
+        
+        [self.senceDataSource addObject:newModel];
+
+        
+        if (idx+1 ==deal_image_array.count) {
+            self.currentIndexPath = [NSIndexPath indexPathForRow:self.currentIndexPath.row+idx inSection:0];
+        }
+        
+        //
+        
+        
+    }];
+}
+
+
 -(NSMutableArray *)makeIndex:(NSInteger)index
                     SubIndex:(NSInteger)subIndex
                   totalArray:(NSArray*)image_array{
-
+    
     NSMutableArray * arrayForArrayM = [NSMutableArray array];
     NSInteger left_num = image_array.count;
     
@@ -169,122 +293,25 @@
         NSArray * arrayM1 = [image_array subarrayWithRange:NSMakeRange(location,length)];
         [arrayForArrayM addObject:arrayM1];
         left_num-=subIndex;
-        subIndex++;
         
-        if (subIndex>4&&index==1) {
-            break;
-        }
-        if (subIndex>3&&index==2) {
-            break;
-        }
+        int y = (arc4random() % 1) + 5;
+        subIndex +=y;
+        
+
         
     }
-    //if (arrayM1.count>imgCount+1) {
-//        NSArray * array2 = [image_array subarrayWithRange:NSMakeRange(arrayM1.count, image_array.count-arrayM1.count)];
-//        [arrayForArrayM addObject:array2];
-//    }
+
     return arrayForArrayM;
-
+    
 }
-//   assets-library://asset/asset.JPG?id=7A494467-58CB-450E-9652-55B46FA456FA&ext=JPG
-- (void)insertAssetIntoEditView:(NSMutableArray*)image_array
-              WithAssetURLArray:(NSMutableArray*)assetUrlArray{
-    
-    IS_SenceTemplateModel * senceTemplateModel = self.senceDataSource[self.currentIndexPath.row];
-       //1.
-    if (self.currentIndexPath.row+1==self.senceDataSource.count) {
-        NSInteger index = senceTemplateModel.s_template_style;
-        NSInteger sub_index =senceTemplateModel.s_sub_template_style;
-        NSMutableArray * deal_image_array = [self makeIndex:index
-                                                   SubIndex:sub_index
-                                                 totalArray:assetUrlArray];
-        
-        [deal_image_array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            
-            NSArray * arrayM1 = obj;
-            IS_SenceTemplateModel * newModel = [[IS_SenceTemplateModel alloc]init];
-            newModel.s_selected_tag=-1;
-            
-            if (idx==0) {
-                newModel.s_template_style = senceTemplateModel.s_template_style;
-                newModel.s_sub_template_style =senceTemplateModel.s_sub_template_style;
-                //           [self.senceDataSource removeObject:senceTemplateModel];
-            }else{
-                
-                newModel.s_template_style = 1;
-                newModel.s_sub_template_style = senceTemplateModel.s_sub_template_style+idx;
-                
-            }
-            
-            [arrayM1 enumerateObjectsUsingBlock:^(id image_asset, NSUInteger image_idx, BOOL *stop) {
-                //1.填满了当前视图
-                [newModel.s_sub_view_array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *sub_stop) {
-                    
-                    IS_SenceSubTemplateModel * sub_model = obj;
-                    
-                    if (sub_model.sub_type==IS_SenceSubTemplateTypeImage&&!sub_model.image_url) {
-//                        sub_model.image_data=image;
-                        sub_model.image_url=image_asset;//assetUrlArray[image_idx];
-                        sub_model.image_data = [IS_SenceEditTool getImagesDataFromAssetURLString:image_asset];
-                        [newModel.s_sub_view_array replaceObjectAtIndex:idx withObject:sub_model];
-                        *sub_stop=YES;
-                    }
-                }];
-                
-                
-                
-            }];
-            
-            if (idx==0) {
-                [self.senceDataSource replaceObjectAtIndex:self.currentIndexPath.row withObject:newModel];
-            }else{
-                [self.senceDataSource addObject:newModel];
-                
-            }
-            
-            if (idx+1 ==deal_image_array.count) {
-                self.currentIndexPath = [NSIndexPath indexPathForRow:self.currentIndexPath.row+idx inSection:0];
-            }
-            
-            //
-            
-            
-        }];
-    }else{
-    
-        [image_array enumerateObjectsUsingBlock:^(id image, NSUInteger image_idx, BOOL *stop) {
-            //1.填满了当前视图
-            [senceTemplateModel.s_sub_view_array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *sub_stop) {
-                
-                IS_SenceSubTemplateModel * sub_model = obj;
-                
-                if (sub_model.sub_type==IS_SenceSubTemplateTypeImage&&!sub_model.image_data) {
-                    sub_model.image_data=image;
-                    //                   sub_model.image_url=assetUrlArray[image_idx];
-                    [senceTemplateModel.s_sub_view_array replaceObjectAtIndex:idx withObject:sub_model];
-                    *sub_stop=YES;
-                }
-            }];
-            
-            
-            
-        }];
-        [self.senceDataSource replaceObjectAtIndex:self.currentIndexPath.row withObject:senceTemplateModel];
 
-    }
-   
-    
-    [self reloadData];
-    [self scrollToItemAtIndexPath:self.currentIndexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
-   
-    
-//    //0.处理10+图片 a.第一个模板填满3个 b.然后把后7个继续填满
-//    //剩余数组
-//    __block  NSArray * left_array = image_array;
-//    __block  NSArray * left_assetUrlArray = assetUrlArray;
 
-   
-}
+
+
+
+
+
+
 #pragma mark - 点击缩略图时候，增加图片到编辑视图
 -(void)insertAssetIntoEditViewDidthumbnailImageAction:(id)itemData
                                              userInfo:(NSDictionary*)userInfo{
@@ -482,25 +509,7 @@
     
     
 }
-#pragma mark -IS_SenceCreateEditViewDelegate
--(void)IS_SenceCreateEditViewDidSelectItem:(id)itemData userinfo:(NSDictionary *)userinfo{
-    //1.代理
-    if (!itemData) {
-        return;
-    }
-    
-    IS_SenceSubTemplateModel *cur_templateSubModel = itemData;
-    
-    IS_SenceTemplateModel * cur_templateModel = self.senceDataSource[self.currentIndexPath.row];
-    [cur_templateModel.s_sub_view_array replaceObjectAtIndex:cur_templateSubModel.sub_tag withObject:cur_templateSubModel];
-    [self.senceDataSource replaceObjectAtIndex:self.currentIndexPath.row withObject:cur_templateModel];
-    [self reloadItemsAtIndexPaths:@[self.currentIndexPath]];
-    
-    //2.
-    if ([self.collection_delegate respondsToSelector:@selector(IS_CardCollectionViewDidSelectImageViewItem:userinfo:)]) {
-        [self.collection_delegate IS_CardCollectionViewDidSelectImageViewItem:itemData userinfo:userinfo];
-    }
-}
+
 -(void)IS_SenceCreateEditViewDidEndPanItem:(id)itemData userinfo:(NSDictionary *)userinfo{
     
     if (!itemData) {
@@ -508,7 +517,19 @@
     }
     IS_SenceTemplateModel * cur_templateModel = itemData;
     [self.senceDataSource replaceObjectAtIndex:self.currentIndexPath.row withObject:cur_templateModel];
-    [self reloadItemsAtIndexPaths:@[self.currentIndexPath]];
+//    [self reloadItemsAtIndexPaths:@[self.currentIndexPath]];
+}
+
+#pragma mark -IS_SenceCreateEditViewDelegate
+-(void)IS_SenceCreateEditViewDidSelectItem:(id)itemData userinfo:(NSDictionary *)userinfo{
+    //1.代理
+    if (!itemData) {
+        return;
+    }
+    //2.
+    if ([self.collection_delegate respondsToSelector:@selector(IS_CardCollectionViewDidSelectImageViewItem:userinfo:)]) {
+        [self.collection_delegate IS_CardCollectionViewDidSelectImageViewItem:itemData userinfo:userinfo];
+    }
 }
 
 

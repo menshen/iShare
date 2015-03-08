@@ -90,7 +90,7 @@
     
     //1.不是就是沙盒
     if (!json_file_url) {
-        //
+        return nil;
     }
     
     NSData *data = [NSData dataWithContentsOfURL:json_file_url];

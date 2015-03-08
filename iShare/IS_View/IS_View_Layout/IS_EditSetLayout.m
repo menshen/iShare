@@ -18,12 +18,7 @@
 
     self.minimumInteritemSpacing = 10;
     self.minimumLineSpacing = 12;
-    
-    //默认的
-    CGFloat WIDTH =ScreenWidth-80;
-    CGFloat HEIGHT =ScreenHeight-60-120-20;
-    
-    self.itemSize = CGSizeMake(WIDTH/3, HEIGHT/3);
+    self.itemSize = CGSizeMake(IS_CARD_LITTER_ITEM_WIDTH, IS_CARD_LITTER_ITEM_HEIGHT);
     self.sectionInset = UIEdgeInsetsMake(50, 30, 10, 30);
 
     return self;

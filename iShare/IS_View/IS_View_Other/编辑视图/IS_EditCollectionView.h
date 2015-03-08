@@ -12,6 +12,9 @@
 @protocol IS_EditCollectionViewDelegate <NSObject>
 
 @required
+/**
+ *  移动item
+ */
 - (void)collectionView:(IS_EditCollectionView *)collectionView moveItemAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath;
 
 //- (void)IS_EditCollectionViewDismissDidHandleTapAndPinch;

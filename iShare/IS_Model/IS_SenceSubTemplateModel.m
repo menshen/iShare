@@ -26,7 +26,13 @@
     NSString *styleName = [NSString stringWithFormat:@"p%d_%d",(int)sub_index,(int)index];
     
     //2.
-    NSDictionary *styleDict = [NSString objectFromJsonFilePath:styleName];
+    NSDictionary *styleDict =nil;
+    if (![NSString objectFromJsonFilePath:styleName]) {
+        return nil;
+    }else{
+       styleDict= [NSString objectFromJsonFilePath:styleName];
+
+    }
     
     
     //3.
@@ -36,8 +42,8 @@
     //4.遍历 每一个子视图信息
     
     //默认的
-    CGFloat WIDTH =ScreenWidth-80;
-    CGFloat HEIGHT =ScreenHeight-60-120-20;
+    CGFloat WIDTH =IS_CARD_ITEM_WIDTH;
+    CGFloat HEIGHT =IS_CARD_ITEM_HEIGHT;
     
     //5.模板子视图
     NSMutableArray * arrayM = [NSMutableArray array];
@@ -82,9 +88,6 @@
     if (!_image_data) {
 
         [_image_data setAccessibilityIdentifier:UPLOAD_IMAGE];
-
-       
-
 
     }else{
         [_image_data setAccessibilityIdentifier:[_image_data description]];
