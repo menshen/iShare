@@ -1,14 +1,14 @@
 //
-//  IS_TextEditView.m
+//  IS_PageControl.m
 //  iShare
 //
-//  Created by 伍松和 on 15/2/8.
+//  Created by wusonghe on 15/3/24.
 //  Copyright (c) 2015年 iShare. All rights reserved.
 //
 
-#import "IS_TextEditView.h"
+#import "IS_PageControl.h"
 
-@implementation IS_TextEditView
+@implementation IS_PageControl
 
 /*
 // Only override drawRect: if you perform custom drawing.
