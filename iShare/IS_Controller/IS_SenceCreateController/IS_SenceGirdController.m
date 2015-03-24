@@ -13,7 +13,10 @@
 #import "IS_SenceEditCell.h"
 
 @interface IS_SenceGirdController ()<UICollectionViewDataSource,UICollectionViewDelegate,IS_EditCollectionViewDelegate>
+//1.布局
 @property (strong,nonatomic)IS_EditSetLayout * editSetLayout;
+//2.底部 button
+@property (strong,nonatomic)UIButton * closeButton;
 @end
 
 @implementation IS_SenceGirdController
@@ -23,36 +26,40 @@
     
     self.view.backgroundColor = [UIColor clearColor];
     
-    //0.布局
-    self.editSetLayout = [[IS_EditSetLayout alloc]init];
-    
-    //1.添加集合视图
-    [self.view addSubview:self.collectionView];
-    [self.collectionView addGestures];
-
-    
-    //2.注册 Cell
-    [self.collectionView registerClass:[IS_SenceEditCell class] forCellWithReuseIdentifier:IS_SENCE_EDIT_CELL_ID];
-    
-    //3.单击
+  
+    [self setupCollectionView];
    
-//    UITapGestureRecognizer*  tapPressGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTapGesture:)];
-//    [self.view addGestureRecognizer:tapPressGestureRecognizer];
-
-    UITapGestureRecognizer * tap_dismss =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTapDismiss:)];
-    [_collectionView addGestureRecognizer:tap_dismss];
-    [_collectionView setUserInteractionEnabled:YES];
+    [self setupClosebtn];
 
     
     
     
 }
+#pragma mark - 
 
+-(void)setupCollectionView{
+    //0.布局
+    self.editSetLayout = [[IS_EditSetLayout alloc]init];
+    //1.添加集合视图
+    [self.view addSubview:self.collectionView];
+    [self.collectionView addGestures];
+    
+    
+    //2.注册 Cell
+    [self.collectionView registerClass:[IS_SenceEditCell class] forCellWithReuseIdentifier:IS_SENCE_EDIT_CELL_ID];
+    
+    //3.单击
+    
+    UITapGestureRecognizer * tap_dismss =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTapDismiss:)];
+    [_collectionView addGestureRecognizer:tap_dismss];
+    [_collectionView setUserInteractionEnabled:YES];
+}
 -(IS_EditCollectionView *)collectionView{
     
     if (!_collectionView) {
         
-        _collectionView = [[IS_EditCollectionView alloc]initWithFrame:self.view.bounds collectionViewLayout:self.editSetLayout];
+        CGRect frame = CGRectMake(0, 10, ScreenWidth, ScreenHeight-100);
+        _collectionView = [[IS_EditCollectionView alloc]initWithFrame:frame collectionViewLayout:self.editSetLayout];
         _collectionView.backgroundColor = [UIColor clearColor];
         _collectionView.delegate = self;
         _collectionView.dataSource=self;
@@ -64,11 +71,32 @@
     return _collectionView;
 
 }
+#pragma mark  -关闭
+#define CLOSE_BUTTON_WIDTH 60
+
+-(void)setupClosebtn{
+    
+    _closeButton = [[UIButton alloc]initWithFrame:CGRectMake((ScreenWidth-CLOSE_BUTTON_WIDTH)/2, ScreenHeight-70, CLOSE_BUTTON_WIDTH,CLOSE_BUTTON_WIDTH)];
+    [_closeButton addTarget:self action:@selector(closeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [_closeButton setBackgroundImage:[UIImage imageNamed:@"IS_Edit_Close"] forState:UIControlStateNormal];
+    [self.view addSubview:_closeButton];
+}
+
+- (void)closeButtonAction:(UIButton*)btn{
+
+    if ([self.delegate respondsToSelector:@selector(IS_SenceGirdControllerDidUpdate:)]) {
+        [self.delegate IS_SenceGirdControllerDidUpdate:nil];
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 #pragma mark - 手势
 -(void)handleTapDismiss:(UIGestureRecognizer*)gesture{
     CGPoint point =  [gesture locationInView:self.collectionView];  //create your custom index path here
     NSIndexPath * indexPath = [self indexPathForItemClosestToPoint:point];
-    [self collectionView:self.collectionView didSelectItemAtIndexPath:indexPath];
+    if (indexPath) {
+        [self collectionView:self.collectionView didSelectItemAtIndexPath:indexPath];
+
+    }
 }
 #pragma mark - 根据CGPoint对象获取对应的NSIndexPath
 - (NSIndexPath *)indexPathForItemClosestToPoint:(CGPoint)point
@@ -119,11 +147,37 @@
 - (void)collectionView:(IS_EditCollectionView *)collectionView
             moveItemAtIndexPath:(NSIndexPath *)fromIndexPath
            toIndexPath:(NSIndexPath *)toIndexPath{
+    IS_SenceTemplateModel *fromTemplateModel = self.sence_array[fromIndexPath.item];
+    IS_SenceTemplateModel * toTemplateModel = self.sence_array[toIndexPath.item];
+
+    //0.改变子视图的page
+    [fromTemplateModel.subview_array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        IS_SenceSubTemplateModel * subModel = obj;
+        subModel.page = toTemplateModel.row_num;
+        [fromTemplateModel.subview_array replaceObjectAtIndex:idx withObject:subModel];
+    }];
     
-    IS_SenceTemplateModel *t = self.sence_array[fromIndexPath.item];
+    [toTemplateModel.subview_array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        IS_SenceSubTemplateModel * subModel = obj;
+        subModel.page = fromTemplateModel.row_num;
+        [toTemplateModel.subview_array replaceObjectAtIndex:idx withObject:subModel];
+    }];
+    
+    
+    //2.改吧 row_num
+    NSInteger temp = toTemplateModel.row_num;
+    toTemplateModel.row_num =fromTemplateModel.row_num;
+    fromTemplateModel.row_num=temp;
+    
+    //3.插入
     
     [_sence_array removeObjectAtIndex:fromIndexPath.item];
-    [_sence_array insertObject:t atIndex:toIndexPath.item];
+    [_sence_array insertObject:fromTemplateModel atIndex:toIndexPath.item];
+    
+    
+
+    
+    
 }
 -(void)handleDel:(UIButton*)btn{
     

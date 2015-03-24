@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C2043" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -20,7 +20,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_1" translatesAutoresizingMaskIntoConstraints="NO" id="ez6-u3-PwE">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="temp_1" translatesAutoresizingMaskIntoConstraints="NO" id="ez6-u3-PwE">
                         <rect key="frame" x="18" y="13" width="55" height="55"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="55" id="2Zo-Zg-BUL"/>
@@ -33,7 +33,7 @@
                             <constraint firstAttribute="height" constant="21" id="jHq-5o-vAx"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                        <color key="textColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                        <color key="textColor" red="0.12156862745098039" green="0.12941176470588237" blue="0.14117647058823529" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2014年12月12日" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aqe-Sx-oZg">
@@ -62,10 +62,10 @@
                 <outlet property="logoView" destination="ez6-u3-PwE" id="EH1-RE-BPy"/>
                 <outlet property="titleLab" destination="P9P-9B-BeZ" id="cS5-cZ-jKR"/>
             </connections>
-            <point key="canvasLocation" x="230" y="309"/>
+            <point key="canvasLocation" x="230" y="204"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="icon_1" width="55" height="55"/>
+        <image name="temp_1" width="255" height="170"/>
     </resources>
 </document>

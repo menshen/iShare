@@ -1,11 +1,3 @@
-//
-//  IS_BaseCell.m
-//  iShare
-//
-//  Created by 伍松和 on 15/1/13.
-//  Copyright (c) 2015年 iShare. All rights reserved.
-//
-
 #import "IS_BaseCell.h"
 #import "IS_SenceModel.h"
 #import "UIImage+JJ.h"
@@ -93,15 +85,4 @@
     }
     return result;
 }
-/*
- 
- UIImageView *bg = [[UIImageView alloc] init];
- self.backgroundView = bg;
- self.bg = bg;
- 
- UIImageView *selectedBg = [[UIImageView alloc] init];
- self.selectedBackgroundView = selectedBg;
- self.selectedBg = selectedBg;
- self.backgroundColor = [UIColor clearColor];
- */
 @end

@@ -45,6 +45,8 @@
     NSIndexPath *hideIndexPath = self.hiddenIndexPath;
     NSIndexPath *indexPathToRemove;
     
+   
+    
     if (toIndexPath == nil) {
         if (hideIndexPath == nil) {
             return elements;

@@ -18,11 +18,6 @@
 - (void)IS_CardCollectionViewDidEndDecelerating:(id)itemData
                                     userinfo:(NSDictionary*)userinfo;
 
-/**
- *  捏合事件之后
- *
- */
-- (void)IS_CardCollectionViewDidEndPinch:(id)itemData;
 
 @end
 
@@ -43,17 +38,16 @@
 
 #pragma mark - 默认
 
--(void)addDefaultSenceTemplateData:(NSMutableArray *)arrayM;
+-(void)addDefaultWithSenceType:(NSInteger)SenceType
+                    SubSenceType:(NSInteger)SubSenceType
+                     ExistData:(NSMutableArray *)arrayM;
 
 
 #pragma mark - 响应模板点击->保存图片->换模板
-
-- (void)templateToCollectionView:(id)template_obj;
+- (void)collectionToChangeTemplate:(id)template_obj;
 #pragma mark - 批量增加图片
 - (void)insertAssetIntoEditView:(NSMutableArray*)image_array
               WithAssetURLArray:(NSMutableArray*)assetUrlArray;
-#pragma mark - 点击缩略图时候，增加图片到编辑视图
--(void)insertAssetIntoEditViewDidthumbnailImageAction:(id)itemData
-                                             userInfo:(NSDictionary*)userInfo;
+
 
 @end

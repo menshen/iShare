@@ -13,6 +13,7 @@
 #import "FLEXManager.h"
 
 
+#import "IS_MainController.h"
 @interface AppDelegate ()
 
 @end
@@ -37,18 +38,22 @@
     
     //1.首页
     
-//    [RootControllerTool chooseRootControllerFirstState:ROOT_CONTROLLER_STATE_NO_ACCOUNT_HAVE_TUTOUIAL];
+    NSArray *arr = [[NSBundle mainBundle]loadNibNamed:@"IS_MainController" owner:nil options:nil];
+    UITabBarController *tabBarController = [arr lastObject];
+    tabBarController.title  =@"爱分享";
+    IS_NavigationController * nav = [[IS_NavigationController alloc]initWithRootViewController:tabBarController];
     
-    IS_HomeController * homeCtrl = [[IS_HomeController alloc]init];
-    IS_NavigationController * navCtrl = [[IS_NavigationController alloc]initWithRootViewController:homeCtrl];
-    self.window.rootViewController =navCtrl;
+    [self.window addSubview:nav.view];
+    [self.window setRootViewController:nav];
+
     
     //2
-    [[UINavigationBar appearance] setBarTintColor:kColor(249, 249, 249)];
-    [[UINavigationBar appearance] setTintColor:kColor(44, 166,255)];//142
-     NSDictionary * font_dic =@{NSForegroundColorAttributeName:kColor(107, 107, 107),
+    [[UINavigationBar appearance] setBarTintColor:IS_SYSTEM_COLOR];
+    [[UINavigationBar appearance] setTintColor:kColor(250, 250, 250)];//142
+     NSDictionary * font_dic =@{NSForegroundColorAttributeName:kColor(250, 250, 250),
                                NSFontAttributeName:[UIFont boldSystemFontOfSize:20]};
     [[UINavigationBar appearance] setTitleTextAttributes:font_dic];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];    
     
     
     //3.    //short version

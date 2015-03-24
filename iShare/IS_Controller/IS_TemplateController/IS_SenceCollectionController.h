@@ -6,11 +6,8 @@
 //  Copyright (c) 2015年 iShare. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import "IS_SenceTemplateCollectionController.h"
 
-@interface IS_SenceCollectionController : UIViewController
-/**
- *  模板数据源
- */
-@property (nonatomic,strong)NSMutableArray * template_dataSource;
+@interface IS_SenceCollectionController : IS_SenceTemplateCollectionController
+
 @end

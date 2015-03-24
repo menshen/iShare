@@ -133,7 +133,7 @@
         tableView.delegate = self;
         tableView.dataSource = self;
       //  [tableView addHeaderWithTarget:self action:@selector(loadMoreData)];
-        tableView.tintColor=[UIColor orangeColor];
+//        tableView.tintColor=[UIColor orangeColor];
 
         _tableView=tableView;
 

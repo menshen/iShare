@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "UIImage+XHRounded.h"
 #import "UIImageView+WebCache.h"
-
+#import "UIImage+ImageEffects.h"
 @interface UIImage (JJ)
 /**
  *  可以自由拉伸的图片
@@ -30,4 +30,20 @@
              inImage:(UIImage*)image
              atPoint:(CGPoint)point;
 + (UIImage*)drawTextWithStroke:(NSString*)string;
+/**
+ *  旋转图片
+ *
+ */
++(UIImage *)makeImageRotateOriginImage:(UIImage*)src
+                    UIImageOrientation:(UIImageOrientation)orientation;
+
++ (UIImage*)imageWithImageSimple:(UIImage*)image
+                           scale:(CGFloat)scale;
+
+/**
+ *  旋转图片
+ *
+ */
++(UIImage *)rotateImage:(UIImage*)src
+           angleDegrees:(CGFloat)angleDegrees;
 @end

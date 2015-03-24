@@ -10,8 +10,9 @@
  *  场景选择控制器
  */
 
-#import "ViewPagerController.h"
+#import "BaseViewController.h"
+#import "IS_HomeController.h"
 
-@interface IS_SencePageController : ViewPagerController
+@interface IS_SencePageController : BaseViewController
 
 @end

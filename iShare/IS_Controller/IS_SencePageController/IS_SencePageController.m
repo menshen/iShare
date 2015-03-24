@@ -1,93 +1,93 @@
 
 #import "IS_SencePageController.h"
 #import "IS_SenceCollectionController.h"
+#import "IS_SenceTemplateCollectionController.h"
+#import "UIViewController+MMDrawerController.h"
 
-@interface IS_SencePageController ()<ViewPagerDataSource, ViewPagerDelegate>
+#import "SUNSlideSwitchView.h"
+#import "SCNavTabBarController.h"
+#import "DrawerViewController.h"
+#import "IS_CollectionView.h"
+@interface IS_SencePageController ()
 
+@property (nonatomic,strong)NSMutableArray * titleArray;
+@property (nonatomic,strong)NSMutableArray * controllerArray;
+@property (nonatomic,strong)SCNavTabBarController * navTabBarController;
+@property (nonatomic,strong)IS_CollectionView * collectionView;
 @end
 
-@implementation IS_SencePageController
-
+@implementation IS_SencePageController{
+    
+    UIButton * _closeBtn;
+}
+-(void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
+    [UIApplication sharedApplication].statusBarHidden = YES;
+    
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    
+    [super viewWillDisappear:animated];
+    self.navigationController.navigationBarHidden = NO;
+    [UIApplication sharedApplication].statusBarHidden = NO;
+    
+}
 - (void)viewDidLoad {
-    
-
-     // Do any additional setup after loading the view from its nib.
-    self.dataSource = self;
-    self.delegate = self;
-    
-    self.title = @"View Pager";
-    
-    // Keeps tab bar below navigation bar on iOS 7.0+
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+    [super viewDidLoad];
+    self.view.backgroundColor = [UIColor clearColor];
+    [self setupClosebtn];
+    if ([self respondsToSelector:@selector(edgesForExtendedLayout)]) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
-    
-    self.view.backgroundColor = [UIColor whiteColor];
-    
-    self.tabWidth = ScreenWidth/5;
-  [super viewDidLoad];
-}
+    [[UIBarButtonItem appearance]setTintColor:[UIColor whiteColor]];
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+    self.title = @"场景选择";
 
-#pragma mark - ViewPagerDataSource
-- (NSUInteger)numberOfTabsForViewPager:(ViewPagerController *)viewPager {
-    return 6;
-}
-- (UIView *)viewPager:(ViewPagerController *)viewPager viewForTabAtIndex:(NSUInteger)index {
     
-    UILabel *label = [UILabel new];
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont systemFontOfSize:13.0];
-    label.text = [NSString stringWithFormat:@"选项%i", (int)index];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.textColor = [UIColor blackColor];
-    [label sizeToFit];
     
-    return label;
-}
-- (UIViewController *)viewPager:(ViewPagerController *)viewPager contentViewControllerForTabAtIndex:(NSUInteger)index {
+    NSArray * titleArray = @[@"婚礼",@"情侣",@"宠物",@"亲子",@"闺密",@"个人"];
+    self.controllerArray = [NSMutableArray array];
     
-    IS_SenceCollectionController *cvc = [[IS_SenceCollectionController alloc]init];
-    
-//    cvc.labelString = [NSString stringWithFormat:@"Content View #%i", index];
-    
-    return cvc;
-}
+    for (int i =0; i<6; i++) {
+        IS_SenceCollectionController *vc = [[IS_SenceCollectionController alloc] init];
+        vc.view.height-=100;
+        vc.title = titleArray[i];
+        [self.controllerArray addObject:vc];
+        
 
-#pragma mark - ViewPagerDelegate
-//- (CGFloat)viewPager:(ViewPagerController *)viewPager valueForOption:(ViewPagerOption)option withDefault:(CGFloat)value {
-//    
-//    switch (option) {
-//        case ViewPagerOptionStartFromSecondTab:
-//            return 1.0;
-//            break;
-//        case ViewPagerOptionCenterCurrentTab:
-//            return 0.0;
-//            break;
-//        case ViewPagerOptionTabLocation:
-//            return 1.0;
-//            break;
-//        default:
-//            break;
-//    }
-//    
-//    return value;
-//}
-- (UIColor *)viewPager:(ViewPagerController *)viewPager colorForComponent:(ViewPagerComponent)component withDefault:(UIColor *)color {
-    
-    switch (component) {
-        case ViewPagerIndicator:
-            return [[UIColor redColor] colorWithAlphaComponent:0.64];
-            break;
-        default:
-            break;
     }
+    self.navTabBarController.subViewControllers = self.controllerArray;
+    [self.navTabBarController addParentController:self];
+    self.navTabBarController.view.height-=100;
+
     
-    return color;
+
+
+  
 }
+#define CLOSE_BUTTON_WIDTH 60
+
+-(void)setupClosebtn{
+    
+    _closeBtn = [[UIButton alloc]initWithFrame:CGRectMake((ScreenWidth-CLOSE_BUTTON_WIDTH)/2, ScreenHeight-70, CLOSE_BUTTON_WIDTH,CLOSE_BUTTON_WIDTH)];
+    [_closeBtn addTarget:self action:@selector(closeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [_closeBtn setBackgroundImage:[UIImage imageNamed:@"IS_Edit_Close"] forState:UIControlStateNormal];
+    [self.view addSubview:_closeBtn];
+}
+
+- (void)closeButtonAction:(UIButton*)btn{
+   
+    [self.navigationController popViewControllerAnimated:YES];
+//    [self dismissViewControllerAnimated:YES completion:nil];
+}
+-(SCNavTabBarController *)navTabBarController{
+    if (!_navTabBarController) {
+        _navTabBarController = [[SCNavTabBarController alloc]init];
+    }
+    return _navTabBarController;
+}
+
 
 @end

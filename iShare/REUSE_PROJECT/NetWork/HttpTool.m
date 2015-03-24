@@ -8,17 +8,10 @@
 #import "HttpTool.h"
 #import "AFHTTPSessionManager.h"
 #import "AFNetworking.h"
+#import "SDWebImageDownloader.h"
 //#warning "要改"
-
-
-
-
-
 @interface HttpTool ()
-
 @end
-
-
 @implementation HttpTool
 #pragma mark -上传图片
 +(void)upLoadimage:(UIImage*)image
@@ -29,14 +22,21 @@
            failure:(HttpFailureBlock)failure{
     
     AFHTTPRequestOperationManager *httpManager = [AFHTTPRequestOperationManager manager];
-    NSData * imageData=UIImageJPEGRepresentation(image, 1.0);
+//    httpManager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    if (image.size.width>1000&&image.size.height>1000) {
+        image = [UIImage imageWithImageSimple:image scale:0.2];
+    }
+    NSData * imageData=UIImageJPEGRepresentation(image, 0.000001);
     NSString * fullPath = [NSString stringWithFormat:@"%@/%@",BASEURL,path];
+    
+    fullPath = [fullPath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
    [httpManager POST:fullPath parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        [formData appendPartWithFileData:imageData name:imageKey fileName:@"jjjjjj.jpg" mimeType:@"image/jpeg"];
+        [formData appendPartWithFileData:imageData name:imageKey fileName:@"j.jpg" mimeType:@"image/jpeg"];
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         success(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         failure(error);
+        
         NSLog(@"失败原因:%@---%@",error,operation);
     }];
     
@@ -136,7 +136,7 @@
         NSURLSessionDataTask * postTask = [httpManager POST:path parameters:allParams success:^(NSURLSessionDataTask *task, id responseObject) {
             //
         //    NSLog(@"URL地址:%@",task.currentRequest);
-            if (!responseObject[@"success"]||[responseObject[@"success"] isEqualToNumber:@(0)]) {
+            if (!responseObject) {
                 success(nil);
                 return;
             }
@@ -167,6 +167,27 @@
     
     
 }
+#pragma mark - 下载图片
 
++ (void)downloadImgaeWithURL:(NSString*)imageURL
+                    progress:(HttpImageProgressBlock)progressBlock
+              success:(HttpSuccessBlock)success
+              failure:(HttpFailureBlock)failure{
+    
+    [[SDWebImageDownloader sharedDownloader]downloadImageWithURL:[NSURL URLWithString:imageURL] options:SDWebImageDownloaderUseNSURLCache progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+        if (progressBlock) {
+            progressBlock(@(receivedSize/expectedSize));
+        }
+    } completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+        if (error) {
+            failure(error);
+        }else{
+            success(image);
+        }
+    }];
+        
+   
+
+}
 
 @end

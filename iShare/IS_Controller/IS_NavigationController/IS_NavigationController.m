@@ -7,8 +7,16 @@
 //
 
 #import "IS_NavigationController.h"
-
 @implementation IS_NavigationController
+
+-(void)viewDidLoad{
+    
+    [super viewDidLoad];
+  
+}
+
+
+
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
     
@@ -20,7 +28,7 @@
     [super pushViewController:viewController animated:animated];
     
     if (self.viewControllers.count) {
-        [viewController navigationItem].backBarButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:nil action:NULL];}
+        [viewController navigationItem].backBarButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:NULL];}
     
 }
 @end

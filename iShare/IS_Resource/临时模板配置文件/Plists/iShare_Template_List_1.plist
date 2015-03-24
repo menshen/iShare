@@ -2,19 +2,19 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>First_Sence</key>
+	<key>Sence_1</key>
 	<array>
 		<dict>
 			<key>s_img_name</key>
-			<string>sence_1</string>
+			<string>s0_1</string>
 		</dict>
 		<dict>
 			<key>s_img_name</key>
-			<string>sence_2</string>
+			<string>s1_1</string>
 		</dict>
 		<dict>
 			<key>s_img_name</key>
-			<string>sence_3</string>
+			<string>s2_1</string>
 		</dict>
 	</array>
 	<key>TEMPLATE_THEME_1</key>

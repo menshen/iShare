@@ -18,7 +18,6 @@
     #import "UITableViewCell+JJ.h"
 
 
-
 #endif
 
 #pragma mark -UI视图相关的

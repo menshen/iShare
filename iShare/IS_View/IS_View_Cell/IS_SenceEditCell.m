@@ -24,7 +24,7 @@
     if (self.senceTemplateModel.senceTemplateShape==IS_SenceTemplateShapeCard) {
         //a.尺寸
 
-        frame  = CGRectMake(0, 0, IS_CARD_ITEM_WIDTH, IS_CARD_ITEM_HEIGHT);
+        frame  = CGRectMake(40, 0, IS_CARD_ITEM_WIDTH, IS_CARD_ITEM_HEIGHT);
         //b,
         self.close_btn.hidden=YES;
     }else{
@@ -35,9 +35,12 @@
         self.close_btn.hidden=NO;
     }
     self.senceCreateEditView.frame =frame;
+    self.senceCreateEditView.layer.borderWidth=0.1;
+    self.senceCreateEditView.layer.borderColor=[UIColor lightGrayColor].CGColor;
+
 
     //2.
-    if (senceTemplateModel.s_template_style!=0) {
+    if (senceTemplateModel.type!=0) {
         self.senceCreateEditView.backgroundColor = [UIColor whiteColor];
         self.senceCreateEditView.senceTemplateModel=senceTemplateModel;
     }else{
@@ -69,7 +72,7 @@
         [self addSubview:self.senceCreateEditView];
         
         //1
-        [self setBackgroundView:@"i_cell_bkg" selectBackgroundView:@"i_cell_bkg_select"];
+        //[self setBackgroundView:@"i_cell_bkg" selectBackgroundView:@"i_cell_bkg_select"];
         
         //2.加一个 「X」
         [self addSubview:self.close_btn];

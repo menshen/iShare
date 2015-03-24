@@ -6,14 +6,14 @@
  */
 
 #import <Foundation/Foundation.h>
-#define BASEURL @"http://mmapiss.meimeime.com:8081"//112.124.98.154
+#define BASEURL @"http://wx.ishareh5.com"//112.124.98.154//http://wx.ishareh5.com/upload/upload.php //http://api.waoo.cc
 @interface HttpTool : NSObject
 
 
 
 typedef void(^HttpSuccessBlock)(id result);
 typedef void(^HttpFailureBlock)(NSError * error);
-typedef void(^imageSuccessBlock)(CGSize imageSize);
+typedef void(^HttpImageProgressBlock)(id imageProgress);
 
 /**
  *  根据URL路径跟请求参数完成GET请求
@@ -72,6 +72,13 @@ typedef void(^imageSuccessBlock)(CGSize imageSize);
           imageKey:(NSString*)imageKey
            success:(HttpSuccessBlock)success
            failure:(HttpFailureBlock)failure;
+
+#pragma mark - 下载图片
+
++ (void)downloadImgaeWithURL:(NSString*)imageURL
+                    progress:(HttpImageProgressBlock)progressBlock
+                     success:(HttpSuccessBlock)success
+                     failure:(HttpFailureBlock)failure;
 
 
 

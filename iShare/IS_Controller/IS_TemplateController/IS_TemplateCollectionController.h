@@ -10,8 +10,24 @@
  *  模板选择控制器
  */
 
-#import "BaseViewController.h"
 
-@interface IS_TemplateCollectionController : BaseViewController
+@protocol IS_TemplateCollectionControllerDelegate <NSObject>
+/**
+ *  模板选择
+ */
+- (void)IS_TemplateCollectionControllerDidSelectItem:(id)result;
 
+@end
+
+#import "IS_SenceTemplateCollectionController.h"
+
+@interface IS_TemplateCollectionController : IS_SenceTemplateCollectionController
+///场景类型:无，婚礼,宠物等
+@property (nonatomic,assign)NSInteger sence_type;
+///场景子类型: 婚礼A，婚礼B....
+@property (nonatomic,assign)NSInteger sence_sub_type;
+
+@property (nonatomic,weak)id<IS_TemplateCollectionControllerDelegate>delegate;
+///类型:多字 少字 纯图
+//@property (nonatomic,assign)IS_TemplateStyle templateStyle;
 @end

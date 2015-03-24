@@ -71,7 +71,7 @@ static NSString * const CellKind = @"CardCell";
 - (void)setOffset:(UIOffset)offset {
     _offset = offset;
     //invalidateLayout是重新调整布局
-    [self invalidateLayout];
+   [self invalidateLayout];
 }
 
 #pragma mark - Public
@@ -79,7 +79,7 @@ static NSString * const CellKind = @"CardCell";
 - (id)init {
     self = [super init];
     if (self) {
-        [self setup];
+      [self setup];
         
         self.minimumLineSpacing = 10000.0f;
     }

@@ -7,7 +7,11 @@
 //
 
 #import "IS_BaseModel.h"
-
+typedef NS_ENUM(NSUInteger, IS_TemplateStyle) {
+    IS_TemplateStyleLessWord,
+    IS_TemplateStyleMutilWord,
+    IS_TemplateStyleNoWord,
+};
 @interface IS_SenceTemplatePanModel : IS_BaseModel
 /**
  ID
@@ -24,11 +28,15 @@
 /**
  *  模板风格
  */
-@property (nonatomic,assign)NSInteger s_template_style;
+@property (nonatomic,assign)NSInteger type;
 /**
  *  子模板编号
  */
-@property (nonatomic,assign)NSInteger s_sub_template_style;
+@property (nonatomic,assign)NSInteger sub_type;
+/**
+ *  模板图片类型
+ */
+@property (nonatomic,assign)IS_TemplateStyle templateStyle;
 /**
  *  缩略图是否被选中
  */

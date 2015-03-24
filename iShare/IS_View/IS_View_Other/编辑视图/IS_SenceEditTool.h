@@ -16,10 +16,6 @@ typedef void(^SenceModelCompleteBlock)(id results);
 
 @interface IS_SenceEditTool : NSObject
 
-/**
- *  默认添加一系列场景(通常1-2个)
- */
-+ (NSMutableArray*)appendSenceDefaultData;
 
 
 #pragma mark - 把场景出去来
@@ -47,5 +43,11 @@ typedef void(^SenceModelCompleteBlock)(id results);
 // *  @return 图片Button
 // */
 //+ (UIButton*)currentSelectImageButton;
+
+#pragma mark - 根据数组组建贝塞尔曲线(1.普通直线 2.曲线 3.等等)
++ (UIBezierPath *)getBezierPathFromArray:(id)array
+                                   WIDTH:(CGFloat)WIDTH
+                                  HEIGHT:(CGFloat)HEIGHT
+                                    type:(NSInteger)type;
 
 @end

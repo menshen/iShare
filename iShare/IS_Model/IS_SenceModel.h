@@ -14,12 +14,15 @@
  */
 @property (nonatomic,copy)NSString  * sence_id;
 /**
- *  模板字典 
-    {
-    A:{
-        1.每个字典包含数据模型信息
-        2.
-    }....
+ *  模板风格
+ */
+@property (nonatomic,assign)NSInteger sence_style;
+/**
+ *  子模板编号
+ */
+@property (nonatomic,assign)NSInteger sence_sub_type;
+/**
+ * 场景加+模板数组
  */
 @property (nonatomic,strong)NSMutableArray  * sence_template_array;
 /**
@@ -27,9 +30,9 @@
  */
 @property (nonatomic,strong)NSMutableArray * image_array;
 
-
 @property (nonatomic,copy)NSString * i_image;
-@property (nonatomic,copy)NSString *i_title;
-@property (nonatomic,copy)NSString *i_detail;
-@property (nonatomic,copy)NSString *i_url;
+@property (nonatomic,copy)NSString * i_title;
+@property (nonatomic,copy)NSString * i_detail;
+
+
 @end

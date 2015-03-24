@@ -191,4 +191,74 @@
     UIImage *image = [[UIImage alloc] initWithContentsOfFile:path];
     return [self decode:image];
 }
+
+static inline double radians (double degrees) {return degrees * M_PI/180;}
++(UIImage *)makeImageRotateOriginImage:(UIImage*)src
+                    UIImageOrientation:(UIImageOrientation)orientation
+{
+    UIGraphicsBeginImageContext(src.size);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    if (orientation == UIImageOrientationRight) {
+        CGContextRotateCTM (context, radians(90));
+    } else if (orientation == UIImageOrientationLeft) {
+        CGContextRotateCTM (context, radians(-90));
+    } else if (orientation == UIImageOrientationDown) {
+        // NOTHING
+    } else if (orientation == UIImageOrientationUp) {
+        CGContextRotateCTM (context, radians(90));
+    }
+    
+    [src drawAtPoint:CGPointMake(0, 0)];
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
+#pragma mark 保存图片到document
++ (UIImage*)imageWithImageSimple:(UIImage*)image
+                           scale:(CGFloat)scale
+{
+    
+    CGSize newSize = CGSizeMake(image.size.width*scale, image.size.height*scale);
+    // Create a graphics image context
+    UIGraphicsBeginImageContext(newSize);
+    
+    // Tell the old image to draw in this new context, with the desired
+    // new size
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    
+    // Get the new image from the context
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    // End the context
+    UIGraphicsEndImageContext();
+    
+    // Return the new image.
+    return newImage;
+}
++(UIImage *)rotateImage:(UIImage*)src
+           angleDegrees:(CGFloat)angleDegrees
+{
+    UIView* rotatedViewBox = [[UIView alloc] initWithFrame: CGRectMake(0, 0, src.size.width, src.size.height)];
+    float angleRadians = angleDegrees * ((float)M_PI / 180.0f);
+    CGAffineTransform t = CGAffineTransformMakeRotation(angleRadians);
+    rotatedViewBox.transform = t;
+    CGSize rotatedSize = rotatedViewBox.frame.size;
+    
+    UIGraphicsBeginImageContext(rotatedSize);
+    CGContextRef bitmap = UIGraphicsGetCurrentContext();
+    CGContextTranslateCTM(bitmap, rotatedSize.width/2, rotatedSize.height/2);
+    CGContextRotateCTM(bitmap, angleRadians);
+    
+    CGContextScaleCTM(bitmap, 1.0, -1.0);
+    CGContextDrawImage(bitmap, CGRectMake(-src.size.width / 2, -src.size.height / 2, src.size.width, src.size.height), [src CGImage]);
+    
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
 @end

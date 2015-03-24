@@ -7,6 +7,7 @@
 #import "IS_HomeController.h"
 #import "IS_RegisterAfterController.h"
 #import "IS_NavigationController.h"
+#import "SVProgressHUD.h"
 @interface RootControllerTool()
 @end
 @implementation RootControllerTool

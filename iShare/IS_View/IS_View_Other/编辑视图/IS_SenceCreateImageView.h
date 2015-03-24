@@ -1,28 +1,43 @@
 #import <UIKit/UIKit.h>
 #import "IS_SenceSubTemplateModel.h"
+#import "RTSpinKitView.h"
 
 
 @protocol IS_SenceCreateImageViewDelegate;
 
-@interface IS_SenceCreateImageView : UIScrollView//<UIScrollViewDelegate>
-/**
- *  数据
- */
-@property (nonatomic, strong) IS_SenceSubTemplateModel  * subTemplateModel;
+@interface IS_SenceCreateImageView : UIView//<UIScrollViewDelegate>
 /*
  *  内容视图
  */
-@property (nonatomic, strong) UIButton  *imageBtnView;
+@property (nonatomic, strong) UIScrollView             * contentView;
+/**
+ *  图片视图
+ */
+@property (nonatomic, strong) UIButton                 *imageBtnView;
+/**
+ *  数据
+ */
+@property (nonatomic, strong) IS_SenceSubTemplateModel * subTemplateModel;
+
+/**
+ *  加载状态
+ */
+
+@property (nonatomic,assign ) IS_ImageUploadState      uploadState;
 /**
  *   是否被选择中
  */
-@property (nonatomic, assign)BOOL isSelected;
-@property (nonatomic ,strong)UIImageView * operationBar;
-/*
- 图片数据
+@property (nonatomic, assign) BOOL                     isSelected;
+/**
+ *  直接设置图片,动态改变内部的偏移量跟内容大小
+ *
+ *  @param imageData 图片数据
+ *  @param isAdjust  是否调整
+ *  @param isExchage 是否在交换图片
  */
 - (void)setImageViewData:(UIImage *)imageData
-                isAdjust:(BOOL)isAdjust;
+                isAdjust:(BOOL)isAdjust
+               isExchage:(BOOL)isExchage;
 
 /**
  *  协议

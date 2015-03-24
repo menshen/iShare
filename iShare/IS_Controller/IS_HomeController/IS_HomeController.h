@@ -6,9 +6,9 @@
 //  Copyright (c) 2015年 iShare. All rights reserved.
 //
 
-#import "IS_BaseTableSectionController.h"
+#import <UIKit/UIKit.h>
 //BaseTableSectionController.#import "IS_BaseTableSectionController.h"
 
-@interface IS_HomeController : IS_BaseTableSectionController
+@interface IS_HomeController : UIViewController
 
 @end

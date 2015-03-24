@@ -2,7 +2,7 @@
 
 #import "UIDevice+JJ.h"
 #import <SystemConfiguration/CaptiveNetwork.h>
-#import "OpenUDID.h"
+//#import "OpenUDID.h"
 @implementation UIDevice (JJ)
 
 +(UIColor*)colorExchangeByColorString:(NSString*)colorString{
@@ -43,7 +43,7 @@
 //#pragma mark -获取设备 UDID
 + (NSString *)getDeviceUDID{
 
-    return [OpenUDID value];
+    return nil;//[OpenUDID value];
 }
 #pragma mark- 是否静音状态
 + (BOOL)isDeviceSilence{

@@ -7,80 +7,45 @@
 //
 
 #import "IS_SenceCollectionController.h"
-#import "IS_TemplateLayout.h"
-#import "IS_TempateCollectionCell.h"
-#import "iShare_Marco.h"
-#import "UIView+JJ.h"
 #import "IS_SenceCreateController.h"
-@interface IS_SenceCollectionController ()<UICollectionViewDataSource,UICollectionViewDelegate>
-@property (nonatomic ,strong)UICollectionView * collectionview;
-
+#import "IS_TemplateActonSheet.h"
+@interface IS_SenceCollectionController ()
 @end
 
 @implementation IS_SenceCollectionController
 
-- (void)viewDidLoad {
+-(void)viewDidLoad{
+
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    //0.
-    self.view.backgroundColor = IS_SYSTEM_WHITE_COLOR;
-    [self.view addSubview:self.collectionview];
-    
-    UINib * nib = [UINib nibWithNibName:IS_TempateCollectionCell_ID bundle:nil];
-    [self.collectionview registerNib:nib forCellWithReuseIdentifier:IS_TempateCollectionCell_ID];
-    
-    //1.默认
-    [self addDefault];
+    self.collectionview.height-=100;
+    self.view.backgroundColor = [UIColor clearColor];
+    self.collectionview.backgroundColor = [UIColor clearColor];
 }
-
--(void)awakeFromNib{
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    [super awakeFromNib];
     
-  
-}
-
-#pragma mark
--(UICollectionView *)collectionview{
-    
-    if (!_collectionview) {
-        IS_TemplateLayout * layout = [[IS_TemplateLayout alloc]init];
-        _collectionview = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 40, ScreenWidth, self.view.height-40) collectionViewLayout:layout];
-        _collectionview.delegate =self;
-        _collectionview.dataSource =self;
-        _collectionview.backgroundColor = [UIColor clearColor];
-        
-    }
-    return _collectionview;
+   
+    IS_SenceCreateController * sc = [[IS_SenceCreateController alloc]init];
+    NSDictionary * dic = self.template_dataSource [indexPath.row];
+    IS_SenceTemplatePanModel * s =[[IS_SenceTemplatePanModel alloc]initWithDictionary:dic];
+    IS_SenceModel * cur_senceModel = [[IS_SenceModel alloc]init];
+    cur_senceModel.sence_style=s.type;
+    cur_senceModel.sence_sub_type = s.sub_type;
+    sc.senceModel=cur_senceModel;
+    [self.navigationController pushViewController:sc animated:YES];
     
 }
 #pragma mark - ...
 -(void)addDefault{
     
     NSMutableArray * arrayM = [NSMutableArray array];
-    [arrayM addObjectsFromArray:TEMPLATE_THEME_1];
-    [arrayM addObjectsFromArray:TEMPLATE_THEME_2];
-    [arrayM addObjectsFromArray:TEMPLATE_THEME_3];
-    
+    [arrayM addObjectsFromArray:SENCE_1_ARRAY];
     self.template_dataSource = arrayM;
-    
-    
-    
+        
 }
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     
-    return self.template_dataSource.count;
-}
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    IS_TempateCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:IS_TempateCollectionCell_ID forIndexPath:indexPath];
-    NSDictionary * dic = self.template_dataSource [indexPath.row];
-    cell.senceTemplatePanModel = [[IS_SenceTemplatePanModel alloc]initWithDictionary:dic];
-    return cell;
-}
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-    IS_SenceCreateController * sc = [[IS_SenceCreateController alloc]init];
-    [self.navigationController pushViewController:sc animated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
     
 }
 @end

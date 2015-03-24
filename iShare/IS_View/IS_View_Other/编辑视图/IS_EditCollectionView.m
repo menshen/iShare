@@ -120,7 +120,7 @@
     [UIView animateWithDuration:0.3
                      animations:^{
                          mockCell.center = layoutAttributes.center;
-                         mockCell.transform = CGAffineTransformMakeScale(1.f, 1.f);
+                         mockCell.transform = CGAffineTransformMakeScale(1.1f, 1.1f);
                      }
                      completion:^(BOOL finished) {
                          self.scrollEnabled = YES;
@@ -159,7 +159,7 @@
     
     if (sender.state == UIGestureRecognizerStateBegan) {
         NSIndexPath *indexPath = [self indexPathForItemClosestToPoint:[sender locationInView:self]];
-        if (!indexPath) {
+        if (!indexPath||indexPath.row==0) {
             return;
         }
         //  0.长按触发-> 把正在长按记录下来(那样移动图标就不会乱动)
@@ -220,11 +220,17 @@
 - (void)handlePanGesture:(UIPanGestureRecognizer *)sender
 {
     
+   
   
     
     if(sender.state == UIGestureRecognizerStateChanged &&
        editLayout.fromIndexPath && isInLongPress) {
         CGPoint movePoint = [sender locationInView:self];
+        
+//        if (movePoint.x<200&&movePoint.y<200) {
+//            return;
+//        }
+        
         mockCell.center = movePoint;
         
         //  [self ifNeedsPaging:movePoint];
@@ -232,13 +238,24 @@
         //if (isPaging) return;
         
         NSIndexPath *indexPath = [self indexPathForItemClosestToPoint:movePoint];
+        
+//        NSLog(@"to:%d",editLayout.toIndexPath.row);
         if (indexPath && ![indexPath isEqual:editLayout.fromIndexPath]) {
             if (self.move_delegate) {
+                
+                
                 [self performBatchUpdates:^{
                     editLayout.hiddenIndexPath = indexPath;
                     editLayout.toIndexPath = indexPath;
+
+                    
+                  
                 } completion:^(BOOL finished) {
                     [self startShake];
+                    
+                    //1.改变数据
+                    
+                    
                 }];
             }
         }

@@ -11,7 +11,6 @@
 #import "UIImage+JJ.h"
 #import "UIControl+JJ.h"
 #import "UIView+JJExtension.h"
-#import "UIButton+JJ.h"
 
 @interface UIView (JJ)<UIAlertViewDelegate,UIActionSheetDelegate>
 -(void)showWithCompletionHandler:(void (^)(NSInteger buttonIndex))completionHandler;

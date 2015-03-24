@@ -7,65 +7,57 @@
 -(instancetype)init{
     
     if (self = [super init]) {
-        self.s_selected_tag=-1;
+        self.selected_tag=-1;
     }
     return self;
 }
 
 
 #pragma mark - 根据主风格+子风格 ->构建子视图的参数
--(void)setS_template_style:(NSInteger)s_template_style{
+-(void)setType:(NSInteger)type{
     
-    _s_template_style = s_template_style;
+    _type = type;
 }
--(void)setS_sub_template_style:(NSInteger)s_sub_template_style{
-    _s_sub_template_style = s_sub_template_style;
+-(void)setSub_type:(NSInteger)sub_type{
+    _sub_type = sub_type;
+    
+   
     
     //初始化时候构建占位的
-    NSMutableArray * arrayM = [IS_SenceSubTemplateModel configureSubTemplateModelWithStandardSize:CGSizeZero
-                                                                                            Index:_s_template_style
-                                                                                        sub_index:_s_sub_template_style];
-    self.s_sub_view_array = arrayM;
+    NSMutableArray * arrayM = [IS_SenceSubTemplateModel configureSubTemplateModelIndex:_type
+                                                                              subIndex:_sub_type
+                                                                                  page:_row_num
+                                                                               isSence:_is_sence];
+    self.subview_array = arrayM;
     
   
 }
-/**
- *  当前被选中的 tag
- *
- *  @param s_selected_tag 
- */
-//-(void)setS_selected_tag:(NSInteger)s_selected_tag{
-//    if (s_selected_tag==-1) {
-//        [self.s_sub_view_array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-//            IS_SenceSubTemplateModel * sub =obj;
-//            sub.image_selected=NO;
-//            [self.s_sub_view_array replaceObjectAtIndex:idx withObject:sub];
-//        }];
-//        //[self.s_sub_view_array makeObjectsPerformSelector:@selector(setImage_selected:) withObject:@(YES)];
-//    }else{
-//        [self.s_sub_view_array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-//            
-//            IS_SenceSubTemplateModel * sub =obj;
-//            sub.image_selected=(idx==s_selected_tag);
-//            [self.s_sub_view_array replaceObjectAtIndex:idx withObject:sub];
-//        }];
-//       
-//    }
-//   
-//    
-//}
 
--(NSMutableArray *)s_sub_view_array{
-    
-    if (!_s_sub_view_array) {
-        _s_sub_view_array = [NSMutableArray array];
+-(NSMutableArray *)img_array{
+    if (!_img_array) {
+        _img_array = [NSMutableArray array];
+        [_subview_array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            IS_SenceSubTemplateModel * sub_model = obj;
+            if (sub_model.sub_type == IS_SubTypeImage&&sub_model.img) {
+               
+                [_img_array addObject:sub_model.img];
+            }
+        }];
     }
-    return _s_sub_view_array;
+    return _img_array;
+}
+
+-(NSMutableArray *)subview_array{
+    
+    if (!_subview_array) {
+        _subview_array = [NSMutableArray array];
+    }
+    return _subview_array;
 }
 
 -(NSInteger)img_count{
     
-    return _s_sub_template_style;
+    return _sub_type;
 }
 
 @end

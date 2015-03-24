@@ -12,7 +12,7 @@
 
 
 #import "IS_TempateCollectionCell.h"
-#import "IS_TemplateLayout.h"
+#import "IS_CommonLayout.h"
 
 #define IS_SenceCreateViewDidChangeTemplate @"IS_SenceCreateViewDidChangeTemplate"
 
@@ -55,7 +55,7 @@
 -(UICollectionView *)collectionview{
     
     if (!_collectionview) {
-        IS_TemplateLayout * layout = [[IS_TemplateLayout alloc]init];
+        IS_CommonLayout * layout = [[IS_CommonLayout alloc]init];
         _collectionview = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 40, ScreenWidth, self.height-40) collectionViewLayout:layout];
         _collectionview.delegate =self;
         _collectionview.dataSource =self;
