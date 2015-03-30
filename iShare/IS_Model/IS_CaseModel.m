@@ -10,4 +10,9 @@
 
 @implementation IS_CaseModel
 
+-(NSString *)uv{
+    
+    return  [NSString stringWithFormat:@"阅读量 %@",_uv];
+}
+
 @end

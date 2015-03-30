@@ -1,7 +1,6 @@
 //
 //  AppDelegate.m
 //  iShare
-//
 //  Created by 伍松和 on 15/1/13.
 //  Copyright (c) 2015年 iShare. All rights reserved.
 //
@@ -11,11 +10,14 @@
 #import "IS_HomeController.h"
 #import "RootControllerTool.h"
 #import "FLEXManager.h"
-
-
+#import "WXApi.h"
+#import "HttpTool.h"
+#import "KVNProgress.h"
 #import "IS_MainController.h"
-@interface AppDelegate ()
-
+@interface AppDelegate ()<WXApiDelegate>
+@property (copy,nonatomic)NSString * wx_code;
+@property (copy,nonatomic)NSString * openID;
+@property (copy,nonatomic)NSString * tokenID;
 @end
 
 @implementation AppDelegate
@@ -28,10 +30,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     //iShare_List
     
+  
     
-//        NSSetUncaughtExceptionHandler(&myExceptionHandler);
-   
-    // [self setNaviAppearance];
+    [WXApi registerApp:WX_APPID withDescription:@"WEIXIN"];
+    
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] ;
     [self.window makeKeyAndVisible];
@@ -79,6 +81,7 @@
 }
 #if DEBUG
 #import "FLEXManager.h"
+
 #endif
 
 - (void)handleSixFingerQuadrupleTap:(UITapGestureRecognizer *)tapRecognizer
@@ -90,27 +93,134 @@
     }
 #endif
 }
-
-- (void)applicationWillResignActive:(UIApplication *)application {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+#pragma mark - 调用WxAPI
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+//    return [TencentOAuth HandleOpenURL:url] ||
+//    [WeiboSDK handleOpenURL:url delegate:self] ||
+//    [WXApi handleOpenURL:url delegate:self];;
+    return [WXApi handleOpenURL:url delegate:self];
 }
+-(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
+    return [WXApi handleOpenURL:url delegate:self];
 
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
+//授权后回调 WXApiDelegate
+-(void)onResp:(BaseReq *)resp
+{
+    
+    if ([resp isKindOfClass:[SendAuthResp class]]) {
+        [KVNProgress showWithStatus:@"正在授权"];
+        /*
+         ErrCode ERR_OK = 0(用户同意)
+         ERR_AUTH_DENIED = -4（用户拒绝授权）
+         ERR_USER_CANCEL = -2（用户取消）
+         code    用户换取access_token的code，仅在ErrCode为0时有效
+         state   第三方程序发送时用来标识其请求的唯一性的标志，由第三方程序调用sendReq时传入，由微信终端回传，state字符串长度不能超过1K
+         lang    微信客户端当前语言
+         country 微信用户当前国家信息
+         */
+        SendAuthResp *aresp = (SendAuthResp *)resp;
+        if (aresp.errCode== 0) {
+            //        NSString *code = aresp.code;
+            //        NSDictionary *dic = @{@"code":code};
+            self.wx_code = aresp.code;
+            [self getAccess_token];
+            
+        }
 
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    }else if ([resp isKindOfClass:[SendMessageToWXResp class]]){
+        [KVNProgress showSuccess];
+
+    }else{
+        [KVNProgress showSuccess];
+   
+    }
+    
 }
-
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+-(void)getAccess_token
+{
+    //https://api.weixin.qq.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&code=CODE&grant_type=authorization_code
+    
+    NSString *url =[NSString stringWithFormat:@"https://api.weixin.qq.com/sns/oauth2/access_token?appid=%@&secret=%@&code=%@&grant_type=authorization_code",WX_APPID,WX_APPSECRET,self.wx_code];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSURL *zoneUrl = [NSURL URLWithString:url];
+        NSString *zoneStr = [NSString stringWithContentsOfURL:zoneUrl encoding:NSUTF8StringEncoding error:nil];
+        NSData *data = [zoneStr dataUsingEncoding:NSUTF8StringEncoding];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (data) {
+                NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+                /*
+                 {
+                 "access_token" = "OezXcEiiBSKSxW0eoylIeJDUKD6z6dmr42JANLPjNN7Kaf3e4GZ2OncrCfiKnGWiusJMZwzQU8kXcnT1hNs_ykAFDfDEuNp6waj-bDdepEzooL_k1vb7EQzhP8plTbD0AgR8zCRi1It3eNS7yRyd5A";
+                 "expires_in" = 7200;
+                 openid = oyAaTjsDx7pl4Q42O3sDzDtA7gZs;
+                 "refresh_token" = "OezXcEiiBSKSxW0eoylIeJDUKD6z6dmr42JANLPjNN7Kaf3e4GZ2OncrCfiKnGWi2ZzH_XfVVxZbmha9oSFnKAhFsS0iyARkXCa7zPu4MqVRdwyb8J16V8cWw7oNIff0l-5F-4-GJwD8MopmjHXKiA";
+                 scope = "snsapi_userinfo,snsapi_base";
+                 }
+                 */
+                
+                self.tokenID = [dic objectForKey:@"access_token"];
+                self.openID = [dic objectForKey:@"openid"];
+                [self getUserInfo];
+                
+            }
+        });
+    });
 }
+#pragma mark - 获取UserInfo
+-(void)getUserInfo
+{
+    // https://api.weixin.qq.com/sns/userinfo?access_token=ACCESS_TOKEN&openid=OPENID
+    
+    NSString *url =[NSString stringWithFormat:@"https://api.weixin.qq.com/sns/userinfo?access_token=%@&openid=%@",self.tokenID,self.openID];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSURL *zoneUrl = [NSURL URLWithString:url];
+        NSString *zoneStr = [NSString stringWithContentsOfURL:zoneUrl encoding:NSUTF8StringEncoding error:nil];
+        NSData *data = [zoneStr dataUsingEncoding:NSUTF8StringEncoding];
+            if (data) {
+                
+                NSMutableDictionary *dicM = [NSMutableDictionary dictionaryWithDictionary:@{WX_TOKEN:self.tokenID}];
+                
+                NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+                
+                [dicM addEntriesFromDictionary:dic];
+                NSString * json = [NSString jsonFromObject:dicM];
+//                json = [json URLEncodedString];
+                /*
+                 {
+                 city = Haidian;
+                 country = CN;
+                 headimgurl = "http://wx.qlogo.cn/mmopen/FrdAUicrPIibcpGzxuD0kjfnvc2klwzQ62a1brlWq1sjNfWREia6W8Cf8kNCbErowsSUcGSIltXTqrhQgPEibYakpl5EokGMibMPU/0";
+                 language = "zh_CN";
+                 nickname = "xxx";
+                 openid = oyAaTjsDx7pl4xxxxxxx;
+                 privilege =     (
+                 );
+                 province = Beijing;
+                 sex = 1;
+                 unionid = oyAaTjsxxxxxxQ42O3xxxxxxs;
+                 }
+                 */
+                NSLog(@"%@",json);
+                
+                NSDictionary * params = @{DATA_KEY:json};
+                [HttpTool postWithPath:WX_LOGIN_API params:params success:^(id result) {
+                    [KVNProgress showSuccessWithStatus:@"成功"];
+                } failure:^(NSError *error) {
+                    [KVNProgress showErrorWithStatus:@"请求失败"];
 
-- (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+                }];
+                
+               // NSString * nickName = [dic objectForKey:@"nickname"];
+//                self.wxHeadImg.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[dic objectForKey:@"headimgurl"]]]];
+                
+            }
+                
+    });
+
 }
 
 @end

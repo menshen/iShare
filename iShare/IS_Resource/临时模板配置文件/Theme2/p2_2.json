@@ -23,12 +23,12 @@
         },
         {
             "frame": {
-                "x": 10,
+                "x": 0,
                 "y": 75,
-                "w": 80,
-                "h": 20
+                "w": 100,
+                "h": 25
             },
-            "type": 2,
+            "type": 1,
             "place_text": "     I AM HERE\r\nTAKE MY HOME"
             
         }

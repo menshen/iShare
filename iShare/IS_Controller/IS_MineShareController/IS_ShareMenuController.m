@@ -1,17 +1,11 @@
-//
-//  IS_ShareMenuController.m
-//  iShare
-//
-//  Created by 伍松和 on 15/3/19.
-//  Copyright (c) 2015年 iShare. All rights reserved.
-//
 
 #import "IS_ShareMenuController.h"
-#import "IS_LoadingView.h"
+#import "IS_EditLoadingView.h"
 #import "KVNProgress.h"
+#import "IS_WebContentController.h"
 
 @interface IS_ShareMenuController ()
-@property (strong ,nonatomic)IS_LoadingView * loadingView;
+@property (strong ,nonatomic)IS_EditLoadingView * loadingView;
 @end
 
 @implementation IS_ShareMenuController
@@ -37,18 +31,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [KVNProgress showProgress:0.10f
-                   parameters:@{KVNProgressViewParameterStatus: @"Loading with progress...",
-                                KVNProgressViewParameterFullScreen: @(YES)}];
-    
-    [self updateProgress];
-    
-    dispatch_main_after(2.7f, ^{
-        [KVNProgress updateStatus:@"You can change to a multiline status text dynamically!"];
-    });
-    dispatch_main_after(5.5f, ^{
-        [self showSuccess];
-    });
+
     
 
 }
@@ -101,79 +84,11 @@
 //    KVNProgressViewParameterFullScreen: @(YES)}];
    // [KVNProgress showSuccessWithStatus:@"Loading..."];
 
-
-   
     
 }
 
-- (IBAction)showSuccess
-{
-    if ([self isFullScreen]) {
-        [KVNProgress showSuccessWithParameters:@{KVNProgressViewParameterStatus: @"Success",
-                                                 KVNProgressViewParameterFullScreen: @(YES)}];
-    } else {
-        [KVNProgress showSuccessWithStatus:@"Success"];
-    }
-}
-#pragma mark - Helper
 
-- (void)updateProgress
-{
-    dispatch_main_after(2.0f, ^{
-        [KVNProgress updateProgress:0.3f
-                           animated:YES];
-    });
-    dispatch_main_after(2.5f, ^{
-        [KVNProgress updateProgress:0.5f
-                           animated:YES];
-    });
-    dispatch_main_after(2.8f, ^{
-        [KVNProgress updateProgress:0.6f
-                           animated:YES];
-    });
-    dispatch_main_after(3.7f, ^{
-        [KVNProgress updateProgress:0.93f
-                           animated:YES];
-    });
-    dispatch_main_after(5.0f, ^{
-        [KVNProgress updateProgress:1.0f
-                           animated:YES];
-    });
-}
 
-- (BOOL)isFullScreen
-{
-    return YES;
-}
-
-static void dispatch_main_after(NSTimeInterval delay, void (^block)(void))
-{
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        block();
-    });
-}
-
-//-(void)showLoading{
-//    
-//    [_loadingView showLoading];
-//    [UIView animateWithDuration:.2 animations:^{
-//        _loadingView.y = 0;
-//    }];
-//}
-//- (void)hideLoading{
-//    [UIView animateWithDuration:.2 animations:^{
-//        _loadingView.y = -ScreenHeight;
-//
-//    } completion:^(BOOL finished) {
-//        [_loadingView hideLoading];
-//
-//    }];
-//  
-//}
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
 
 
 @end

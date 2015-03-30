@@ -21,7 +21,7 @@
 
 @end
 
-@interface IS_CardCollectionView : UICollectionView<UIGestureRecognizerDelegate>
+@interface IS_EditCardCollectionView : UICollectionView<UIGestureRecognizerDelegate>
 
 
 @property (nonatomic,weak)id<IS_CardCollectionViewDelegate>collection_delegate;
@@ -48,6 +48,8 @@
 #pragma mark - 批量增加图片
 - (void)insertAssetIntoEditView:(NSMutableArray*)image_array
               WithAssetURLArray:(NSMutableArray*)assetUrlArray;
+#pragma mark - 数据的增删改查
+-(void)addItem;
 
 
 @end

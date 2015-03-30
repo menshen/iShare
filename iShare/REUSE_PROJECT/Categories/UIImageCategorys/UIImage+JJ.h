@@ -19,7 +19,7 @@
 + (UIImage *)resizedImage:(NSString *)imgName xPos:(CGFloat)xPos yPos:(CGFloat)yPos;
 
 #pragma mark -得到截图
-- (UIImage *)imageFromView: (UIView *) theView;
++ (UIImage *)getImageFromCurView:(UIView *)theView;
 - (UIImage *)imageFromView: (UIView *) theView   atFrame:(CGRect)r;
 +(UIImage*)getSubImage:(UIImage*)superImage inFrame:(CGRect)frame;
 
@@ -39,6 +39,8 @@
 
 + (UIImage*)imageWithImageSimple:(UIImage*)image
                            scale:(CGFloat)scale;
+#pragma mark  圆角
++ (UIImage*)circularScaleAndCropImage:(UIImage*)image frame:(CGRect)frame;
 
 /**
  *  旋转图片
@@ -46,4 +48,15 @@
  */
 +(UIImage *)rotateImage:(UIImage*)src
            angleDegrees:(CGFloat)angleDegrees;
+
+
+#define SCALE_KEY @"scale"
+#define RECT_KEY  @"rect"
+/**
+ *  @brief  处理滑动视图
+ *
+ *  @return <#return value description#>
+ */
++ (NSDictionary *)dealImageData:(UIImage*)imageData
+                    containView:(UIView*)containView;
 @end

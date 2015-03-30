@@ -1,0 +1,36 @@
+{
+    "view_info": [
+        {
+            "frame": {
+                "x": 5.2,
+                "y": 3.2,
+                "w": 90,
+                "h": 35
+            },
+            "type": 0,
+           "place_image": "p2_b_1"
+        },
+        {
+            "frame": {
+                "x": 5.2,
+                "y": 40,
+                "w": 90,
+                "h": 35
+            },
+          "type":  0,
+          "place_image": "p2_b_2"
+            
+        },
+        {
+            "frame": {
+                "x": 10,
+                "y": 75,
+                "w": 80,
+                "h": 20
+            },
+            "type": 2,
+            "place_text": "     I AM HERE\r\nTAKE MY HOME"
+            
+        }
+    ]
+}

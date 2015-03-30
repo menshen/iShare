@@ -1,13 +1,16 @@
-//
-//  IS_WebCoverView.h
-//  iShare
-//
-//  Created by wusonghe on 15/3/28.
-//  Copyright (c) 2015年 iShare. All rights reserved.
-//
+@protocol IS_WebCoverViewDelegate <NSObject>
+
+- (void)IS_WebCoverViewDidBackAction:(id)result;
+
+- (void)IS_WebCoverViewDidScroll:(id)result;
+
+@end
 
 #import <UIKit/UIKit.h>
+#import "IS_CaseModel.h"
 
 @interface IS_WebCoverView : UIView
+@property (strong,nonatomic)IS_CaseModel * caseModel;
+@property (assign,nonatomic)id<IS_WebCoverViewDelegate>delegate;
 
 @end

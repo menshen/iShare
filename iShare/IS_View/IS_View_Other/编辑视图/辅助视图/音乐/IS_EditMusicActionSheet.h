@@ -1,13 +1,5 @@
-//
-//  IS_EditMusicActionSheet.h
-//  iShare
-//
-//  Created by wusonghe on 15/3/26.
-//  Copyright (c) 2015年 iShare. All rights reserved.
-//
+#import "IS_ActionSheet.h"
 
-#import <UIKit/UIKit.h>
-
-@interface IS_EditMusicActionSheet : UIView
-
+@interface IS_EditMusicActionSheet : IS_ActionSheet
+- (void)addDatasource:(NSMutableArray * )dataSource;
 @end

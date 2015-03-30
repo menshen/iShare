@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IS_MineCaseHeaderView : UICollectionReusableView
-
+@interface IS_MiniHeaderView : UICollectionReusableView
+@property (weak, nonatomic) IBOutlet UIView  *lineView;
+@property (weak, nonatomic) IBOutlet UILabel *titleLab;
 @end

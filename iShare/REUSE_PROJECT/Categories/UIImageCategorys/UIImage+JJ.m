@@ -45,7 +45,7 @@
 
 
 //获得屏幕图像
-- (UIImage *)imageFromView: (UIView *) theView
++ (UIImage *)getImageFromCurView:(UIView *)theView
 {
     
     UIGraphicsBeginImageContext(theView.frame.size);
@@ -86,6 +86,7 @@
     
     return  theImage;//[self getImageAreaFromImage:theImage atFrame:r];
 }
+
 
 
 - (UIImage *)addImage:(UIImage *)image1 toImage:(UIImage *)image2 {
@@ -261,4 +262,109 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
     
     return newImage;
 }
+#pragma mark  圆角
++ (UIImage*)circularScaleAndCropImage:(UIImage*)image frame:(CGRect)frame {
+    // This function returns a newImage, based on image, that has been:
+    // - scaled to fit in (CGRect) rect
+    // - and cropped within a circle of radius: rectWidth/2
+    
+    //Create the bitmap graphics context
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(frame.size.width, frame.size.height), NO, 0.0);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    //Get the width and heights
+    CGFloat imageWidth = image.size.width;
+    CGFloat imageHeight = image.size.height;
+    CGFloat rectWidth = frame.size.width;
+    CGFloat rectHeight = frame.size.height;
+    
+    //Calculate the scale factor
+    CGFloat scaleFactorX = rectWidth/imageWidth;
+    CGFloat scaleFactorY = rectHeight/imageHeight;
+    
+    //Calculate the centre of the circle
+    CGFloat imageCentreX = rectWidth/2;
+    CGFloat imageCentreY = rectHeight/2;
+    
+    // Create and CLIP to a CIRCULAR Path
+    // (This could be replaced with any closed path if you want a different shaped clip)
+    CGFloat radius = rectWidth/2;
+    CGContextBeginPath (context);
+    CGContextAddArc (context, imageCentreX, imageCentreY, radius, 0, 2*M_PI, 0);
+    CGContextClosePath (context);
+    CGContextClip (context);
+    
+    //Set the SCALE factor for the graphics context
+    //All future draw calls will be scaled by this factor
+    CGContextScaleCTM (context, scaleFactorX, scaleFactorY);
+    
+    // Draw the IMAGE
+    CGRect myRect = CGRectMake(0, 0, imageWidth, imageHeight);
+    [image drawInRect:myRect];
+    
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
+#pragma mark - 处理滑动视图
+#pragma mark - 处理图片数据跟尺寸
++ (NSDictionary *)dealImageData:(UIImage*)imageData
+                    containView:(UIView*)containView{
+    
+    CGRect rect  = CGRectZero;
+    CGFloat scale = 1.0f;
+    CGFloat w = 0.0f;
+    CGFloat h = 0.0f;
+    
+    CGRect frame = containView.frame;
+    if(frame.size.width > frame.size.height)
+    {
+        
+        w = frame.size.width;
+        h = w*imageData.size.height/imageData.size.width;
+        if(h < frame.size.height){
+            h = frame.size.height;
+            w = h*imageData.size.width/imageData.size.height;
+        }
+        
+    }else{
+        
+        h = frame.size.height;
+        w = h*imageData.size.width/imageData.size.height;
+        if(w < frame.size.width){
+            w = frame.size.width;
+            h = w*imageData.size.height/imageData.size.width;
+        }
+    }
+    rect.size  = CGSizeMake(w, h);
+    //        rect.size = CGSizeMake(w, h);
+    
+    CGFloat scale_w = w / imageData.size.width;
+    CGFloat scale_h = h / imageData.size.height;
+    if (w > frame.size.width || h > frame.size.height) {
+        scale_w = w / frame.size.width;
+        scale_h = h / frame.size.height;
+        if (scale_w > scale_h) {
+            scale = 1/scale_w;
+        }else{
+            scale = 1/scale_h;
+        }
+    }
+    
+    if (w <= frame.size.width || h <= frame.size.height) {
+        scale_w = w / frame.size.width;
+        scale_h = h / frame.size.height;
+        if (scale_w > scale_h) {
+            scale = scale_h;
+        }else{
+            scale = scale_w;
+        }
+    }
+    
+    return @{RECT_KEY:NSStringFromCGRect(rect),
+             SCALE_KEY:@(scale)};
+    
+}
+
 @end

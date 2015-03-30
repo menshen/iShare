@@ -1,0 +1,46 @@
+{
+
+	
+    "view_info": [
+        {
+            "frame": {
+                "x": 2,
+                "y": 2,
+                "w": 95,
+                "h": 45
+            },
+            "type": 0,
+            "place_image": "p3_a_1"
+        },
+        {
+            "frame": {
+                "x": 2,
+                "y": 48,
+                "w": 47,
+                "h": 47
+            },
+            "type": 0,
+            "place_image": "p3_a_2"
+        },
+        {
+            "frame": {
+                "x": 50,
+                "y": 48,
+                "w": 47,
+                "h": 47
+            },
+            "type": 0,
+            "place_image": "p3_a_3"
+        },
+        {
+            "frame": {
+                "x": 35,
+                "y": 38,
+                "w": 29,
+                "h": 18
+            },
+            "type": 1,
+             "place_image": "Love_Story"
+        }
+    ]
+}

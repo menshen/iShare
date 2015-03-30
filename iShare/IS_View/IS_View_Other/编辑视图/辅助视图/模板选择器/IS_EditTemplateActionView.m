@@ -8,7 +8,7 @@
 
 #import "IS_EditTemplateActionView.h"
 #import "IS_EditTemplateSelectModel.h"
-#import "IS_SenceTemplateModel.h"
+#import "IS_EditTemplateModel.h"
 
 
 #import "IS_EditTemplateCell.h"
@@ -23,9 +23,12 @@
 #define BOTTOM_BTN_WIDTH ScreenWidth/5
 #define COVER_WINDOW_H ScreenHeight/2
 #define BOTTOM_SHEET_H 50
+
+#define CONTAIN_VIEW_H ScreenHeight/1.5
 #define COLLECTION_W ScreenWidth
 #define COLLECTION_H ScreenHeight/2-BOTTOM_SHEET_H
 #define COLLECTION_HEADER_H 20
+
 @interface IS_EditTemplateActionView()
 
 
@@ -77,10 +80,10 @@
     [self.collectionView reloadData];
 }
 - (void)setupContainView{
-    _containView = [[UIView alloc]initWithFrame:CGRectMake(0, ScreenHeight, ScreenWidth, ScreenHeight/2)];
+    _containView = [[UIView alloc]initWithFrame:CGRectMake(0, ScreenHeight, ScreenWidth, CONTAIN_VIEW_H)];
     [self addSubview:_containView];
     [UIView animateWithDuration:.3 animations:^{
-        [_containView setFrame:CGRectMake(0, ScreenHeight/2, ScreenWidth, ScreenHeight/2)];
+        [_containView setFrame:CGRectMake(0, ScreenHeight-CONTAIN_VIEW_H, ScreenWidth, CONTAIN_VIEW_H)];
         
     }];
 
@@ -127,7 +130,7 @@
                            @{TITLE_KEY:@"纯图",IMG_KEY:@""},
                            @{TITLE_KEY:@"少字",IMG_KEY:@""},
                            @{TITLE_KEY:@"多字",IMG_KEY:@""},
-                           @{TITLE_KEY:@"",IMG_KEY:@"bottom_template_icon_comfire"}];
+                           @{TITLE_KEY:@"",IMG_KEY:@""}];
     for (int i = 0; i<5; i++) {
         CGRect frame = CGRectMake(BOTTOM_BTN_WIDTH * i, 0, BOTTOM_BTN_WIDTH, BOTTOM_SHEET_H);
         UIButton * btn = [[UIButton alloc]initWithFrame:frame];
@@ -162,16 +165,7 @@
         [self dismissActionSheet];
        
     }else if(btn.tag==4){
-        if (self.actonSheetBlock) {
-            if (_curIndexPath.row>=0) {
-                IS_EditTemplateSelectModel * p = self.c_datasource[_curIndexPath.row];
-                self.actonSheetBlock (p);
-            }else{
-                [self dismissActionSheet];
-
-            }
-           
-        }
+        
     }else{
         _selectBtn.selected = !_selectBtn.selected;
         btn.selected = YES;
@@ -190,7 +184,7 @@
 -(void)dismissActionSheet{
     
     [UIView animateWithDuration:.25 animations:^{
-        [_containView setFrame:CGRectMake(0, ScreenHeight,ScreenWidth, ScreenHeight/2)];
+        [_containView setFrame:CGRectMake(0, ScreenHeight,ScreenWidth, CONTAIN_VIEW_H)];
         self.backgroundColor = [UIColor clearColor];
     } completion:^(BOOL finished) {
         if (finished) {
@@ -212,8 +206,19 @@
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    _curIndexPath  = indexPath;
-//    
+        _curIndexPath  = indexPath;
+//
+    
+    if (self.actonSheetBlock) {
+        if (_curIndexPath.row>=0) {
+            IS_EditTemplateSelectModel * p = self.c_datasource[_curIndexPath.row];
+            self.actonSheetBlock (p);
+        }else{
+            [self dismissActionSheet];
+            
+        }
+        
+    }
 //    NSDictionary * dic = self.c_datasource [indexPath.row];
 //    IS_SenceTemplatePanModel * senceTemplatePanModel = [[IS_SenceTemplatePanModel alloc]initWithDictionary:dic];
 //    [self.c_Delegate IS_CollectionViewDidSelectItem:senceTemplatePanModel];

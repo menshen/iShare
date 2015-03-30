@@ -32,21 +32,37 @@
                               Image:(UIImage*)image
                                 scene:(NSInteger)scene{
     
+    
+    
+    SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
+    req.bText = NO;
+    req.text = title;
+    req.scene = scene;
+    
+
+    
     WXMediaMessage *message = [WXMediaMessage message];
     message.title =title;
     message.description = des;
     [message setThumbImage:image];
-    
     WXWebpageObject *ext = [WXWebpageObject object];
+    ext.webpageUrl = url_string;
     
     message.mediaObject = ext;
-    
-    SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
-    req.bText = NO;
     req.message = message;
-    req.scene = scene;
-    //
     [WXApi sendReq:req];
+
+//
+//    WXWebpageObject *ext = [WXWebpageObject object];
+//    
+//    message.mediaObject = ext;
+//    
+//    SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
+//    req.bText = NO;
+//    req.message = message;
+//    req.scene = scene;
+//    //
+//    [WXApi sendReq:req];
     
 }
 #pragma mark -新浪

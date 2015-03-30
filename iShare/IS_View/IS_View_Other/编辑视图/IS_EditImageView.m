@@ -1,14 +1,14 @@
 
-#import "IS_SenceCreateImageView.h"
+#import "IS_EditImageView.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <AVFoundation/AVFoundation.h>
 #import "IS_SenceEditTool.h"
 #import "MutilThreadTool.h"
 #import "CMPopTipView.h"
 #import "HttpTool.h"
-#import "IS_LoadingView.h"
+#import "IS_EditLoadingView.h"
 
-@interface IS_SenceCreateImageView()<UIGestureRecognizerDelegate,UIScrollViewDelegate>
+@interface IS_EditImageView()<UIGestureRecognizerDelegate,UIScrollViewDelegate>
 @property (nonatomic, strong) UILongPressGestureRecognizer *longPressGestureRecognizer;
 @property (nonatomic, strong) UIPanGestureRecognizer       *panPressGestureRecognizer;
 @property (nonatomic, strong) UITapGestureRecognizer       *tapPressGestureRecognizer;
@@ -23,11 +23,11 @@
 /**
  *  加载视图
  */
-@property (nonatomic,strong ) IS_LoadingView               * loadingView;
+@property (nonatomic,strong ) IS_EditLoadingView               * loadingView;
 
 @end
 
-@implementation IS_SenceCreateImageView
+@implementation IS_EditImageView
 #define MRScreenWidth      CGRectGetWidth([UIScreen mainScreen].applicationFrame)
 #define MRScreenHeight     CGRectGetHeight([UIScreen mainScreen].applicationFrame)
 #pragma mark - 内容视图-可以滚动
@@ -231,10 +231,10 @@
     
     return _imageBtnView;
 }
--(IS_LoadingView *)loadingView{
+-(IS_EditLoadingView *)loadingView{
     
     if (!_loadingView) {
-        _loadingView = [[IS_LoadingView alloc]initWithFrame:self.bounds];
+        _loadingView = [[IS_EditLoadingView alloc]initWithFrame:self.bounds];
        
         [_loadingView hideLoading];
     

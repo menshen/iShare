@@ -1,27 +1,27 @@
 
-#import "IS_CardCollectionView.h"
-#import "IS_SenceTemplateModel.h"
-#import "IS_SceneEditCell.h"
+#import "IS_EditCardCollectionView.h"
+#import "IS_EditTemplateModel.h"
+#import "IS_EditCardCell.h"
 
 
 //刷新控件
 #import "AAPullToRefresh.h"
 #import "IS_SenceEditTool.h"
 #import "MutilThreadTool.h"
-#import "IS_SenceTemplatePanModel.h"
+#import "IS_EditTemplateSelectModel.h"
 #import "IS_EditAssetPickerView.h"
-#import "IS_TemplateActonSheet.h"
+#import "IS_SencePageController.h"
 
 #define WEAKSELF __weak typeof(self) weakSelf = self
 
 
-@interface IS_CardCollectionView()<IS_SenceCreateEditViewDelegate,IS_SceneEditCellDelegate,UICollectionViewDataSource,UICollectionViewDelegate>
+@interface IS_EditCardCollectionView()<IS_EditCellDelegate,UICollectionViewDataSource,UICollectionViewDelegate>
 //1.布局
 @property (nonatomic,strong)AAPullToRefresh * right_refresh;
 /**
  *  当前模板
  */
-@property (nonatomic,strong)IS_SenceTemplateModel * cur_templateModel;
+@property (nonatomic,strong)IS_EditTemplateModel * cur_templateModel;
 
 /**
  *  当前插入图片的数量
@@ -35,7 +35,7 @@
 
 @end
 
-@implementation IS_CardCollectionView
+@implementation IS_EditCardCollectionView
 #pragma mark - 视图初始化
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout
 {
@@ -83,7 +83,7 @@
     self.pagingEnabled = YES;
     
     //2.初始化缓冲池处理
-   [self registerClass:[IS_SceneEditCell class] forCellWithReuseIdentifier:IS_SceneEditCell_ID];
+   [self registerClass:[IS_EditCardCell class] forCellWithReuseIdentifier:IS_EditCardCell_ID];
     
   
   
@@ -111,15 +111,12 @@
 #pragma mark - 图片上传通知
 - (void)image_upload_action:(NSNotification*)notification{
     
-    if ([notification.object isKindOfClass:[IS_SenceSubTemplateModel class]]) {
-        IS_SenceSubTemplateModel * sub_obj = notification.object;
-        
-
-        
+    if ([notification.object isKindOfClass:[IS_EditSubTemplateModel class]]) {
+        IS_EditSubTemplateModel * sub_obj = notification.object;
         if (self.senceDataSource.count<sub_obj.page+1) {
             return;
         }
-        IS_SenceTemplateModel * t_obj = [self.senceDataSource objectAtIndex:sub_obj.page];
+        IS_EditTemplateModel * t_obj = [self.senceDataSource objectAtIndex:sub_obj.page];
         if (t_obj.subview_array.count<sub_obj.sub_tag+1) {
             return;
         }
@@ -147,7 +144,7 @@
         
     }else{
         
-        IS_SenceTemplateModel  * senceModelA = [[IS_SenceTemplateModel alloc]init];
+        IS_EditTemplateModel  * senceModelA = [[IS_EditTemplateModel alloc]init];
         senceModelA.row_num=0;
         senceModelA.is_sence=YES;
         senceModelA.type=SenceType;
@@ -155,7 +152,7 @@
         senceModelA.sence_Id = SubSenceType;
         self.senceDataSource = [NSMutableArray arrayWithObject:senceModelA];
         
-        IS_SenceTemplateModel  * senceModelB = [[IS_SenceTemplateModel alloc]init];
+        IS_EditTemplateModel  * senceModelB = [[IS_EditTemplateModel alloc]init];
         senceModelB.row_num=1;
         senceModelB.type=1;
         senceModelB.sub_type=2;
@@ -164,6 +161,7 @@
     }
     self.currentIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [self reloadData];
+//    [self scrollToItemAtIndexPath:self.currentIndexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
     
 }
 #pragma mark --------------- 响应外部方法----------------------
@@ -176,20 +174,20 @@
     }
     
     //0.把当前的模板模型拿下来
-    IS_SenceTemplateModel * cur_SenceTemplateModel = self.senceDataSource[self.currentIndexPath.row];
-    
-    
-    IS_SenceTemplatePanModel * from = (IS_SenceTemplatePanModel *)template_obj;
-    IS_SenceTemplateModel * be_change_sence=[[IS_SenceTemplateModel alloc]init];//self.senceTemplateArray[self.currentIndexPath.row];
+    IS_EditTemplateModel * cur_SenceTemplateModel = self.senceDataSource[self.currentIndexPath.row];
+     IS_EditTemplateSelectModel * from = (IS_EditTemplateSelectModel *)template_obj;
+    IS_EditTemplateModel * be_change_sence=[[IS_EditTemplateModel alloc]init];//self.senceTemplateArray[self.currentIndexPath.row];
+    be_change_sence.is_sence = from.isScene;
     be_change_sence.row_num =cur_SenceTemplateModel.row_num;
     be_change_sence.type=from.type;
     be_change_sence.sub_type=from.sub_type;
+   
     
     
     __block  NSInteger leftNum = 0;
     if (cur_SenceTemplateModel.img_array.count>0) {
         [be_change_sence.subview_array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            IS_SenceSubTemplateModel * sub_model = (IS_SenceSubTemplateModel*)obj;
+            IS_EditSubTemplateModel * sub_model = (IS_EditSubTemplateModel*)obj;
             if (sub_model.sub_type == IS_SubTypeImage) {
                 if (cur_SenceTemplateModel.img_array.count>leftNum) {
                     sub_model.img = cur_SenceTemplateModel.img_array[leftNum];
@@ -226,11 +224,11 @@
      //1.把空缺的补上
     for (UIImage * i in image_array) {
         [cur_arraym enumerateObjectsUsingBlock:^(id t, NSUInteger t_idx, BOOL *t_stop) {
-            IS_SenceTemplateModel * templateModel = t;
+            IS_EditTemplateModel * templateModel = t;
             NSArray * sub_view_array =templateModel.subview_array;
             [sub_view_array enumerateObjectsUsingBlock:^(id sub_obj, NSUInteger s_idx, BOOL *s_stop) {
                 
-                IS_SenceSubTemplateModel * sub_templateModel =sub_obj;
+                IS_EditSubTemplateModel * sub_templateModel =sub_obj;
                 if (sub_templateModel.sub_type== IS_SubTypeImage&&!sub_templateModel.img) {
                     if (t_idx==0&&s_idx<_cur_sub_tag) {
                         //
@@ -289,7 +287,7 @@
 }
 
 -(void)dealLetf:(NSMutableArray *)deal_image_array
-            lastSenceTemplateModel:(IS_SenceTemplateModel*)senceTemplateModel{
+            lastSenceTemplateModel:(IS_EditTemplateModel*)senceTemplateModel{
     
     [deal_image_array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
@@ -298,7 +296,7 @@
 //        }
         
         NSArray * arrayM1 = obj;
-        IS_SenceTemplateModel * newModel = [[IS_SenceTemplateModel alloc]init];
+        IS_EditTemplateModel * newModel = [[IS_EditTemplateModel alloc]init];
         newModel.row_num = self.senceDataSource.count;
         if (arrayM1.count>=6) {
             newModel.type=1;
@@ -315,7 +313,7 @@
             //1.填满了当前视图
             [newModel.subview_array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *sub_stop) {
                 
-                IS_SenceSubTemplateModel * sub_model = obj;
+                IS_EditSubTemplateModel * sub_model = obj;
                 
                 if (sub_model.sub_type==IS_SubTypeImage&&!sub_model.img) {
                     //                        sub_model.img=image;
@@ -402,15 +400,14 @@
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     
-   IS_SceneEditCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:IS_SceneEditCell_ID
+   IS_EditCardCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:IS_EditCardCell_ID
                                                                        forIndexPath:indexPath];
     
-    IS_SenceTemplateModel * senceTemplateModel =self.senceDataSource[indexPath.row];
+    IS_EditTemplateModel * senceTemplateModel =self.senceDataSource[indexPath.row];
     
     senceTemplateModel.senceTemplateShape = IS_SenceTemplateShapeCard;
     cell.senceTemplateModel = senceTemplateModel;
-    cell.senceCreateEditView.delegate =self;
-//    cell.delegate = self;
+   cell.delegate = self;
     return cell;
 }
 #pragma mark - 每次滑动后得到当前编辑视图
@@ -423,20 +420,20 @@
         self.currentIndexPath =visibleIndexPath;
     
     
-
+    NSInteger curRow = self.currentIndexPath.row;
+    [self.collection_delegate IS_CardCollectionViewDidEndDecelerating:@(curRow) userinfo:nil];
  
 }
 #pragma mark - 数据的增删改查
 -(void)addItem{
     
     //0.把最后一条拿出来
-    
-    
 
+//
+    IS_EditTemplateModel * newModel = [[IS_EditTemplateModel alloc]init];
     NSInteger sub_num = arc4random() % 6+ 1;
-    IS_SenceTemplateModel * newModel = [[IS_SenceTemplateModel alloc]init];
     newModel.row_num = self.senceDataSource.count;
-
+//
     if (sub_num>=6) {
         newModel.type=1;
     }else if (sub_num>=5){
@@ -447,6 +444,10 @@
     }
     newModel.sub_type =sub_num;
 
+    
+    newModel.type=0;
+    newModel.sub_type=0;
+    
     [self.senceDataSource addObject:newModel];
     NSIndexPath* newIndexPath = [NSIndexPath indexPathForRow:[self.senceDataSource count]-1 inSection:0];
     self.currentIndexPath = [NSIndexPath indexPathForRow:[self.senceDataSource count]-1 inSection:0];
@@ -457,46 +458,57 @@
 //    self.contentOffset= CGPointMake(self.contentOffset.x+130+20, self.contentOffset.y);
     [self scrollToItemAtIndexPath:self.currentIndexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
     self.currentIndexPath =  [NSIndexPath indexPathForRow:self.currentIndexPath.row+1 inSection:self.currentIndexPath.section];
-  //  NSLog(@"cur-row:%d",self.currentIndexPath.row);
-
     
+    NSInteger curRow = self.currentIndexPath.row;
+    [self.collection_delegate IS_CardCollectionViewDidEndDecelerating:@(curRow) userinfo:@{@"action":@"additem"}];
     
  
-    
-    
     [_right_refresh performSelector:@selector(stopIndicatorAnimation) withObject:nil afterDelay:0.5];
     
     
 }
-#pragma mark -IS_SenceCreateEditViewDelegate
+#pragma mark -IS_CellEditViewDelegate
 
 
-#pragma mark - 子视图交换后数据整理
--(void)IS_SenceCreateEditViewDidEndPanItem:(id)itemData userinfo:(NSDictionary *)userinfo{
+#pragma mark - Cell视图交换后数据整理
+-(void)IS_EditCellDidSelectItemAction:(id)result userinfo:(id)userinfo{
     
-    if (!itemData) {
-        return;
+    _cur_sub_tag = [result sub_tag];
+    //2.
+    if ([self.collection_delegate respondsToSelector:@selector(IS_CardCollectionViewDidSelectImageViewItem:userinfo:)]) {
+        [self.collection_delegate IS_CardCollectionViewDidSelectImageViewItem:result userinfo:userinfo];
     }
-    IS_SenceTemplateModel * cur_templateModel = itemData;
+}
+-(void)IS_EditCellDidDataChangeAction:(id)result userinfo:(id)userinfo{
+    
+    
+    IS_EditTemplateModel * cur_templateModel = result;
     [self.senceDataSource replaceObjectAtIndex:self.currentIndexPath.row withObject:cur_templateModel];
 //    [self reloadItemsAtIndexPaths:@[self.currentIndexPath]];
 }
-#pragma mark - 子视图点击 1.图片点击(跳出选择图片控制器) 2.文字点击(文字处理控制器) 3.等等
--(void)IS_SenceCreateEditViewDidSelectItem:(id)itemData userinfo:(NSDictionary *)userinfo{
-    //1.代理
-    if (!itemData) {
-        return;
-    }
-    
-   
-    
-    _cur_sub_tag = [itemData sub_tag];
-    //2.
-    if ([self.collection_delegate respondsToSelector:@selector(IS_CardCollectionViewDidSelectImageViewItem:userinfo:)]) {
-        [self.collection_delegate IS_CardCollectionViewDidSelectImageViewItem:itemData userinfo:userinfo];
-    }
-}
-#pragma mark - 删除
 
+-(void)IS_EditCellDidChangeSceneAction:(id)result{
+    IS_SencePageController * pvc = [[IS_SencePageController alloc]init];
+    CGSize windowSize = self.window.bounds.size;
+    
+    UIImage * snapshot = [UIImage getImageFromCurView:self];
+    snapshot = [snapshot applyBlurWithRadius:40
+                                   tintColor:Color(244, 244, 244, 0.7)
+                       saturationDeltaFactor:0.8
+                                   maskImage:nil];
+    UIImageView* backgroundImageView = [[UIImageView alloc] initWithImage:snapshot];
+    backgroundImageView.frame =  CGRectMake(0, 0, windowSize.width, windowSize.height);;
+    backgroundImageView.userInteractionEnabled = YES;
+    [pvc.view addSubview:backgroundImageView];
+    [pvc.view sendSubviewToBack:backgroundImageView];
+    [pvc showAnimationAtContainerView:nil selectBlock:^(id result) {
+        if (result) {
+            
+//            IS_SenceTemplateModel * cur_templateModel = result;
+            [self collectionToChangeTemplate:result];
+
+        }
+    }];
+}
 
 @end

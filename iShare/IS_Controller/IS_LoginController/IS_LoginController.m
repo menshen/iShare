@@ -1,5 +1,6 @@
 #import "IS_LoginController.h"
 #import "IS_RegisterViewController.h"
+#import "WXApi.h"
 @interface IS_LoginController()
 
 @end
@@ -15,7 +16,6 @@
     
     [super viewWillDisappear:animated];
     [self.view becomeFirstResponder];
-    [self TransitionViewController:CGAffineTransformIdentity];
 
 }
 
@@ -23,36 +23,43 @@
 
    
         self.curTextField =textField;
-    CGAffineTransform transform = CGAffineTransformMakeTranslation(0, - self.loginBtn.height-(iPhone4_4S?90:20));
-        [self TransitionViewController:transform];
+//        CGAffineTransform transform = CGAffineTransformMakeTranslation(0, - self.loginBtn.height-(iPhone4_4S?90:20));
+//        [self TransitionViewController:transform];
         return YES;
     
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     
-    [self.view endEditing:YES];
-    [self TransitionViewController:CGAffineTransformIdentity];
+    [self.scrollView endEditing:YES];
+//    [self TransitionViewController:CGAffineTransformIdentity];
 
     
     
 }
--(void)TransitionViewController:(CGAffineTransform)transform{
-
-    [UIView animateWithDuration:0.25
-                          delay:0.0
-                        options:UIViewAnimationOptionTransitionFlipFromBottom
-                     animations:^{
-                         self.view.transform = transform;
-                     }
-                     completion:NULL];
-    
+- (IBAction)dismissBtnAction:(id)sender {
+    [self.scrollView endEditing:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (IBAction)loginBtnAction:(UIButton *)sender {
+  //  [self sendAuthRequest];
+
 }
 
+#define WX_SCOPE @"snsapi_userinfo,snsapi_base"
 - (IBAction)wechatBtnAction:(UIButton *)sender {
+    
+   [self sendAuthRequest];
+    
 }
+-(void)sendAuthRequest
+{
+    SendAuthReq* req =[[SendAuthReq alloc ] init];
+    req.scope =WX_SCOPE;
+    req.state = @"9999" ;
+    [WXApi sendReq:req];
+}
+
 - (IBAction)forgetPasswordBtnAction:(UIButton *)sender{
     
 

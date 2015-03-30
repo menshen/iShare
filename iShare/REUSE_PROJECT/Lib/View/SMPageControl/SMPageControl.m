@@ -102,7 +102,14 @@
 
 		if (image) {
 			[image drawAtPoint:CGPointMake(xOffset, yOffset)];
-		} else {
+        }  else if(_curPageText&&i == _displayedPage){
+            NSDictionary* stringAttrs = @{NSFontAttributeName : [UIFont systemFontOfSize:14],
+                                          NSForegroundColorAttributeName : [UIColor lightGrayColor] };
+            NSAttributedString* attrStr = [[NSAttributedString alloc] initWithString:_curPageText attributes:stringAttrs];
+            [attrStr drawAtPoint:CGPointMake(xOffset, yOffset-6)];
+            
+            
+        }else {
 			CGContextFillEllipseInRect(context, CGRectMake(xOffset, yOffset, _measuredIndicatorWidth, _measuredIndicatorHeight));
 		}
 

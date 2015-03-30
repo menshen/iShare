@@ -16,7 +16,7 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </tabBar>
             <viewControllers>
-                <viewController title="爱分享" nibName="" id="72q-r6-4CJ" customClass="IS_HomeController">
+                <viewController title="爱分享" nibName="" id="72q-r6-4CJ" customClass="IS_PageViewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Tux-Bg-WP2"/>
                         <viewControllerLayoutGuide type="bottom" id="ior-Jd-09t"/>
@@ -28,7 +28,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="热门" image="home_icon_hot" id="dwS-Z5-WjY"/>
                 </viewController>
-                <viewController id="icb-ti-ZKF" customClass="IS_ShareMenuController">
+                <viewController id="icb-ti-ZKF">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gpm-et-jr8"/>
                         <viewControllerLayoutGuide type="bottom" id="sJG-fr-PnS"/>

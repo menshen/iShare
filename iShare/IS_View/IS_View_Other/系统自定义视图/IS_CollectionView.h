@@ -1,5 +1,6 @@
 #import <UIKit/UIKit.h>
 #import "UIView+JJ.h"
+#import "IS_ActionSheet.h"
 @protocol IS_CollectionViewDelegate <NSObject>
 /**
  *  点击活动后动作
@@ -12,7 +13,7 @@
  *  滑动状态控制
  */
 typedef void(^IS_CollectionViewScrollStateAction)(id result);
-@interface IS_CollectionView : UIView
+@interface IS_CollectionView : IS_ActionSheet<UICollectionViewDataSource,UICollectionViewDelegate>
 /**
  *  数据源
  */
@@ -22,6 +23,11 @@ typedef void(^IS_CollectionViewScrollStateAction)(id result);
 @property (weak,nonatomic)id<IS_CollectionViewDelegate>c_Delegate;
 @property (copy,nonatomic)IS_CollectionViewScrollStateAction scrollStateAction;
 - (void)setupScrollStateAction:(IS_CollectionViewScrollStateAction)scrollStateAction;
+
+/*!
+ *  初始化CollectionView
+ */
+-(void)setupCollectionView;
 /**
  *  缓存策略
  *

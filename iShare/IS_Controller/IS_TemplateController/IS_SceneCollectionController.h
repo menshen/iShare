@@ -1,13 +1,24 @@
-//
-//  IS_SenceCollectionController.h
-//  iShare
-//
-//  Created by 伍松和 on 15/3/5.
-//  Copyright (c) 2015年 iShare. All rights reserved.
-//
 
-#import "IS_SenceTemplateCollectionController.h"
+#import <UIKit/UIKit.h>
+typedef NS_ENUM(NSInteger, IS_SceneChooseType){
+    IS_SceneChooseTypeCreate,
+    IS_SceneChooseTypeChange
+};
 
-@interface IS_SenceCollectionController : IS_SenceTemplateCollectionController
+@protocol IS_SceneCollectionControllerDelegate <NSObject>
 
+- (void)IS_SceneCollectionControllerDidSceneChange:(id)result;
+
+@end
+
+@interface IS_SceneCollectionController : UIViewController
+-(void)appendDatasource:(NSMutableArray *)datasource;
+/*!
+ *  1.直接进入 2.换场景
+ */
+@property (assign,nonatomic)IS_SceneChooseType sceneChooseType;
+/*!
+ *  代理
+ */
+@property (assign,nonatomic)id<IS_SceneCollectionControllerDelegate>delegate;
 @end

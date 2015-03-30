@@ -39,13 +39,49 @@
         [self addSubview:self.contentView];
         [self.contentView addSubview:self.imageBtnView];
         [self.contentView addSubview:self.loadingView];
-
+        
         
     }
     return self;
     
 }
+#pragma mark - 增加观察者来观察数据变化
 
+- (void)uploadImageData:(UIImage*)imageData{
+    BOOL condition =(self.subTemplateModel.img_upload_state == IS_ImageUploadStateNone)
+    &&!self.subTemplateModel.img_url;
+    if (condition){
+        
+        self.subTemplateModel.img_upload_state = IS_ImageUploadStateing;
+        self.uploadState =IS_ImageUploadStateing;
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"IMAGE_UPLOAD" object:self.subTemplateModel];
+        
+        [MutilThreadTool ES_AsyncConcurrentOperationQueueBlock:^{
+            [HttpTool upLoadimage:imageData
+                             path:@"upload/upload.php?action=appupload" // //upload/upload.php
+                            param:nil
+                         imageKey:@"pic"
+                          success:^(id result) {
+                              //1.发出通知
+                              self.subTemplateModel.img_upload_state = IS_ImageUploadStateDone;
+                              self.uploadState                       = IS_ImageUploadStateDone;
+                              
+                              NSLog(@"img_url:%@",result[IMAGE_URL_KEY]);
+                              self.subTemplateModel.img_url=result[IMAGE_URL_KEY]?result[IMAGE_URL_KEY]:@"not found";
+                              
+                              [[NSNotificationCenter defaultCenter]postNotificationName:@"IMAGE_UPLOAD" object:self.subTemplateModel];
+                          } failure:^(NSError *error) {
+                              self.subTemplateModel.img_upload_state = IS_ImageUploadStateFailure;
+                              self.uploadState                       = IS_ImageUploadStateFailure;
+                              [[NSNotificationCenter defaultCenter]postNotificationName:@"IMAGE_UPLOAD" object:self.subTemplateModel];
+                          }];
+        }];
+    }else{
+        [self setUploadState:self.subTemplateModel.img_upload_state];
+        //            self.uploadState = self.subTemplateModel.img_upload_state;
+        
+    }
+}
 #pragma mark - 图片数据
 - (void)setImageViewData:(UIImage *)imageData
                 isAdjust:(BOOL)isAdjust
@@ -55,53 +91,10 @@
     
     if (imageData) {
 
-        BOOL condition =(self.subTemplateModel.img_upload_state == IS_ImageUploadStateNone)
-                         &&!self.subTemplateModel.img_url;
-        if (condition){
-            
-            self.subTemplateModel.img_upload_state = IS_ImageUploadStateing;
-            self.uploadState =IS_ImageUploadStateing;
-            [[NSNotificationCenter defaultCenter]postNotificationName:@"IMAGE_UPLOAD" object:self.subTemplateModel];
-
-            [MutilThreadTool ES_AsyncConcurrentOperationQueueBlock:^{
-                [HttpTool upLoadimage:imageData
-                                 path:@"upload/upload.php?action=appupload" // //upload/upload.php
-                                param:nil
-                             imageKey:@"pic"
-                              success:^(id result) {
-                              
-                                  
-                                  
-                                  
-                                  //1.发出通知
-                                  self.subTemplateModel.img_upload_state = IS_ImageUploadStateDone;
-                                  self.uploadState                       = IS_ImageUploadStateDone;
-                                  
-                                  NSLog(@"img_url:%@",result[IMAGE_URL_KEY]);
-                                  self.subTemplateModel.img_url=result[IMAGE_URL_KEY]?result[IMAGE_URL_KEY]:@"not found";
-                                  
-                                  [[NSNotificationCenter defaultCenter]postNotificationName:@"IMAGE_UPLOAD" object:self.subTemplateModel];
-                                  
-                                 
-                                  
-                              
-                              } failure:^(NSError *error) {
-                                  self.subTemplateModel.img_upload_state = IS_ImageUploadStateFailure;
-                                  self.uploadState                       = IS_ImageUploadStateFailure;
-                                  [[NSNotificationCenter defaultCenter]postNotificationName:@"IMAGE_UPLOAD" object:self.subTemplateModel];
-                                  
-                                 
-
-
-                              }];
-            }];
-        }else{
-            [self setUploadState:self.subTemplateModel.img_upload_state];
-//            self.uploadState = self.subTemplateModel.img_upload_state;
-
-        }
+        [self uploadImageData:imageData];
         [self.imageBtnView setImage:imageData forState:UIControlStateNormal];
 
+       
     }else{
         UIImage * place_image = [UIImage imageNamed:UPLOAD_IMAGE];
         imageData=place_image;
@@ -109,63 +102,15 @@
 
         
     }
-    CGRect rect  = CGRectZero;
-    rect  = CGRectZero;
 
-    CGFloat scale = 1.0f;
-    CGFloat w = 0.0f;
-    CGFloat h = 0.0f;
+    NSDictionary * dic = [UIImage dealImageData:imageData
+                          containView:self];
     
-    if(self.frame.size.width > self.frame.size.height)
-    {
-        
-        w = self.frame.size.width;
-        h = w*imageData.size.height/imageData.size.width;
-        if(h < self.frame.size.height){
-            h = self.frame.size.height;
-            w = h*imageData.size.width/imageData.size.height;
-        }
-        
-    }else{
-        
-        h = self.frame.size.height;
-        w = h*imageData.size.width/imageData.size.height;
-        if(w < self.frame.size.width){
-            w = self.frame.size.width;
-            h = w*imageData.size.height/imageData.size.width;
-        }
-    }
-    rect.size  = CGSizeMake(w, h);
-//        rect.size = CGSizeMake(w, h);
-    
-    CGFloat scale_w = w / imageData.size.width;
-    CGFloat scale_h = h / imageData.size.height;
-    if (w > self.frame.size.width || h > self.frame.size.height) {
-        scale_w = w / self.frame.size.width;
-        scale_h = h / self.frame.size.height;
-        if (scale_w > scale_h) {
-            scale = 1/scale_w;
-        }else{
-            scale = 1/scale_h;
-        }
-    }
-    
-    if (w <= self.frame.size.width || h <= self.frame.size.height) {
-        scale_w = w / self.frame.size.width;
-        scale_h = h / self.frame.size.height;
-        if (scale_w > scale_h) {
-            scale = scale_h;
-        }else{
-            scale = scale_w;
-        }
-    }
-
-
-    self.imageBtnView.frame = rect;
+    CGFloat scale =[dic[SCALE_KEY]floatValue];
+    CGRect rect  = CGRectFromString(dic[RECT_KEY]);
+    self.imageBtnView.frame =rect;
     [self setBackgroundColor:kColor(221, 221, 221)];
     self.subTemplateModel.img_frame = NSStringFromCGRect(rect);
-    
-    
     [self.imageViewDelegate IS_SenceCreateImageViewDidDealImage:self.subTemplateModel];
 
 #pragma mark - 图片调整
@@ -178,9 +123,9 @@
         
         
         NSDictionary * info = self.subTemplateModel.img_info;
+        CGRect frame = CGRectFromString( self.subTemplateModel.img_frame);
         CGPoint offset = CGPointFromString(info[TRANSLATE_KEY]);
         CGFloat scale =  [info[SCALE_KEY] floatValue];
-        CGRect frame = CGRectFromString( self.subTemplateModel.img_frame);
         CGFloat W = frame.size.width * scale;
         CGFloat H = frame.size.height * scale;
         self.contentView.contentOffset=offset;
@@ -196,6 +141,7 @@
         CGPoint offset = CGPointFromString(info[TRANSLATE_KEY]);
         CGFloat scale =  [info[SCALE_KEY] floatValue];
         CGRect frame = CGRectFromString(self.subTemplateModel.img_frame);
+        
         if (self.subTemplateModel.shapeType==IS_ShapeTypeSmall) {
             frame  = CGRectMake(offset.x/3, offset.y/3, frame.size.width, frame.size.height);
         }
@@ -235,8 +181,20 @@
     
     if (!_loadingView) {
         _loadingView = [[IS_EditLoadingView alloc]initWithFrame:self.bounds];
+       // [_loadingView hideLoading];
+       _loadingView.uploadState = IS_ImageUploadStateNone;
+        WEAKSELF;
+        [_loadingView addActionBlock:^(id objectData, NSInteger buttonTag) {
+            if (buttonTag == IS_ImageUploadStateNone) {
+                [weakSelf btnAction:weakSelf.imageBtnView];
+            }
+            if (buttonTag == IS_ImageUploadStateFailure) {
+                weakSelf.subTemplateModel.img_upload_state = IS_ImageUploadStateNone;
+                [weakSelf uploadImageData:weakSelf.subTemplateModel.img];
+
+            }
+        }];
        
-        [_loadingView hideLoading];
     
         
     }
@@ -259,6 +217,8 @@
    // [self.loadingView removeFromSuperview];
 
     _uploadState = uploadState;
+    _loadingView.uploadState = uploadState;
+    
     switch (uploadState) {
             
         case IS_ImageUploadStateNone:
@@ -273,24 +233,25 @@
         }
         case IS_ImageUploadStateing:
         {
+            _loadingView.hidden = NO;
+
+            self.loadingView.loadingView.hidden=NO;
             [self.loadingView showLoading];
-//            [self.loadingView startAnimating];
             self.contentView.userInteractionEnabled=NO;
+            [self.loadingView.loadingView startAnimating];
             break;
         }
         case IS_ImageUploadStateDone:
         {
             [self.loadingView hideLoading];
-
-//            [self.loadingView stopAnimating];
             self.contentView.userInteractionEnabled=YES;
+            _loadingView.hidden = YES;
+
             break;
         }
         case IS_ImageUploadStateFailure:
         {
-            [self.loadingView showLoading];
-            [self.loadingView.loadingView stopAnimating];
-            [self.loadingView.loadingView setColor:[UIColor redColor]];
+            
             
             break;
         }
@@ -298,10 +259,12 @@
             
         default:
             break;
+            
     }
+//
     
 }
--(void)setSubTemplateModel:(IS_SenceSubTemplateModel *)subTemplateModel{
+-(void)setSubTemplateModel:(IS_EditSubTemplateModel *)subTemplateModel{
     
     _subTemplateModel = subTemplateModel;
     
@@ -328,22 +291,18 @@
                 }];
             }else if (subTemplateModel.img_place_name){
                 //3.有占位图片
+                _loadingView.hidden = NO;
                  [self.imageBtnView setImage:[UIImage imageNamed:subTemplateModel.img_place_name]forState:UIControlStateNormal];
                 _imageBtnView.imageView.contentMode = UIViewContentModeScaleAspectFill;
 
             }
             //2.增加手势
             [self addGestureRecognizers];
-        }
             break;
-        case IS_SubTypeDecorate:{
-        
-            [self.imageBtnView setImage:[UIImage imageNamed:subTemplateModel.img_place_name]forState:UIControlStateNormal];
-            self.imageBtnView.imageView.backgroundColor = [UIColor clearColor];
-            self.imageBtnView.userInteractionEnabled=NO;
+
+          //
         }
-            break;
-        case IS_SubTypeText:{
+                case IS_SubTypeText:{
         //Raleway Thin
             NSInteger num = (subTemplateModel.shapeType==IS_ShapeTypeLarge)?1:3;
             UIFont * raleway_font = [UIFont fontWithName:@"Raleway-Thin" size:20/num]; //[UIFont systemFontOfSize:25];
@@ -353,11 +312,25 @@
             NSString * text =subTemplateModel.text?subTemplateModel.text:subTemplateModel.text_place_string;
             [self.imageBtnView setTitle:text forState:UIControlStateNormal];
             self.imageBtnView.imageView.backgroundColor = [UIColor clearColor];
-        
-        }
+//            self.imageBtnView.titleLabel.textAlignment = NSTextAlignmentLeft;
+            _loadingView.hidden = YES;
             break;
+        }
+
+        case IS_SubTypeDecorate:{
+            
+            [self.imageBtnView setImage:[UIImage imageNamed:subTemplateModel.img_place_name]forState:UIControlStateNormal];
+            self.imageBtnView.imageView.backgroundColor = [UIColor clearColor];
+            self.imageBtnView.userInteractionEnabled=NO;
+            _loadingView.hidden = YES;
+             break;
+        }
+           
+
             
         default:
+            _loadingView.hidden = YES;
+
             break;
     }
     
@@ -387,11 +360,11 @@
         [self setNeedsLayout];
     }
 #pragma mark - 设置 tag 等
-    self.tag = subTemplateModel.sub_tag;
-    self.imageBtnView.tag=subTemplateModel.sub_tag;
-    //3.
-    self.isLongPress =NO;
-    [self setClipsToBounds:YES];
+        self.tag = subTemplateModel.sub_tag;
+        self.imageBtnView.tag=subTemplateModel.sub_tag;
+        //3.
+        self.isLongPress =NO;
+        [self setClipsToBounds:YES];
 
   
 
@@ -402,31 +375,15 @@
     self.transform =CGAffineTransformMakeScale(0.8, 0.8);
     
     [UIView animateWithDuration:.2 animations:^{
-        self.transform =CGAffineTransformMakeScale(1.0, 1.0);
+        self.transform =CGAffineTransformIdentity;
         
     } completion:^(BOOL finished) {
-        IS_SenceSubTemplateModel * subTemplateModel = self.subTemplateModel;
-        if (subTemplateModel.img) {
-            
-            if ([self.imageViewDelegate respondsToSelector:@selector(IS_SenceCreateImageViewDidBtnAction:)]) {
-                [self.imageViewDelegate IS_SenceCreateImageViewDidBtnAction:self];
-            }
-            
-        }else{
-            if ([self.imageViewDelegate respondsToSelector:@selector(IS_SenceCreateImageViewDidBtnAction:)]) {
-                [self.imageViewDelegate IS_SenceCreateImageViewDidBtnAction:self];
-            }
+        if ([self.imageViewDelegate respondsToSelector:@selector(IS_SenceCreateImageViewDidBtnAction:)]) {
+            [self.imageViewDelegate IS_SenceCreateImageViewDidBtnAction:self];
         }
-        
         
     }];
 }
-#pragma mark - 当内部移动的触发
-
-
-
-
-
 #pragma mark -增加手势通知
 -(void)addGestureNotification:(BOOL)isGesture{
     
@@ -438,10 +395,7 @@
 #pragma mark - 增加手势
 -(void)addGestureRecognizers{
     
-   
-    
-
-    if (self.subTemplateModel.sub_type==IS_SubTypeImage&&self.subTemplateModel.img) {
+       if (self.subTemplateModel.sub_type==IS_SubTypeImage&&self.subTemplateModel.img) {
         //1.长按手势
         
         _longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleLongPressGesture:)];
@@ -578,6 +532,8 @@
             break;
         }
         case UIGestureRecognizerStateChanged:{
+            
+            
 //            CGFloat radians = atan2f(view.transform.b, view.transform.a);
 //            degree+=rotationGestureRecognizer.rotation;
 //         
@@ -646,10 +602,6 @@
 - (void)scrollViewWillBeginZooming:(UIScrollView *)scrollView withView:(UIView *)view{
     [self addGestureNotification:YES];
     
-}
--(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    //[self addGestureNotification:YES];
-
 }
 -(void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
     [self addGestureNotification:NO];
@@ -720,8 +672,6 @@
 {
     CGRect zoomRect;
     zoomRect.size.height = self.frame.size.height / scale;
-    //    NSLog(@"zoomRect.size.height is %f",zoomRect.size.height);
-    //    NSLog(@"self.frame.size.height is %f",self.frame.size.height);
     zoomRect.size.width  = self.frame.size.width  / scale;
     zoomRect.origin.x = center.x - (zoomRect.size.width  / 2.0);
     zoomRect.origin.y = center.y - (zoomRect.size.height / 2.0);

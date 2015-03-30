@@ -1,0 +1,34 @@
+{
+    "view_info": [
+        {
+            "frame": {
+                "x": 3,
+                "y": 2,
+                "w": 95,
+                "h": 40
+            },
+            "type": 0,
+            "place_image": "p2_c_1"
+        },
+        {
+            "frame": {
+                "x": 3,
+                "y": 60,
+                "w": 95,
+                "h": 40
+            },
+            "type": 0,
+            "place_image": "p2_c_2"
+        },
+        {
+           "frame": {
+               "x": 3,
+               "y": 38,
+               "w": 95,
+               "h": 25
+              },
+            "type": 1,
+            "place_image": "Our_Wedding_Day"
+        }
+    ]
+}

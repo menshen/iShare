@@ -5,7 +5,7 @@
 
 @protocol IS_SenceCreateImageViewDelegate;
 
-@interface IS_SenceCreateImageView : UIView//<UIScrollViewDelegate>
+@interface IS_EditImageView : UIView//<UIScrollViewDelegate>
 /*
  *  内容视图
  */
@@ -52,7 +52,7 @@
 /**
  *  拖动状态
  */
-- (void)IS_SenceCreateImageViewPanning:(IS_SenceCreateImageView *)sender
+- (void)IS_SenceCreateImageViewPanning:(IS_EditImageView *)sender
                         state:(UIGestureRecognizerState)pan_state;
 
 

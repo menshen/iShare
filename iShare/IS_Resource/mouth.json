@@ -1,47 +1,93 @@
- [
-  {
-  "mouth": "五月",
-  "datas": [
-            {
-            "title": "我们结婚了",
-            "des": "好开心还开心",
-            "isEdit": 1,
-            "read_num": 1023,
-            "time": "11132454634"
-            },
-            {
-            "title": "我们结婚了BB",
-            "des": "好开心还开心NNN",
-            "isEdit": 1,
-            "read_num": 1023,
-            "time": 1113245463
-            },
-            {
-            "title": "我们结婚了BB",
-            "des": "好开心还开心NNN",
-            "isEdit": 1,
-            "read_num": 1023,
-            "time": 1113245463
-            }
-            ]
-  },
-  {
-  "mouth": "四月",
-  "datas": [
-            {
-            "title": "我们结婚了",
-            "des": "好开心还开心",
-            "isEdit": 1,
-            "read_num": 1023,
-            "time": 11132454634
-            },
-            {
-            "title": "我们结婚了BB",
-            "des": "好开心还开心NNN",
-            "isEdit": 1,
-            "read_num": 1023,
-            "time": 11132454634
-            }
-            ]
-  }
-  ]
+- (void)updateProgress
+{
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                   
+                   [KVNProgress updateStatus:@"正在生成场景,好快就可以看到美美哒视频了"];
+                   [ KVNProgress updateProgress:0.6f
+                                       animated:YES];
+                   });
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                   
+                   [KVNProgress updateProgress:0.93f
+                                      animated:YES];
+                   [KVNProgress showSuccessWithParameters:@{KVNProgressViewParameterStatus: @"Success",
+                       KVNProgressViewParameterFullScreen: @(YES)}];
+                   
+                   
+                   
+                   });
+}
+
+
+- (void)setupObserver{
+    [self addObserver:self forKeyPath:UPLAOD_STATE_KEY options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:@"CONTENT"];
+    
+}
+- (void)dealloc{
+    [self removeObserver:self forKeyPath:UPLAOD_STATE_KEY];
+    
+}
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    
+    BOOL condition = (change[NSKeyValueChangeNewKey]&&
+                      [keyPath isEqualToString:UPLAOD_STATE_KEY]&&
+                      ![change[NSKeyValueChangeNewKey] isEqual:change[NSKeyValueChangeOldKey]]);
+    
+    if (condition&&[change[NSKeyValueChangeNewKey] isEqual:@(3)]) {
+        IS_EditImageView * obj = object;
+        //        obj.uploadState =[change[NSKeyValueChangeNewKey] integerValue];
+        [obj.loadingView hideLoading];
+        obj.contentView.userInteractionEnabled=YES;
+        //        NSLog(@"img:%@",self.subTemplateModel.img);
+    }
+}
+
+
+
+//        [subTemplateDataArray enumerateObjectsUsingBlock:^(id s_obj, NSUInteger s_idx, BOOL *stop) {
+//            IS_SenceSubTemplateModel * s =s_obj;
+//            s.img=nil;
+//            [subTemplateDataArray replaceObjectAtIndex:s_idx withObject:s];
+//        }];
+//
+//
+//        if (senceID) {
+//
+//            IS_SenceModel * senceModel_exist = [self getSenceModelWithID:senceID];
+//
+//            //1.场景数组
+//            senceModel_exist.sence_template_array = templateArray;
+//
+//            //2.用过的图片
+//            senceModel_exist.image_array = subTemplateDataArray;
+//
+//            [senceModel_exist updateToDB];
+//
+//
+//        }else{
+//            //0.
+//            IS_SenceModel * senceModel = [[IS_SenceModel alloc]init];
+//
+//            //1.场景数组
+//
+//            senceModel.sence_template_array = templateArray;
+//
+//            //2.用过的图片
+//
+//
+//
+//            senceModel.image_array = subTemplateDataArray;
+//
+//            senceModel.sence_id = [self msg_custom_id];
+//
+////            senceModel.i_title = [NSString stringWithFormat:@"%@",[NSDate date]] ;
+////
+////
+////
+////
+////            senceModel.i_image = @"icon_5";
+//
+//            [IS_SenceModel insertToDB:senceModel];
+//
+//        }

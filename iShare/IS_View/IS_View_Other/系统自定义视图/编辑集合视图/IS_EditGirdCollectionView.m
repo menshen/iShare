@@ -6,11 +6,11 @@
 //  Copyright (c) 2015年 iShare. All rights reserved.
 //
 
-#import "IS_EditCollectionView.h"
-#import "IS_SceneEditCell.h"
+#import "IS_EditGirdCollectionView.h"
+#import "IS_EditCardCell.h"
 #import "IS_EditSetLayout.h"
 
-@interface IS_EditCollectionView()<UIGestureRecognizerDelegate>{
+@interface IS_EditGirdCollectionView()<UIGestureRecognizerDelegate>{
 
     @private
         UIGestureRecognizer *longPressGestureRecognizer;
@@ -32,7 +32,7 @@
 
 @end
 
-@implementation IS_EditCollectionView
+@implementation IS_EditGirdCollectionView
 
 -(instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout{
 
@@ -107,7 +107,8 @@
     [UIView animateWithDuration:0.3
                      animations:^{
                          mockCell.center = layoutAttributes.center;
-                         mockCell.transform = CGAffineTransformMakeScale(1.1f, 1.1f);
+                         mockCell.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
+                         mockCell.alpha = 1;
                      }
                      completion:^(BOOL finished) {
                          self.scrollEnabled = YES;
@@ -168,7 +169,8 @@
         [self addSubview:mockCell];
         [UIView animateWithDuration:0.3
                          animations:^{
-                             mockCell.transform = CGAffineTransformMakeScale(1.1f, 1.1f);
+                             mockCell.alpha = 0.8;
+                             mockCell.transform = CGAffineTransformMakeScale(0.9f, 0.9f);
                          }
                          completion:nil];
         //4.cell 对应位置设置为布局隐藏位置

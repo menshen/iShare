@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#define YYMMDD @"yyyy-MM-dd"
 @interface NSDate (JJ)
 ///时间相关
 

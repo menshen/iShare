@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#define IS_EditMusicCell_ID @"IS_EditMusicCell"
 @interface IS_EditMusicCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *titleLab;
+@property (weak, nonatomic) IBOutlet UIButton *actionBtn;
 @end

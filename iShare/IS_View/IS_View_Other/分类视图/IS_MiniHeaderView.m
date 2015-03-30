@@ -6,9 +6,9 @@
 //  Copyright (c) 2015年 iShare. All rights reserved.
 //
 
-#import "IS_MineCaseHeaderView.h"
+#import "IS_MiniHeaderView.h"
 
-@implementation IS_MineCaseHeaderView
+@implementation IS_MiniHeaderView
 
 - (void)awakeFromNib {
     // Initialization code

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IS_SenceShareController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <point key="canvasLocation" x="430" y="203"/>
+        </view>
+        <view contentMode="scaleToFill" id="61T-Vr-IL7" userLabel="输入">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="81"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X1q-CQ-cOK">
+                    <rect key="frame" x="8" y="8" width="65" height="65"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="65" id="EQ5-o5-PIv"/>
+                        <constraint firstAttribute="height" constant="65" id="mKp-ki-cnj"/>
+                    </constraints>
+                    <state key="normal" image="icon_add_title">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="请输入" translatesAutoresizingMaskIntoConstraints="NO" id="aAp-hX-yvz">
+                    <rect key="frame" x="78" y="8" width="237" height="65"/>
+                    <color key="backgroundColor" white="0.92534436677631582" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="aAp-hX-yvz" firstAttribute="top" secondItem="X1q-CQ-cOK" secondAttribute="top" id="3GQ-1r-Ttd"/>
+                <constraint firstItem="aAp-hX-yvz" firstAttribute="bottom" secondItem="X1q-CQ-cOK" secondAttribute="bottom" id="7xl-De-hkt"/>
+                <constraint firstItem="aAp-hX-yvz" firstAttribute="leading" secondItem="X1q-CQ-cOK" secondAttribute="trailing" constant="5" id="CML-LN-MIg"/>
+                <constraint firstItem="X1q-CQ-cOK" firstAttribute="top" secondItem="61T-Vr-IL7" secondAttribute="top" constant="8" id="OhS-kO-RKT"/>
+                <constraint firstAttribute="trailing" secondItem="aAp-hX-yvz" secondAttribute="trailing" constant="5" id="Xlj-BA-G6r"/>
+                <constraint firstItem="X1q-CQ-cOK" firstAttribute="leading" secondItem="61T-Vr-IL7" secondAttribute="leading" constant="8" id="dy8-5G-rH3"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="820" y="16.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icon_add_title" width="65" height="65"/>
+    </resources>
+</document>

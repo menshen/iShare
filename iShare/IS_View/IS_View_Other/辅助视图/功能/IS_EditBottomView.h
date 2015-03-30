@@ -19,7 +19,7 @@ typedef NS_ENUM(NSInteger, IS_BottomEditViewButtonType) {
     IS_BottomEditViewButtonTypeDone,
 
 };
-@interface IS_BottomEditView : UIImageView
+@interface IS_EditBottomView : UIImageView
 
 @property (nonatomic ,copy)IS_BottomEditViewBtnBlock btnBlock;
 

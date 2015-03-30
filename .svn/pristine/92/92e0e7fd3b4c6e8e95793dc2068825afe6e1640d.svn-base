@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6221" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6213"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IS_SenceCreateController">
+            <connections>
+                <outlet property="collectionView" destination="SyE-Pt-hOb" id="qg7-aw-clj"/>
+                <outlet property="view" destination="iN0-l3-epB" id="uhF-dU-euc"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8k4-Sl-EIC" userLabel="总览">
+                    <rect key="frame" x="170" y="500" width="60" height="70"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="70" id="9aB-9Q-zOU"/>
+                        <constraint firstAttribute="width" constant="60" id="fAB-eY-C2U"/>
+                    </constraints>
+                    <state key="normal" image="icon_menu">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="jumpToMenuAction:" destination="-1" eventType="touchUpInside" id="llg-Ir-UXb"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="haO-8f-0Nn" userLabel="模板">
+                    <rect key="frame" x="90" y="500" width="60" height="70"/>
+                    <state key="normal" image="icon_template">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="jumpToTemplateSheetAction:" destination="-1" eventType="touchUpInside" id="ytw-lg-S6l"/>
+                    </connections>
+                </button>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="SyE-Pt-hOb" customClass="IS_CardCollectionView">
+                    <rect key="frame" x="0.0" y="65" width="320" height="425"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <collectionViewLayout key="collectionViewLayout" id="bKE-ES-7nJ" customClass="IS_CardLayout"/>
+                </collectionView>
+                <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="5" currentPage="2" translatesAutoresizingMaskIntoConstraints="NO" id="SnR-z7-CKs">
+                    <rect key="frame" x="0.0" y="490" width="320" height="10"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="10" id="Hew-DV-4on"/>
+                    </constraints>
+                    <color key="pageIndicatorTintColor" white="0.82719983552631582" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="currentPageIndicatorTintColor" red="0.086274509803921567" green="0.63137254901960782" blue="0.8901960784313725" alpha="1" colorSpace="calibratedRGB"/>
+                </pageControl>
+            </subviews>
+            <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="centerX" secondItem="8k4-Sl-EIC" secondAttribute="centerX" constant="-40" id="1oI-Sf-OJO"/>
+                <constraint firstItem="SnR-z7-CKs" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="8Et-gQ-EoX"/>
+                <constraint firstAttribute="centerX" secondItem="haO-8f-0Nn" secondAttribute="centerX" constant="40" id="8OQ-Sj-7GO"/>
+                <constraint firstItem="8k4-Sl-EIC" firstAttribute="top" secondItem="haO-8f-0Nn" secondAttribute="top" id="B45-Vn-UM8"/>
+                <constraint firstItem="8k4-Sl-EIC" firstAttribute="width" secondItem="haO-8f-0Nn" secondAttribute="width" id="J8N-1W-tIk"/>
+                <constraint firstItem="8k4-Sl-EIC" firstAttribute="bottom" secondItem="haO-8f-0Nn" secondAttribute="bottom" id="Ut1-ep-KKu"/>
+                <constraint firstItem="haO-8f-0Nn" firstAttribute="top" secondItem="SnR-z7-CKs" secondAttribute="bottom" id="XoY-2A-Ypw"/>
+                <constraint firstAttribute="bottom" secondItem="8k4-Sl-EIC" secondAttribute="bottom" constant="-2" id="kb7-GI-22R"/>
+                <constraint firstAttribute="trailing" secondItem="SnR-z7-CKs" secondAttribute="trailing" id="kei-fV-mWp"/>
+                <constraint firstAttribute="trailing" secondItem="SyE-Pt-hOb" secondAttribute="trailing" id="lfF-9Z-21Z"/>
+                <constraint firstItem="SyE-Pt-hOb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="65" id="ptR-da-0Oz"/>
+                <constraint firstItem="haO-8f-0Nn" firstAttribute="bottom" secondItem="SyE-Pt-hOb" secondAttribute="bottom" constant="80" id="xec-oM-i76"/>
+                <constraint firstItem="SyE-Pt-hOb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="zMd-q1-jLc"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icon_menu" width="45" height="59"/>
+        <image name="icon_template" width="45" height="59"/>
+    </resources>
+</document>

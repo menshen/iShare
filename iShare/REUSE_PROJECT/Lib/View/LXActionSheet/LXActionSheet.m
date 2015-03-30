@@ -12,7 +12,7 @@
 // [UIColor colorWithRed:53/255.00f green:53/255.00f blue:53/255.00f alpha:1]
 #define DESTRUCTIVE_BUTTON_COLOR                [UIColor colorWithRed:194/255.00f green:66/255.00f blue:64/255.00f alpha:1]
 #define OTHER_BUTTON_COLOR                      [UIColor whiteColor]
-#define ACTIONSHEET_BACKGROUNDCOLOR             [UIColor colorWithRed:234/255.00f green:234/255.00f blue:234/255.00f alpha:0.7]
+#define ACTIONSHEET_BACKGROUNDCOLOR             [UIColor colorWithRed:255/255.00f green:255/255.00f blue:255/255.00f alpha:1]
 #define WINDOW_COLOR                            [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7]
 #define CORNER_RADIUS                           5
 
@@ -243,17 +243,17 @@
 - (UIButton *)creatDestructiveButtonWith:(NSString *)destructiveButtonTitle
 {
     UIButton *destructiveButton = [[UIButton alloc] initWithFrame:CGRectMake(BUTTON_INTERVAL_WIDTH, BUTTON_INTERVAL_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT)];
-    destructiveButton.layer.masksToBounds = YES;
-    destructiveButton.layer.cornerRadius = CORNER_RADIUS;
+//    destructiveButton.layer.masksToBounds = YES;
+//    destructiveButton.layer.cornerRadius = CORNER_RADIUS;
     
     destructiveButton.layer.borderWidth = BUTTON_BORDER_WIDTH;
     destructiveButton.layer.borderColor = BUTTON_BORDER_COLOR;
     
-    destructiveButton.backgroundColor = DESTRUCTIVE_BUTTON_COLOR;
+    destructiveButton.backgroundColor = OTHER_BUTTON_COLOR;
     [destructiveButton setTitle:destructiveButtonTitle forState:UIControlStateNormal];
     destructiveButton.titleLabel.font = BUTTONTITLE_FONT;
     
-    [destructiveButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [destructiveButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [destructiveButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateHighlighted];
     return destructiveButton;
 }
@@ -261,8 +261,8 @@
 - (UIButton *)creatOtherButtonWith:(NSString *)otherButtonTitle withPostion:(NSInteger )postionIndex
 {
     UIButton *otherButton = [[UIButton alloc] initWithFrame:CGRectMake(BUTTON_INTERVAL_WIDTH, BUTTON_INTERVAL_HEIGHT + (postionIndex*(BUTTON_HEIGHT+(BUTTON_INTERVAL_HEIGHT/2))), BUTTON_WIDTH, BUTTON_HEIGHT)];
-    otherButton.layer.masksToBounds = YES;
-    otherButton.layer.cornerRadius = CORNER_RADIUS;
+//    otherButton.layer.masksToBounds = YES;
+//    otherButton.layer.cornerRadius = CORNER_RADIUS;
     
     otherButton.layer.borderWidth = BUTTON_BORDER_WIDTH;
     otherButton.layer.borderColor = BUTTON_BORDER_COLOR;
@@ -277,17 +277,17 @@
 
 - (UIButton *)creatCancelButtonWith:(NSString *)cancelButtonTitle
 {
-    UIButton *cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(BUTTON_INTERVAL_WIDTH, BUTTON_INTERVAL_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT)];
-    cancelButton.layer.masksToBounds = YES;
-    cancelButton.layer.cornerRadius = CORNER_RADIUS;
+    UIButton *cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(BUTTON_INTERVAL_WIDTH, BUTTON_INTERVAL_HEIGHT-5, BUTTON_WIDTH, BUTTON_HEIGHT)];
+//    cancelButton.layer.masksToBounds = YES;
+//    cancelButton.layer.cornerRadius = CORNER_RADIUS;
     
     cancelButton.layer.borderWidth = BUTTON_BORDER_WIDTH;
     cancelButton.layer.borderColor = BUTTON_BORDER_COLOR;
     
-    cancelButton.backgroundColor = CANCEL_BUTTON_COLOR;
+    cancelButton.backgroundColor = OTHER_BUTTON_COLOR;
     [cancelButton setTitle:cancelButtonTitle forState:UIControlStateNormal];
     cancelButton.titleLabel.font = BUTTONTITLE_FONT;
-    [cancelButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [cancelButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [cancelButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateHighlighted];
     return cancelButton;
 }
@@ -316,7 +316,7 @@
     
     if (self.delegate) {
         if ([self.delegate respondsToSelector:@selector(didClickOnButtonIndex:)] == YES) {
-            [self.delegate didClickOnButtonIndex:(NSInteger *)button.tag];
+            [self.delegate didClickOnButtonIndex:button.tag];
         }
     }
     

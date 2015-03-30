@@ -25,4 +25,7 @@ typedef NS_ENUM(NSInteger, IS_BottomEditViewButtonType) {
 
 -(instancetype)initWithFrame:(CGRect)frame
                     btnBlock:(IS_BottomEditViewBtnBlock)btnBlock;
+
+- (void)IS_BottomEditViewButtonEnableState:(BOOL)isEnable
+                                    tag:(NSInteger)tag;
 @end

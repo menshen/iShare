@@ -12,11 +12,8 @@ typedef NS_ENUM(NSUInteger, IS_TemplateStyle) {
     IS_TemplateStyleMutilWord,
     IS_TemplateStyleNoWord,
 };
-@interface IS_SenceTemplatePanModel : IS_BaseModel
-/**
- ID
- */
-@property (nonatomic,assign)NSInteger s_Id;
+@interface IS_EditTemplateSelectModel : IS_BaseModel
+
 /**
  *  对应的略缩图
  */
@@ -41,6 +38,13 @@ typedef NS_ENUM(NSUInteger, IS_TemplateStyle) {
  *  缩略图是否被选中
  */
 @property (nonatomic,assign)BOOL is_selected;
-
+/*!
+ *  图片数量
+ */
 @property (nonatomic ,assign)NSInteger img_count;
+/*!
+ *  是否为场景
+ */
+@property (assign ,nonatomic)BOOL isScene;
+
 @end

@@ -4,6 +4,7 @@
 #import <UIKit/UIKit.h>
 #import "IS_CollectionView.h"
 
-@interface IS_CaseCollectionView : IS_CollectionView
 
+@interface IS_CaseCollectionView : IS_CollectionView
+- (void)reloadDataWithDataSource:(NSMutableArray*)arrayM;
 @end

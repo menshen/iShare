@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@class IS_EditCollectionView;
+@class IS_EditGirdCollectionView;
 @class IS_EditSetLayout;
 @protocol IS_EditCollectionViewDelegate <NSObject>
 
@@ -15,11 +15,11 @@
 /**
  *  移动item
  */
-- (void)collectionView:(IS_EditCollectionView *)collectionView moveItemAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath;
+- (void)collectionView:(IS_EditGirdCollectionView *)collectionView moveItemAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath;
 
 //- (void)IS_EditCollectionViewDismissDidHandleTapAndPinch;
 @end
-@interface IS_EditCollectionView : UICollectionView<UIGestureRecognizerDelegate>
+@interface IS_EditGirdCollectionView : UICollectionView<UIGestureRecognizerDelegate>
 
 /**
  *  增加一个变量->>滑动刷新

@@ -1,12 +1,12 @@
 
 
-#import "IS_SenceSubTemplateModel.h"
+#import "IS_EditSubTemplateModel.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <AVFoundation/AVFoundation.h>
 #import "IS_SenceEditTool.h"
 #import "MutilThreadTool.h"
 #import "HttpTool.h"
-@implementation IS_SenceSubTemplateModel
+@implementation IS_EditSubTemplateModel
 
 #pragma mark
 -(instancetype)init{
@@ -56,11 +56,18 @@
     NSMutableArray * arrayM = [NSMutableArray array];
     [sub_view_info_array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
-        IS_SenceSubTemplateModel * senceSubTemplateModel = [[IS_SenceSubTemplateModel alloc]init];
+        IS_EditSubTemplateModel * senceSubTemplateModel = [[IS_EditSubTemplateModel alloc]init];
+        
+        
 
         NSDictionary  * sub_view_info_dic = obj;
         //5.frame 信息
         NSDictionary  * sub_view_frame = sub_view_info_dic[FRAME_KEY];
+        
+//        NSArray * a= nil;
+//        
+//        CGRect rec1t = CGRectMake([a[0] floatValue]*0.01*WIDTH, Y, W, H);
+
         CGFloat X = [sub_view_frame[X_KEY] floatValue]*0.01*WIDTH;
         CGFloat Y = [sub_view_frame[Y_KEY] floatValue]*0.01*HEIGHT;
         CGFloat W = [sub_view_frame[WIDTH_KEY] floatValue]*0.01*WIDTH;

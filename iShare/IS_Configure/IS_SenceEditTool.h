@@ -9,8 +9,8 @@
  */
 
 #import <Foundation/Foundation.h>
-#import "IS_SenceTemplateModel.h"
-#import "IS_SenceModel.h"
+#import "IS_EditTemplateModel.h"
+#import "IS_CaseModel.h"
 
 typedef void(^SenceModelCompleteBlock)(id results);
 
@@ -19,7 +19,7 @@ typedef void(^SenceModelCompleteBlock)(id results);
 
 
 #pragma mark - 把场景出去来
-+ (IS_SenceModel *)getSenceModelWithID:(NSString*)sence_id;
++ (IS_CaseModel *)getSenceModelWithID:(NSString*)sence_id;
 
 #pragma mark - 保存
 + (void)saveSenceModelWithSenceID:(NSString*)senceID

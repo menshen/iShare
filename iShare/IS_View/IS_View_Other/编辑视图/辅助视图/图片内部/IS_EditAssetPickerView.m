@@ -27,9 +27,9 @@
 
     if (!_imagePickerController) {
         _imagePickerController = [[UIImagePickerController alloc]init];
-        _imagePickerController.editing = YES;
+//        _imagePickerController.editing = YES;
         _imagePickerController.delegate = self;
-        _imagePickerController.allowsEditing = YES;
+//        _imagePickerController.allowsEditing = YES;
 //        _imagePickerController.sourceType = sourceType;
     }
     return _imagePickerController;

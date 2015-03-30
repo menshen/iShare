@@ -8,11 +8,11 @@
 
 #import "IS_SenceGirdController.h"
 
-#import "IS_EditCollectionView.h"
+#import "IS_EditGirdCollectionView.h"
 #import "IS_EditSetLayout.h"
-#import "IS_SenceEditCell.h"
+#import "IS_EditCardCell.h"
 
-@interface IS_SenceGirdController ()<UICollectionViewDataSource,UICollectionViewDelegate,IS_EditCollectionViewDelegate>
+@interface IS_SenceGirdController ()<UICollectionViewDataSource,UICollectionViewDelegate,IS_EditCollectionViewDelegate,IS_EditCellDelegate>
 //1.布局
 @property (strong,nonatomic)IS_EditSetLayout * editSetLayout;
 //2.底部 button
@@ -46,7 +46,7 @@
     
     
     //2.注册 Cell
-    [self.collectionView registerClass:[IS_SenceEditCell class] forCellWithReuseIdentifier:IS_SENCE_EDIT_CELL_ID];
+    [self.collectionView registerClass:[IS_EditCardCell class] forCellWithReuseIdentifier:IS_EditCardCell_ID];
     
     //3.单击
     
@@ -54,12 +54,12 @@
     [_collectionView addGestureRecognizer:tap_dismss];
     [_collectionView setUserInteractionEnabled:YES];
 }
--(IS_EditCollectionView *)collectionView{
+-(IS_EditGirdCollectionView *)collectionView{
     
     if (!_collectionView) {
         
         CGRect frame = CGRectMake(0, 10, ScreenWidth, ScreenHeight-100);
-        _collectionView = [[IS_EditCollectionView alloc]initWithFrame:frame collectionViewLayout:self.editSetLayout];
+        _collectionView = [[IS_EditGirdCollectionView alloc]initWithFrame:frame collectionViewLayout:self.editSetLayout];
         _collectionView.backgroundColor = [UIColor clearColor];
         _collectionView.delegate = self;
         _collectionView.dataSource=self;
@@ -84,6 +84,14 @@
 
 - (void)closeButtonAction:(UIButton*)btn{
 
+    
+    [self.sence_array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        IS_EditTemplateModel * model = obj;
+        model.row_num = idx;
+        [model configureRowNum:idx];
+        [self.sence_array replaceObjectAtIndex:idx withObject:model];
+    }];
+    
     if ([self.delegate respondsToSelector:@selector(IS_SenceGirdControllerDidUpdate:)]) {
         [self.delegate IS_SenceGirdControllerDidUpdate:nil];
     }
@@ -119,17 +127,13 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    IS_SenceEditCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:IS_SENCE_EDIT_CELL_ID forIndexPath:indexPath];
-    
-    IS_SenceTemplateModel * senceTemplateModel =self.sence_array[indexPath.row];
-    
+    IS_EditCardCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:IS_EditCardCell_ID forIndexPath:indexPath];
+    IS_EditTemplateModel * senceTemplateModel =self.sence_array[indexPath.row];
     senceTemplateModel.senceTemplateShape = IS_SenceTemplateShapeGird;
     cell.senceCreateEditView.userInteractionEnabled=NO;
     cell.senceTemplateModel = senceTemplateModel;
-    
-    
-    cell.close_btn.tag=indexPath.row;
-    [cell.close_btn addTarget:self action:@selector(handleDel:) forControlEvents:UIControlEventTouchUpInside];
+    cell.tag = indexPath.row;
+    cell.delegate = self;
     
     return cell;
 }
@@ -144,30 +148,30 @@
 #pragma mark  -----------Delegate
 
 #pragma mark - 数据重置
-- (void)collectionView:(IS_EditCollectionView *)collectionView
+- (void)collectionView:(IS_EditGirdCollectionView *)collectionView
             moveItemAtIndexPath:(NSIndexPath *)fromIndexPath
            toIndexPath:(NSIndexPath *)toIndexPath{
-    IS_SenceTemplateModel *fromTemplateModel = self.sence_array[fromIndexPath.item];
-    IS_SenceTemplateModel * toTemplateModel = self.sence_array[toIndexPath.item];
+    IS_EditTemplateModel *fromTemplateModel = self.sence_array[fromIndexPath.item];
+//    IS_EditTemplateModel * toTemplateModel = self.sence_array[toIndexPath.item];
 
-    //0.改变子视图的page
-    [fromTemplateModel.subview_array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        IS_SenceSubTemplateModel * subModel = obj;
-        subModel.page = toTemplateModel.row_num;
-        [fromTemplateModel.subview_array replaceObjectAtIndex:idx withObject:subModel];
-    }];
-    
-    [toTemplateModel.subview_array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        IS_SenceSubTemplateModel * subModel = obj;
-        subModel.page = fromTemplateModel.row_num;
-        [toTemplateModel.subview_array replaceObjectAtIndex:idx withObject:subModel];
-    }];
-    
-    
-    //2.改吧 row_num
-    NSInteger temp = toTemplateModel.row_num;
-    toTemplateModel.row_num =fromTemplateModel.row_num;
-    fromTemplateModel.row_num=temp;
+//    //0.改变子视图的page
+//    [fromTemplateModel.subview_array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+//        IS_EditSubTemplateModel * subModel = obj;
+//        subModel.page = toTemplateModel.row_num;
+//        [fromTemplateModel.subview_array replaceObjectAtIndex:idx withObject:subModel];
+//    }];
+//    
+//    [toTemplateModel.subview_array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+//        IS_EditSubTemplateModel * subModel = obj;
+//        subModel.page = fromTemplateModel.row_num;
+//        [toTemplateModel.subview_array replaceObjectAtIndex:idx withObject:subModel];
+//    }];
+//    
+//    
+//    //2.改吧 row_num
+//    NSInteger temp = toTemplateModel.row_num;
+//    toTemplateModel.row_num =fromTemplateModel.row_num;
+//    fromTemplateModel.row_num=temp;
     
     //3.插入
     
@@ -179,18 +183,25 @@
     
     
 }
+- (void)IS_EditCellDidDeleteAction:(id)result{
+
+    if (!result) {
+        return;
+    }
+    NSInteger row = [result tag];
+    NSIndexPath * remove_indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+    [self.collectionView performBatchUpdates:^{
+        [_sence_array removeObjectAtIndex:row];
+        [self.collectionView deleteItemsAtIndexPaths:@[remove_indexPath]];
+        
+    } completion:^(BOOL finished) {
+        [self.collectionView reloadData];
+        
+    }];
+}
 -(void)handleDel:(UIButton*)btn{
     
-    NSInteger row = btn.tag;
-    NSIndexPath * remove_indexPath = [NSIndexPath indexPathForRow:row inSection:0];
-  [self.collectionView performBatchUpdates:^{
-      [_sence_array removeObjectAtIndex:row];
-      [self.collectionView deleteItemsAtIndexPaths:@[remove_indexPath]];
-
-  } completion:^(BOOL finished) {
-      [self.collectionView reloadData];
-
-  }];
+    
     
   
    

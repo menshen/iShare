@@ -1,0 +1,25 @@
+{
+    "view_info": [
+        {
+            "frame": {
+                "x": 0,
+                "y": 13,
+                "w": 100,
+                "h": 52
+            },
+            "type": 0,
+            "place_image": "p1_c_1"
+
+        },
+        {
+            "frame": {
+                "x": 33,
+                "y": 87,
+                "w": 35,
+                "h": 10
+            },
+             "type": 1,
+             "place_image": "Forever_Love"
+        }
+    ]
+}

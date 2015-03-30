@@ -34,25 +34,28 @@
 {
     
     
+    if (!_selectedBtn) {
+        _selectedBtn = button;
+    }
+
     
     _selectedBtn.selected = !_selectedBtn.selected;
     [_selectedBtn.titleLabel setFont:[UIFont systemFontOfSize:17]];
-    
-    
     button.transform = CGAffineTransformMakeScale(0.8, 0.8);
     [UIView animateWithDuration:0.1 animations:^{
         button.transform = CGAffineTransformMakeScale(1, 1);
         button.selected = YES;
         [button.titleLabel setFont:[UIFont systemFontOfSize:17]];
     }];
-  
-
     _selectedBtn = button;
+
+   
+
     
     
     
     NSInteger index =button.tag;
-    self.currentItemIndex = index;
+    _currentItemIndex = index;
 
     
   
@@ -62,31 +65,33 @@
 #pragma mark - ScrollView
 
 
-//- (void)setCurrentItemIndex:(NSInteger)currentItemIndex
-//{
-//    _currentItemIndex = currentItemIndex;
-//    UIButton *button = _items[currentItemIndex];
-//    CGFloat flag = SCREEN_WIDTH;
-//    
-//    if (button.frame.origin.x + button.frame.size.width > flag)
-//    {
-//        CGFloat offsetX = button.frame.origin.x + button.frame.size.width - flag;
-//        if (_currentItemIndex < [_itemTitles count] - 1)
-//        {
-//            offsetX = offsetX + 40.0f;
-//        }
-//        
-//      //  [self setContentOffset:CGPointMake(offsetX, 0) animated:YES];
-//    }
-//    else
-//    {
-//       // [self setContentOffset:CGPointMake(DOT_COORDINATE, 0) animated:YES];
-//    }
-//    
-////    [UIView animateWithDuration:0.2f animations:^{
-////        _line.frame = CGRectMake(button.frame.origin.x + 2.0f, _line.frame.origin.y, [_itemsWidth[currentItemIndex] floatValue] - 4.0f, _line.frame.size.height);
-////    }];
-//}
+- (void)setCurrentItemIndex:(NSInteger)currentItemIndex
+{
+    _currentItemIndex = currentItemIndex;
+    UIButton *button = _items[currentItemIndex];
+    CGFloat flag = SCREEN_WIDTH;
+    
+    if (button.frame.origin.x + button.frame.size.width > flag)
+    {
+        CGFloat offsetX = button.frame.origin.x + button.frame.size.width - flag;
+        if (_currentItemIndex < [_itemTitles count] - 1)
+        {
+            offsetX = offsetX + 40.0f;
+        }
+        
+        [self setContentOffset:CGPointMake(offsetX, 0) animated:YES];
+    }
+    else
+    {
+        [self setContentOffset:CGPointMake(DOT_COORDINATE, 0) animated:YES];
+    }
+    [self itemPressed:button];
+
+    
+//    [UIView animateWithDuration:0.2f animations:^{
+//        _line.frame = CGRectMake(button.frame.origin.x + 2.0f, _line.frame.origin.y, [_itemsWidth[currentItemIndex] floatValue] - 4.0f, _line.frame.size.height);
+//    }];
+}
 #pragma mark - 更新数据
 - (void)updateData
 {

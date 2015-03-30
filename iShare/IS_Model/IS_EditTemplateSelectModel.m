@@ -1,8 +1,8 @@
 
 
-#import "IS_SenceTemplatePanModel.h"
+#import "IS_EditTemplateSelectModel.h"
 
-@implementation IS_SenceTemplatePanModel
+@implementation IS_EditTemplateSelectModel
 -(void)setS_img_name:(NSString *)s_img_name{
     
     _s_img_name = s_img_name;
@@ -19,6 +19,11 @@
     //2.图片数量
     
     _img_count = _sub_type;
+    
+    //3.
+    NSString * is_scene = [s_img_name substringToIndex:1];
+    _isScene =[is_scene isEqualToString:@"s"];
+    
     
 }
 @end

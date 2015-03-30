@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6221" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6213"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="40"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kMF-sz-9UD">
+                    <rect key="frame" x="100" y="0.0" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="T5V-hs-B2b"/>
+                    </constraints>
+                    <state key="normal" image="imageviewx_zoom_in ">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v2w-i3-gOQ">
+                    <rect key="frame" x="145" y="0.0" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="dSf-er-dfn"/>
+                    </constraints>
+                    <state key="normal" image="imageviewx_zoom_out ">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hPF-Ks-wso">
+                    <rect key="frame" x="15" y="0.0" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="rUL-xr-E8f"/>
+                    </constraints>
+                    <state key="normal" image="imageview_pic">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u5g-kp-Ozp">
+                    <rect key="frame" x="60" y="0.0" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="19S-mN-Agc"/>
+                        <constraint firstAttribute="height" constant="40" id="b8v-QE-tsv"/>
+                    </constraints>
+                    <state key="normal" image="imageview_rotate">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="v2w-i3-gOQ" firstAttribute="leading" secondItem="kMF-sz-9UD" secondAttribute="trailing" constant="5" id="2cn-Ur-tMy"/>
+                <constraint firstAttribute="centerX" secondItem="u5g-kp-Ozp" secondAttribute="centerX" constant="20" id="Fv8-vA-Uzg"/>
+                <constraint firstAttribute="centerX" secondItem="kMF-sz-9UD" secondAttribute="centerX" constant="-20" id="JcE-25-YaB"/>
+                <constraint firstItem="u5g-kp-Ozp" firstAttribute="bottom" secondItem="hPF-Ks-wso" secondAttribute="bottom" id="Mh9-29-KAf"/>
+                <constraint firstItem="u5g-kp-Ozp" firstAttribute="leading" secondItem="hPF-Ks-wso" secondAttribute="trailing" constant="5" id="jHv-q0-hGI"/>
+                <constraint firstItem="u5g-kp-Ozp" firstAttribute="top" secondItem="v2w-i3-gOQ" secondAttribute="top" id="lje-qj-eAt"/>
+                <constraint firstItem="u5g-kp-Ozp" firstAttribute="bottom" secondItem="v2w-i3-gOQ" secondAttribute="bottom" id="p9I-Ti-m0i"/>
+                <constraint firstItem="u5g-kp-Ozp" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="syL-97-hx1"/>
+                <constraint firstItem="u5g-kp-Ozp" firstAttribute="top" secondItem="kMF-sz-9UD" secondAttribute="top" id="tLL-ZC-G3X"/>
+                <constraint firstItem="u5g-kp-Ozp" firstAttribute="top" secondItem="hPF-Ks-wso" secondAttribute="top" id="y2U-Kv-bON"/>
+                <constraint firstItem="u5g-kp-Ozp" firstAttribute="bottom" secondItem="kMF-sz-9UD" secondAttribute="bottom" id="yuE-Lk-GVy"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="506" y="123"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="imageview_pic" width="22" height="22"/>
+        <image name="imageview_rotate" width="22" height="22"/>
+        <image name="imageviewx_zoom_in " width="22" height="22"/>
+        <image name="imageviewx_zoom_out " width="22" height="22"/>
+    </resources>
+</document>

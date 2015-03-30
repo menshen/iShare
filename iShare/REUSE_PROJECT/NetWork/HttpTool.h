@@ -4,6 +4,19 @@
  3.GET.POST,etc
  
  */
+#define RET_MSG   @"retmsg"
+#define ERROR     @"error"
+#define MOUTH_KEY @"mon"
+#define DATA_KEY  @"data"
+#define TYPE_KEY  @"type"
+#define PAGE_KEY  @"page"
+#define PIC_KEY   @"pic"
+
+#define GET_MINE_SHARE_DATA @"/newmodule_dev/index.php?M=index&a=appgetcreatedata"
+#define GET_RANKLIST_DATA    @"/newmodule_dev/index.php?M=index&a=appgetranklist"
+#define GET_HOTLIST_DATA    @"/newmodule_dev/index.php?M=index&a=appgethotlist"
+#define CREATE_HTML_API     @"/newmodule/index.php/app/create" //http://wx.ishareh5.com/newmodule/index.php/Home/app/create
+#define UPLOAD_IMG_DATA     @"/upload/index.php?M=index&a=fileupload"
 
 #import <Foundation/Foundation.h>
 #define BASEURL @"http://wx.ishareh5.com"//112.124.98.154//http://wx.ishareh5.com/upload/upload.php //http://api.waoo.cc

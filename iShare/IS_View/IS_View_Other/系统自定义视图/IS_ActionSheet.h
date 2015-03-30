@@ -9,5 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface IS_ActionSheet : UIView
+typedef void(^IS_ActonSheetBlock)(id result);
+@property (copy,nonatomic)IS_ActonSheetBlock actonSheetBlock;
+- (void)showActionSheetAtView:(UIView *)view
+                     actonSheetBlock:(IS_ActonSheetBlock)actonSheetBlock;
 
+#pragma mark - 显示
+- (void)setupActionSheet;
+- (void)dismissActionSheet;
 @end

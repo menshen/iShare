@@ -6,23 +6,25 @@
 
 #import "IS_SenceCreateController.h"
 #import "IS_ShareMenuController.h"
-#import "IS_SenceTemplateModel.h"
-#import "IS_CardCollectionView.h"
-#import "IS_TemplateSheetView.h"
+#import "IS_EditTemplateModel.h"
+#import "IS_EditCardCollectionView.h"
+#import "IS_EditTemplateActionView.h"
 
 
 #import "UIImage+ImageEffects.h"
 #import "UIWindow+JJ.h"
 #import "IS_SenceGirdController.h"
 #import "IS_SenceEditTool.h"
-#import "IS_TemplateCollectionController.h"
-#import "IS_SenceCollectionController.h"
-#import "IS_BottomEditView.h"
+#import "IS_SceneCollectionController.h"
+#import "IS_EditBottomView.h"
 #import "KVNProgress.h"
+#import "IS_EditPageControl.h"
+#import "IS_EditMusicActionSheet.h"
+#import "IS_WebContentController.h"
 
 
 @interface IS_SenceCreateController ()<UzysAssetsPickerControllerDelegate,IS_SenceGirdControllerDelegate,
-IS_CardCollectionViewDelegate,IS_TemplateCollectionControllerDelegate>
+IS_CardCollectionViewDelegate>
 
 
 
@@ -30,20 +32,22 @@ IS_CardCollectionViewDelegate,IS_TemplateCollectionControllerDelegate>
 /**
   滚动视图
  */
-@property (nonatomic,weak)IBOutlet IS_CardCollectionView * collectionView;
+@property (nonatomic,weak)IBOutlet IS_EditCardCollectionView * collectionView;
 
 /**
  * 选择条
  */
-@property (strong, nonatomic)  UIPageControl *sence_pageControl;
+@property (weak, nonatomic) IBOutlet IS_EditPageControl *editPageControl;
 
-@property (weak, nonatomic) IBOutlet UIView *bottomView;
 
 
 
 @end
 
-@implementation IS_SenceCreateController
+@implementation IS_SenceCreateController{
+    
+    IS_EditBottomView * _editView;
+}
 -(void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
@@ -85,20 +89,42 @@ IS_CardCollectionViewDelegate,IS_TemplateCollectionControllerDelegate>
  
     
     self.collectionView.collection_delegate = self;
-    [self.collectionView addDefaultWithSenceType:_senceModel.sence_style
-                                    SubSenceType:_senceModel.sence_sub_type
-                                       ExistData:_senceModel.sence_template_array];
+    [self.collectionView addDefaultWithSenceType:_firstEditModel.type
+                                    SubSenceType:_firstEditModel.sub_type
+                                       ExistData:_senceModel.templateArray];
+    
 
     
     
+    [self setupPageControl];
+}
+#pragma mark - PageControl
+- (void)setupPageControl{
     
+    _editPageControl.numberOfPages = 2;
+    _editPageControl.indicatorMargin = 8;
+    _editPageControl.indicatorDiameter = 1;
+    [_editPageControl setPageIndicatorImage:[UIImage imageNamed:@"edit_dot_gray"]];
+    [_editPageControl setImage:[UIImage imageNamed:@"edit_dot_lightgray"] forPage:0];
+    _editPageControl.currentPage = 1;
+    _editPageControl.curPageText = [NSString stringWithFormat:@"%d",(int)_editPageControl.currentPage];
+    [_editPageControl setNeedsDisplay];
+    
+    
+}
+- (void)spacePageControl:(SMPageControl *)sender
+
+{
+    
+    _editPageControl.curPageText = [NSString stringWithFormat:@"%d",(int)_editPageControl.currentPage];
+    [_editPageControl setNeedsDisplay];
 }
 #pragma mark - A.头部
 
 //#import "UIButton+JJ.h"
 -(void)setupHeaderViews{
   
-//    self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithTitle:@"返回" themeColor:kColor(44, 166,255) target:self action:@selector(backToRoot:)];
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithTitle:@"返回" themeColor:IS_SYSTEM_WHITE_COLOR target:self action:@selector(backToRoot:)];
     
     //0.标题
     self.title  =@"编辑";
@@ -108,7 +134,7 @@ IS_CardCollectionViewDelegate,IS_TemplateCollectionControllerDelegate>
 - (void)setupBottomView{
     
     CGRect rect = CGRectMake(0, ScreenHeight-50, ScreenWidth, 50);
-    IS_BottomEditView * editView = [[IS_BottomEditView alloc]initWithFrame:rect btnBlock:^(id result) {
+    _editView = [[IS_EditBottomView alloc]initWithFrame:rect btnBlock:^(id result) {
         if (!result) {
             return;
         }else{
@@ -127,14 +153,17 @@ IS_CardCollectionViewDelegate,IS_TemplateCollectionControllerDelegate>
                 }
                  case IS_BottomEditViewButtonTypeAdd:
                 {
+                    [self addTemplateToCollection];
                     break;
                 }
                 case IS_BottomEditViewButtonTypeTrash:
                 {
+                    [self trashTemplateFromCollection];
                     break;
                 }
                 case IS_BottomEditViewButtonTypeMusic:
                 {
+                    [self jumpToMusicAction];
                     break;
                 }
                 case IS_BottomEditViewButtonTypeDone:
@@ -154,7 +183,9 @@ IS_CardCollectionViewDelegate,IS_TemplateCollectionControllerDelegate>
         
         
     }];
-    [self.view addSubview:editView];
+    [self.view addSubview:_editView];
+    [_editView IS_BottomEditViewButtonEnableState:NO tag:0];
+
     
 }
 
@@ -163,7 +194,7 @@ IS_CardCollectionViewDelegate,IS_TemplateCollectionControllerDelegate>
 
 
 #pragma mark - 跳转到总览九宫格界面
-- (IBAction)jumpToMenuAction:(id)sender {
+- (void)jumpToMenuAction:(id)sender {
  
     
     IS_SenceGirdController * GirdCtrl = [[IS_SenceGirdController alloc]init];
@@ -173,25 +204,62 @@ IS_CardCollectionViewDelegate,IS_TemplateCollectionControllerDelegate>
 
 }
 #pragma mark  - 跳转到模板选择界面
-- (IBAction)jumpToTemplateSheetAction:(id)sender {
+- (void)jumpToTemplateSheetAction:(id)sender {
     
-    IS_TemplateCollectionController * templateController = [[IS_TemplateCollectionController alloc]init];
-    templateController.delegate =self;
-    [self presentNextController:templateController];
+    
+    IS_EditTemplateActionView * a = [[IS_EditTemplateActionView alloc]initWithFrame:self.view.bounds];
+    [a showActionSheetAtView:nil actonSheetBlock:^(id result) {
+        [self.collectionView collectionToChangeTemplate:result];
+        [a dismissActionSheet];
+
+    }];
+
   
 
 }
+#pragma mark - 跳转到音乐页面
+- (void)jumpToMusicAction{
+    
+    IS_EditMusicActionSheet * musicActionSheet = [[IS_EditMusicActionSheet alloc]initWithFrame:self.view.bounds];
+    [musicActionSheet addDatasource:[NSMutableArray arrayWithArray:@[@"1",@"1",@"1",@"1",@"1",@"1"]]];
+    [musicActionSheet showActionSheetAtView:nil actonSheetBlock:^(id result) {
+        
+    }];
+
+}
+#pragma mark - 生成场景
 -(void)createSence:(UIBarButtonItem*)item{
     
     
-    IS_ShareMenuController * shareMenu = [[IS_ShareMenuController alloc]init];
-//    [self.navigationController pushViewController:shareMenu animated:YES];
-    [self presentViewController:shareMenu animated:YES completion:^{
+    
+    
+//    [KVNProgress showSuccessWithParameters:@{KVNProgressViewParameterStatus: @"等等",
+//                                             KVNProgressViewParameterFullScreen: @(YES)}];
+    
+    [IS_SenceEditTool saveSenceModelWithSenceID:nil TemplateArray:self.collectionView.senceDataSource SubTemplateDataArray:nil CompleteBlock:^(id results) {
         
-       //        [IS_SenceEditTool saveSenceModelWithSenceID:nil TemplateArray:self.collectionView.senceDataSource SubTemplateDataArray:nil CompleteBlock:nil];
+        if ([results isKindOfClass:[IS_CaseModel class]]) {
+            IS_WebContentController * webVC = [[IS_WebContentController alloc]init];
+            webVC.caseModel = results;
+            [self.navigationController pushViewController:webVC animated:YES];
+        }
+       
+        
     }];
     
+   
+
     
+    
+    
+}
+#pragma mark - 增加页数
+- (void)addTemplateToCollection{
+//    [self.collectionView addItem];
+}
+#pragma mark - 删除模板
+
+- (void)trashTemplateFromCollection{
     
 }
 #pragma mark  -保存并且离开
@@ -199,34 +267,7 @@ IS_CardCollectionViewDelegate,IS_TemplateCollectionControllerDelegate>
 
 -(void)backToRoot:(UIBarButtonItem*)item{
 
-    UIAlertView * a=[[UIAlertView alloc]initWithTitle:@"" message:@"是否保存编辑" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"确认",@"继续", nil];
-       [a showWithCompletionHandler:^(NSInteger buttonIndex) {
-           
-           switch (buttonIndex) {
-               case 0:
-               {
-                    [self.navigationController popViewControllerAnimated:YES];
-                     break;
-               }
-               case 1:
-               {
-                   break;
-               }
-               case 2:
-               {
-                   break;
-               }
-                 
-  
-               default:
-                   break;
-           }
-     
-
-       }];
-    
-    
-
+   [self.navigationController popViewControllerAnimated:YES];
  
 }
 /**
@@ -287,12 +328,6 @@ IS_CardCollectionViewDelegate,IS_TemplateCollectionControllerDelegate>
 #pragma mark ------------------------------代理方法--------------------------------------
 
 
-#pragma mark - 点击切换模板
--(void)IS_TemplateCollectionControllerDidSelectItem:(id)result{
-    
-    [self.collectionView collectionToChangeTemplate:result];
-}
-
 #pragma mark - IS_CardCollectionVoewDelegate
 
 /**
@@ -306,10 +341,40 @@ IS_CardCollectionViewDelegate,IS_TemplateCollectionControllerDelegate>
     }else{
         [self pickImageAndVideo];
     }
-    
 }
+#pragma mark - 滑动之后
+-(void)IS_CardCollectionViewDidEndDecelerating:(id)itemData userinfo:(NSDictionary *)userinfo{
+    
+    //0.
+    if (userinfo[@"action"]) {
+        [self jumpToTemplateSheetAction:nil];
+    }
+    
+    
+    //1.滑点
+    NSInteger row = [itemData integerValue];
+    _editPageControl.currentPage =row;
+    _editPageControl.numberOfPages = _collectionView.senceDataSource.count;
 
+    if (row!=0) {
 
+        _editPageControl.curPageText = [NSString stringWithFormat:@"%d",(int)row];
+    
+    }else{
+        _editPageControl.curPageText = nil;///[NSString stringWithFormat:@"%d",(int)row];
+
+    }
+    [_editPageControl setNeedsDisplay];
+    
+    //2.
+    if (row==0) {
+        [_editView IS_BottomEditViewButtonEnableState:NO tag:0];
+    }else{
+        [_editView IS_BottomEditViewButtonEnableState:YES tag:0];
+
+    }
+
+}
 
 -(void)IS_SenceGirdControllerDidUpdate:(id)itemData{
     
@@ -323,32 +388,16 @@ IS_CardCollectionViewDelegate,IS_TemplateCollectionControllerDelegate>
        [self.collectionView reloadData];
 }
 
-
-
-
-
-
-#pragma mark - 把当前背景截图
--(UIImage*)getSnapshotFromCurWindow:(UIView*)view{
-
-    CGSize windowSize = view.window.bounds.size;
-    UIGraphicsBeginImageContextWithOptions(windowSize, YES, 2.0);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    [view.window.layer renderInContext:context];
-    UIImage *snapshot = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    snapshot = [snapshot applyBlurWithRadius:20
-                                   tintColor:Color(0, 0, 0, .3)
-                       saturationDeltaFactor:0.6
-                                   maskImage:nil];
-    
-    return snapshot;
-}
 #pragma mark -背景蒙板
 - (void)presentNextController:(UIViewController*)destination
 {
     CGSize windowSize = self.view.window.bounds.size;
-    UIImage * snapshot =[self getSnapshotFromCurWindow:self.view];
+
+    UIImage * snapshot =[UIImage getImageFromCurView:self.view];
+    snapshot= [snapshot applyBlurWithRadius:10
+                                  tintColor:Color(0, 0, 0, .3)
+                      saturationDeltaFactor:0.6
+                                  maskImage:nil];
     UIImageView* backgroundImageView = [[UIImageView alloc] initWithImage:snapshot];
     backgroundImageView.frame =  CGRectMake(0, -windowSize.height, windowSize.width, windowSize.height);;
     [destination.view addSubview:backgroundImageView];

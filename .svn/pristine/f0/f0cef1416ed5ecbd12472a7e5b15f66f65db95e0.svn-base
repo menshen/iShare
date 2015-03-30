@@ -1,0 +1,60 @@
+
+
+#import "IS_SenceTemplateModel.h"
+@implementation IS_SenceTemplateModel
+
+#pragma mark
+-(instancetype)init{
+    
+    if (self = [super init]) {
+        self.s_selected_tag=-1;
+    }
+    return self;
+}
+
+
+#pragma mark - 根据主风格+子风格 ->构建子视图的参数
+-(void)setS_template_style:(NSInteger)s_template_style{
+    
+    _s_template_style = s_template_style;
+}
+-(void)setS_sub_template_style:(NSInteger)s_sub_template_style{
+    _s_sub_template_style = s_sub_template_style;
+    
+    //初始化时候构建占位的
+    NSMutableArray * arrayM = [IS_SenceSubTemplateModel configureSubTemplateModelIndex:_s_template_style
+                                                                              subIndex:_s_sub_template_style
+                                                                               isSence:_is_sence];
+    self.s_sub_view_array = arrayM;
+    
+  
+}
+
+-(NSMutableArray *)img_array{
+    if (!_img_array) {
+        _img_array = [NSMutableArray array];
+        [_s_sub_view_array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            IS_SenceSubTemplateModel * sub_model = obj;
+            if (sub_model.sub_type == IS_SenceSubTemplateTypeImage&&sub_model.image_data) {
+               
+                [_img_array addObject:sub_model.image_data];
+            }
+        }];
+    }
+    return _img_array;
+}
+
+-(NSMutableArray *)s_sub_view_array{
+    
+    if (!_s_sub_view_array) {
+        _s_sub_view_array = [NSMutableArray array];
+    }
+    return _s_sub_view_array;
+}
+
+-(NSInteger)img_count{
+    
+    return _s_sub_template_style;
+}
+
+@end

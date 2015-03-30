@@ -1,0 +1,57 @@
+
+
+#import "IS_TemplateCollectionController.h"
+#import "IS_TemplateSheetView.h"
+@interface IS_TemplateCollectionController ()
+@end
+
+@implementation IS_TemplateCollectionController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    
+    
+    self.collectionview.frame = CGRectMake(0, 100, ScreenWidth, ScreenHeight-100);
+
+}
+-(void)viewWillAppear:(BOOL)animated{
+    
+//    self.navigationController.
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+
+}
+-(void)addDefault{
+    
+    NSMutableArray * arrayM = [NSMutableArray array];
+    [arrayM addObjectsFromArray:TEMPLATE_THEME_1];
+    [arrayM addObjectsFromArray:TEMPLATE_THEME_2];
+    [arrayM addObjectsFromArray:TEMPLATE_THEME_3];
+
+    
+    self.template_dataSource = arrayM;
+    
+
+}
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    NSDictionary * dic = self.template_dataSource [indexPath.row];
+    IS_SenceTemplatePanModel * s =[[IS_SenceTemplatePanModel alloc]initWithDictionary:dic];
+    
+    if ([self.delegate respondsToSelector:@selector(IS_TemplateCollectionControllerDidSelectItem:)]) {
+        [self.delegate IS_TemplateCollectionControllerDidSelectItem:s];
+        [self dismissViewControllerAnimated:YES completion:nil];
+
+    }
+  
+    
+}
+
+@end

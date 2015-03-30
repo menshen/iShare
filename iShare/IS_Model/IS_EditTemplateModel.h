@@ -18,9 +18,9 @@ typedef NS_ENUM(NSInteger, IS_SenceTemplateShape) {
 };
 #import "IS_BaseModel.h"
 #import "NSObject+DBCatefgory.h"
-#import "IS_SenceSubTemplateModel.h"
+#import "IS_EditSubTemplateModel.h"
 
-@interface IS_SenceTemplateModel : IS_BaseModel
+@interface IS_EditTemplateModel : IS_BaseModel
 
 @property (nonatomic,assign) IS_SenceTemplateShape       senceTemplateShape;
 /**
@@ -53,11 +53,11 @@ typedef NS_ENUM(NSInteger, IS_SenceTemplateShape) {
  */
 @property (nonatomic,strong) NSMutableArray              * img_array;
 /**
- *  模板图片数组
+ *  模板图片数量
  */
 @property (nonatomic,assign) NSInteger                   img_count;
 /**
- *  模板文字数组
+ *  模板文字数量
  */
 @property (nonatomic,assign) NSInteger                   text_count;
 /**
@@ -66,7 +66,7 @@ typedef NS_ENUM(NSInteger, IS_SenceTemplateShape) {
 @property (nonatomic,assign) NSInteger                   selected_tag;
 
 
-
+- (void)configureRowNum:(NSInteger)row;
 
 
 @end

@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IS_SenceCreateController">
             <connections>
                 <outlet property="collectionView" destination="SyE-Pt-hOb" id="qg7-aw-clj"/>
+                <outlet property="editPageControl" destination="L3B-kV-ePb" id="REt-QC-kLG"/>
                 <outlet property="view" destination="iN0-l3-epB" id="uhF-dU-euc"/>
             </connections>
         </placeholder>
@@ -16,28 +17,27 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <collectionView clipsSubviews="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="SyE-Pt-hOb" customClass="IS_CardCollectionView">
-                    <rect key="frame" x="0.0" y="65" width="320" height="435"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L3B-kV-ePb" customClass="IS_EditPageControl">
+                    <rect key="frame" x="5" y="488" width="310" height="15"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="15" id="Iga-SD-5Hf"/>
+                    </constraints>
+                </view>
+                <collectionView clipsSubviews="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="SyE-Pt-hOb" customClass="IS_EditCardCollectionView">
+                    <rect key="frame" x="0.0" y="65" width="320" height="423"/>
                     <color key="backgroundColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
                     <collectionViewLayout key="collectionViewLayout" id="bKE-ES-7nJ" customClass="IS_CardPageLayout"/>
                 </collectionView>
-                <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="5" currentPage="2" translatesAutoresizingMaskIntoConstraints="NO" id="SnR-z7-CKs">
-                    <rect key="frame" x="0.0" y="503" width="320" height="10"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="10" id="Hew-DV-4on"/>
-                    </constraints>
-                    <color key="pageIndicatorTintColor" white="0.82719983552631582" alpha="1" colorSpace="calibratedWhite"/>
-                    <color key="currentPageIndicatorTintColor" red="0.086274509803921567" green="0.63137254901960782" blue="0.8901960784313725" alpha="1" colorSpace="calibratedRGB"/>
-                </pageControl>
             </subviews>
             <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="SnR-z7-CKs" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="8Et-gQ-EoX"/>
-                <constraint firstAttribute="bottom" secondItem="SnR-z7-CKs" secondAttribute="bottom" constant="55" id="SHe-NY-7jK"/>
-                <constraint firstItem="SnR-z7-CKs" firstAttribute="top" secondItem="SyE-Pt-hOb" secondAttribute="bottom" constant="3" id="jmZ-qM-Jjy"/>
-                <constraint firstAttribute="trailing" secondItem="SnR-z7-CKs" secondAttribute="trailing" id="kei-fV-mWp"/>
+                <constraint firstAttribute="bottom" secondItem="SyE-Pt-hOb" secondAttribute="bottom" constant="80" id="90N-J8-5qg"/>
+                <constraint firstItem="L3B-kV-ePb" firstAttribute="top" secondItem="SyE-Pt-hOb" secondAttribute="bottom" id="fEU-qC-MJf"/>
+                <constraint firstAttribute="trailing" secondItem="L3B-kV-ePb" secondAttribute="trailing" constant="5" id="kqY-UG-ymX"/>
                 <constraint firstAttribute="trailing" secondItem="SyE-Pt-hOb" secondAttribute="trailing" id="lfF-9Z-21Z"/>
                 <constraint firstItem="SyE-Pt-hOb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="65" id="ptR-da-0Oz"/>
+                <constraint firstItem="L3B-kV-ePb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="q7O-p4-V9b"/>
                 <constraint firstItem="SyE-Pt-hOb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="zMd-q1-jLc"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>

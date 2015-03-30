@@ -15,10 +15,10 @@
     block
  */
 
-@class IS_SenceModel;
-@interface IS_BaseCell : MGSwipeTableCell
+@class IS_CaseModel;
+@interface IS_RankingCell : MGSwipeTableCell
 #pragma mark -模板
-@property (strong,nonatomic)IS_SenceModel * senceModel;
+@property (strong,nonatomic)IS_CaseModel * senceModel;
 
 @property (weak, nonatomic) IBOutlet UIImageView *logoView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;

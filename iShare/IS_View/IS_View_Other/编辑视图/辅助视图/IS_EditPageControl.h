@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface IS_EditPageControl : UIPageControl
+#import "SMPageControl.h"
+@interface IS_EditPageControl : SMPageControl
 
 @end

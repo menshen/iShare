@@ -128,4 +128,8 @@
  */
 +(UIColor*)colorExchangeByColorString:(NSString*)colorString;
 
+
+
+#define WEAKSELF __weak typeof(self) weakSelf = self
+
 @end

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IS_WebContentController.h"
 
-@interface IS_ShareMenuController : UIViewController
+@interface IS_ShareMenuController : IS_WebContentController
 
 @end

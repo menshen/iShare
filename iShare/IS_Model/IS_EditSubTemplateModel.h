@@ -23,8 +23,8 @@
 typedef NS_ENUM(NSInteger, IS_SubType) {
     
     IS_SubTypeImage, //图片
-    IS_SubTypeDecorate, //装饰
     IS_SubTypeText, //文字
+    IS_SubTypeDecorate,//装饰
     
 };
 typedef NS_ENUM(NSInteger, IS_ShapeType) {
@@ -47,7 +47,7 @@ typedef NS_ENUM(NSInteger, IS_ImageUploadState) {
     1.包括图片
     2.文字
  */
-@interface IS_SenceSubTemplateModel : IS_BaseModel
+@interface IS_EditSubTemplateModel : IS_BaseModel
 
 
 @property (nonatomic,assign) IS_ShapeType             shapeType;

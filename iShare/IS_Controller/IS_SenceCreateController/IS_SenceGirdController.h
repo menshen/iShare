@@ -1,5 +1,5 @@
 #import <UIKit/UIKit.h>
-#import "IS_EditCollectionView.h"
+#import "IS_EditGirdCollectionView.h"
 @protocol IS_SenceGirdControllerDelegate <NSObject>
 
 -(void)IS_SenceGirdControllerDidUpdate:(id)itemData;
@@ -16,7 +16,7 @@
 /**
  *  视图
  */
-@property (strong,nonatomic)IS_EditCollectionView * collectionView;
+@property (strong,nonatomic)IS_EditGirdCollectionView * collectionView;
 
 
 @property (strong,nonatomic)UIImageView* backgroundImageView;

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 //BaseTableSectionController.#import "IS_BaseTableSectionController.h"
-
+#import "XHTwitterPaggingViewer.h"
 @interface IS_HomeController : UIViewController
 
 @end

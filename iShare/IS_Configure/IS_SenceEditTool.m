@@ -2,7 +2,7 @@
 #import "IS_SenceEditTool.h"
 #import "IS_EditImageView.h"
 #import "IS_EditContentView.h"
-#import "IS_SenceSubTemplateModel.h"
+#import "IS_EditSubTemplateModel.h"
 #import "UIWindow+JJ.h"
 #import "MutilThreadTool.h"
 #import "HttpTool.h"
@@ -35,12 +35,12 @@
 
 
 #pragma mark - 把场景出去来
-+ (IS_SenceModel *)getSenceModelWithID:(NSString*)sence_id{
++ (IS_CaseModel *)getSenceModelWithID:(NSString*)sence_id{
 
     NSString * condition = [NSString stringWithFormat:@"sence_id = '%@'",sence_id];
     //  NSString * condition = [NSString stringWithFormat:@"rowid = '%d'",(int)sence_id];
-    NSMutableArray * arrayM = [IS_SenceModel queryFormDB:condition orderBy:nil count:1 success:nil];
-    IS_SenceModel * s = [arrayM lastObject];
+    NSMutableArray * arrayM = [IS_CaseModel queryFormDB:condition orderBy:nil count:1 success:nil];
+    IS_CaseModel * s = [arrayM lastObject];
     return s;
 }
 
@@ -64,7 +64,7 @@
             //2.每个模板的信息
             NSMutableDictionary * dictM = [NSMutableDictionary dictionary];
             
-            IS_SenceTemplateModel * tm = obj;
+            IS_EditTemplateModel * tm = obj;
             //3.模板主题+子模板主题
             NSString * a_id =nil;
             if (tm.is_sence) {
@@ -80,12 +80,12 @@
             
         // p2_b_1t
             //4.图片数组
-            NSMutableArray * img_array = [NSMutableArray array];
+           __block NSMutableDictionary * imgDictM = [NSMutableDictionary dictionary];
            __block  NSInteger text_num =0;
             __block NSInteger decorate_num = 0;
             [tm.subview_array enumerateObjectsUsingBlock:^(id s_obj, NSUInteger s_idx, BOOL *stop) {
                 
-                IS_SenceSubTemplateModel * s =s_obj;
+                IS_EditSubTemplateModel * s =s_obj;
                 NSMutableDictionary *content_dic = [NSMutableDictionary dictionary];
                 NSString * t_name = nil;
                 
@@ -96,7 +96,7 @@
                         //1.有文字
                         text_num++;
                         [content_dic addEntriesFromDictionary:@{TYPE_KEY:@(1)}];
-                        t_name = [NSString stringWithFormat:@"%@_t%d",a_id,text_num];
+                        t_name = [NSString stringWithFormat:@"%@_t%d",a_id,(int)text_num];
                         [content_dic addEntriesFromDictionary:@{TEXT_KEY:s.text_place_string?s.text_place_string:@""}];
                     }
                      break;
@@ -105,7 +105,7 @@
                     if (s.img_url) {
                         //有图片数据
                         [content_dic addEntriesFromDictionary:@{TYPE_KEY:@(0)}];
-                        t_name = [NSString stringWithFormat:@"%@_%d",a_id,s_idx+1-text_num-decorate_num];
+                        t_name = [NSString stringWithFormat:@"%@_%d",a_id,(int)(s_idx+1-text_num-decorate_num)];
                         [content_dic addEntriesFromDictionary:@{IMAGE_URL_KEY:s.img_url?s.img_url:@""}];
                         if (s.img_info) {
                             NSMutableDictionary * temp =[NSMutableDictionary dictionaryWithDictionary:s.img_info];
@@ -136,16 +136,13 @@
                 if (t_name&&content_dic[TYPE_KEY]) {
                    
                     NSDictionary * img_content_dic = @{t_name:content_dic};
-                    [img_array addObject:img_content_dic];
+                    [imgDictM addEntriesFromDictionary:img_content_dic];
                 }
-               
-                
-                
                 
             }];
             text_num=0;
             decorate_num=0;
-            [dictM addEntriesFromDictionary:@{T_CONTENT_KEY:img_array}];
+            [dictM addEntriesFromDictionary:@{T_CONTENT_KEY:imgDictM}];
             [arrayM addObject:dictM];
         }];
         
@@ -160,12 +157,24 @@
         [last_dic addEntriesFromDictionary:@{@"share_img":@"https://ss0.bdstatic.com/5a21bjqh_Q23odCf/static/superplus/img/logo_white_ee663702.png"}];
         [last_dic addEntriesFromDictionary:@{@"title":@"测试 BB"}];
         [last_dic addEntriesFromDictionary:@{@"activity_name":@"iwedding"}];
+        
+
+        
+        __block  IS_CaseModel * caseModel = [[IS_CaseModel alloc]init];
+        caseModel.enterid = enter_id;
+        caseModel.title = @"测试";
+        caseModel.detailTitle = @"今夜你不回";
+        caseModel.cre_time =[NSDate getRealDateTime:[NSDate date] withFormat:YYMMDD];
+        caseModel.uv = @"0";
+        
+        
         NSString * json = [NSString jsonFromObject:last_dic];
         NSLog(@"json-%@",json);
         [HttpTool postWithPath:APP_CREATE_URL
                         params:@{@"data":json}
                        success:^(id result) {
-                           
+                           caseModel.url =@"https://www.baidu.com/";//result[@"url"];
+                           CompleteBlock(caseModel);
                            NSLog(@"http://wx.ishareh5.com%@",result[@"url"]);
                        }
                        failure:^(NSError *error) {
@@ -174,57 +183,12 @@
                        }];
     
         
-//        [subTemplateDataArray enumerateObjectsUsingBlock:^(id s_obj, NSUInteger s_idx, BOOL *stop) {
-//            IS_SenceSubTemplateModel * s =s_obj;
-//            s.img=nil;
-//            [subTemplateDataArray replaceObjectAtIndex:s_idx withObject:s];
-//        }];
-//        
-//        
-//        if (senceID) {
-//            
-//            IS_SenceModel * senceModel_exist = [self getSenceModelWithID:senceID];
-//            
-//            //1.场景数组
-//            senceModel_exist.sence_template_array = templateArray;
-//            
-//            //2.用过的图片
-//            senceModel_exist.image_array = subTemplateDataArray;
-//            
-//            [senceModel_exist updateToDB];
-//            
-//            
-//        }else{
-//            //0.
-//            IS_SenceModel * senceModel = [[IS_SenceModel alloc]init];
-//            
-//            //1.场景数组
-//            
-//            senceModel.sence_template_array = templateArray;
-//            
-//            //2.用过的图片
-//            
-//            
-//            
-//            senceModel.image_array = subTemplateDataArray;
-//            
-//            senceModel.sence_id = [self msg_custom_id];
-//            
-////            senceModel.i_title = [NSString stringWithFormat:@"%@",[NSDate date]] ;
-////            
-////            
-////            
-////            
-////            senceModel.i_image = @"icon_5";
-//            
-//            [IS_SenceModel insertToDB:senceModel];
-//            
-//        }
+
 
     } MainThreadBlock:^{
-        if (CompleteBlock) {
-            CompleteBlock(@(YES));
-        }
+//        if (CompleteBlock) {
+//            CompleteBlock(@(YES));
+//        }
     }];
         
   

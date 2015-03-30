@@ -30,7 +30,9 @@
 @property (strong,nonatomic)IS_Button * createBtn;
 @end
 
-@implementation IS_EditBottomView
+@implementation IS_EditBottomView{
+    NSMutableArray * _btnArray;
+}
 -(instancetype)initWithFrame:(CGRect)frame
                     btnBlock:(IS_BottomEditViewBtnBlock)btnBlock{
     
@@ -63,7 +65,7 @@
 -(void)setupScrollView{
     
     [self addSubview:self.scrollView];
-    
+    _btnArray = [NSMutableArray array];
     NSArray * btn_array = @[@{IMG_KEY:@"bottom_template_icon",TITLE_KEY:@"模板"},
                             @{IMG_KEY:@"bottom_menu_icon",TITLE_KEY:@"总览"},
                             @{IMG_KEY:@"bottom_add_icon",TITLE_KEY:@"加页"},
@@ -80,6 +82,7 @@
         [bottomBtn setImage:[UIImage imageNamed:btn_array[i][IMG_KEY]] forState:UIControlStateNormal];
         [bottomBtn addTarget:self action:@selector(bottomBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         bottomBtn.tag = i;
+        [_btnArray addObject:bottomBtn];
         [self.scrollView addSubview:bottomBtn];
         
     }
@@ -124,5 +127,12 @@
         self.btnBlock(btn);
     }
 
+}
+
+#pragma mark - 禁止
+- (void)IS_BottomEditViewButtonEnableState:(BOOL)isEnable
+                                       tag:(NSInteger)tag{
+    IS_Button * bottomBtn =(IS_Button*)_btnArray[tag];
+    bottomBtn.enabled = isEnable;
 }
 @end

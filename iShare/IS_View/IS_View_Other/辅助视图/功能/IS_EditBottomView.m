@@ -6,7 +6,7 @@
 //  Copyright (c) 2015年 iShare. All rights reserved.
 //
 
-#import "IS_BottomEditView.h"
+#import "IS_EditBottomView.h"
 #import "IS_Button.h"
 
 #define CREATE_BTN_WIDTH 70
@@ -18,7 +18,7 @@
 #define IMG_KEY @"img"
 #define TITLE_KEY @"title"
 
-@interface IS_BottomEditView()
+@interface IS_EditBottomView()
 
 /**
  *  可以滚动的操作条
@@ -30,7 +30,7 @@
 @property (strong,nonatomic)IS_Button * createBtn;
 @end
 
-@implementation IS_BottomEditView
+@implementation IS_EditBottomView
 -(instancetype)initWithFrame:(CGRect)frame
                     btnBlock:(IS_BottomEditViewBtnBlock)btnBlock{
     

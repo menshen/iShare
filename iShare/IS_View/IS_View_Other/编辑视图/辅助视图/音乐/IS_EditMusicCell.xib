@@ -15,8 +15,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NuV-jq-UK2">
-                        <rect key="frame" x="282" y="13" width="20" height="20"/>
+                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NuV-jq-UK2">
+                        <rect key="frame" x="282" y="14" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="6ve-YU-Csy"/>
                             <constraint firstAttribute="height" constant="20" id="Ygb-JF-vD9"/>
@@ -25,24 +25,27 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k8f-WC-Hly">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我那里见过你啊," lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lD8-U6-Saz">
                         <rect key="frame" x="13" y="13" width="189" height="17"/>
-                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                        <state key="normal" title="i lovev you">
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                    </button>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="k8f-WC-Hly" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="EIk-a6-qw5"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="lD8-U6-Saz" secondAttribute="bottom" constant="5" id="6be-Fc-Ye4"/>
+                    <constraint firstItem="lD8-U6-Saz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="MH0-HE-4rM"/>
                     <constraint firstItem="NuV-jq-UK2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="a4Q-Z6-td9"/>
+                    <constraint firstItem="lD8-U6-Saz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="5" id="cHs-sQ-5sL"/>
+                    <constraint firstItem="NuV-jq-UK2" firstAttribute="leading" secondItem="lD8-U6-Saz" secondAttribute="trailing" constant="80" id="dLM-Kc-nMb"/>
                     <constraint firstAttribute="trailingMargin" secondItem="NuV-jq-UK2" secondAttribute="trailing" constant="10" id="gE5-ba-Eag"/>
-                    <constraint firstItem="k8f-WC-Hly" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="5" id="oAu-5K-9az"/>
-                    <constraint firstItem="NuV-jq-UK2" firstAttribute="leading" secondItem="k8f-WC-Hly" secondAttribute="trailing" constant="80" id="q9t-hB-xCY"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="k8f-WC-Hly" secondAttribute="bottom" constant="5" id="z9Q-YM-l5o"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="262" y="174"/>
+            <connections>
+                <outlet property="actionBtn" destination="NuV-jq-UK2" id="uoF-rp-qnf"/>
+                <outlet property="titleLab" destination="lD8-U6-Saz" id="A2C-ri-oU7"/>
+            </connections>
+            <point key="canvasLocation" x="262" y="173"/>
         </tableViewCell>
     </objects>
     <resources>

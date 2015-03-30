@@ -2,20 +2,20 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "IS_EditImageView.h"
-#import "IS_SenceTemplateModel.h"
+#import "IS_EditTemplateModel.h"
 
-@protocol IS_SenceCreateEditViewDelegate <NSObject>
+@protocol IS_EditContentViewDelegate <NSObject>
 
 /**
  *  当点击事件后
  */
-- (void)IS_SenceCreateEditViewDidSelectItem:(id)itemData
+- (void)IS_EditContentViewDidSelectItem:(id)itemData
                                  userinfo:(NSDictionary*)userinfo;
 
 /**
- *  当点击事件后
+ *   处理图片数据后
  */
-- (void)IS_SenceCreateEditViewDidEndPanItem:(id)itemData
+- (void)IS_EditViewDidChangeDataAction:(id)itemData
                                    userinfo:(NSDictionary*)userinfo;
 
 
@@ -25,7 +25,7 @@
 
 @interface IS_EditContentView : UIView
 
-@property (nonatomic,weak)id<IS_SenceCreateEditViewDelegate>delegate;
+@property (nonatomic,weak)id<IS_EditContentViewDelegate>delegate;
 ///存放View数组
 @property (nonatomic,strong)NSMutableArray *  senceSubModelArray;
 //存放view-Frame的标准位置
@@ -42,7 +42,7 @@
 /**
  *  模板编辑视图的模板模型
  */
-@property (nonatomic,strong)IS_SenceTemplateModel * senceTemplateModel;
+@property (nonatomic,strong)IS_EditTemplateModel * senceTemplateModel;
 
 
 //-(void)resetSenceCreateImageView:(NSArray*)arrayM;

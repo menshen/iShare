@@ -1,5 +1,5 @@
 #import <UIKit/UIKit.h>
-#import "IS_SenceSubTemplateModel.h"
+#import "IS_EditSubTemplateModel.h"
 #import "RTSpinKitView.h"
 
 
@@ -17,7 +17,7 @@
 /**
  *  数据
  */
-@property (nonatomic, strong) IS_SenceSubTemplateModel * subTemplateModel;
+@property (nonatomic, strong) IS_EditSubTemplateModel * subTemplateModel;
 
 /**
  *  加载状态

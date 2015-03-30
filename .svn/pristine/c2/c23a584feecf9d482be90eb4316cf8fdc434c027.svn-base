@@ -1,0 +1,63 @@
+//
+//  IS_SenceTemplateCollectionController.m
+//  iShare
+//
+//  Created by 伍松和 on 15/3/9.
+//  Copyright (c) 2015年 iShare. All rights reserved.
+//
+
+#import "IS_SenceTemplateCollectionController.h"
+
+@interface IS_SenceTemplateCollectionController ()
+
+@end
+
+@implementation IS_SenceTemplateCollectionController
+
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.title = @"场景选择";
+    // Do any additional setup after loading the view.
+    //0.
+    self.view.backgroundColor = IS_SYSTEM_WHITE_COLOR;
+    [self.view addSubview:self.collectionview];
+    
+    UINib * nib = [UINib nibWithNibName:IS_TempateCollectionCell_ID bundle:nil];
+    [self.collectionview registerNib:nib forCellWithReuseIdentifier:IS_TempateCollectionCell_ID];
+    
+    //1.默认
+    [self addDefault];
+}
+-(void)addDefault{
+
+    
+    
+}
+
+#pragma mark
+-(UICollectionView *)collectionview{
+    
+    if (!_collectionview) {
+        IS_TemplateLayout * layout = [[IS_TemplateLayout alloc]init];
+        _collectionview = [[UICollectionView alloc]initWithFrame:self.view.bounds collectionViewLayout:layout];
+        _collectionview.delegate =self;
+        _collectionview.dataSource =self;
+        _collectionview.backgroundColor = IS_SYSTEM_WHITE_COLOR;
+        
+    }
+    return _collectionview;
+    
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    
+    return self.template_dataSource.count;
+}
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    IS_TempateCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:IS_TempateCollectionCell_ID forIndexPath:indexPath];
+    NSDictionary * dic = self.template_dataSource [indexPath.row];
+    cell.senceTemplatePanModel = [[IS_SenceTemplatePanModel alloc]initWithDictionary:dic];
+    return cell;
+}
+@end

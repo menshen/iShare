@@ -1,13 +1,15 @@
-//
-//  IS_SenceController.h
-//  iShare
-//
-//  Created by 伍松和 on 15/1/13.
-//  Copyright (c) 2015年 iShare. All rights reserved.
-//
 
-//#import "BaseWebController.h"
-#import "IS_WebViewController.h"
-@interface IS_WebContentController : IS_WebViewController
+#import <UIKit/UIKit.h>
+#import "IS_CaseModel.h"
+@interface IS_WebContentController : UIViewController
+/*!
+ *  整个场景+模板+数据
+ */
+@property (strong,nonatomic)IS_CaseModel * caseModel;
+/*!
+ *  URL
+ */
+@property (copy,nonatomic)NSString * urlString;
 
+- (void)loadAddress:(NSString *)url;
 @end

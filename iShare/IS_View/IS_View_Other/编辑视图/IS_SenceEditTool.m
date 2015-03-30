@@ -1,7 +1,7 @@
 
 #import "IS_SenceEditTool.h"
-#import "IS_SenceCreateImageView.h"
-#import "IS_SenceCreateEditView.h"
+#import "IS_EditImageView.h"
+#import "IS_SceneEditView.h"
 #import "IS_SenceSubTemplateModel.h"
 #import "UIWindow+JJ.h"
 #import "MutilThreadTool.h"

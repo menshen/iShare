@@ -1,7 +1,7 @@
-#import "IS_BaseCell.h"
-#import "IS_SenceModel.h"
+#import "IS_RankingCell.h"
+#import "IS_CaseModel.h"
 #import "UIImage+JJ.h"
-@implementation IS_BaseCell
+@implementation IS_RankingCell
 //i_cell_bkg
 - (void)awakeFromNib {
     
@@ -12,14 +12,14 @@
 //    [self.logoView setRoundedCorners:UIRectCornerAllCorners radius:CGSizeMake(55/2, 55/2)];
 }
 
--(void)setSenceModel:(IS_SenceModel *)senceModel{
+-(void)setSenceModel:(IS_CaseModel *)senceModel{
     _senceModel =senceModel;
     //1.头像
-    self.logoView.image = [UIImage imageNamed:senceModel.i_image];
-    //2.标题
-    self.titleLab.text = senceModel.i_title;
-    //3.详情
-    self.detailLab.text = senceModel.i_detail;
+//    self.logoView.image = [UIImage imageNamed:senceModel.i_image];
+//    //2.标题
+//    self.titleLab.text = senceModel.i_title;
+//    //3.详情
+//    self.detailLab.text = senceModel.i_detail;
 
     //4.时间
     //
@@ -34,11 +34,11 @@
     //NIB万岁
     BOOL nibsRegistered = NO;
     if (!nibsRegistered) {
-        UINib *nib = [UINib nibWithNibName:NSStringFromClass([IS_BaseCell class]) bundle:nil];
+        UINib *nib = [UINib nibWithNibName:NSStringFromClass([IS_RankingCell class]) bundle:nil];
         [tableView registerNib:nib forCellReuseIdentifier:CellIdentifier];
         nibsRegistered = YES;
     }
-    IS_BaseCell *cell = (IS_BaseCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    IS_RankingCell *cell = (IS_RankingCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     UIView *v=[[UIView alloc]initWithFrame:cell.bounds];
     v.backgroundColor=[UIColor clearColor];
     cell.multipleSelectionBackgroundView=v;//UITableViewCellStateShowingEditControlMask=UITableViewCellSelectionStyleGray;

@@ -1,13 +1,12 @@
 #import "IS_CollectionView.h"
 
-@interface IS_CollectionView()<UICollectionViewDataSource,UICollectionViewDelegate>
+@interface IS_CollectionView()
 @end
 
 @implementation IS_CollectionView
 -(instancetype)initWithFrame:(CGRect)frame{
     
     if (self = [super initWithFrame:frame]) {
-        //
         [self setupCollectionView];
     }
     return self;
@@ -15,12 +14,12 @@
 -(void)awakeFromNib{
     
     [super awakeFromNib];
-    
     [self setupCollectionView];
 }
 #pragma mark - UICollectionView
 -(void)setupCollectionView{
     
+    _c_datasource = [NSMutableArray array];
     
     _commonLayout = [[UICollectionViewFlowLayout alloc]init];
     _commonLayout.itemSize =CGSizeZero;
@@ -69,8 +68,6 @@
 - (void)setupScrollStateAction:(IS_CollectionViewScrollStateAction)scrollStateAction{
     self.scrollStateAction = scrollStateAction;
 }
-
-
 #pragma mark - UICollectionViewDelegate
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{return 1;}
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{

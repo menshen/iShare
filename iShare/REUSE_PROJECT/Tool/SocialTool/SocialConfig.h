@@ -12,6 +12,7 @@
 typedef NS_ENUM(NSInteger, SocialPlatformType) {
     
     
+    SocialPlatformTypeNone = -1,
     SocialPlatformTypeWXSession,
     SocialPlatformTypeWXTimeline,//朋友圈
     SocialPlatformTypeQQ,

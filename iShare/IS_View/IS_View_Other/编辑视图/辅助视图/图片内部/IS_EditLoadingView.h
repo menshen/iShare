@@ -1,5 +1,5 @@
 #import <UIKit/UIKit.h>
-#import "IS_SenceSubTemplateModel.h"
+#import "IS_EditSubTemplateModel.h"
 @class  RTSpinKitView;
 @interface IS_EditLoadingView : UIView
 
