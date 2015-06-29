@@ -1,0 +1,41 @@
+{
+    "id":"p1_l",
+    "view_info": [
+        {
+            "frame": {
+                "x": 0,
+                "y": 0,
+                "w": 100,
+                "h": 58.8
+            },
+            
+            "type": 0,
+             "place_image": "p1_l_1",
+             "view_id":"p1_l_1"
+        },
+        {
+            "frame": {
+                "x": 21.3,
+                "y": 39.1,
+                "w": 57,
+                "h": 37
+            },
+            "type": 2,
+            "place_image":"p1_l_1u",
+             "view_id":"p1_l_1u"
+        },
+        {
+            "frame": {
+                "x": 19,
+                "y": 95,
+                "w": 62,
+                "h": 4
+            },
+            
+            "type": 1,
+            "place_text":"the love is always young",
+             "view_id":"p1_l_1t"
+        }       
+
+     ]
+}

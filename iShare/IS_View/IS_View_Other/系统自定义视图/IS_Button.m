@@ -53,18 +53,18 @@
 }
 -(void)buttonPositionTypeBothCenter{
     //0.image
-    self.imageView.center=CGPointMake(self.frame.size.width/2, self.frame.size.height/2-3);
+    self.imageView.center=CGPointMake(self.frame.size.width/2, self.frame.size.height/2-5);
  
 
     
     //1.title
     CGRect frame = [self titleLabel].frame;
-    frame.origin.x = 0;
-    frame.origin.y = self.imageView.bottom + 3;
-    frame.size.width = self.frame.size.width;
+    frame.origin.x = -10;
+    frame.origin.y = self.imageView.bottom + 2+_imgTitleMargin;
+    frame.size.width = self.frame.size.width+20;
     self.titleLabel.frame = frame;
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
-//    [self.titleLabel setFont:[UIFont boldSystemFontOfSize:10.0f]];
+//    self.titleLabel.numberOfLines = 2;
 }
 -(void)buttonPositionTypeTitleLeft{
     

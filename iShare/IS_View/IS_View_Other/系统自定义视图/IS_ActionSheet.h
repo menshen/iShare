@@ -11,6 +11,10 @@
 @interface IS_ActionSheet : UIView
 typedef void(^IS_ActonSheetBlock)(id result);
 @property (copy,nonatomic)IS_ActonSheetBlock actonSheetBlock;
+@property (strong,nonatomic)UIViewController * rootController;
+@property (strong,nonatomic)UIWindow * actionSheetWindow;
+@property (strong,nonatomic)UIWindow * oldKeyWindow;
+
 - (void)showActionSheetAtView:(UIView *)view
                      actonSheetBlock:(IS_ActonSheetBlock)actonSheetBlock;
 

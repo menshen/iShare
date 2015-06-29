@@ -1,0 +1,91 @@
+{
+  "id" : "p6_a",
+  "scene_common" : 0,
+  "view_info" : [
+    {
+      "place_image" : "p6_a_1",
+      "frames" : [
+        15.5,
+        10.60000038146973,
+        34,
+        23
+      ],
+      "type" : 0,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/default\/p6_a_1.jpg",
+      "view_id" : "p6_a_1"
+    },
+    {
+      "place_image" : "p6_a_2",
+      "frames" : [
+        50.5,
+        10.60000038146973,
+        34,
+        23
+      ],
+      "type" : 0,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/default\/p6_a_2.jpg",
+      "view_id" : "p6_a_2"
+    },
+    {
+      "place_image" : "p6_a_3",
+      "frames" : [
+        15.5,
+        34,
+        34,
+        23
+      ],
+      "type" : 0,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/default\/p6_a_3.jpg",
+      "view_id" : "p6_a_3"
+    },
+    {
+      "place_image" : "p6_a_4",
+      "frames" : [
+        50.5,
+        34,
+        34,
+        23
+      ],
+      "type" : 0,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/default\/p6_a_4.jpg",
+      "view_id" : "p6_a_4"
+    },
+    {
+      "place_image" : "p6_a_5",
+      "frames" : [
+        15.5,
+        58,
+        34,
+        23
+      ],
+      "type" : 0,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/default\/p6_a_5.jpg",
+      "view_id" : "p6_a_5"
+    },
+    {
+      "place_image" : "p6_a_6",
+      "frames" : [
+        50.5,
+        58,
+        34,
+        23
+      ],
+      "type" : 0,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/default\/p6_a_6.jpg",
+      "view_id" : "p6_a_6"
+    },
+    {
+      "frames" : [
+        0,
+        82,
+        100,
+        15
+      ],
+      "place_text" : "I WANT YOU",
+      "type" : 1,
+      "view_id" : "p6_a_t1"
+    }
+  ],
+  "type" : 1,
+  "scene_type" : 0
+}

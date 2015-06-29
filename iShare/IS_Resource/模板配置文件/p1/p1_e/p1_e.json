@@ -1,0 +1,32 @@
+{
+    "id":"p1_e",
+    "view_info": [
+        {
+	        "frames":[15.5,6.8,85,87],
+	        "type":0,
+	        "place_image":"p1_e_1.jpg",
+	        "view_id":"p1_e_1"
+	        
+        }, 
+        {
+            
+            
+            "frames":[40.7,74.3,53,22],
+            "type": 2,
+             "place_image": "p1_e_u1.jpg",
+             "view_id":"p1_e_u1"
+        },
+        {
+	        
+            "frames":[40.7,74.3,53,22],
+            "type": 1,
+            "place_text": "Light Your\r\nGolden\r\nMoment" ,
+            "text_info":{
+	            "text_size":20,
+	            "text_font":""
+            },
+            "view_id":"p1_e_1t"
+        }
+        
+         ]
+}

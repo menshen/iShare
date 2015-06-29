@@ -1,0 +1,28 @@
+{
+    "id":"p1_j",
+    "view_info": [
+        {
+            "frames":[12.2,14.3,81,81],
+             "type": 2,
+             "place_image": "p1_j_1u",
+             "view_id":"p1_j_1u"
+        },
+        {
+            "frames":[6.1,4.5,81,73],
+            "type": 0,
+            "place_image":"p1_j_1",
+            "view_id":"p1_j_1"
+
+        },
+        {
+            "frames":[35.8,80.1,56,12],
+            "type": 1,
+              "place_text":"NEVER LEAVE\r\n  YOU ALONE",
+              "text_info":{"text_size":20,
+              "text_color":"#FFFFFF"},
+            "view_id":"p1_j_t1"
+        }
+             
+
+            ]
+}

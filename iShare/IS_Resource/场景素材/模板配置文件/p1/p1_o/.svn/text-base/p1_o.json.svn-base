@@ -1,0 +1,31 @@
+{
+    "id":"p1_o",
+	"type":1,
+    "mode_type":0,
+    "view_info": [
+        {
+            "frames": [
+                0,
+                0,
+                100,
+                30
+            ],
+            
+            "type": 2,
+             "place_image": "p1_o_1u",
+             "view_id":"p1_o_1u"
+        },
+        {
+            "frames": [
+                0,
+                28,
+                100,
+                70
+            ],
+            "type": 0,
+            "place_image":"p1_o_1",
+             "view_id":"p1_o_1"
+        }      
+
+     ]
+}

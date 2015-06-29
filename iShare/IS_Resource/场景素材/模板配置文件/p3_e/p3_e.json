@@ -1,0 +1,84 @@
+{
+  "id" : "p3_e",
+  "scene_common" : 0,
+  "view_info" : [
+    {
+      "place_image" : "p3_e_1u",
+      "view_id" : "p3_e_1u",
+      "type" : 2,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/p3_e_1u.png",
+      "frames" : [
+        40,
+        5,
+        55,
+        18
+      ]
+    },
+    {
+      "place_image" : "p3_e_1",
+      "view_id" : "p3_e_1",
+      "type" : 0,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/default\/p3_e_1.jpg",
+      "frames" : [
+        5,
+        22,
+        44.200000762939,
+        59.299999237061
+      ]
+    },
+    {
+      "place_image" : "p3_e_2",
+      "view_id" : "p3_e_2",
+      "type" : 0,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/default\/p3_e_2.jpg",
+      "frames" : [
+        51,
+        22,
+        43.900001525879,
+        34.5
+      ]
+    },
+    {
+      "view_id" : "p3_e_1t",
+      "place_text" : "TRUST IN ME",
+      "text_info" : {
+        "text_size" : 15
+      },
+      "type" : 1,
+      "frames" : [
+        5.5999999046326,
+        85,
+        40,
+        3.7999999523163
+      ]
+    },
+    {
+      "view_id" : "p3_e_2t",
+      "place_text" : "be my owner",
+      "text_info" : {
+        "text_size" : 12
+      },
+      "type" : 1,
+      "frames" : [
+        5.5999999046326,
+        90,
+        32.200000762939,
+        3.7999999523163
+      ]
+    },
+    {
+      "place_image" : "p3_e_3",
+      "view_id" : "p3_e_3",
+      "type" : 0,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/default\/p3_e_3.jpg",
+      "frames" : [
+        51,
+        57.5,
+        43.900001525879,
+        34.5
+      ]
+    }
+  ],
+  "type" : 1,
+  "scene_type" : 0
+}

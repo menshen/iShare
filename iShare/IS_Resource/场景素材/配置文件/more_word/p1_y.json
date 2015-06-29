@@ -1,0 +1,76 @@
+{
+  "id" : "p1_y",
+  "scene_common" : 0,
+  "view_info" : [
+    {
+      "place_image" : "p1_y_1",
+      "view_id" : "p1_y_1",
+      "type" : 0,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/default\/p1_y_1.jpg",
+      "frames" : [
+        21,
+        36,
+        79,
+        55
+      ]
+    },
+    {
+      "place_image" : "p1_y_1u",
+      "view_id" : "p1_y_1u",
+      "type" : 2,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/p1_y_1u.png",
+      "frames" : [
+        47,
+        16,
+        53,
+        20
+      ]
+    },
+    {
+      "place_image" : "p1_y_2u",
+      "view_id" : "p1_y_2u",
+      "type" : 2,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/p1_y_2u.png",
+      "frames" : [
+        0,
+        36,
+        16,
+        55
+      ]
+    },
+    {
+      "view_id" : "p1_y_t1",
+      "place_text" : "摄影师andrew kuenis:冬季婚礼有一种独特的\n魔法和不可取代的美感，但在瑞士，大部分的新\n人都因为惧怕寒冷天气所带来的不便，而对冬季\n婚礼十分抗拒。我是个典型的瑞士人，从小在雪\n地中长大，也常到冰天雪地的地方旅游和工作",
+      "text_info" : {
+        "text_color" : "#000000",
+        "text_position" : 0,
+        "text_size" : 14
+      },
+      "type" : 1,
+      "frames" : [
+        0,
+        5,
+        100,
+        21
+      ]
+    },
+    {
+      "view_id" : "p1_y_t2",
+      "place_text" : "春\n天\n之\n际",
+      "text_info" : {
+        "text_color" : "#ffffff",
+        "text_position" : 0,
+        "text_size" : 22
+      },
+      "type" : 1,
+      "frames" : [
+        3,
+        38,
+        8,
+        52
+      ]
+    }
+  ],
+  "type" : 1,
+  "scene_type" : 0
+}

@@ -1,0 +1,116 @@
+{
+    "id":"scene_e",
+    "view_info": [
+                  {
+                  
+                  "frames":[0,0,100,100],
+                  "type": 2,
+                  "place_image": "scene_e_1u.png",
+                  "view_id":"scene_e_1u"
+                  
+                  },
+                  {
+                  
+                  "frames":[10,2,80,5],
+                  "type": 1,
+                  "place_text": "2014.05.01 19:00",
+                  "text_info":{"text_size":15,
+                  "text_font":"HelveticaNeue-CondensedBold"
+                  },
+                  "text_action":"date_pick",
+                  "view_id":"time"
+                  },
+                  {
+                  
+                  "frames":[10,8,80,10],
+                  "type": 1,
+                  "place_text": "MAY",
+                  "text_info":{
+                  "text_size":35,
+                  "text_font":"HelveticaNeue-CondensedBold",
+                  "text_color":"#724f81"
+                  },
+                  "text_action":"date_pick",
+                  "view_id":"month"
+                  
+                  },
+                  {
+                  
+                  "frames":[10,19,80,13],
+                  "type": 1,
+                  "place_text": "01",
+                  "text_info":{"text_size":60,
+                  "text_font":"HelveticaNeue-CondensedBold",
+                  "text_color":"#724f81"},
+                  "text_action":"date_pick",
+                  "view_id":"date"
+                  
+                  },
+                  {
+                  
+                  "frames":[10,33,80,5],
+                  "type": 1,
+                  "place_text": "19:00",
+                  "text_info":{"text_size":20,
+                  "text_font":"HelveticaNeue-Condensed"},
+                  "text_action":"date_pick",
+                  "view_id":"hour",
+                  
+                  
+                  },
+                  {
+                  
+                  "frames":[10,39,80,18],
+                  "type": 1,
+                  "place_text": "广州海航威斯丁酒店\r\n       恭候光临",
+                  "text_info":{"text_size":15},
+                  "view_id":"location"
+                  
+                  },
+                  {
+                  
+                  "frames":[16,52,75,43],
+                  "type": 0,
+                  "place_image":"scene_e_1",
+                  "mask_image":"scene_e_1mask",
+                  "view_id":"scene_e_1"
+                  
+                  },
+                  {
+                  
+                  "frames":[13,74,30,18],
+                  "type": 2,
+                  "place_image": "scene_e_2u",
+                  "view_id":"scene_e_2u"
+                  
+                  },
+                  {
+                  
+                  "frames":[70,55,30,18],
+                  "type": 2,
+                  "place_image": "scene_e_2u",
+                  "view_id":"scene_e_2u"
+                  
+                  },
+                  {
+                  
+                  "frames":[18,80,20,6],
+                  "type": 1,
+                  "place_text": "新郎名",
+                  "text_info":{"text_size":14,
+                  "text_color":"#FFFFFF","isTextEdit":1},
+                  "view_id":"name1"
+                  
+                  },
+                  {
+                  
+                  "frames":[75,61,20,6],
+                  "type": 1,
+                  "place_text": "新娘名",
+                  "text_info":{"text_size":14,
+                  "text_color":"#FFFFFF","isTextEdit":1},
+                  "view_id":"name2"
+                  
+                  }
+                  ]
+}

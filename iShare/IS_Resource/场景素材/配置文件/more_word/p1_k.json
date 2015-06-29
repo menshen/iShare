@@ -1,0 +1,57 @@
+{
+  "id" : "p1_k",
+  "scene_common" : 0,
+  "view_info" : [
+    {
+      "place_image" : "p1_k_1",
+      "frames" : [
+        11,
+        7,
+        78,
+        64
+      ],
+      "type" : 0,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/default\/p1_k_1.jpg",
+      "view_id" : "p1_k_1"
+    },
+    {
+      "place_image" : "p1_k_1u",
+      "frames" : [
+        55.5,
+        50,
+        37,
+        23
+      ],
+      "type" : 2,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/p1_k_1u.png",
+      "view_id" : "p1_k_1u"
+    },
+    {
+      "view_id" : "p1_k_t1",
+      "place_text" : "Garden",
+      "type" : 1,
+      "frames" : [
+        11,
+        79,
+        78,
+        7
+      ]
+    },
+    {
+      "frames" : [
+        11,
+        85,
+        78,
+        10
+      ],
+      "place_text" : "if i have a flower flower \r\nflower flower flower flower flower ",
+      "text_info" : {
+        "text_size" : 13
+      },
+      "type" : 1,
+      "view_id" : "p1_k_t2"
+    }
+  ],
+  "type" : 1,
+  "scene_type" : 0
+}

@@ -1,0 +1,30 @@
+{
+    "id":"p1_c",
+    "view_info": [
+                  {
+            "frame": {
+                "x": 0,
+                "y": 13,
+                "w": 100,
+                "h": 52
+            },
+            "type": 0,
+            "place_image": "p1_c_1",
+                  "mask_image":"p1_c_1mask",
+             "view_id":"p1_c_1"
+
+        },
+        {
+            "frame": {
+                "x": 33,
+                "y": 89,
+                "w": 35,
+                "h": 7
+            },
+             "type": 2,
+             "place_image": "p1_c_1u",
+             "view_id":"p1_c_1u"
+
+        }
+    ]
+}

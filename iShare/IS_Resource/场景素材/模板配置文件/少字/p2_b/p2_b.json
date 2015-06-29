@@ -1,0 +1,43 @@
+{
+  "id" : "p2_b",
+  "scene_common" : 0,
+  "view_info" : [
+    {
+      "place_image" : "p2_b_1",
+      "view_id" : "p2_b_1",
+      "type" : 0,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/default\/p2_b_1.jpg",
+      "frames" : [
+        5.2,
+        3.2,
+        90,
+        35
+      ]
+    },
+    {
+      "place_image" : "p2_b_2",
+      "view_id" : "p2_b_2",
+      "type" : 0,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/default\/p2_b_2.jpg",
+      "frames" : [
+        5.2,
+        40,
+        90,
+        35
+      ]
+    },
+    {
+      "frames" : [
+        5.2,
+        80,
+        90,
+        15
+      ],
+      "place_text" : "     I AM HERE\r\nTAKE ME HOME",
+      "type" : 1,
+      "view_id" : "p2_b_1t"
+    }
+  ],
+  "type" : 1,
+  "scene_type" : 0
+}

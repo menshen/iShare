@@ -1,0 +1,78 @@
+{
+    "id":"scene_d",
+    "view_info": [
+                  {
+                  
+                  "frames":[0,0,100,100],
+                  "type": 2,
+                  "place_image": "scene_d_1u",
+                  "view_id":"scene_d_1u"
+                  
+                  },{
+                  
+                  "frames":[18,8,63,38],
+                  "type": 0,
+                  "place_image":"scene_d_1",
+                  "mask_image":"scene_d_1mask.png",
+                  "view_id":"scene_d_1"
+                  
+                  },{
+                  
+                  "frames":[10,49,40,6],
+                  "type": 1,
+                  "place_text": "新郎名",
+                  "text_info":{"text_size":15,
+                  "text_font":"HelveticaNeue",
+                  "text_color":"a08953",
+                  "isTextEdit":1},
+                  "view_id":"name1"
+                  
+                  },
+                  {
+                  
+                  "frames":[51,49,40,6],
+                  "type": 1,
+                  "place_text": "新娘名",
+                  "text_info":{"text_size":15,
+                  "text_font":"HelveticaNeue",
+                  "text_color":"a08953",
+                  "isTextEdit":1},
+                  "view_id":"name2"
+                  
+                  },
+                  {
+                  
+                  "frames":[10,62,80,6],
+                  "type": 1,
+                  "place_text": "2015.2.14 19:00",
+                  "text_info":{"text_size":12,
+                  "text_font":"HelveticaNeue",
+                  "text_color":"a08953"},
+                  "view_id":"time",
+                  "text_action":"date_pick"
+                  
+                  },
+                  {
+                  
+                  "frames":[10,68,80,8],
+                  "type": 1,
+                  "place_text": "广州海航威斯丁酒店",
+                  "text_info":{"text_size":12,
+                  "text_font":"HelveticaNeue",
+                  "text_color":"a08953"},
+                  "view_id":"location"
+                  
+                  },
+                  {
+                  
+                  "frames":[4,82,92,16],
+                  "type": 1,
+                  "place_text": "邀您见证我们幸福的将来\r\n        感谢一路陪伴",
+                  "text_info":{"text_size":13,
+                  "text_font":"HelveticaNeue",
+                  "text_color":"a08953"},
+                  "view_id":"wish"
+                  
+                  }
+                  ]
+}

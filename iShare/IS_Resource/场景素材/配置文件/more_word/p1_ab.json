@@ -1,0 +1,79 @@
+{
+  "scene_type" : 0,
+  "id" : "p1_ab",
+  "scene_common" : 0,
+  "view_info" : [
+    {
+      "place_image" : "p1_ab_1",
+      "view_id" : "p1_ab_1",
+      "type" : 0,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/default\/p1_ab_1.jpg",
+      "frames" : [
+        0,
+        0,
+        100,
+        100
+      ]
+    },
+    {
+      "place_image" : "p1_ab_1u",
+      "view_id" : "p1_ab_1u",
+      "type" : 2,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/p1_ab_1u.png",
+      "frames" : [
+        12.5,
+        12.3,
+        75.3,
+        75.3
+      ]
+    },
+    {
+      "frames" : [
+        17.8,
+        19.2,
+        62.5,
+        47.8
+      ],
+      "place_text" : "想你，慢慢地想成了一种习惯，常常是夜已尽，想你的心却没有尽头。回想你长发飘飘的样子，现在却成为了我永恒的回忆...",
+      "text_info" : {
+        "text_color" : "#ffffff",
+        "text_size" : 14
+      },
+      "type" : 1,
+      "view_id" : "p1_ab_t1"
+    },
+    {
+      "view_id" : "p1_ab_t2",
+      "place_text" : "春天之際",
+      "text_info" : {
+        "text_color" : "#ffffff",
+        "text_position" : 1,
+        "text_size" : 20
+      },
+      "type" : 1,
+      "frames" : [
+        17.8,
+        75.59999999999999,
+        62.5,
+        7
+      ]
+    },
+    {
+      "view_id" : "p1_ab_t3",
+      "place_text" : "動人的浪漫童話",
+      "text_info" : {
+        "text_color" : "#ffffff",
+        "text_size" : 12
+      },
+      "type" : 1,
+      "frames" : [
+        17.8,
+        83.09999999999999,
+        62.5,
+        3.7
+      ]
+    }
+  ],
+  "mode_type" : 2,
+  "type" : 1
+}

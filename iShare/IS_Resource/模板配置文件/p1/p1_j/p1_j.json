@@ -1,0 +1,43 @@
+{
+    "id":"p1_j",
+    "view_info": [
+        {
+            "frame": {
+                "x": 12.2,
+                "y": 14.3,
+                "w": 81,
+                "h": 81
+            },
+            
+             "type": 2,
+             "place_image": "p1_j_1u",
+             "view_id":"p1_j_1u"
+        },
+        {
+            "frame": {
+                "x": 6.1,
+                "y": 4.5,
+                "w": 81,
+                "h": 73
+            },
+            "type": 0,
+            "place_image":"p1_j_1",
+            "view_id":"p1_j_1"
+
+        },
+        {
+            "frame": {
+                "x": 35.8,
+                "y": 80.1,
+                "w": 56,
+                "h": 12
+            },
+            
+            "type": 1,
+            "place_text":"NEVER LEAVE\r\n  YOU ALONE",
+            "view_id":"p1_j_1t"
+        }
+             
+
+            ]
+}

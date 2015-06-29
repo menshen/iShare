@@ -1,0 +1,36 @@
+{
+      "id":"p2_e",
+    "view_info": [
+                  {
+                  
+                  "frames":[38,3.6,23.8,4.7],
+                  "type": 2,
+                  "place_image": "p2_e_1u",
+                  "view_id":"p2_e_1u"
+                  },
+                  {
+                  
+                  "frames":[4.4,16.7,90.6,38.7],
+                  "type":  0,
+                  "place_image": "p2_e_1",
+                  "view_id":"p2_e_1"
+                  
+                  },
+                  {
+                  
+                  "frames":[4.9,57.1,90.6,38.7],
+                  "type":  0,
+                  "place_image": "p2_e_2",
+                  "view_id":"p2_e_2"
+                  
+                  },
+                  {
+                  
+                  "frames":[19.8,9.7,59.7,6],
+                  "type": 1,
+                  "place_text": "BE WITH YOU",
+                  "view_id":"p2_e_1t"
+                  
+                  }
+                  ]
+}

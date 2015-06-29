@@ -1,0 +1,39 @@
+{
+
+	"id":"p2_d",
+    "view_info": [
+        {
+            "frames":[8.5,0,38,25],
+             "type": 2,
+             "place_image": "p2_d_1u",
+             "view_id":"p2_d_1u"
+        },
+        {
+            "frames":[14,7,73,13.5],
+            "type":1,
+            "place_text": "Light Your\r\nGolden Moment",
+            "text_info":{
+                  "text_size":22,
+                  "text_position":1
+                  },
+             "view_id":"p2_d_1t"
+        },
+        {
+            "frame": {
+                "x": 0,
+                "y": 30,
+                "w": 58,
+                "h": 50
+            },
+            "type": 0,
+             "place_image": "p2_d_1",
+             "view_id":"p2_d_1"
+        },
+        {
+            "frames":[60,30,40,50],
+            "type": 0,
+             "place_image": "p2_d_2",
+             "view_id":"p2_d_2"
+        }
+    ]
+}

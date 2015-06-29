@@ -1,0 +1,103 @@
+{
+        "id":"scene_e",
+        "view_info": [
+                  {
+                  
+                  "frames":[0,0,100,100],
+                  "type": 2,
+                  "place_image": "scene_e_1u.png"
+                  
+                  },
+                  {
+                  
+                  "frames":[10,5,80,5],
+                  "type": 1,
+                  "place_text": "2014.05.01",
+                  "text_info":{"text_size":15,
+                                "text_font":"HelveticaNeue-CondensedBold"
+                  },
+                  "text_action":"date_pick"
+                  },
+                  {
+                  
+                  "frames":[10,10,80,8],
+                  "type": 1,
+                  "place_text": "MAY",
+                  "text_info":{
+                  "text_size":35,
+                  "text_font":"HelveticaNeue-CondensedBold",
+                  "text_color":"#724f81"
+                  },
+                  "text_action":"date_pick"
+                  
+                  },
+                  {
+                  
+                  "frames":[10,18,80,12],
+                  "type": 1,
+                  "place_text": "01",
+                  "text_info":{"text_size":60,
+                  "text_font":"HelveticaNeue-CondensedBold",
+                  "text_color":"#724f81"},
+                  "text_action":"date_pick"
+                  
+                  },
+                  {
+                  
+                  "frames":[10,30,80,5],
+                  "type": 1,
+                  "place_text": "19:00",
+                  "text_info":{"text_size":20,
+                  "text_font":"HelveticaNeue-Condensed"},
+                  
+                  },
+                  {
+                  
+                  "frames":[10,35,80,18],
+                  "type": 1,
+                  "place_text": "广州海航威斯丁酒店\r\n       恭候光临",
+                  "text_info":{"text_size":15}    
+                  
+                  },
+                  {
+                  
+                  "frames":[16,52,75,43],
+                  "type": 0,
+                   "place_image_url":"http://7vznnu.com2.z0.glb.qiniucdn.com/default/scene_e_1.jpg",
+                  "mask_image":"scene_e_1mask.png"
+                  
+                  },
+                  {
+                  
+                  "frames":[13,74,30,18],
+                  "type": 2,
+                  "place_image": "scene_e_2u.png"
+                  
+                  },
+                  {
+                  
+                  "frames":[70,55,30,18],
+                  "type": 2,
+                  "place_image": "scene_e_2u.png"
+                  
+                  },
+                  {
+                  
+                  "frames":[18,80,20,6],
+                  "type": 1,
+                  "place_text": "他名字",
+                  "text_info":{"text_size":14,
+                  "text_color":"#FFFFFF"}
+                  
+                  },
+                  {
+                  
+                  "frames":[75,61,20,6],
+                  "type": 1,
+                  "place_text": "她名字",
+                  "text_info":{"text_size":14,
+                  "text_color":"#FFFFFF"}
+                  
+                  }
+                  ]
+}

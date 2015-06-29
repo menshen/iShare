@@ -1,0 +1,59 @@
+{
+  "id" : "p2_d",
+  "scene_common" : 0,
+  "view_info" : [
+    {
+      "place_image" : "p2_d_1u",
+      "view_id" : "p2_d_1u",
+      "type" : 2,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/p2_d_1u.png",
+      "frames" : [
+        8.5,
+        0,
+        38,
+        25
+      ]
+    },
+    {
+      "frames" : [
+        14,
+        7,
+        73,
+        13.5
+      ],
+      "place_text" : "Light Your\r\nGolden Moment",
+      "text_info" : {
+        "text_position" : 1,
+        "text_size" : 22
+      },
+      "type" : 1,
+      "view_id" : "p2_d_1t"
+    },
+    {
+      "place_image" : "p2_d_1",
+      "view_id" : "p2_d_1",
+      "type" : 0,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/default\/p2_d_1.jpg",
+      "frames" : [
+        0,
+        30,
+        58,
+        50
+      ]
+    },
+    {
+      "place_image" : "p2_d_2",
+      "view_id" : "p2_d_2",
+      "type" : 0,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/default\/p2_d_2.jpg",
+      "frames" : [
+        60,
+        30,
+        40,
+        50
+      ]
+    }
+  ],
+  "type" : 1,
+  "scene_type" : 0
+}

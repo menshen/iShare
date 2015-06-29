@@ -1,0 +1,63 @@
+{
+  "scene_type" : 0,
+  "id" : "p1_ak",
+  "scene_common" : 0,
+  "view_info" : [
+    {
+      "place_image" : "p1_ak_1",
+      "view_id" : "p1_ak_1",
+      "type" : 0,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/default\/p1_ak_1.jpg",
+      "frames" : [
+        0,
+        0,
+        100,
+        68.3
+      ]
+    },
+    {
+      "place_image" : "p1_ak_1u",
+      "view_id" : "p1_ak_1u",
+      "type" : 2,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/p1_ak_1u.png",
+      "frames" : [
+        5,
+        70.59999999999999,
+        4.2,
+        24.6
+      ]
+    },
+    {
+      "place_image" : "p1_ak_t1",
+      "view_id" : "p1_ak_t1",
+      "place_text" : "攝影師 Andrea Kuehnis:冬季婚禮有壹種獨特的魔法和不可取代的美感.但在瑞士，大部分的新人都因為懼怕寒冷天氣帶來的不便，而對冬季婚禮十分抗拒。",
+      "text_info" : {
+        "text_size" : 14
+      },
+      "type" : 1,
+      "frames" : [
+        12.8,
+        70.59999999999999,
+        81.40000000000001,
+        18.5
+      ]
+    },
+    {
+      "view_id" : "p1_ak_t2",
+      "text_info" : {
+        "text_position" : 1,
+        "text_size" : 24
+      },
+      "place_text" : "春天之際",
+      "type" : 1,
+      "frames" : [
+        12.8,
+        89.90000000000001,
+        67.5,
+        7.2
+      ]
+    }
+  ],
+  "mode_type" : 2,
+  "type" : 1
+}

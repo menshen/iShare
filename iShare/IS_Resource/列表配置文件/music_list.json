@@ -1,0 +1,167 @@
+{
+
+ "1000":{
+    
+    "en_tip":"unauthorized",
+    "ch_tip":"用户没授权"
+
+ },
+ "1001":{
+    
+    "en_tip":"access deny",
+    "ch_tip":"用户没授权"
+
+ },
+ "1002":{
+    
+    "en_tip":"enterid null",
+    "ch_tip":"有点小问题,尝试重新生成"
+
+ },
+ "1003":{
+    
+    "en_tip":"account doesn't exits",
+    "ch_tip":"账号不存在,请返回注册"
+
+ },
+ "1004":{
+    
+    "en_tip":"password incorrec",
+    "ch_tip":"密码错误"
+
+ },
+ "1005":{
+   
+    "en_tip":"information Incomplete error",
+    "ch_tip":"信息不完整"
+
+ }
+ ,
+ "1005":{
+   
+    "en_tip":"information Incomplete error",
+    "ch_tip":"信息不完整"
+
+ },
+ "1006":{
+   
+    "en_tip":"account already exist",
+    "ch_tip":"该账号已经存在"
+
+ },
+ "1007":{
+   
+    "en_tip":"account register error",
+    "ch_tip":"用户注册失败,请输入正确号码"
+
+ },
+ "1008":{
+   
+    "en_tip":"access token null",
+    "ch_tip":"账号异常"
+
+ },
+ "1009":{
+   
+    "en_tip":"uid null",
+    "ch_tip":"账号异常"
+
+ },
+ "1010":{
+   
+    "en_tip":"data null",
+    "ch_tip":"账号信息为空"
+
+ },
+ "1011":{
+   
+    "en_tip":"enterid error",
+    "ch_tip":"格式有误,请重新生成"
+
+ },
+ "1012":{
+   
+    "en_tip":"request resource null",
+    "ch_tip":"服务器资源出错"
+
+ },
+ "1013":{
+   
+    "en_tip":"error",
+    "ch_tip":"微信信息错误"
+
+ },
+ "1014":{
+   
+    "en_tip":"logout failed",
+    "ch_tip":" 退出失败"
+
+ },
+ "1015":{
+   
+    "en_tip":"Render Engine Error",
+    "ch_tip":"生成H5失败,请重新尝试"
+
+ },
+ "1016":{
+   
+    "en_tip":"The operation was not standardized",
+    "ch_tip":"请求失败,请重新尝试"
+
+ },
+ "1017":{
+   
+     "en_tip":"phone null",
+     "ch_tip":"电话为空"
+
+ },
+ "1018":{
+   
+    "en_tip":"type null",
+    "ch_tip":"请求失败,请重新尝试"
+
+ },
+ "1019":{
+   
+     "en_tip":"operation overtime",
+    "ch_tip":"操作超时,请检查你的网络"
+
+ },
+ "1020":{
+   
+    "en_tip":"login failed",
+    "ch_tip":"登录错误"
+
+ },
+ "1021":{
+   
+    "en_tip":"Incomplete information",
+    "ch_tip":"信息不完整"
+
+ },
+ "1022":{
+   
+    "en_tip":"wechat toekn error",
+    "ch_tip":"微信登录错误,请再尝试"
+
+ },
+ "1023":{
+   
+    "en_tip":"save failed",
+    "ch_tip":"保存失败,请检查你的网络"
+
+ },
+ "1024":{
+   
+    "en_tip":"message error",
+    "ch_tip":"请求失败,请重新尝试"
+
+ },
+ "1025":{
+   
+    "en_tip":"shopid null",
+    "ch_tip":"请求失败,请重新尝试"
+
+ }
+
+}

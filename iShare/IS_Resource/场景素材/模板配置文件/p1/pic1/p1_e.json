@@ -1,0 +1,28 @@
+{
+    "id":"p1_e",
+    "view_info": [
+        {
+	        "frames":[15.5,6.8,85,87],
+	        "type":0,
+	        "place_image":"p1_e_1",
+	        "view_id":"p1_e_1"
+	        
+        },
+        {
+          
+          
+          "frames":[6.3,3.2,63,83.6],
+          "type": 2,
+          "place_image": "p1_e_2u",
+          "view_id":"p1_e_2u"
+      },
+      {
+      
+      
+          "frames":[40.7,74.3,53,22],
+          "type": 2,
+          "place_image": "p1_e_1u",
+          "view_id":"p1_e_1u"
+      }
+         ]
+}

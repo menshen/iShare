@@ -1,0 +1,28 @@
+{
+      "id":"p2_b",
+    "view_info": [
+                  {
+                  
+                  "frames":[5.2,3.2,90,35],
+                  "type": 0,
+                  "place_image": "p2_b_1",
+                  "view_id":"p2_b_1"
+                  },
+                  {
+                  
+                  "frames":[5.2,40,90,35],
+                  "type":  0,
+                  "place_image": "p2_b_2",
+                  "view_id":"p2_b_2"
+                  
+                  },
+                  {
+                  
+                  "frames":[0,75,100,25],
+                  "type": 1,
+                  "place_text": "     I AM HERE\r\nTAKE MY HOME",
+                  "view_id":"p2_b_1t"
+                  
+                  }
+                  ]
+}

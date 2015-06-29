@@ -1,0 +1,57 @@
+{
+    "id":"p1_m",
+    "view_info": [
+                 {
+                  "frame": {
+                  "x": 0,
+                  "y": 0,
+                  "w": 100,
+                  "h": 100
+
+                  },
+                "type": 0,
+                "place_image": "p1_m_1",
+                "view_id":"p1_m_1"
+                  },
+                  {
+                  "frame": {
+                  "x": 0,
+                  "y": 64,
+                  "w": 100,
+                  "h": 36
+                  },
+                  "type": 2,
+                  "place_image":"p1_m_1u"
+                  }, {
+                  "frame": {
+                  "x": 15,
+                  "y": 73,
+                  "w": 71,
+                  "h": 5.5
+                  },
+                  "type": 1,
+                  "place_text":"BEST DAY EVER",
+                  "text_info":{
+                  "text_size":20,
+                  "text_color":"#000000"
+                  },
+                  "view_id":"p1_m_1t"
+                  },
+                  {
+                  "frame": {
+                  "x": 14.5,
+                  "y": 80,
+                  "w": 71,
+                  "h": 10
+                  },
+                  "type": 1,
+                  "place_text":"if time can fly backwards\r\n  I will try to leave you",
+                  "text_info":{
+                  "text_size":14,
+                  
+                  },
+                  "view_id":"p1_m_2t"
+                  }
+
+                  ]
+}

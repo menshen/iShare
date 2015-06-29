@@ -1,0 +1,48 @@
+{
+  "id" : "p1_q",
+  "scene_common" : 0,
+  "view_info" : [
+    {
+      "place_image" : "p1_q_1",
+      "frames" : [
+        13,
+        9,
+        75,
+        65
+      ],
+      "type" : 0,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/default\/p1_q_1.jpg",
+      "view_id" : "p1_q_1"
+    },
+    {
+      "place_image" : "p1_q_1u",
+      "frames" : [
+        13,
+        71,
+        75,
+        18
+      ],
+      "type" : 2,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/p1_q_1u.png",
+      "view_id" : "p1_q_1u"
+    },
+    {
+      "view_id" : "p1_q_t1",
+      "place_text" : "        你的优点缺点\r\n让你成为我的独一无二",
+      "text_info" : {
+        "text_color" : "#FFFFFF",
+        "text_position" : "left",
+        "text_size" : 13
+      },
+      "type" : 1,
+      "frames" : [
+        24,
+        75,
+        52,
+        12
+      ]
+    }
+  ],
+  "type" : 1,
+  "scene_type" : 0
+}

@@ -1,0 +1,32 @@
+{
+    "id":"p1_q",
+    "view_info": [
+                  {
+                  
+                  "frames":[13,9,75,65],
+                  "type": 0,
+                  "place_image": "p1_q_1",
+                  "view_id":"p1_q_1"
+                  },
+                  {
+                  
+                  "frames":[13,71,75,18],
+                  "type": 2,
+                  "place_image": "p1_q_1u",
+                  "view_id":"p1_q_1u"
+                  },
+                  {
+                  
+                  "frames":[24,75,52,12],
+                  "type": 1,
+                  "place_text": "        你的优点缺点\r\n让你成为我的独一无二",
+                  "text_info":{
+                  "text_size":13,
+                  "text_color":"#FFFFFF",
+                  "text_position":"left"
+                  },
+                  "view_id":"p1_q_t1"
+                  
+                  }
+                  ]
+}

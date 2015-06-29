@@ -1,0 +1,52 @@
+{
+    "id":"p3_f",
+    "view_info": [
+        {
+            "frame": [
+                5.2,
+                11.3,
+                81,
+                24
+            ],
+            
+            "type": 0,
+            "place_image": "p3_f_1",
+            "view_id":"p3_f_1"
+        },
+        {
+            "frame": [
+                5.2,
+                37.9,
+                12,
+                25
+            ],
+            "type": 2,
+            "place_image":"p3_f_1u",
+            "view_id":"p3_f_1u"
+        },
+        {
+            "frame": [
+                17.8,
+                37.9,
+                74,
+                25
+            ],
+            
+            "type": 0,
+            "place_image":"p3_f_2",
+            "view_id":"p3_f_2"
+            
+        },
+        {
+	        "frame":[
+		        5.2,
+		        64.7,
+		        81,
+		        24
+	        ],
+	        "type":0,
+	        "place_image":"p3_f_3",
+            "view_id":"p3_f_3"
+        }
+            ]
+}

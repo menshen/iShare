@@ -1,0 +1,53 @@
+{
+    "id":"p2_g",
+    "view_info": [
+                  
+                  {
+                  
+                  "frames":[0,3,48,4],
+                  "type": 2,
+                  "place_image": "p2_g_1u",
+                  "view_id":"p2_g_1u"
+                  },
+                  {
+                  
+                  "frames":[39,0,61,100],
+                  "type": 2,
+                  "place_image": "p2_g_2u",
+                  "view_id":"p2_g_2u"
+                  },
+                  {
+                  
+                  "frames":[9,7,45,6],
+                  "type": 1,
+                  "place_text": "Value You",
+                  "view_id":"p2_g_1t"
+                  
+                  },
+                  {
+                  
+                  "frames":[49,16,50,10],
+                  "type": 1,
+                  "place_text": "你的优点缺点\r\n让你成为我的独一无二",
+                  "text_info":{
+                  "text_size":11,
+                  "text_position":2,
+                  "text_color":"666666"
+                  },
+                  "view_id":"p2_g_2t"
+                  },
+                  {
+                  "frames":[23,30,71,30],
+                  "type": 0,
+                  "place_image": "p2_g_1",
+                  "view_id":"p2_g_1"
+                  },
+                  {
+                  
+                  "frames":[23,61,71,30],                
+                  "type": 0,
+                  "place_image": "p2_g_2",
+                  "view_id":"p2_g_2"
+                  }
+                  ]
+}

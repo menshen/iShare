@@ -1,0 +1,68 @@
+{
+
+"m_scene_collection":[
+
+    {"a_id":"scene_b","class":"m_scene","words":"相遇","more_class":"scene_lv scene_wd"},
+    {"a_id":"scene_a","class":"m_scene","words":"牵手","more_class":"scene_wd"},
+    {"a_id":"scene_d","class":"m_scene","words":"邀请函 朴素","more_class":"scene_wd"},
+    {"a_id":"scene_e","class":"m_scene","words":"邀请函 紫色","more_class":"scene_wd"},
+    {"a_id":"scene_c","class":"m_scene","words":"殿堂","more_class":"scene_wd"},
+    {"a_id":"scene_none","class":"m_scene","words":"通用场景","more_class":"scene_none"}
+],
+"m_p_only_pic":[
+
+    {"a_id":"p2_a","class":"m_p","more_class":"only_pic"},
+    {"a_id":"p3_a","class":"m_p","more_class":"only_pic"},
+    {"a_id":"p5_a","class":"m_p","more_class":"only_pic"},
+    {"a_id":"p1_b","class":"m_p","more_class":"only_pic"},
+    {"a_id":"p3_b","class":"m_p","more_class":"only_pic"},
+    {"a_id":"p1_c","class":"m_p","more_class":"only_pic"},
+    {"a_id":"p2_c","class":"m_p","more_class":"only_pic"},
+    {"a_id":"p3_c","class":"m_p","more_class":"only_pic"},
+    {"a_id":"p1_d","class":"m_p","more_class":"only_pic"},
+    {"a_id":"p3_d","class":"m_p","more_class":"only_pic"},
+    {"a_id":"p1_e","class":"m_p","more_class":"only_pic"},
+    {"a_id":"p3_f","class":"m_p","more_class":"only_pic"},
+    {"a_id":"p1_g","class":"m_p","more_class":"only_pic"},
+    {"a_id":"p3_g","class":"m_p","more_class":"only_pic"},
+    {"a_id":"p1_h","class":"m_p","more_class":"only_pic"},
+    {"a_id":"p1_j","class":"m_p","more_class":"only_pic"},
+    {"a_id":"p4_c","class":"m_p","more_class":"only_pic"},
+    {"a_id":"p1_n","class":"m_p","more_class":"only_pic"},
+    {"a_id":"p1_o","class":"m_p","more_class":"only_pic"},
+    {"a_id":"p4_d","class":"m_p","more_class":"only_pic"},
+
+
+],
+"m_p_less_word":[
+
+    {"a_id":"p1_a","class":"m_p","more_class":"less_word"},
+    {"a_id":"p6_a","class":"m_p","more_class":"less_word"},
+    {"a_id":"p2_b","class":"m_p","more_class":"less_word"},
+    {"a_id":"p4_b","class":"m_p","more_class":"less_word"},
+    {"a_id":"p2_d","class":"m_p","more_class":"less_word"},
+    {"a_id":"p3_e","class":"m_p","more_class":"less_word"},
+    {"a_id":"p1_f","class":"m_p","more_class":"less_word"},
+    {"a_id":"p1_i","class":"m_p","more_class":"less_word"},
+    {"a_id":"p1_l","class":"m_p","more_class":"less_word"},  
+    {"a_id":"p2_e","class":"m_p","more_class":"less_word"},
+    {"a_id":"p3_h","class":"m_p","more_class":"less_word"},
+    {"a_id":"p3_i","class":"m_p","more_class":"less_word"},
+    {"a_id":"p4_e","class":"m_p","more_class":"less_word"}
+
+
+
+],
+"m_p_more_word":[
+
+    {"a_id":"p1_k","class":"m_p","more_class":"more_word"},
+    {"a_id":"p1_m","class":"m_p","more_class":"more_word"},
+    {"a_id":"p1_p","class":"m_p","more_class":"more_word"},
+    {"a_id":"p1_q","class":"m_p","more_class":"more_word"},
+    {"a_id":"p2_f","class":"m_p","more_class":"more_word"},
+    {"a_id":"p2_g","class":"m_p","more_class":"more_word"},
+
+
+]
+
+}

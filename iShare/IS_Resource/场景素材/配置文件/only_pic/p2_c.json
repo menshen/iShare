@@ -1,0 +1,48 @@
+{
+  "id" : "p2_c",
+  "scene_common" : 0,
+  "view_info" : [
+    {
+      "frames" : [
+        3,
+        2,
+        95,
+        48
+      ],
+      "mask_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/p2_c_1mask.png",
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/default\/p2_c_1.jpg",
+      "view_id" : "p2_c_1",
+      "mask_image" : "p2_c_1mask",
+      "type" : 0,
+      "place_image" : "p2_c_1"
+    },
+    {
+      "frames" : [
+        3,
+        50,
+        95,
+        50
+      ],
+      "mask_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/p2_c_2mask.png",
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/default\/p2_c_2.jpg",
+      "view_id" : "p2_c_2",
+      "mask_image" : "p2_c_2mask",
+      "type" : 0,
+      "place_image" : "p2_c_2"
+    },
+    {
+      "place_image" : "p2_c_1u",
+      "frames" : [
+        3,
+        40,
+        97,
+        20
+      ],
+      "type" : 2,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/p2_c_1u.png",
+      "view_id" : "p2_c_1u"
+    }
+  ],
+  "type" : 1,
+  "scene_type" : 0
+}

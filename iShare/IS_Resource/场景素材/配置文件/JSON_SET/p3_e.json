@@ -1,0 +1,73 @@
+{
+    "id":"p3_e",
+    "view_info": [
+        {
+            "frame": {
+                "x": 40,
+                "y": 5,
+                "w": 55,
+                "h": 18
+            },
+            "type": 2,
+             "place_image": "p3_e_1u",
+            "view_id":"p3_e_1u"
+        },
+        {
+            "frame": {
+                "x": 5,
+                "y": 22,
+                "w": 44.2,
+                "h": 59.3
+            },
+            "type": 0,
+             "place_image": "p3_e_1",
+            "view_id":"p3_e_1"
+        },
+        {
+            "frame": {
+                "x": 51,
+                "y": 22,
+                "w": 43.9,
+                "h": 34.5
+            },
+            "type": 0,
+             "place_image": "p3_e_2",
+            "view_id":"p3_e_2"
+        },
+        {
+            "frame": {
+                "x": 5.6,
+                "y": 85,
+                "w": 40,
+                "h": 3.8
+            },
+            "type": 1,
+             "place_text": "TRUST IN ME",
+            "text_info":{"text_size":15},
+            "view_id":"p3_e_1t"
+      },
+      {
+              "frame": {
+              "x": 5.6,
+              "y": 90,
+              "w": 32.2,
+              "h": 3.8
+              },
+              "type": 1,
+              "place_text": "be my owner",
+              "text_info":{"text_size":12},
+              "view_id":"p3_e_2t"
+        },
+        {
+            "frame": {
+                "x": 51,
+                "y": 57.5,
+                "w": 43.9,
+                "h": 34.5
+            },
+            "type": 0,
+             "place_image": "p3_e_3",
+            "view_id":"p3_e_3"
+        }
+    ]
+}

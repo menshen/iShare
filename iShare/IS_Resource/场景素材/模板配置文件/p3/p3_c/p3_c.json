@@ -1,0 +1,50 @@
+{
+    "id":"p3_c",
+    "view_info": [
+        {
+            "frames": [
+               4.5,
+              3.5,
+                90,
+              30
+            ],
+            "type": 0,
+            "place_image": "p3_c_1",
+            "view_id":"p3_c_1"
+        },
+        {
+            "frames": [
+                4.5,
+               35,
+                90,
+               30
+            ],
+            "type": 0,
+            "place_image": "p3_c_2",
+            "view_id":"p3_c_2"
+            
+        },
+        {
+              "frames": [
+                   4.5,
+				   66,
+				    45,
+				    30
+              ],
+                  "type": 0,
+            "place_image": "p3_c_3",
+            "view_id":"p3_c_3"
+        },
+         {
+              "frames": [
+                   54,
+				   76,
+				   42,
+				    17
+              ],
+                  "type": 2,
+                   "place_image": "p3_c_1u",
+            "view_id":"p3_c_1u"
+        }
+    ]
+}

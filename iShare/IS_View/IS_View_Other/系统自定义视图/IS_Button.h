@@ -20,4 +20,6 @@ typedef NS_ENUM(NSInteger, ButtonPositionType){
 -(instancetype)initWithFrame:(CGRect)frame
           ButtonPositionType:(ButtonPositionType)type;
 - (void)setBtnSelecteAction;
+
+@property (assign,nonatomic)CGFloat imgTitleMargin;
 @end

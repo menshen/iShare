@@ -1,0 +1,83 @@
+{
+  "id" : "p2_g",
+  "scene_common" : 0,
+  "view_info" : [
+    {
+      "place_image" : "p2_g_1u",
+      "frames" : [
+        0,
+        3,
+        48,
+        4
+      ],
+      "type" : 2,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/p2_g_1u.png",
+      "view_id" : "p2_g_1u"
+    },
+    {
+      "place_image" : "p2_g_2u",
+      "frames" : [
+        39,
+        0,
+        61,
+        100
+      ],
+      "type" : 2,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/p2_g_2u.png",
+      "view_id" : "p2_g_2u"
+    },
+    {
+      "frames" : [
+        9,
+        7,
+        45,
+        6
+      ],
+      "place_text" : "Value You",
+      "type" : 1,
+      "view_id" : "p2_g_t1"
+    },
+    {
+      "frames" : [
+        49,
+        16,
+        50,
+        10
+      ],
+      "place_text" : "你的优点缺点\r\n让你成为我的独一无二",
+      "text_info" : {
+        "text_color" : "666666",
+        "text_position" : 2,
+        "text_size" : 11
+      },
+      "type" : 1,
+      "view_id" : "p2_g_t2"
+    },
+    {
+      "place_image" : "p2_g_1",
+      "frames" : [
+        23,
+        30,
+        71,
+        30
+      ],
+      "type" : 0,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/default\/p2_g_1.jpg",
+      "view_id" : "p2_g_1"
+    },
+    {
+      "place_image" : "p2_g_2",
+      "frames" : [
+        23,
+        61,
+        71,
+        30
+      ],
+      "type" : 0,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/default\/p2_g_2.jpg",
+      "view_id" : "p2_g_2"
+    }
+  ],
+  "type" : 1,
+  "scene_type" : 0
+}

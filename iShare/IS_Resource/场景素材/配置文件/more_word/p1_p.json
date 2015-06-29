@@ -1,0 +1,81 @@
+{
+  "id" : "p1_p",
+  "scene_common" : 0,
+  "view_info" : [
+    {
+      "place_image" : "p1_p_1",
+      "frames" : [
+        3,
+        3,
+        94,
+        69
+      ],
+      "type" : 0,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/default\/p1_p_1.jpg",
+      "view_id" : "p1_p_1"
+    },
+    {
+      "place_image" : "p1_p_1u",
+      "frames" : [
+        48,
+        60,
+        44,
+        19
+      ],
+      "type" : 2,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/p1_p_1u.png",
+      "view_id" : "p1_p_1u"
+    },
+    {
+      "place_image" : "p1_p_2u",
+      "frames" : [
+        63,
+        63,
+        15,
+        9
+      ],
+      "type" : 2,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/p1_p_2u.png",
+      "view_id" : "p1_p_2u"
+    },
+    {
+      "view_id" : "p1_p_t1",
+      "place_text" : "何以",
+      "type" : 1,
+      "frames" : [
+        52,
+        64,
+        21,
+        6
+      ]
+    },
+    {
+      "frames" : [
+        69,
+        70,
+        21,
+        6
+      ],
+      "place_text" : "爱情",
+      "type" : 1,
+      "view_id" : "p1_p_t2"
+    },
+    {
+      "frames" : [
+        5,
+        80,
+        90,
+        20
+      ],
+      "place_text" : "最美的声音是小溪欢快的流淌，最美的图\r\n画是深夜的朗月繁星，最美的语言是世间\r\n默默的关爱，最美的故事是流芳百年，最\r\n        美的情感是你我持之以恒的爱恋",
+      "text_info" : {
+        "text_position" : "left",
+        "text_size" : 11
+      },
+      "type" : 1,
+      "view_id" : "p1_p_t3"
+    }
+  ],
+  "type" : 1,
+  "scene_type" : 0
+}

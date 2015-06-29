@@ -1,0 +1,50 @@
+{
+    "id":"p2_f",
+    "view_info": [
+                  {
+                  
+                  "frames":[0,5,100,50],
+                  "type": 0,
+                  "place_image": "p2_f_1",
+                  "view_id":"p2_f_1"
+                  },
+                  {
+                  
+                  "frames":[8,51,42,38],
+                  "type": 2,
+                  "place_image": "p2_f_1u",
+                  "view_id":"p2_f_1u"
+                  },
+                  {
+                  
+                  "frames":[10,52,37,5],
+                  "type": 1,
+                  "place_text": "唯一",
+                  "text_info":{
+                  "text_size":12,
+                  "text_color":"#666666",
+                  "text_position":1
+                  },
+                  "view_id":"p2_f_1t"
+                  
+                  },
+                  {
+                  
+                  "frames":[10,58,37,27],
+                  "type": 1,
+                  "place_text": "你是我温暖的手套\r\n冰冷的啤酒\r\n带着阳光味道的衬衫\r\n日复一日的梦想\r\n那枚准备已久戒指 \r\n在我手中为你闪闪发光\r\n从今往后\r\n和你走过漫漫长夜和美好时光",
+                  "text_info":{
+                  "text_size":10,
+                  "text_color":"#666666",
+                  "text_position":1
+                  },
+                  "view_id":"p2_f_2t"
+                  },
+                  {
+                  "frames":[50,51,42,38],
+                  "type": 0,
+                  "place_image": "p2_f_2",
+                  "view_id":"p2_f_2"
+                  }
+                  ]
+}

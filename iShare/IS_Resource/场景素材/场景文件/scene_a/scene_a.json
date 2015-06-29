@@ -1,0 +1,73 @@
+
+{
+    "id":"scene_a",
+    "view_info": [
+        {
+            
+            "frames":[0,0,100,100],
+            "type": 2,
+            "place_image": "scene_a_1u",
+             "view_id":"scene_a_1u"
+            
+
+        },
+        {
+          
+          "frames":[21.3,17.4,57,32],
+          "type": 0,
+          "place_image": "scene_a_1",
+          "mask_image":"scene_a_1mask.png",
+           "view_id":"scene_a_1"
+
+        },
+        {
+                  
+           "frames":[20,37,61,12],
+            "type": 2,
+            "place_image": "scene_a_2u",
+            "view_id":"scene_a_2u"
+                  
+                  
+       },
+        {
+             
+          "frames":[13,58,30,6],
+          "type": 1,
+          "place_text": "新郎名",
+          "text_info":{"text_size":14,
+                        "text_position":"right"},
+           "view_id":"name1"
+
+          },
+          
+          {
+          
+          "frames":[58,58,30,6],
+          "type": 1,
+          "place_text": "新娘名",
+          "text_info":{"text_size":14,
+                        "text_position":"left"},
+           "view_id":"name2"
+          
+          },
+          {
+          
+          "frames":[7,70,18.5,11.5],
+          "type": 0,
+          "place_image": "scene_a_2",
+          "mask_image":"scene_a_1mask.png",
+           "view_id":"scene_a_2"
+
+          
+          },
+          {
+          
+          "frames":[73,70,18.5,11.5],
+          "type": 0,
+          "place_image": "scene_a_3",
+          "mask_image":"scene_a_1mask.png",
+           "view_id":"scene_a_3"
+          
+        }
+    ]
+}

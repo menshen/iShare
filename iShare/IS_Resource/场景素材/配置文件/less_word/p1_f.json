@@ -1,0 +1,33 @@
+{
+  "id" : "p1_f",
+  "scene_common" : 0,
+  "view_info" : [
+    {
+      "frames" : [
+        9.399999618530273,
+        6.099999904632568,
+        81,
+        75
+      ],
+      "mask_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/p1_f_1mask.png",
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/default\/p1_f_1.jpg",
+      "view_id" : "p1_f_1",
+      "mask_image" : "p1_f_1mask",
+      "type" : 0,
+      "place_image" : "p1_f_1"
+    },
+    {
+      "frames" : [
+        20,
+        86.19999694824219,
+        80,
+        15
+      ],
+      "place_text" : "      Best Day Ever",
+      "type" : 1,
+      "view_id" : "p1_f_t1"
+    }
+  ],
+  "type" : 1,
+  "scene_type" : 0
+}

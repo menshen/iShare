@@ -1,0 +1,30 @@
+{
+    "id":"p1_f",
+    "view_info": [
+        {
+            "frame": {
+                "x": 9.4,
+                "y": 6.1,
+                "w": 81,
+                "h": 75
+            },
+            "type": 0,
+             "place_image": "p1_f_1",
+            "mask_image":"p1_f_1mask",
+             "view_id":"p1_f_1"
+        },
+        {
+            "frame": {
+                "x": 20,
+                "y": 86.2,
+                "w": 80,
+                "h": 15
+            },
+            
+            "type": 1,
+            "place_text":"      Best Day Ever",
+            "view_id":"p1_f_t1"
+
+        }
+            ]
+}

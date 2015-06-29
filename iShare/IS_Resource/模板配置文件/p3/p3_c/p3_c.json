@@ -1,0 +1,50 @@
+{
+    "id":"p3_c",
+    "view_info": [
+        {
+            "frame": {
+                "x": 4.5,
+                "y": 3.5,
+                "w": 90,
+                "h": 30
+            },
+            "type": 0,
+            "place_image": "p3_c_1",
+            "view_id":"p3_c_1"
+        },
+        {
+            "frame": {
+                "x": 4.5,
+                "y": 35,
+                "w": 90,
+                "h": 30
+            },
+            "type": 0,
+            "place_image": "p3_c_2",
+            "view_id":"p3_c_2"
+            
+        },
+        {
+              "frame": {
+                   "x": 4.5,
+				   "y": 66,
+				   "w": 45,
+				   "h": 30
+              },
+                  "type": 0,
+            "place_image": "p3_c_3",
+            "view_id":"p3_c_3"
+        },
+         {
+              "frame": {
+                   "x": 52,
+				   "y": 66,
+				   "w": 45,
+				   "h": 30
+              },
+                  "type": 2,
+                   "place_image": "p3_c_1u",
+            "view_id":"p3_c_1u"
+        }
+    ]
+}

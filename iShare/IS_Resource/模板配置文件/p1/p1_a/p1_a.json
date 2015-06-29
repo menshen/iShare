@@ -1,0 +1,30 @@
+{
+    "id":"p1_a",
+    "view_info": [
+        {
+            "frame": {
+                "x": 5.1,
+                "y": 3.2,
+                "w": 90,
+                "h": 75
+            },
+                  
+            "type": 0,
+            "place_image": "p1_a_1",
+            "view_id":"p1_a_1"
+
+        },
+        {
+            "frame": {
+                "x": 0,
+                "y": 81,
+                "w": 100,
+                "h": 10
+            },
+             "type": 1,
+             "place_text": "ON MY OWN",
+              "view_id":"p1_a_1t"
+             
+        }
+    ]
+}

@@ -1,0 +1,60 @@
+{
+  "id" : "p1_x",
+  "scene_common" : 0,
+  "view_info" : [
+    {
+      "place_image" : "p1_x_1",
+      "view_id" : "p1_x_1",
+      "type" : 0,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/default\/p1_x_1.jpg",
+      "frames" : [
+        0,
+        36,
+        100,
+        58
+      ]
+    },
+    {
+      "place_image" : "p1_x_1u",
+      "view_id" : "p1_x_1u",
+      "type" : 2,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/p1_x_1u.png",
+      "frames" : [
+        0,
+        4,
+        100,
+        36
+      ]
+    },
+    {
+      "place_image" : "p1_x_2u",
+      "view_id" : "p1_x_2u",
+      "type" : 2,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/p1_x_2u.png",
+      "frames" : [
+        0,
+        6,
+        100,
+        32
+      ]
+    },
+    {
+      "view_id" : "p1_x_t1",
+      "place_text" : "缘分让我遇到你，感觉让我喜欢你，心痛让我想起你，时间让我爱上你，让我记住你，只是身边缺少你！如果有人问我为什么爱你，我觉得我只能如此回答：“ 因为是你，因为是我。”",
+      "text_info" : {
+        "text_color" : "#000000",
+        "text_position" : 0,
+        "text_size" : 15
+      },
+      "type" : 1,
+      "frames" : [
+        0,
+        6.3,
+        100,
+        27.4
+      ]
+    }
+  ],
+  "type" : 1,
+  "scene_type" : 0
+}

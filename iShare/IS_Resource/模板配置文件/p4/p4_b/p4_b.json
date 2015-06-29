@@ -1,0 +1,41 @@
+{
+      "id":"p4_b",
+    "view_info": [
+                  {
+                  
+                  "frames":[27.7,4.5,44,13.3],
+                  "type": 1,
+                  "place_text": "  PERFECT\rROMANCE",
+                   "view_id":"p4_b_1t"
+                  },
+                  {
+                  
+                  "frames":[5.2,22.2,44,35],
+                  "type": 0,
+                  "place_image": "p4_b_1",
+                   "view_id":"p4_b_1"
+
+                  },
+                  {
+                  
+                  "frames":[51,22.5,44,35],
+                  "type": 0,
+                  "place_image": "p4_b_2",
+                   "view_id":"p4_b_2"
+                  },
+                  {
+                  
+                  "frames":[5.2,58.3,44,35],
+                  "type": 0,
+                  "place_image": "p4_b_3",
+                   "view_id":"p4_b_3"
+                  },
+                  {
+                  
+                  "frames":[51,58,44,35],
+                  "type": 0,
+                  "place_image": "p4_b_4",
+                   "view_id":"p4_b_4"
+                  }
+                  ]
+}

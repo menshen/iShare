@@ -1,0 +1,39 @@
+{
+    "id":"p1_g",
+    "view_info": [
+        {
+            "frame": {
+                "x": 4.4,
+                "y": 8.5,
+                "w": 78,
+                "h": 75
+            },
+            
+            "type": 0,
+             "place_image": "p1_g_1",
+             "view_id":"p1_g_1"
+        },
+        {
+            "frame": {
+                "x": 33.7,
+                "y": 68.8,
+                "w": 66,
+                "h": 9
+            },
+            "type": 2,
+            "place_image":"p1_g_1u",
+            "view_id":"p1_g_1u"
+        },
+       {
+            "frame": {
+                "x": 33.7,
+                "y": 68.8,
+                "w": 66,
+                "h": 9
+            },
+            "type": 1,
+            "place_text":"A Lifetime of Love.",
+            "view_id":"p1_g_1t"
+        }
+            ]
+}

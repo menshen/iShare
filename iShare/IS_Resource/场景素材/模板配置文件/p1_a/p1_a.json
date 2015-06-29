@@ -1,0 +1,31 @@
+{
+  "id" : "p1_a",
+  "scene_common" : 0,
+  "view_info" : [
+    {
+      "place_image" : "p1_a_1",
+      "view_id" : "p1_a_1",
+      "type" : 0,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/default\/p1_a_1.jpg",
+      "frames" : [
+        5.0999999046326,
+        3.2000000476837,
+        90,
+        75
+      ]
+    },
+    {
+      "view_id" : "p1_a_1t",
+      "place_text" : "BY MY OWN",
+      "type" : 1,
+      "frames" : [
+        5.0999999046326,
+        81,
+        90,
+        15
+      ]
+    }
+  ],
+  "type" : 1,
+  "scene_type" : 0
+}

@@ -1,0 +1,41 @@
+{
+    "id":"p1_f",
+    "view_info": [
+        {
+            "frame": {
+                "x": 9.4,
+                "y": 6.1,
+                "w": 81,
+                "h": 75
+            },
+            "type": 0,
+             "place_image": "p1_f_1",
+            "mask_image":"p1_f_1mask",
+             "view_id":"p1_f_1"
+        },{
+          "frame": {
+          "x": 3.1,
+          "y": 71,
+          "w": 22.8,
+          "h": 14.6
+          },
+          "type": 2,
+          "place_image": "p1_f_1u",
+          "view_id":"p1_f_1u"
+        },
+        {
+            "frame": {
+                "x": 25.2,
+                "y": 86.8,
+                "w": 65.0,
+                "h": 10.6
+            },
+            
+            "type": 1,
+            "place_text":"Best Day Ever ",
+            "text_info":{"text_position":2},
+            "view_id":"p1_f_1t"
+
+        }
+            ]
+}

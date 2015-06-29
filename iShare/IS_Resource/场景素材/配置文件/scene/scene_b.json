@@ -1,0 +1,39 @@
+{
+    
+    "id":"scene_b",
+    "view_info": [
+      {
+           
+        "frames":[0,0,100,100],
+        "type": 2,
+        "place_image": "scene_b_1u",
+                   "view_id":"scene_b_1u"
+
+      },
+      {
+      
+      "frames":[17.6,22,13,4],
+      "type": 1,
+      "place_text": "新郎名",
+      "text_info":{"text_size":13,
+      "text_color":"#FFFFFF",
+      "text_position":2,
+        "isTextEdit":1},
+       "view_id":"name1"
+
+      },
+      {
+      
+      "frames":[55,22,13,4],
+      "type": 1,
+      "place_text": "新娘名",
+      "text_info":{"text_size":13,
+      "text_color":"#FFFFFF",
+      "text_position":1,"isTextEdit":1
+      },
+       "view_id":"name2"
+
+      
+      }
+    ]
+}

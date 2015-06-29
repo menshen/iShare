@@ -1,0 +1,35 @@
+{
+    "id":"scene_c",
+    "view_info": [
+     
+            
+      {
+            
+        "frames":[0,0,100,100],
+        "type": 2,
+        "place_image": "scene_c_1u.png"
+
+      },
+      {
+      
+      "frames":[19,10,20,8],
+      "type": 1,
+      "place_text": "他名字",
+      "text_info":{"text_size":13,
+                  "text_color":"#FFFFFF",
+                  "text_position":"right"}
+      
+      },
+      {
+      
+      "frames":[55,10,25,8],
+      "type": 1,
+      "place_text": "她名字",
+      "text_info":{"text_size":13,
+                  "text_color":"#FFFFFF",
+                  "text_position":"left"
+                  }
+      
+      }
+    ]
+}

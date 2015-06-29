@@ -1,0 +1,67 @@
+{
+  "id" : "p4_b",
+  "scene_common" : 0,
+  "view_info" : [
+    {
+      "view_id" : "p4_b_t1",
+      "place_text" : " PERFECT\rROMANCE",
+      "type" : 1,
+      "frames" : [
+        5.2,
+        4.5,
+        90,
+        13.3
+      ]
+    },
+    {
+      "place_image" : "p4_b_1",
+      "frames" : [
+        5.2,
+        22.2,
+        44,
+        35
+      ],
+      "type" : 0,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/default\/p4_b_1.jpg",
+      "view_id" : "p4_b_1"
+    },
+    {
+      "place_image" : "p4_b_2",
+      "frames" : [
+        51,
+        22.2,
+        44,
+        35
+      ],
+      "type" : 0,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/default\/p4_b_2.jpg",
+      "view_id" : "p4_b_2"
+    },
+    {
+      "place_image" : "p4_b_3",
+      "frames" : [
+        5.2,
+        58.3,
+        44,
+        35
+      ],
+      "type" : 0,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/default\/p4_b_3.jpg",
+      "view_id" : "p4_b_3"
+    },
+    {
+      "place_image" : "p4_b_4",
+      "frames" : [
+        51,
+        58.3,
+        44,
+        35
+      ],
+      "type" : 0,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/default\/p4_b_4.jpg",
+      "view_id" : "p4_b_4"
+    }
+  ],
+  "type" : 1,
+  "scene_type" : 0
+}

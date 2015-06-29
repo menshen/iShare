@@ -1,12 +1,13 @@
 #import "IS_CollectionView.h"
 
-@interface IS_CollectionView()
+@interface IS_CollectionView()<UIGestureRecognizerDelegate>
 @end
 
 @implementation IS_CollectionView
 -(instancetype)initWithFrame:(CGRect)frame{
     
     if (self = [super initWithFrame:frame]) {
+        [self setupActionSheet];
         [self setupCollectionView];
     }
     return self;
@@ -14,6 +15,7 @@
 -(void)awakeFromNib{
     
     [super awakeFromNib];
+    [self setupActionSheet];
     [self setupCollectionView];
 }
 #pragma mark - UICollectionView
@@ -38,6 +40,41 @@
 
 
 }
+- (void)showActionSheetAtView:(UIView *)view
+              actonSheetBlock:(IS_CollectionViewActonSheetBlock)actonSheetBlock{
+    
+    self.actonSheetBlock = actonSheetBlock;
+    UIView * contain_v =  [UIApplication sharedApplication].delegate.window.rootViewController.view;
+    [contain_v addSubview:self];
+}
+#pragma mark - 初始化
+- (void)setupActionSheet{
+    
+    self.backgroundColor = Color(0, 0, 0, 0.6);
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissActionSheet)];
+    tapGesture.delegate = self;
+    [self addGestureRecognizer:tapGesture];
+    
+    /*!
+     *  显示变化的视图
+     */
+    
+}
+#pragma mark - 关闭
+- (void)dismissActionSheet{
+    
+    /*!
+     *  关闭变化的视图
+     */
+    
+}
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
+    if([touch.view isKindOfClass:[self class]]&&[touch.view isEqual:self]){
+        return YES;
+    }
+    return NO;
+}
+
 - (void)setupCollectionViewRegisterClass:(NSString *)className
                                    isNib:(BOOL)isNib
                                 isHeader:(BOOL)isHeader{

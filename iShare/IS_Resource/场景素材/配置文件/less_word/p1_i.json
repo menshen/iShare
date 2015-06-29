@@ -1,0 +1,75 @@
+{
+  "id" : "p1_i",
+  "scene_common" : 0,
+  "view_info" : [
+    {
+      "place_image" : "p1_i_1u",
+      "frames" : [
+        7,
+        8,
+        29,
+        6
+      ],
+      "type" : 2,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/p1_i_1u.png",
+      "view_id" : "p1_i_1u"
+    },
+    {
+      "view_id" : "p1_i_t1",
+      "place_text" : "You Only",
+      "text_info" : {
+        "text_color" : "#FFFFFF",
+        "text_size" : 13
+      },
+      "type" : 1,
+      "frames" : [
+        7,
+        8,
+        29,
+        6
+      ]
+    },
+    {
+      "place_image" : "p1_i_2u",
+      "frames" : [
+        7,
+        18,
+        44,
+        29
+      ],
+      "type" : 2,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/p1_i_2u.png",
+      "view_id" : "p1_i_2u"
+    },
+    {
+      "frames" : [
+        7.2,
+        18.2,
+        86.3,
+        51
+      ],
+      "mask_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/p1_i_1mask.png",
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/default\/p1_i_1.jpg",
+      "view_id" : "p1_i_1",
+      "mask_image" : "p1_i_1mask",
+      "type" : 0,
+      "place_image" : "p1_i_1"
+    },
+    {
+      "view_id" : "p1_i_t1",
+      "place_text" : "Love and you will be Love",
+      "text_info" : {
+        "text_size" : 13
+      },
+      "type" : 1,
+      "frames" : [
+        0,
+        78,
+        100,
+        6
+      ]
+    }
+  ],
+  "type" : 1,
+  "scene_type" : 0
+}

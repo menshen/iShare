@@ -1,0 +1,39 @@
+{
+    "id":"p1_k",
+    "view_info": [
+        {
+            "frames":[11,7,78,64],
+            "type": 0,
+             "place_image": "p1_k_1",
+             "view_id":"p1_k_1"
+
+        },
+        {
+            "frames":[55.5,50,37,23],
+            "type": 2,
+            "place_image":"p1_k_1u",
+             "view_id":"p1_k_1u"
+        },
+        {
+            "frames":[11,79,78,7],
+            "type": 1,
+            "place_text":"Garden",
+            "text_info":
+            {
+                  "text_size":20,
+                  "text_color":"#000000",
+                  "text_position":1
+            },
+             "view_id":"p1_k_t1"
+        },
+         {
+            "frames":[11,86,78,10],
+            "type": 1,
+              "place_text":"if i have a flower for every time i think\r\nabout you I could walk forever in my garden",
+              "text_info":{"text_size":11},
+                  
+             "view_id":"p1_k_2t"
+        }    
+
+            ]
+}

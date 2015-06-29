@@ -9,7 +9,6 @@
 #import "IS_ActionSheet.h"
 
 @interface IS_ActionSheet()<UIGestureRecognizerDelegate>
-
 @end
 
 @implementation IS_ActionSheet
@@ -21,18 +20,47 @@
     }
     return self;
 }
+-(UIViewController *)rootController{
+    
+    if (!_rootController) {
+        _rootController = [[UIViewController alloc]init];
+    }
+    return _rootController;
+}
+-(UIWindow *)actionSheetWindow{
+    
+    if (!_actionSheetWindow) {
+        _actionSheetWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        _actionSheetWindow.windowLevel = UIWindowLevelStatusBar + [UIApplication sharedApplication].windows.count;
+        _actionSheetWindow.userInteractionEnabled =YES;
 
+    }
+    return _actionSheetWindow;
+}
 - (void)showActionSheetAtView:(UIView *)view
               actonSheetBlock:(IS_ActonSheetBlock)actonSheetBlock{
     
     self.actonSheetBlock = actonSheetBlock;
-    UIView * contain_v =  [UIApplication sharedApplication].delegate.window.rootViewController.view;
-    [contain_v addSubview:self];
+    
+//
+    
+    if (view) {
+        [view addSubview:self];
+
+    }else{
+        UIView * contain_v =  [UIApplication sharedApplication].keyWindow.rootViewController.view;
+        [contain_v addSubview:self];
+    }
+ 
+
+//    [self.actionSheetWindow addSubview:self];
+//    [self.actionSheetWindow makeKeyAndVisible];
+
 }
 #pragma mark - 初始化
 - (void)setupActionSheet{
     
-    self.backgroundColor = Color(0, 0, 0, 0.6);
+    self.backgroundColor = Color(0, 0, 0, 0.5);
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissActionSheet)];
     tapGesture.delegate = self;
     [self addGestureRecognizer:tapGesture];
@@ -45,9 +73,7 @@
 #pragma mark - 关闭
 - (void)dismissActionSheet{
     
-    /*!
-     *  关闭变化的视图
-     */
+  
     
 }
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{

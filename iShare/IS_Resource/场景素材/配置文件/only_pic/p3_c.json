@@ -1,0 +1,62 @@
+{
+  "id" : "p3_c",
+  "scene_common" : 0,
+  "view_info" : [
+    {
+      "frames" : [
+        4.5,
+        3.5,
+        90,
+        30
+      ],
+      "mask_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/p3_c_1mask.png",
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/default\/p3_c_1.jpg",
+      "view_id" : "p3_c_1",
+      "mask_image" : "p3_c_1mask",
+      "type" : 0,
+      "place_image" : "p3_c_1"
+    },
+    {
+      "frames" : [
+        4.5,
+        34.8,
+        90,
+        30
+      ],
+      "mask_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/p3_c_2mask.png",
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/default\/p3_c_2.jpg",
+      "view_id" : "p3_c_2",
+      "mask_image" : "p3_c_2mask",
+      "type" : 0,
+      "place_image" : "p3_c_2"
+    },
+    {
+      "frames" : [
+        4.5,
+        66,
+        45,
+        30
+      ],
+      "mask_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/p3_c_3mask.png",
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/default\/p3_c_3.jpg",
+      "view_id" : "p3_c_3",
+      "mask_image" : "p3_c_3mask",
+      "type" : 0,
+      "place_image" : "p3_c_3"
+    },
+    {
+      "place_image" : "p3_c_1u",
+      "frames" : [
+        54,
+        76,
+        42,
+        17
+      ],
+      "type" : 2,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/p3_c_1u.png",
+      "view_id" : "p3_c_1u"
+    }
+  ],
+  "type" : 1,
+  "scene_type" : 0
+}

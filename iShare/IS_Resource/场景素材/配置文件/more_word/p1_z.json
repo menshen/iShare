@@ -1,0 +1,64 @@
+{
+  "id" : "p1_z",
+  "scene_common" : 0,
+  "view_info" : [
+    {
+      "place_image" : "p1_z_1u",
+      "view_id" : "p1_z_1u",
+      "type" : 2,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/p1_z_1u.png",
+      "frames" : [
+        0,
+        0,
+        100,
+        100
+      ]
+    },
+    {
+      "place_image" : "p1_z_1",
+      "view_id" : "p1_z_1",
+      "type" : 0,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/default\/p1_z_1.jpg",
+      "frames" : [
+        0,
+        31,
+        100,
+        69
+      ]
+    },
+    {
+      "view_id" : "p1_z_t1",
+      "place_text" : "春天之际",
+      "text_info" : {
+        "text_color" : "#ffffff",
+        "text_position" : 1,
+        "text_size" : 18
+      },
+      "type" : 1,
+      "frames" : [
+        31,
+        7,
+        66,
+        5
+      ]
+    },
+    {
+      "view_id" : "p1_z_t2",
+      "place_text" : "让我们再次回味属于冬天的梦幻魔法。\n为了展现出冬季的美，瑞士才华摄影师andreakuenis集合了当地的艺术者\n团队，为两位准新娘拍摄以冬季",
+      "text_info" : {
+        "text_color" : "#ffffff",
+        "text_position" : 1,
+        "text_size" : 12
+      },
+      "type" : 1,
+      "frames" : [
+        31,
+        12,
+        66,
+        15
+      ]
+    }
+  ],
+  "type" : 1,
+  "scene_type" : 0
+}

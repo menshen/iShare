@@ -21,7 +21,7 @@
 }
 - (void)setup{
     
-    self.contentView.backgroundColor = [UIColor whiteColor];
+    self.contentView.backgroundColor = [UIColor clearColor];
     [self setupImgView];
     [self setupTitleLab];
 
@@ -37,8 +37,10 @@
 
     _titleLab =[[UILabel alloc]initWithFrame:CGRectZero];
     _titleLab.textAlignment = NSTextAlignmentCenter;
-    _titleLab.font = [UIFont systemFontOfSize:16];
+    _titleLab.font = [UIFont systemFontOfSize:14];
     _titleLab.textColor = [UIColor lightGrayColor];
+    _titleLab.backgroundColor = [UIColor clearColor];
     [self.contentView addSubview:_titleLab];
 }
+
 @end

@@ -1,0 +1,54 @@
+{
+    "id":"p1_l",
+    "view_info": [
+        {
+            "frame": {
+                "x": 0,
+                "y": 0,
+                "w": 100,
+                "h": 58.8
+            },
+            
+            "type": 0,
+             "place_image": "p1_l_1",
+             "view_id":"p1_l_1"
+        },
+        {
+            "frame": {
+                "x": 21.3,
+                "y": 39.1,
+                "w": 57.5,
+                "h": 35.5
+            },
+            "type": 2,
+            "place_image":"p1_l_1u",
+             "view_id":"p1_l_1u"
+        },
+        {
+              "frame": {
+              "x": 33.5,
+              "y": 30.1,
+              "w": 66.7,
+              "h": 42.6
+              },
+              "type": 2,
+              "place_image":"p1_l_2u",
+              "view_id":"p1_l_2u"
+        },
+        {
+            "frame": {
+                "x": 5,
+                "y": 90,
+                "w": 90,
+                "h": 8
+            },
+            
+            "type": 1,
+            "place_text":"A heart the love is always young",
+              "text_info":{"text_size":11,
+                            "text_color":"cba38f"},
+             "view_id":"p1_l_1t"
+        }       
+
+     ]
+}

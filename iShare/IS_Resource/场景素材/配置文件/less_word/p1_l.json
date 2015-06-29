@@ -1,0 +1,46 @@
+{
+  "id" : "p1_l",
+  "scene_common" : 0,
+  "view_info" : [
+    {
+      "place_image" : "p1_l_1",
+      "view_id" : "p1_l_1",
+      "type" : 0,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/default\/p1_l_1.jpg",
+      "frames" : [
+        0,
+        0,
+        100,
+        58.799999237061
+      ]
+    },
+    {
+      "place_image" : "p1_l_1u",
+      "view_id" : "p1_l_1u",
+      "type" : 2,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/p1_l_1u.png",
+      "frames" : [
+        21.299999237061,
+        39.099998474121,
+        57.5,
+        35.5
+      ]
+    },
+    {
+      "view_id" : "p1_l_t1",
+      "place_text" : "the love is always young",
+      "text_info" : {
+        "text_size" : 10
+      },
+      "type" : 1,
+      "frames" : [
+        5,
+        95,
+        95,
+        5
+      ]
+    }
+  ],
+  "type" : 1,
+  "scene_type" : 0
+}

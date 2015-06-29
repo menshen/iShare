@@ -1,0 +1,54 @@
+{
+    "id":"p1_k",
+    "view_info": [
+        {
+            "frame": {
+                "x": 11,
+                "y": 7,
+                "w": 78,
+                "h": 64
+            },
+            
+            "type": 0,
+             "place_image": "p1_k_1",
+             "view_id":"p1_k_1"
+
+        },
+        {
+            "frame": {
+                "x": 55.5,
+                "y": 49.9,
+                "w": 37,
+                "h": 23
+            },
+            "type": 2,
+            "place_image":"p1_k_1u",
+             "view_id":"p1_k_1u"
+        },
+        {
+            "frame": {
+                "x": 11,
+                "y": 79,
+                "w": 78,
+                "h": 7
+            },
+            
+            "type": 1,
+            "place_text":"Garden",
+             "view_id":"p1_k_1t"
+        },
+         {
+            "frame": {
+                "x": 11,
+                "y": 86,
+                "w": 78,
+                "h": 7
+            },
+            
+            "type": 1,
+            "place_text":"if i have a flower flower flower flower flower flower flower ",
+             "view_id":"p1_k_2t"
+        }    
+
+            ]
+}

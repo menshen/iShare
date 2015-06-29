@@ -1,0 +1,62 @@
+{
+    "id":"p3_i",
+	"type":1,
+    "mode_type":1,
+    "view_info": [
+        {
+            "frames": [
+                 6,
+                 5.4,
+                 80.8,
+                 10
+            ],
+             "type": 1,
+             "place_text": "一起 变得更好",
+			 "text_info":{
+			 "text_size":20,
+             "text_font":"HelveticaNeue",
+             "text_color":"6f6f6f",
+             "text_position":"left"
+			 
+			 },
+             "view_id":"p3_i_1t"
+        },
+        {
+            "frames": [
+                 4.8,
+                 18.8,
+                 91,
+                 31
+            ],
+            "type": 0,
+            "place_image": "p3_i_1",
+             "view_id":"p3_i_1"
+        },
+     
+        {
+            "frames": [
+                 4.8,
+                 51.3,
+                 43,
+                 41
+            ],
+            "type": 0,
+            "place_image": "p3_i_2",
+             "view_id":"p3_i_2"
+             
+        },
+		 {
+            "frames": [
+                 52,
+                 51.3,
+                 43,
+                 41
+            ],
+            "type": 0,
+            "place_image": "p3_i_3",
+             "view_id":"p3_i_3"
+        }
+		
+      
+    ]
+}

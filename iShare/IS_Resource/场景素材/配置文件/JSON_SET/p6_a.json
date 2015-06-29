@@ -1,0 +1,84 @@
+{
+    "id":"p6_a",
+    "view_info": [
+        {
+            "frame": {
+                "x": 15.5,
+                "y": 10.6,
+                "w": 34,
+                "h": 23
+            },
+            "type": 0,
+            "place_image": "p6_a_1",
+            "view_id":"p6_a_1"
+        },
+        {
+            "frame": {
+                "x": 50.5,
+                "y": 10.6,
+                "w": 34,
+                "h": 23
+            },
+            "type": 0,
+             "place_image": "p6_a_2",
+            "view_id":"p6_a_2"
+            
+        },
+        {
+            "frame": {
+                "x": 15.5,
+                "y": 34,
+                "w": 34,
+                "h": 23
+            },
+            "type": 0,
+             "place_image": "p6_a_3",
+            "view_id":"p6_a_3"
+        },
+        {
+            "frame": {
+                "x": 50.5,
+                "y": 34,
+                "w": 34,
+                "h": 23
+            },
+            "type": 0,
+             "place_image": "p6_a_4",
+            "view_id":"p6_a_4"
+        },
+         {
+            "frame": {
+                "x": 15.5,
+                "y": 58,
+                "w": 34,
+                "h": 23
+            },
+            "type": 0,
+             "place_image": "p6_a_5",
+            "view_id":"p6_a_5"
+                  
+        },
+        {
+            "frame": {
+                "x": 50.5,
+                "y": 58,
+                "w": 34,
+                "h": 23
+            },
+            "type": 0,
+             "place_image": "p6_a_6",
+            "view_id":"p6_a_6"
+        },
+        {
+              "frame": {
+                  "x": 0,
+                  "y": 82,
+                  "w": 100,
+                  "h": 15
+              },
+                  "type": 1,
+                 "place_text": "I WANT YOU",
+            "view_id":"p6_a_t1"
+        }
+    ]
+}

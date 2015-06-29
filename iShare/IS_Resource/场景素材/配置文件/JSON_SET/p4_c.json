@@ -1,0 +1,61 @@
+{
+    "id":"p4_c",
+    "view_info": [
+        {
+            "frame": {
+                "x": 0,
+                "y": 0,
+                "w": 60,
+                "h": 49
+            },
+            "type": 0,
+           "place_image": "p4_c_1",
+            "view_id":"p4_c_1"
+        },
+        {
+            "frame": {
+                "x": 0,
+                "y": 50,
+                "w": 38,
+                "h": 50
+            },
+            "type": 0,
+            "place_image": "p4_c_2",
+             "view_id":"p4_c_2"
+        },
+        {
+          "frame": {
+               "x": 62,
+               "y": 0,
+               "w": 38,
+               "h": 49
+          },
+              "type": 0,
+            "place_image": "p4_c_3",
+             "view_id":"p4_c_3"
+        },
+         {
+          "frame": {
+               "x": 40,
+                "y": 50,
+                "w": 60,
+               "h": 50
+              },
+                "type": 0,
+                "place_image": "p4_c_4",
+                "view_id":"p4_c_4"
+                 
+        },
+        {
+          "frame": {
+               "x": 38,
+               "y": 43,
+               "w": 23,
+               "h": 13
+              },
+                  "type": 2,
+                   "place_image": "p4_c_1u",
+                   "view_id":"p4_c_1u"
+        }
+    ]
+}

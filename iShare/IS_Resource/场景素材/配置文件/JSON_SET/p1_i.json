@@ -1,0 +1,46 @@
+{
+    "id":"p1_i",
+    "view_info": [
+        {
+            "frames":[7,8,29,6],
+            "type": 2,
+             "place_image": "p1_i_1u",
+              "view_id": "p1_i_1u"
+        },
+        {
+            "frames":[7,8,29,6],
+            "type": 1,
+          "place_text":"You Only",
+          "text_info":{"text_size":13,
+                        "text_color":"#FFFFFF"},
+           "view_id": "p1_i_t1"
+
+        },
+        {
+           
+            "frames":[7,18,44,29],
+            "type": 2,
+             "place_image": "p1_i_2u",
+              "view_id": "p1_i_2u"
+
+        },
+                {
+            "frames":[7.2,18.2,86.3,51],
+            "type": 0,
+            "place_image":"p1_i_1",
+            "mask_image":"p1_i_1mask",
+             "view_id": "p1_i_1"
+
+          },
+          {
+          "frames":[0,78,100,6],
+          "type": 1,
+          "place_text":"Love and you will be Love",
+          "text_info":{"text_size":13},
+          "view_id": "p1_i_t1"
+          
+          }
+
+
+            ]
+}

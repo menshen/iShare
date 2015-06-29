@@ -1,0 +1,20 @@
+{
+    "id":"p2_n",
+    "view_info": [
+                  {
+                  
+                  "frames":[0,0,100,100],
+                  "type": 0,
+                  "place_image": "p1_n_1",
+                  "view_id":"p1_n_1"
+                  },
+                  {
+                  
+                  "frames":[30.5,35.3,40.8,30],
+                  "type": 2,
+                  "place_image": "p1_n_1u",
+                  "view_id":"p1_n_1u"
+                  
+                  }
+                  ]
+}

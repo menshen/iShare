@@ -1,0 +1,55 @@
+{
+  "id" : "p2_e",
+  "scene_common" : 0,
+  "view_info" : [
+    {
+      "place_image" : "p2_e_1u",
+      "view_id" : "p2_e_1u",
+      "type" : 2,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/p2_e_1u.png",
+      "frames" : [
+        38,
+        3.6,
+        23.8,
+        4.7
+      ]
+    },
+    {
+      "place_image" : "p2_e_1",
+      "view_id" : "p2_e_1",
+      "type" : 0,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/default\/p2_e_1.jpg",
+      "frames" : [
+        4.4,
+        16.7,
+        90.59999999999999,
+        38.7
+      ]
+    },
+    {
+      "place_image" : "p2_e_2",
+      "view_id" : "p2_e_2",
+      "type" : 0,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/default\/p2_e_2.jpg",
+      "frames" : [
+        4.9,
+        57.1,
+        90.59999999999999,
+        38.7
+      ]
+    },
+    {
+      "view_id" : "p2_e_t1",
+      "place_text" : "BE WITH YOU",
+      "type" : 1,
+      "frames" : [
+        19.8,
+        9.699999999999999,
+        59.7,
+        6
+      ]
+    }
+  ],
+  "type" : 1,
+  "scene_type" : 0
+}

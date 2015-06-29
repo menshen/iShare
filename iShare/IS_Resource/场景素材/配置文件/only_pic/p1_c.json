@@ -1,0 +1,32 @@
+{
+  "id" : "p1_c",
+  "scene_common" : 0,
+  "view_info" : [
+    {
+      "place_image" : "p1_c_1",
+      "frames" : [
+        0,
+        13,
+        100,
+        52
+      ],
+      "type" : 0,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/default\/p1_c_1.jpg",
+      "view_id" : "p1_c_1"
+    },
+    {
+      "place_image" : "p1_c_1u",
+      "frames" : [
+        33,
+        87,
+        35,
+        10
+      ],
+      "type" : 2,
+      "place_image_url" : "http:\/\/7vznnu.com2.z0.glb.qiniucdn.com\/p1_c_1u.png",
+      "view_id" : "p1_c_1u"
+    }
+  ],
+  "type" : 1,
+  "scene_type" : 0
+}

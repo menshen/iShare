@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C2043" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IS_HomeLoginController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_icon_bg" translatesAutoresizingMaskIntoConstraints="NO" id="cl5-6P-N5q">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hax-0F-bnl">
+                    <rect key="frame" x="100" y="110" width="120" height="120"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="120" id="OFL-zO-exU"/>
+                        <constraint firstAttribute="width" constant="120" id="qnC-BW-f5U"/>
+                    </constraints>
+                    <state key="normal" image="login_icon_wechat">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="wechatAction:" destination="-1" eventType="touchUpInside" id="F07-JI-cBE"/>
+                    </connections>
+                </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_icon_or" translatesAutoresizingMaskIntoConstraints="NO" id="t64-wF-phb">
+                    <rect key="frame" x="40" y="250" width="240" height="11"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="11" id="Rdz-Kw-YZx"/>
+                        <constraint firstAttribute="width" constant="240" id="fQF-fF-hSG"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Ye-Ex-cyY" userLabel="login">
+                    <rect key="frame" x="60" y="271" width="200" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="200" id="4ta-tw-fu9"/>
+                        <constraint firstAttribute="height" constant="50" id="9gk-sZ-cKo"/>
+                    </constraints>
+                    <state key="normal" image="login_icon_login">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="phoneLogin:" destination="-1" eventType="touchUpInside" id="glV-bU-2II"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N6k-38-RyG" userLabel="zhuce">
+                    <rect key="frame" x="60" y="321" width="200" height="50"/>
+                    <state key="normal" image="login_icon_register">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="registerAction:" destination="-1" eventType="touchUpInside" id="FaD-5Z-nKp"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oAb-pT-ukT">
+                    <rect key="frame" x="100" y="518" width="120" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="FKL-vs-BfY"/>
+                        <constraint firstAttribute="width" constant="120" id="uHw-Ui-jiJ"/>
+                    </constraints>
+                    <state key="normal" image="login_icon_logo">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rRU-gZ-UcH" userLabel="colse">
+                    <rect key="frame" x="10" y="10" width="60" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="Mgt-Of-7Z1"/>
+                        <constraint firstAttribute="height" constant="60" id="uA7-dX-fZd"/>
+                    </constraints>
+                    <state key="normal" image="bottom_template_icon_cancel">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="closeAction:" destination="-1" eventType="touchUpInside" id="qiz-2w-ZDq"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="6Ye-Ex-cyY" firstAttribute="height" secondItem="N6k-38-RyG" secondAttribute="height" id="1Fi-VC-8rN"/>
+                <constraint firstItem="6Ye-Ex-cyY" firstAttribute="leading" secondItem="N6k-38-RyG" secondAttribute="leading" id="CIb-lS-k8n"/>
+                <constraint firstItem="rRU-gZ-UcH" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="Chj-Hh-DIy"/>
+                <constraint firstAttribute="centerX" secondItem="t64-wF-phb" secondAttribute="centerX" id="GPl-t5-iPy"/>
+                <constraint firstAttribute="bottom" secondItem="cl5-6P-N5q" secondAttribute="bottom" id="JO6-Oe-azC"/>
+                <constraint firstItem="t64-wF-phb" firstAttribute="top" secondItem="hax-0F-bnl" secondAttribute="bottom" constant="20" id="LNi-ev-dlI"/>
+                <constraint firstItem="rRU-gZ-UcH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="Mkf-5O-17J"/>
+                <constraint firstItem="N6k-38-RyG" firstAttribute="top" secondItem="6Ye-Ex-cyY" secondAttribute="bottom" id="UN9-xL-ZWY"/>
+                <constraint firstAttribute="bottom" secondItem="oAb-pT-ukT" secondAttribute="bottom" constant="10" id="V1e-W6-kmz"/>
+                <constraint firstItem="6Ye-Ex-cyY" firstAttribute="top" secondItem="t64-wF-phb" secondAttribute="bottom" constant="10" id="Zdx-ED-qav"/>
+                <constraint firstAttribute="centerX" secondItem="6Ye-Ex-cyY" secondAttribute="centerX" id="bwj-az-u1P"/>
+                <constraint firstItem="cl5-6P-N5q" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="dfC-ja-4MK"/>
+                <constraint firstAttribute="centerX" secondItem="oAb-pT-ukT" secondAttribute="centerX" id="fwb-wr-3i5"/>
+                <constraint firstItem="6Ye-Ex-cyY" firstAttribute="trailing" secondItem="N6k-38-RyG" secondAttribute="trailing" id="hGa-B3-Ovv"/>
+                <constraint firstAttribute="trailing" secondItem="cl5-6P-N5q" secondAttribute="trailing" id="mg0-1Q-SKC"/>
+                <constraint firstItem="hax-0F-bnl" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="110" id="oAx-US-Vdg"/>
+                <constraint firstAttribute="centerX" secondItem="hax-0F-bnl" secondAttribute="centerX" id="sjy-iE-eI9"/>
+                <constraint firstItem="cl5-6P-N5q" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="uOs-Jk-jzc"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="bottom_template_icon_cancel" width="17" height="17"/>
+        <image name="login_icon_bg" width="320" height="504"/>
+        <image name="login_icon_login" width="190" height="35"/>
+        <image name="login_icon_logo" width="111" height="39"/>
+        <image name="login_icon_or" width="191" height="8"/>
+        <image name="login_icon_register" width="190" height="35"/>
+        <image name="login_icon_wechat" width="120" height="120"/>
+    </resources>
+</document>

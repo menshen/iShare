@@ -1,0 +1,67 @@
+{
+      "id":"p3_h",
+	  "type":1,
+    "mode_type":1,
+    "view_info": [
+                  {
+                  
+                  "frames":[39.3,13.6,57.5,25],
+                  "type": 0,
+                  "place_image": "p3_h_1",
+                  "view_id":"p3_h_1"
+                  },
+              
+                  {
+                  
+                  "frames":[39.3,40,57.5,25],
+                  "type": 0,
+                  "place_image": "p3_h_2",
+                  "view_id":"p3_h_2"
+                  },
+                  {
+                  
+                  "frames":[39.3,67.5,57.5,25],
+                  "type": 0,
+                  "place_image": "p3_h_3",
+                  "view_id":"p3_h_3"
+                  },
+				  {
+				  
+				  "frames":[0,0,22.1,21.2],
+                  "type": 2,
+                  "place_image": "p3_h_1u",
+                  "view_id":"p3_h_1u"
+				  },
+				 {
+				  "frames":[8,13,25.4,47.1],
+                  "type": 2,
+                  "place_image": "p3_h_2u",
+                  "view_id":"p3_h_2u"				  
+				  },
+				  
+				  {
+				  "frames":[39.3,5,58,7.3],
+				   "type":1,
+                   "place_text":"My best friend",
+				    "text_info":{"text_size":20,
+                              "text_font":"HelveticaNeue",
+                              "text_color":"6f6f6f",
+                                "text_position":0},
+					"view_id":"p3_h_1t"
+				  },
+				   {
+				  "frames":[5.7,4.3,21.3,8],
+				   "type":1,
+                   "place_text":"闺蜜",
+				    "text_info":{"text_size":25,
+                              "text_font":"HelveticaNeue",
+                              "text_color":"6f6f6f",
+                               "text_position":0},
+					"view_id":"p3_h_2t"
+				  }
+				  
+                  ]
+				  
+				  
+				  
+}

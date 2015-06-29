@@ -1,0 +1,33 @@
+{
+    "id":"p2_a",
+    "view_info": [
+                  {
+                  
+                  "frames":[0,0,50,50],
+                  "type": 0,
+                  "place_image": "p2_a_1",
+                  "view_id":"p2_a_1"
+                  },
+                  {
+                  
+                  "frames":[50,0,50,50],
+                  "type": 2,
+                  "place_image": "p2_a_1u",
+                  "view_id":"p2_a_1u"
+                  
+                  },
+                  {
+                  "frames":[0,50,50,50],
+                  "type": 2,
+                  "place_image": "p2_a_2u",
+                  "view_id":"p2_a_2u"
+                  },
+                  {
+                  
+                  "frames":[50,50,50,50],                
+                  "type": 0,
+                  "place_image": "p2_a_2",
+                  "view_id":"p2_a_2"
+                  }
+                  ]
+}

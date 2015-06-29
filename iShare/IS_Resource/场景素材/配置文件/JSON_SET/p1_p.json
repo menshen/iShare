@@ -1,0 +1,51 @@
+{
+    "id":"p1_p",
+    "view_info": [
+                  {
+                  
+                  "frames":[3,3,94,69],
+                  "type": 0,
+                  "place_image": "p1_p_1",
+                  "view_id":"p1_p_1"
+                  },
+                  {
+                  
+                  "frames":[48,60,44,19],
+                  "type": 2,
+                  "place_image": "p1_p_1u",
+                  "view_id":"p1_p_1u"
+                  },
+                  {
+                  
+                  "frames":[63,63,15,9],
+                  "type": 2,
+                  "place_image": "p1_p_2u",
+                  "view_id":"p1_p_2u"
+                  
+                  },
+                  {
+                  
+                  "frames":[52,64,21,6],
+                  "type": 1,
+                  "place_text": "何以",
+                  "view_id":"p1_p_t1"
+                  },
+                  {
+                  
+                  "frames":[69,70,21,6],
+                  "type": 1,
+                  "place_text": "爱情",
+                  "view_id":"p1_p_2t"
+                  },
+                  {
+                  
+                  "frames":[5,80,90,20],
+                  "type": 1,
+                  "place_text": "最美的声音是小溪欢快的流淌，最美的图\r\n画是深夜的朗月繁星，最美的语言是世间\r\n默默的关爱，最美的故事是流芳百年，最\r\n        美的情感是你我持之以恒的爱恋",
+                  "text_info":{"text_size":11,
+                  "text_position":"left"},
+                  
+                  "view_id":"p1_p_3t"
+                  }
+                  ]
+}
