@@ -1,0 +1,46 @@
+{
+
+	"rotateInDownLeft":{
+
+		"name":"从左下旋转进入",
+		 "0":{
+	 		"opacity": 0,
+			"rotate3d": "0, 0, 1, -45",
+			"origin":"left_bottom"
+		 }
+ 		 "100":{
+ 		 	"opacity": 1,
+ 		 	 "rotate3d": "none"
+ 		 }
+
+	},
+	"zoomIn":{
+
+		"name":"缩小进入",
+		 "0":{
+	 		"opacity": 0,
+			"scale3d": "0.3, 0.3, 0.3",
+		 }
+ 		 "50":{
+ 		 	"opacity": 1,
+ 		 	 "rotate3d": "none"
+ 		 }
+
+	},
+	"rotateInUpLeft":{
+
+		"name":"从左上旋转进入",
+		"0":{
+	 		"opacity": 0,
+			"rotate3d": "0, 0, 1, 45",
+			"origin":"left_bottom"
+		 }
+ 		 "100":{
+ 		 	"opacity": 1,
+ 		 	 "rotate3d": "none"
+ 		 }
+
+	}
+
+
+}

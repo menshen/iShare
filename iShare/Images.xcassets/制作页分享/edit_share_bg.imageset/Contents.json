@@ -2,12 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "04分享语.png"
-    },
-    {
-      "idiom" : "universal",
-      "scale" : "2x"
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",

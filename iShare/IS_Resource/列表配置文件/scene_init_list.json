@@ -1,0 +1,132 @@
+{
+    "all":[
+              {
+              "a_id": "scene_none_graduate",
+              "a_class": "m_scene",
+              "words": "毕业季",
+              "more_class": "graduate"
+              },
+              {
+               "a_id": "scene_none_fatherday",
+               "a_class": "m_scene",
+               "words": "父亲节",
+               "more_class": "fatherday"
+              }
+            ],
+    "wedding":[
+               {
+               "a_id": "scene_a",
+               "a_class": "m_scene",
+               "words": "牵手",
+               "more_class": "wedding"
+               },
+               {
+               "a_id": "scene_d",
+               "a_class": "m_scene",
+               "words": "邀请函 朴素",
+               "more_class": "wedding"
+               },
+               {
+               "a_id": "scene_e",
+               "a_class": "m_scene",
+               "words": "邀请函 紫色",
+               "more_class": "wedding"
+               },
+               {
+               "a_id": "scene_c",
+               "a_class": "m_scene",
+               "words": "殿堂",
+               "more_class": "wedding"
+               },
+               {
+               "a_id": "scene_none_wedding",
+               "a_class": "m_scene",
+               "words": "婚礼",
+               "more_class": "wedding"
+               }
+            ],
+    "lovers":[
+             {
+             "a_id": "scene_b",
+             "a_class": "m_scene",
+             "words": "相遇",
+             "more_class": "lovers"
+             },
+             {
+             "a_id": "scene_none_lover",
+             "a_class": "m_scene",
+             "words": "情侣",
+             "more_class": "lovers"
+             }
+            ],
+    "bestie":[
+              {
+              "a_id": "scene_none_bestie",
+              "a_class": "m_scene",
+              "words": "闺蜜",
+              "more_class": "bestie"
+              },
+              {
+              "a_id": "scene_none_toladybro",
+              "a_class": "m_scene",
+              "words": "致闺蜜",
+              "more_class": "bestie",
+              "sepical":"toladybro"
+              }
+            ],
+    "enjoyalone":[
+                  {
+                  "a_id": "scene_none_enjoyalone",
+                  "a_class": "m_scene",
+                  "words": "独享",
+                  "more_class": "enjoyalone"
+                  },
+                  {
+                  "a_id": "scene_none_aloneweekend",
+                  "a_class": "m_scene",
+                  "words": "自在周末",
+                  "more_class": "enjoyalone",
+                  "sepical": "aloneweekend"
+                  }
+            ],
+    "parents":[
+               {
+               "a_id": "scene_none_parents",
+               "a_class": "m_scene",
+               "words": "亲子",
+               "more_class": "parents"
+               },
+               {
+               "a_id": "scene_none_thxforbaby",
+               "a_class": "m_scene",
+               "words": "谢谢你宝贝",
+               "more_class": "parents",
+               "sepical":"thxforbaby"
+               }
+            ],
+    "travel":[
+              {
+              "a_id": "scene_none_travel",
+              "a_class": "m_scene",
+              "words": "旅行",
+              "more_class": "travel"
+              },
+              {
+              "a_id": "scene_none_saygothengo",
+              "a_class": "m_scene",
+              "words": "说走就走",
+              "more_class": "travel",
+              "sepical": "saygothengo"
+              }
+            ],
+    "graduate":[
+                {
+                "a_id": "scene_none_graduate",
+                "a_class": "m_scene",
+                "words": "毕业季",
+                "more_class": "graduate"
+                }
+        ],
+    
+    
+}
